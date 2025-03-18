@@ -8,7 +8,7 @@ set_default_tracer_provider(tracer_provider)
 }
 \arguments{
 \item{tracer_provider}{An OpenTelemetry tracer provider
-(\code{opentelemetry_tracer_provider} object) to set as default.}
+(\code{otel_tracer_provider} object) to set as default.}
 }
 \value{
 The previously set default tracer provider, or \code{NULL}, if no
@@ -17,3 +17,4 @@ default was set before.
 \description{
 Set the default tracer provider
 }
+\keyword{internal}

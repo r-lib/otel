@@ -10,7 +10,7 @@ start_shiny_app(service_name)
 \item{service_name}{The name of the app.}
 }
 \value{
-The OpenTelemetry tracer (\code{opentelemetry_tracer}), invisibly.
+The OpenTelemetry tracer (\code{otel_tracer}), invisibly.
 }
 \description{
 Call this function from \code{global.R}.

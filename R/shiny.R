@@ -2,7 +2,7 @@
 #'
 #' Call this function from `global.R`.
 #' @param service_name The name of the app.
-#' @return The OpenTelemetry tracer (`opentelemetry_tracer`), invisibly.
+#' @return The OpenTelemetry tracer (`otel_tracer`), invisibly.
 #'
 #' @export
 

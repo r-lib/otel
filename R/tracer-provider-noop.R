@@ -1,6 +1,3 @@
-#' Tracer provider to ignore all tracing commands
-#' @export
-
 tracer_provider_noop <- list(
   new = function() {
     structure(
@@ -10,8 +7,8 @@ tracer_provider_noop <- list(
         }
       ),
       class = c(
-        "opentelemetry_tracer_provider_noop",
-        "opentelemetry_tracer_provider"
+        "otel_tracer_provider_noop",
+        "otel_tracer_provider"
       )
     )
   }
@@ -34,7 +31,7 @@ tracer_noop <- list(
         finish_session = function(session) { },
         finish_all_sessions = function() { }
       ),
-      class = c("opentelemetry_tracer_noop", "opentelemetry_tracer")
+      class = c("otel_tracer_noop", "otel_tracer")
     )
   }
 )
@@ -84,7 +81,7 @@ span_noop <- list(
           invisible(self)
         }
       ),
-      class = c("opentelemetry_span_noop", "opentelemetry_span")
+      class = c("otel_span_noop", "otel_span")
     )
   }
 )

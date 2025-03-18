@@ -11,7 +11,7 @@ setup_default_tracer(name)
 name.}
 }
 \value{
-An OpenTelemetry tracer, an \code{opentelemetry_tracer} object.
+An OpenTelemetry tracer, an \code{otel_tracer} object.
 }
 \description{
 Calls \code{\link[=get_default_tracer_provider]{get_default_tracer_provider()}} to get the default tracer

@@ -1,21 +1,21 @@
-default_tracer_provider_option <- "opentelemetry.default_tracer_provider"
+default_tracer_provider_option <- "otel.tracer_provider"
 default_tracer_exporter_envvar <- "OTEL_TRACES_EXPORTER"
 default_tracer_exporter_envvar_r <-
   paste0("R_", default_tracer_exporter_envvar)
 
 #' Set the default tracer provider
 #' @param tracer_provider An OpenTelemetry tracer provider
-#'   (`opentelemetry_tracer_provider` object) to set as default.
+#'   (`otel_tracer_provider` object) to set as default.
 #' @return The previously set default tracer provider, or `NULL`, if no
 #'   default was set before.
 #'
-#' @export
+#' @keywords internal
 
 set_default_tracer_provider <- function(tracer_provider) {
-  if (!inherits(tracer_provider, "opentelemetry_tracer_provider")) {
+  if (!inherits(tracer_provider, "otel_tracer_provider")) {
     stop(
       "Cannot set default OpenTelemetry tracer provider, not an ",
-      "opentelemetry_tracer_provider object"
+      "otel_tracer_provider object"
     )
   }
   old <- getOption(default_tracer_provider_option)
@@ -30,6 +30,9 @@ set_default_tracer_provider <- function(tracer_provider) {
 #'
 #' If there is no default set currently, then it creates and sets a
 #' default.
+#'
+#' To remove the current default unset the
+#' `r default_tracer_provider_option` option.
 #'
 #' The default tracer provider is created based on the
 #' `r default_tracer_exporter_envvar_r` environment variable. This
@@ -54,7 +57,7 @@ set_default_tracer_provider <- function(tracer_provider) {
 #'   If this fails for some reason, e.g. the package is not installed,
 #'   then it throws an error.
 #'
-#' @return The default tracer provider, an `opentelemetry_tracer_provider`
+#' @return The default tracer provider, an `otel_tracer_provider`
 #'   object.
 #' @export
 

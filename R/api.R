@@ -8,7 +8,7 @@
 #'
 #' @param name Name of the new tracer. This is typically the R package
 #'   name.
-#' @return An OpenTelemetry tracer, an `opentelemetry_tracer` object.
+#' @return An OpenTelemetry tracer, an `otel_tracer` object.
 #' @export
 
 setup_default_tracer <- function(name) {
