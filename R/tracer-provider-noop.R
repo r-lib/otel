@@ -24,7 +24,7 @@ tracer_noop <- list(
     }
     structure(
       list(
-        start_span = function(name, ...) {
+        start_span = function(name = NULL, ...) {
           span_noop$new(name, ...)
         },
         is_enabled = function(...) FALSE,
