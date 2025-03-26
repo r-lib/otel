@@ -4,6 +4,9 @@ tracer_provider_noop <- list(
       list(
         get_tracer = function(name, ...) {
           tracer_noop$new(name, ...)
+        },
+        flush = function() {
+          # noop
         }
       ),
       class = c(
@@ -29,7 +32,8 @@ tracer_noop <- list(
         activate_session = function(session) { },
         deactivate_session = function(Session) { },
         finish_session = function(session) { },
-        finish_all_sessions = function() { }
+        finish_all_sessions = function() { },
+        flush = function() { }
       ),
       class = c("otel_tracer_noop", "otel_tracer")
     )
