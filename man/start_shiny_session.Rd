@@ -9,7 +9,7 @@ start_shiny_session(session, attributes = NULL, options = NULL, ...)
 \arguments{
 \item{session}{Shiny session object.}
 
-\item{attibutes, options, }{... Additional arguments are passed to
+\item{attributes, options, ...}{Additional arguments are passed to
 \verb{$start_span()} for the \code{session} span.}
 }
 \value{

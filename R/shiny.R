@@ -26,7 +26,7 @@ start_shiny_app <- function(service_name, ...) {
 #'
 #' Call this function from the Shiny server function, at the beginning.
 #' @param session Shiny session object.
-#' @param attibutes,options, ... Additional arguments are passed to
+#' @param attributes,options,... Additional arguments are passed to
 #'   `$start_span()` for the `session` span.
 #' @return The OpenTelemetry span corresponding to the Shiny session,
 #'   invisibly.
