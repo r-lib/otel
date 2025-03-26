@@ -1,14 +1,17 @@
 #' Start tracing a Shiny app
 #'
 #' Call this function from `global.R`.
-#' @param service_name The name of the app.
+#' @param service_name The name of the app. Defaults to the name of the
+#'   current working directory.
 #' @param ... Additional arguments are passed to `$start_span` for the
 #'   `app` span.
 #' @return The OpenTelemetry tracer (`otel_tracer`), invisibly.
 #'
 #' @export
 
-start_shiny_app <- function(service_name, ...) {
+start_shiny_app <- function(service_name = NULL, ...) {
+  # TODO: do not error in PROD mode
+  service_name <- service_name %||% basename(getwd())
   service_name <- as_string(service_name, null = FALSE)
   Sys.setenv(OTEL_SERVICE_NAME = service_name)
   .GlobalEnv$.tracer <- setup_default_tracer(service_name)
@@ -35,6 +38,12 @@ start_shiny_app <- function(service_name, ...) {
 
 start_shiny_session <- function(
     session, attributes = NULL, options = NULL, ...) {
+  # if there is no tracer, return a noop span, so the caller can use it
+  # TODO: error/warning in DEV mode
+  if (is.null(.GlobalEnv$.tracer)) {
+    return(invisible(span_noop$new("session", options, ...)))
+  }
+  # inactive tracer, probably noop
   if (!.GlobalEnv$.tracer$is_enabled()) {
     return(invisible(.GlobalEnv$.tracer$start_span("session", options, ...)))
   }

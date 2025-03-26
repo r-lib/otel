@@ -18,7 +18,8 @@ RoxygenNote: 7.3.2
 Suggests:
     otelsdk,
     shiny,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    utils
 Remotes:
     r-lib/otelsdk
 Config/testthat/edition: 3

@@ -4,7 +4,7 @@
 \alias{start_span}
 \title{Start a new OpenTelemetry span, using the default tracer}
 \usage{
-start_span(name, session = NULL, ..., scope = parent.frame())
+start_span(name = NULL, session = NULL, ..., scope = parent.frame())
 }
 \arguments{
 \item{name}{Name of the span.}

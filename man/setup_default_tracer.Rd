@@ -4,11 +4,13 @@
 \alias{setup_default_tracer}
 \title{Get a tracer from the default tracer provider}
 \usage{
-setup_default_tracer(name)
+setup_default_tracer(name = NULL)
 }
 \arguments{
-\item{name}{Name of the new tracer. This is typically the R package
-name.}
+\item{name}{Name of the new tracer. This is typically the name of the
+package or project. Defaults to the name of the calling package,
+or the name of the current working directory if not called from a
+package.}
 }
 \value{
 An OpenTelemetry tracer, an \code{otel_tracer} object.

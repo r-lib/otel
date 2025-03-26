@@ -12,6 +12,7 @@ default_tracer_exporter_envvar_r <-
 #' @keywords internal
 
 set_default_tracer_provider <- function(tracer_provider) {
+  # TODO: do not error in PROD mode
   if (!inherits(tracer_provider, "otel_tracer_provider")) {
     stop(
       "Cannot set default OpenTelemetry tracer provider, not an ",
@@ -66,10 +67,12 @@ get_default_tracer_provider <- function() {
   if (is.null(tp)) {
     setup_default_tracer_provider()
   }
+  # TODO: make sure we return something that works
   getOption(default_tracer_provider_option)
 }
 
 setup_default_tracer_provider <- function() {
+  # TODO: do not error in PROD mode
   evar <- default_tracer_exporter_envvar_r
   ev <- Sys.getenv(evar, NA_character_)
   if (is.na(ev)) {
