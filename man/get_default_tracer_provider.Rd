@@ -15,9 +15,6 @@ If there is no default set currently, then it creates and sets a
 default.
 }
 \details{
-To remove the current default unset the
-otel.tracer_provider option.
-
 The default tracer provider is created based on the
 R_OTEL_TRACES_EXPORTER environment variable. This
 environment variable is specifically for R applications with

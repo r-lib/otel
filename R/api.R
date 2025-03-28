@@ -13,7 +13,7 @@
 #' @return An OpenTelemetry tracer, an `otel_tracer` object.
 #' @export
 
-setup_default_tracer <- function(name = NULL) {
+get_default_tracer <- function(name = NULL) {
   name <- name %||% utils::packageName() %||% basename(getwd())
   # does setup if necessary
   tp <- get_default_tracer_provider()
@@ -23,7 +23,6 @@ setup_default_tracer <- function(name = NULL) {
 
 #' Start a new OpenTelemetry span, using the default tracer
 #'
-#' The default tracer is stored as `.tracer`, in the global environment.
 #' @param name Name of the span.
 #' @param session Optionally, an OpenTelemetry session to activate before
 #'   starting the span. It can also be a Shiny session (`ShinySession`
@@ -38,15 +37,14 @@ setup_default_tracer <- function(name = NULL) {
 start_span <- function(name = NULL, session = NULL, ...,
                        scope = parent.frame()) {
   # if no tracer, return something useful
-  # TODO: error/warning in DEV mode
-  if (is.null(.GlobalEnv$.tracer)) {
+  if (is.null(the$tracer)) {
     return(span_noop$new(name, ..., scope = scope))
   }
   if (!is.null(session)) {
     if (inherits(session, "ShinySession")) {
       session <- session$userData$otel_session
     }
-    .GlobalEnv$.tracer$activate_session(session)
+    the$tracer$activate_session(session)
   }
-  invisible(.GlobalEnv$.tracer$start_span(name = NULL, ..., scope = scope))
+  invisible(the$tracer$start_span(name = NULL, ..., scope = scope))
 }

@@ -21,5 +21,5 @@ object), that was previously used as an argument to
 The new Opentelemetry span object, invisibly.
 }
 \description{
-The default tracer is stored as \code{.tracer}, in the global environment.
+Start a new OpenTelemetry span, using the default tracer
 }

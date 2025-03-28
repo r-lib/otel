@@ -2,7 +2,7 @@ tracer_provider_noop <- list(
   new = function() {
     structure(
       list(
-        get_tracer = function(name, ...) {
+        get_tracer = function(name = NULL, ...) {
           tracer_noop$new(name, ...)
         },
         flush = function() {
@@ -18,10 +18,7 @@ tracer_provider_noop <- list(
 )
 
 tracer_noop <- list(
-  new = function(name, ...) {
-    if (!is_string(name)) {
-      stop("Opentelemetry tracer name must be a string.")
-    }
+  new = function(name = NULL, ...) {
     structure(
       list(
         start_span = function(name = NULL, ...) {
@@ -42,9 +39,6 @@ tracer_noop <- list(
 
 span_noop <- list(
   new = function(name, ...) {
-    if (!is_string(name)) {
-      stop("Opentelemetry span name must be a string.")
-    }
     self <- structure(
       list(
         get_context = function() {
