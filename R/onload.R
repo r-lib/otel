@@ -53,7 +53,7 @@ setup_r_trace <- function() {
     } else {
       setHook(
         packageEvent(pkg, "onLoad"),
-        function(...) otel::trace_namespace(pkg)
+        function(...) otel:::trace_namespace(pkg)
       )
     }
   }
