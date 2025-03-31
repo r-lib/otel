@@ -27,7 +27,8 @@ with the otel package.
 
 ## Installation
 
-> \[!WARNING\] This package is experimental and may introduce breaking
+> [!WARNING]
+> This package is experimental and may introduce breaking
 > changes any time. It probably works best with the latest commit of the
 > [otelsdk](https://github.com/r-lib/otelsdk) package.
 
