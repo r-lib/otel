@@ -1,4 +1,5 @@
 trace_namespace <- function(pkg) {
+  msg("Instrumenting {.pkg {pkg}}.")
   ns <- asNamespace(pkg)
   trace_env(ns, name = pkg)
 }

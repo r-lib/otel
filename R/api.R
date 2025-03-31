@@ -25,7 +25,7 @@ get_tracer <- function(name = NULL) {
     trc <- tp$get_tracer(name)
     invisible(trc)
   }, error = function(err) {                                         # safe
-    msg("OpenTelemetry error: ", conditionMessage(err))              # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     tracer_noop$new()                                                # safe
   })                                                                 # safe
 }
@@ -59,7 +59,7 @@ start_span <- function(name = NULL, session = NULL, ...,
     }
     invisible(trc$start_span(name = name, ..., scope = scope))
   }, error = function(err) {                                         # safe
-    msg("OpenTelemetry error: ", conditionMessage(err))              # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     invisible(span_noop$new())                                       # safe
   })                                                                 # safe
 }

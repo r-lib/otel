@@ -42,7 +42,7 @@ get_default_tracer_provider <- function() {
     }
     the$tracer_provider
   }, error = function(err) {                                         # safe
-    msg("OpenTelemetry error: ", conditionMessage(err))              # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     tracer_provider_noop$new()                                       # safe
   })                                                                 # safe
 }

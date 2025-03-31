@@ -26,10 +26,10 @@ start_shiny_app <- function(service_name = NULL, ...) {
       })
     }
     invisible(the$tracer_app)
-  }, error = function(err) {                                        # safe
-    msg("OpenTelemetry error: ", conditionMessage(err))             # safe
-    invisible(tracer_noop$new())                                    # safe
-  })                                                                # safe
+  }, error = function(err) {                                         # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
+    invisible(tracer_noop$new())                                     # safe
+  })                                                                 # safe
 }
 # safe end
 
@@ -95,7 +95,7 @@ start_shiny_session <- function(
 
     invisible(session$userData$session_span)
   }, error = function(err) {                                         # safe
-    msg("OpenTelemetry error: ", conditionMessage(err))              # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     invisible(span_noop$new())                                       # safe
   })                                                                 # safe
 }
