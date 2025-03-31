@@ -118,6 +118,9 @@ setup_default_tracer_provider <- function() {
     )
   }
 
+  if (Sys.getenv("OTEL_SERVICE_NAME") == "") {
+    Sys.setenv("OTEL_SERVICE_NAME" = "R")
+  }
   the$tracer_provider <- tp
   invisible(tp)
 }
