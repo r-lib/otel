@@ -51,6 +51,8 @@ setup_r_trace <- function() {
     PKG <- gsub(".", "_", toupper(pkg))
     inc <- get_env(paste0("OTEL_INSTRUMENT_R_PKGS_", PKG, "_INCLUDE"))
     exc <- get_env(paste0("OTEL_INSTRUMENT_R_PKGS_", PKG, "_EXCLUDE"))
+    inc <- trimws(strsplit(inc, ",")[[1]])
+    exc <- trimws(strsplit(exc, ",")[[1]])
     if (pkg %in% loadedNamespaces()) {
       trace_namespace(pkg, inc, exc)
     } else {
