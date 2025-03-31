@@ -1,0 +1,24 @@
+trace_namespace <- function(pkg) {
+  ns <- asNamespace(pkg)
+  trace_env(ns, name = pkg)
+}
+
+trace_env <- function(env, name = NULL) {
+  nms <- ls(env)
+  for (nm in nms) {
+    obj <- get(nm, envir = env)
+    if (!is.function(obj)) next
+    span_name <- paste0(name, "::", nm)
+    tr1 <- substitute(
+      .__span <- otel::start_span(sn, scope = NULL),
+      list(sn = span_name)
+    )
+    suppressMessages(trace(
+      nm,
+      tr1,
+      exit = quote(try(.__span$end())),
+      print = FALSE,
+      where = env
+    ))
+  }
+}
