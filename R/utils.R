@@ -18,3 +18,22 @@ get_env <- function(n) {
   v <- Sys.getenv(n)
   if (v != "") v else NULL
 }
+
+glob_filter <- function(x, include = NULL, exclude = NULL) {
+  if (is.null(include)) {
+    res <- x
+  } else {
+    res <- character()
+    for (pat in include) {
+      res <- c(res, grep(utils::glob2rx(pat), x, value = TRUE))
+    }
+    res <- unique(res)
+  }
+  for (pat in exclude) {
+    res <- setdiff(
+      res,
+      grep(utils::glob2rx(pat), res, value = TRUE)
+    )
+  }
+  res
+}

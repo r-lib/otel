@@ -1,18 +1,12 @@
-trace_namespace <- function(pkg) {
+trace_namespace <- function(pkg, include = NULL, exclude = NULL) {
   msg("Instrumenting {.pkg {pkg}}.")
   ns <- asNamespace(pkg)
-  trace_env(ns, name = pkg)
+  trace_env(ns, name = pkg, include = include, exclude = exclude)
 }
 
 trace_env <- function(
-    env, name = NULL, include_pattern = NULL, exclude_pattern = NULL) {
-  nms <- ls(env)
-  if (!is.null(include_pattern)) {
-    nms <- grep(utils::glob2rx(include_pattern), nms, value = TRUE)
-  }
-  if (!is.null(exclude_pattern)) {
-    nms <- nms[!grepl(utils::glob2rx(include_pattern), nms)]
-  }
+    env, name = NULL, include = NULL, exclude = NULL) {
+  nms <- glob_filter(ls(env), include, exclude)
   for (nm in nms) {
     obj <- get(nm, envir = env)
     if (!is.function(obj)) next
