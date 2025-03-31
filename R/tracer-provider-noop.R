@@ -24,10 +24,10 @@ tracer_noop <- list(
         start_span = function(name = NULL, ...) {
           span_noop$new(name, ...)
         },
-        is_enabled = function(...) FALSE,
+        is_enabled = function() FALSE,
         start_session = function() { },
         activate_session = function(session) { },
-        deactivate_session = function(Session) { },
+        deactivate_session = function(session) { },
         finish_session = function(session) { },
         finish_all_sessions = function() { },
         flush = function() { }

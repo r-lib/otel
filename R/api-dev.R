@@ -1,17 +1,35 @@
-#' Start tracing a Shiny app
-#'
-#' Call this function from `global.R`.
-#' @param service_name The name of the app. Defaults to the name of the
-#'   current working directory.
-#' @param ... Additional arguments are passed to `$start_span` for the
-#'   `app` span.
-#' @return The OpenTelemetry tracer (`otel_tracer`), invisibly.
-#'
-#' @export
 
-# safe start
-start_shiny_app <- function(service_name = NULL, ...) {
-  tryCatch({                                                         # safe
+get_tracer_dev <- function(name = NULL) {
+    name <- name %||%
+      utils::packageName() %||%
+      get_env("OTEL_SERVICE_NAME") %||%
+      basename(getwd())
+    # does setup if necessary
+    tp <- get_default_tracer_provider()
+    trc <- tp$get_tracer(name)
+    invisible(trc)
+}
+
+start_span_dev <- function(name = NULL, session = NULL, ...,
+                       scope = parent.frame()) {
+    trc <- get_tracer()
+    if (!is.null(session)) {
+      if (inherits(session, "ShinySession")) {
+        session <- session$userData$otel_session
+      }
+      trc$activate_session(session)
+    }
+    invisible(trc$start_span(name = name, ..., scope = scope))
+}
+
+get_default_tracer_provider_dev <- function() {
+    if (is.null(the$tracer_provider)) {
+      setup_default_tracer_provider()
+    }
+    the$tracer_provider
+}
+
+start_shiny_app_dev <- function(service_name = NULL, ...) {
     service_name <- service_name %||%
       get_env("OTEL_SERVICE_NAME") %||%
       basename(getwd())
@@ -26,30 +44,10 @@ start_shiny_app <- function(service_name = NULL, ...) {
       })
     }
     invisible(the$tracer_app)
-  }, error = function(err) {                                        # safe
-    msg("OpenTelemetry error: ", conditionMessage(err))             # safe
-    invisible(tracer_noop$new())                                    # safe
-  })                                                                # safe
 }
-# safe end
 
-start_shiny_app_safe <- start_shiny_app
-
-#' Start tracing a Shiny session
-#'
-#' Call this function from the Shiny server function, at the beginning.
-#' @param session Shiny session object.
-#' @param attributes,options,... Additional arguments are passed to
-#'   `$start_span()` for the `session` span.
-#' @return The OpenTelemetry span corresponding to the Shiny session,
-#'   invisibly.
-#'
-#' @export
-
-# safe start
-start_shiny_session <- function(
+start_shiny_session_dev <- function(
     session, attributes = NULL, options = NULL, ...) {
-  tryCatch({                                                         # safe
     name <- get_env("OTEL_SERVICE_NAME")
     trc <- get_tracer(name)
     # inactive tracer, do nothing, but return a span
@@ -94,11 +92,4 @@ start_shiny_session <- function(
     })
 
     invisible(session$userData$session_span)
-  }, error = function(err) {                                         # safe
-    msg("OpenTelemetry error: ", conditionMessage(err))              # safe
-    invisible(span_noop$new())                                       # safe
-  })                                                                 # safe
 }
-# safe end
-
-start_shiny_session_safe <- start_shiny_session

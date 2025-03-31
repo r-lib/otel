@@ -13,13 +13,25 @@
 #' @return An OpenTelemetry tracer, an `otel_tracer` object.
 #' @export
 
-get_default_tracer <- function(name = NULL) {
-  name <- name %||% utils::packageName() %||% basename(getwd())
-  # does setup if necessary
-  tp <- get_default_tracer_provider()
-  trc <- tp$get_tracer(name)
-  invisible(trc)
+# safe start
+get_tracer <- function(name = NULL) {
+  tryCatch({                                                         # safe
+    name <- name %||%
+      utils::packageName() %||%
+      get_env("OTEL_SERVICE_NAME") %||%
+      basename(getwd())
+    # does setup if necessary
+    tp <- get_default_tracer_provider()
+    trc <- tp$get_tracer(name)
+    invisible(trc)
+  }, error = function(err) {                                         # safe
+    msg("OpenTelemetry error: ", conditionMessage(err))              # safe
+    tracer_noop$new()                                                # safe
+  })                                                                 # safe
 }
+# safe end
+
+get_tracer_safe <- get_tracer
 
 #' Start a new OpenTelemetry span, using the default tracer
 #'
@@ -34,17 +46,23 @@ get_default_tracer <- function(name = NULL) {
 #'
 #' @export
 
+# safe start
 start_span <- function(name = NULL, session = NULL, ...,
                        scope = parent.frame()) {
-  # if no tracer, return something useful
-  if (is.null(the$tracer)) {
-    return(span_noop$new(name, ..., scope = scope))
-  }
-  if (!is.null(session)) {
-    if (inherits(session, "ShinySession")) {
-      session <- session$userData$otel_session
+  tryCatch({                                                         # safe
+    trc <- get_tracer()
+    if (!is.null(session)) {
+      if (inherits(session, "ShinySession")) {
+        session <- session$userData$otel_session
+      }
+      trc$activate_session(session)
     }
-    the$tracer$activate_session(session)
-  }
-  invisible(the$tracer$start_span(name = NULL, ..., scope = scope))
+    invisible(trc$start_span(name = name, ..., scope = scope))
+  }, error = function(err) {                                         # safe
+    msg("OpenTelemetry error: ", conditionMessage(err))              # safe
+    invisible(span_noop$new())                                       # safe
+  })                                                                 # safe
 }
+# safe end
+
+start_span_safe <- start_span
