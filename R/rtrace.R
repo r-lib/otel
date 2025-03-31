@@ -4,8 +4,15 @@ trace_namespace <- function(pkg) {
   trace_env(ns, name = pkg)
 }
 
-trace_env <- function(env, name = NULL) {
+trace_env <- function(
+    env, name = NULL, include_pattern = NULL, exclude_pattern = NULL) {
   nms <- ls(env)
+  if (!is.null(include_pattern)) {
+    nms <- grep(utils::glob2rx(include_pattern), nms, value = TRUE)
+  }
+  if (!is.null(exclude_pattern)) {
+    nms <- nms[!grepl(utils::glob2rx(include_pattern), nms)]
+  }
   for (nm in nms) {
     obj <- get(nm, envir = env)
     if (!is.function(obj)) next

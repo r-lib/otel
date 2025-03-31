@@ -48,12 +48,15 @@ setup_r_trace <- function() {
 
   pkgs <- strsplit(ev, ",")
   for (pkg in pkgs) {
+    PKG <- gsub(".", "_", toupper(pkg))
+    inc <- get_env(paste0("OTEL_INSTRUMENT_R_PKGS_", PKG, "_INCLUDE"))
+    exc <- get_env(paste0("OTEL_INSTRUMENT_R_PKGS_", PKG, "_EXCLUDE"))
     if (pkg %in% loadedNamespaces()) {
-      trace_namespace(pkg)
+      trace_namespace(pkg, inc, exc)
     } else {
       setHook(
         packageEvent(pkg, "onLoad"),
-        function(...) otel:::trace_namespace(pkg)
+        function(...) otel:::trace_namespace(pkg, inc, exc)
       )
     }
   }
