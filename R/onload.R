@@ -41,7 +41,7 @@ setup_dev_env <- function() {
 }
 
 setup_r_trace <- function() {
-  ev <- Sys.getenv("OTEL_INSTRUMENT_R_PKGS", "")
+  ev <- trimws(Sys.getenv("OTEL_INSTRUMENT_R_PKGS", ""))
   if (ev == "") return()
 
   if (!get_tracer()$is_enabled()) return()
