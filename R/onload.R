@@ -46,13 +46,13 @@ setup_r_trace <- function() {
 
   if (!get_tracer()$is_enabled()) return()
 
-  pkgs <- strsplit(ev, ",")
+  pkgs <- strsplit(ev, ",", fixed = TRUE)[[1]]
   for (pkg in pkgs) {
     PKG <- gsub(".", "_", toupper(pkg))
     inc <- get_env(paste0("OTEL_INSTRUMENT_R_PKGS_", PKG, "_INCLUDE"))
     exc <- get_env(paste0("OTEL_INSTRUMENT_R_PKGS_", PKG, "_EXCLUDE"))
-    inc <- trimws(strsplit(inc, ",")[[1]])
-    exc <- trimws(strsplit(exc, ",")[[1]])
+    if (!is.null(inc)) inc <- trimws(strsplit(inc, ",")[[1]])
+    if (!is.null(exc)) exc <- trimws(strsplit(exc, ",")[[1]])
     if (pkg %in% loadedNamespaces()) {
       trace_namespace(pkg, inc, exc)
     } else {
