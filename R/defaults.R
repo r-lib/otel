@@ -2,6 +2,10 @@ default_tracer_exporter_envvar <- "OTEL_TRACES_EXPORTER"
 default_tracer_exporter_envvar_r <-
   paste0("R_", default_tracer_exporter_envvar)
 
+default_logs_exporter_envvar <- "OTEL_LOGS_EXPORTER"
+default_logs_exporter_envvar_r <-
+  paste0("R_", default_logs_exporter_envvar)
+
 #' Get the default tracer provider
 #'
 #' If there is no default set currently, then it creates and sets a
@@ -122,5 +126,91 @@ setup_default_tracer_provider <- function() {
     Sys.setenv("OTEL_SERVICE_NAME" = "R")
   }
   the$tracer_provider <- tp
+  invisible(tp)
+}
+
+#' Get the default tracer provider
+#' TODO
+#'
+#' @export
+
+# safe start
+get_default_logger_provider <- function() {
+  tryCatch({                                                         # safe
+    if (is.null(the$logger_provider)) {
+      setup_default_logger_provider()
+    }
+    the$logger_provider
+  }, error = function(err) {                                         # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
+    logger_provider_noop$new()                                       # safe
+  })                                                                 # safe
+}
+# safe end
+
+setup_default_logger_provider <- function() {
+  evar <- default_logs_exporter_envvar_r
+  ev <- Sys.getenv(evar, NA_character_)
+  if (is.na(ev)) {
+    evar <- default_logs_exporter_envvar
+    ev <- Sys.getenv(evar, NA_character_)
+  }
+  tp <-  if (is.na(ev)) {
+    logger_provider_noop$new()
+  } else if (grepl("::", ev)) {
+    evx <- strsplit(ev, "::", fixed = TRUE)[[1]]
+    pkg <- evx[1]
+    prv <- evx[2]
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      stop(
+        "Cannot set logs exporter ", ev, " from ", evar,
+        " environment variable, cannot load package ", pkg, "."
+      )
+    }
+    if (!prv %in% names(asNamespace(pkg))) {
+      stop(
+        "Cannot set logs exporter ", ev, " from ", evar,
+        " environment variable, cannot find provider ", prv,
+        " in package ", pkg, "."
+      )
+    }
+    tp <- asNamespace(pkg)[[prv]]
+    if ((!is.list(tp) && !is.environment(tp)) || !"new" %in% names(tp)) {
+      stop(
+        "Cannot set logs exporter ", ev, " from ", evar,
+        " environment variable, it is not a list or environment with ",
+        "a 'new' member."
+      )
+    }
+    tp$new()
+
+  } else {
+    switch(
+      ev,
+      "none" = {
+        logger_provider_noop$new()
+      },
+      "console" = ,
+      "stdout" = {
+        otelsdk::logger_provider_stdstream$new("stdout")
+      },
+      "stderr" = {
+        otelsdk::logger_provider_stdstream$new("stderr")
+      },
+      "otlp" = ,
+      "http" = {
+        otelsdk::logger_provider_http$new()
+      },
+      stop(
+        "Unknown OpenTelemetry exporter from ", evar,
+        " environment variable: ", ev
+      )
+    )
+  }
+
+  if (Sys.getenv("OTEL_SERVICE_NAME") == "") {
+    Sys.setenv("OTEL_SERVICE_NAME" = "R")
+  }
+  the$logger_provider <- tp
   invisible(tp)
 }

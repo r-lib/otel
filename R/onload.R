@@ -5,6 +5,8 @@ the$tracer_provider <- NULL
 the$tracer_app <- NULL
 the$span_app <- NULL
 
+the$logger_provider <- NULL
+
 .onLoad <- function(libname, pkgname) {
   setup_dev_env()
   setup_r_trace()

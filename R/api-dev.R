@@ -29,6 +29,13 @@ get_default_tracer_provider_dev <- function() {
     the$tracer_provider
 }
 
+get_default_logger_provider_dev <- function() {
+    if (is.null(the$logger_provider)) {
+      setup_default_logger_provider()
+    }
+    the$logger_provider
+}
+
 start_shiny_app_dev <- function(service_name = NULL, ...) {
     service_name <- service_name %||%
       get_env("OTEL_SERVICE_NAME") %||%
