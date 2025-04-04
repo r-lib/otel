@@ -4,12 +4,14 @@ function(input, output, session) {
 
   # Combine the selected variables into a new data frame
   selectedData <- reactive({
-    otel::start_span("data", session)
+    otel::start_span("data", session,
+      attributes = list(columns = c(input$xcol, input$ycol)))
     iris[, c(input$xcol, input$ycol)]
   })
 
   clusters <- reactive({
-    otel::start_span("kmeans", session)
+    otel::start_span("kmeans", session,
+      attributes = list(clusters = input$clusters))
     Sys.sleep(1)
     kmeans(selectedData(), input$clusters)
   })
