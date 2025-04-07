@@ -25,6 +25,18 @@ setup_dev_env <- function() {
     )
     assign("get_tracer", get_tracer_dev, envir = envir)
     assign(
+      "get_default_logger_provider",
+      get_default_logger_provider_dev,
+      envir = envir
+    )
+    assign("get_logger", get_logger_dev, envir = envir)
+    assign(
+      "get_default_meter_provider",
+      get_default_meter_provider_dev,
+      envir = envir
+    )
+    assign("get_meter", get_meter_dev, envir = envir)
+    assign(
       "start_shiny_app",
       start_shiny_app_dev,
       envir = envir
