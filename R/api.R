@@ -33,6 +33,63 @@ get_tracer <- function(name = NULL) {
 
 get_tracer_safe <- get_tracer
 
+#' Get a logger from the default logger provider
+#'
+#' @param name Name of the new logger. This is typically the name of the
+#'   package or project. Defaults to the name of the calling package,
+#'   or the name of the current working directory if not called from a
+#'   package.
+#'
+#' @export
+
+# safe start
+get_logger <- function(name = NULL) {
+  tryCatch({                                                         # safe
+    name <- name %||%
+      utils::packageName() %||%
+      get_env("OTEL_SERVICE_NAME") %||%
+      basename(getwd())
+    # does setup if necessary
+    tp <- get_default_logger_provider()
+    trc <- tp$get_logger(name)
+    invisible(trc)
+  }, error = function(err) {                                         # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
+    logger_noop$new()                                                # safe
+  })                                                                 # safe
+}
+# safe end
+
+get_logger_safe <- get_logger
+
+#' Get a meter from the default meter provider
+#'
+#' @param name Name of the new meter. This is typically the name of the
+#'   package or project. Defaults to the name of the calling package,
+#'   or the name of the current working directory if not called from a
+#'   package.
+#' @export
+
+# safe start
+get_meter <- function(name = NULL) {
+  tryCatch({                                                         # safe
+    name <- name %||%
+      utils::packageName() %||%
+      get_env("OTEL_SERVICE_NAME") %||%
+      basename(getwd())
+    # does setup if necessary
+    tp <- get_default_meter_provider()
+    trc <- tp$get_meter(name)
+    invisible(trc)
+  }, error = function(err) {                                         # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
+    meter_noop$new()                                                # safe
+  })                                                                 # safe
+}
+# safe end
+
+get_meter_safe <- get_meter
+
 #' Start a new OpenTelemetry span, using the default tracer
 #'
 #' @param name Name of the span.

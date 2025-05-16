@@ -10,6 +10,28 @@ get_tracer_dev <- function(name = NULL) {
     invisible(trc)
 }
 
+get_logger_dev <- function(name = NULL) {
+    name <- name %||%
+      utils::packageName() %||%
+      get_env("OTEL_SERVICE_NAME") %||%
+      basename(getwd())
+    # does setup if necessary
+    tp <- get_default_logger_provider()
+    trc <- tp$get_logger(name)
+    invisible(trc)
+}
+
+get_meter_dev <- function(name = NULL) {
+    name <- name %||%
+      utils::packageName() %||%
+      get_env("OTEL_SERVICE_NAME") %||%
+      basename(getwd())
+    # does setup if necessary
+    tp <- get_default_meter_provider()
+    trc <- tp$get_meter(name)
+    invisible(trc)
+}
+
 start_span_dev <- function(name = NULL, session = NULL, ...,
                        scope = parent.frame()) {
     trc <- get_tracer()
@@ -34,6 +56,13 @@ get_default_logger_provider_dev <- function() {
       setup_default_logger_provider()
     }
     the$logger_provider
+}
+
+get_default_meter_provider_dev <- function() {
+    if (is.null(the$meter_provider)) {
+      setup_default_meter_provider()
+    }
+    the$meter_provider
 }
 
 start_shiny_app_dev <- function(service_name = NULL, ...) {
