@@ -38,6 +38,10 @@ meter_noop <- list(
         create_histogram = function(
             name, description = NULL, unit = NULL) {
           histogram_noop$new(name, description, unit)
+        },
+        create_gauge = function(
+            name, description = NULL, unit = NULL) {
+          gauge_noop$new(name, description, unit)
         }
       ),
       class = c("otel_meter_noop", "otel_meter")
@@ -85,5 +89,18 @@ histogram <- list(
       class = c("otel_histogram_noop", "otel_histogram")
     )
     self
+  }
+)
+
+gauge <- list(
+  new = function(name = NULL, ...) {
+    self <- structure(
+      list(
+        record = function(value, attributes = NULL, context = NULL) {
+          invisible(self)
+        }
+      ),
+      class = c("otel_gauge_noop", "otel_gauge")
+    )
   }
 )
