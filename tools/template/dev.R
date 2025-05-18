@@ -8,8 +8,10 @@ for (r_file in r_files) {
   cli::cli_alert_info("Processing {.file {r_file}}.")
   stts <- grep("^# safe start", lns)
   ends <- grep("^# safe end", lns)
-  if (length(stts) != length(ends) ||
-      any(stts >= ends)) {
+  if (
+    length(stts) != length(ends) ||
+      any(stts >= ends)
+  ) {
     stop("Invalid #safe markers in file ", r_file)
   }
 

@@ -25,12 +25,18 @@ tracer_noop <- list(
           span_noop$new(name, ...)
         },
         is_enabled = function() FALSE,
-        start_session = function() { },
-        activate_session = function(session) { },
-        deactivate_session = function(session) { },
-        finish_session = function(session) { },
-        finish_all_sessions = function() { },
-        flush = function() { }
+        start_session = function() {
+        },
+        activate_session = function(session) {
+        },
+        deactivate_session = function(session) {
+        },
+        finish_session = function(session) {
+        },
+        finish_all_sessions = function() {
+        },
+        flush = function() {
+        }
       ),
       class = c("otel_tracer_noop", "otel_tracer")
     )
@@ -63,9 +69,10 @@ span_noop <- list(
 
         set_status = function(
           status_code = c("unset", "ok", "error"),
-          description = NULL) {
-            invisible(self)
-          },
+          description = NULL
+        ) {
+          invisible(self)
+        },
 
         update_name = function(name) {
           invisible(self)

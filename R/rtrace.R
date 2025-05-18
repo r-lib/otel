@@ -5,7 +5,11 @@ trace_namespace <- function(pkg, include = NULL, exclude = NULL) {
 }
 
 trace_env <- function(
-    env, name = NULL, include = NULL, exclude = NULL) {
+  env,
+  name = NULL,
+  include = NULL,
+  exclude = NULL
+) {
   nms <- glob_filter(ls(env), include, exclude)
   for (nm in nms) {
     obj <- get(nm, envir = env)

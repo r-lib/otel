@@ -44,15 +44,20 @@ default_metrics_exporter_envvar_r <-
 
 # safe start
 get_default_tracer_provider <- function() {
-  tryCatch({                                                         # safe
-    if (is.null(the$tracer_provider)) {
-      setup_default_tracer_provider()
+  tryCatch(
+    {
+      # safe
+      if (is.null(the$tracer_provider)) {
+        setup_default_tracer_provider()
+      }
+      the$tracer_provider
+    },
+    error = function(err) {
+      # safe
+      errmsg("OpenTelemetry error: ", conditionMessage(err)) # safe
+      tracer_provider_noop$new() # safe
     }
-    the$tracer_provider
-  }, error = function(err) {                                         # safe
-    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
-    tracer_provider_noop$new()                                       # safe
-  })                                                                 # safe
+  ) # safe
 }
 # safe end
 
@@ -65,7 +70,7 @@ setup_default_tracer_provider <- function() {
     evar <- default_tracer_exporter_envvar
     ev <- Sys.getenv(evar, NA_character_)
   }
-  tp <-  if (is.na(ev)) {
+  tp <- if (is.na(ev)) {
     tracer_provider_noop$new()
   } else if (grepl("::", ev)) {
     evx <- strsplit(ev, "::", fixed = TRUE)[[1]]
@@ -73,27 +78,40 @@ setup_default_tracer_provider <- function() {
     prv <- evx[2]
     if (!requireNamespace(pkg, quietly = TRUE)) {
       stop(
-        "Cannot set trace exporter ", ev, " from ", evar,
-        " environment variable, cannot load package ", pkg, "."
+        "Cannot set trace exporter ",
+        ev,
+        " from ",
+        evar,
+        " environment variable, cannot load package ",
+        pkg,
+        "."
       )
     }
     if (!prv %in% names(asNamespace(pkg))) {
       stop(
-        "Cannot set trace exporter ", ev, " from ", evar,
-        " environment variable, cannot find provider ", prv,
-        " in package ", pkg, "."
+        "Cannot set trace exporter ",
+        ev,
+        " from ",
+        evar,
+        " environment variable, cannot find provider ",
+        prv,
+        " in package ",
+        pkg,
+        "."
       )
     }
     tp <- asNamespace(pkg)[[prv]]
     if ((!is.list(tp) && !is.environment(tp)) || !"new" %in% names(tp)) {
       stop(
-        "Cannot set trace exporter ", ev, " from ", evar,
+        "Cannot set trace exporter ",
+        ev,
+        " from ",
+        evar,
         " environment variable, it is not a list or environment with ",
         "a 'new' member."
       )
     }
     tp$new()
-
   } else {
     switch(
       ev,
@@ -120,8 +138,10 @@ setup_default_tracer_provider <- function() {
         tracer_provider_noop$new()
       },
       stop(
-        "Unknown OpenTelemetry exporter from ", evar,
-        " environment variable: ", ev
+        "Unknown OpenTelemetry exporter from ",
+        evar,
+        " environment variable: ",
+        ev
       )
     )
   }
@@ -140,15 +160,20 @@ setup_default_tracer_provider <- function() {
 
 # safe start
 get_default_logger_provider <- function() {
-  tryCatch({                                                         # safe
-    if (is.null(the$logger_provider)) {
-      setup_default_logger_provider()
+  tryCatch(
+    {
+      # safe
+      if (is.null(the$logger_provider)) {
+        setup_default_logger_provider()
+      }
+      the$logger_provider
+    },
+    error = function(err) {
+      # safe
+      errmsg("OpenTelemetry error: ", conditionMessage(err)) # safe
+      logger_provider_noop$new() # safe
     }
-    the$logger_provider
-  }, error = function(err) {                                         # safe
-    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
-    logger_provider_noop$new()                                       # safe
-  })                                                                 # safe
+  ) # safe
 }
 # safe end
 
@@ -159,7 +184,7 @@ setup_default_logger_provider <- function() {
     evar <- default_logs_exporter_envvar
     ev <- Sys.getenv(evar, NA_character_)
   }
-  tp <-  if (is.na(ev)) {
+  tp <- if (is.na(ev)) {
     logger_provider_noop$new()
   } else if (grepl("::", ev)) {
     evx <- strsplit(ev, "::", fixed = TRUE)[[1]]
@@ -167,27 +192,40 @@ setup_default_logger_provider <- function() {
     prv <- evx[2]
     if (!requireNamespace(pkg, quietly = TRUE)) {
       stop(
-        "Cannot set logs exporter ", ev, " from ", evar,
-        " environment variable, cannot load package ", pkg, "."
+        "Cannot set logs exporter ",
+        ev,
+        " from ",
+        evar,
+        " environment variable, cannot load package ",
+        pkg,
+        "."
       )
     }
     if (!prv %in% names(asNamespace(pkg))) {
       stop(
-        "Cannot set logs exporter ", ev, " from ", evar,
-        " environment variable, cannot find provider ", prv,
-        " in package ", pkg, "."
+        "Cannot set logs exporter ",
+        ev,
+        " from ",
+        evar,
+        " environment variable, cannot find provider ",
+        prv,
+        " in package ",
+        pkg,
+        "."
       )
     }
     tp <- asNamespace(pkg)[[prv]]
     if ((!is.list(tp) && !is.environment(tp)) || !"new" %in% names(tp)) {
       stop(
-        "Cannot set logs exporter ", ev, " from ", evar,
+        "Cannot set logs exporter ",
+        ev,
+        " from ",
+        evar,
         " environment variable, it is not a list or environment with ",
         "a 'new' member."
       )
     }
     tp$new()
-
   } else {
     switch(
       ev,
@@ -206,8 +244,10 @@ setup_default_logger_provider <- function() {
         otelsdk::logger_provider_http$new()
       },
       stop(
-        "Unknown OpenTelemetry exporter from ", evar,
-        " environment variable: ", ev
+        "Unknown OpenTelemetry exporter from ",
+        evar,
+        " environment variable: ",
+        ev
       )
     )
   }
@@ -226,15 +266,20 @@ setup_default_logger_provider <- function() {
 
 # safe start
 get_default_meter_provider <- function() {
-  tryCatch({                                                         # safe
-    if (is.null(the$meter_provider)) {
-      setup_default_meter_provider()
+  tryCatch(
+    {
+      # safe
+      if (is.null(the$meter_provider)) {
+        setup_default_meter_provider()
+      }
+      the$meter_provider
+    },
+    error = function(err) {
+      # safe
+      errmsg("OpenTelemetry error: ", conditionMessage(err)) # safe
+      meter_provider_noop$new() # safe
     }
-    the$meter_provider
-  }, error = function(err) {                                         # safe
-    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
-    meter_provider_noop$new()                                       # safe
-  })                                                                 # safe
+  ) # safe
 }
 # safe end
 
@@ -245,7 +290,7 @@ setup_default_meter_provider <- function() {
     evar <- default_metrics_exporter_envvar
     ev <- Sys.getenv(evar, NA_character_)
   }
-  tp <-  if (is.na(ev)) {
+  tp <- if (is.na(ev)) {
     meter_provider_noop$new()
   } else if (grepl("::", ev)) {
     evx <- strsplit(ev, "::", fixed = TRUE)[[1]]
@@ -253,27 +298,40 @@ setup_default_meter_provider <- function() {
     prv <- evx[2]
     if (!requireNamespace(pkg, quietly = TRUE)) {
       stop(
-        "Cannot set metrics exporter ", ev, " from ", evar,
-        " environment variable, cannot load package ", pkg, "."
+        "Cannot set metrics exporter ",
+        ev,
+        " from ",
+        evar,
+        " environment variable, cannot load package ",
+        pkg,
+        "."
       )
     }
     if (!prv %in% names(asNamespace(pkg))) {
       stop(
-        "Cannot set metrics exporter ", ev, " from ", evar,
-        " environment variable, cannot find provider ", prv,
-        " in package ", pkg, "."
+        "Cannot set metrics exporter ",
+        ev,
+        " from ",
+        evar,
+        " environment variable, cannot find provider ",
+        prv,
+        " in package ",
+        pkg,
+        "."
       )
     }
     tp <- asNamespace(pkg)[[prv]]
     if ((!is.list(tp) && !is.environment(tp)) || !"new" %in% names(tp)) {
       stop(
-        "Cannot set metrics exporter ", ev, " from ", evar,
+        "Cannot set metrics exporter ",
+        ev,
+        " from ",
+        evar,
         " environment variable, it is not a list or environment with ",
         "a 'new' member."
       )
     }
     tp$new()
-
   } else {
     switch(
       ev,
@@ -296,8 +354,10 @@ setup_default_meter_provider <- function() {
         meter_provider_noop$new()
       },
       stop(
-        "Unknown OpenTelemetry exporter from ", evar,
-        " environment variable: ", ev
+        "Unknown OpenTelemetry exporter from ",
+        evar,
+        " environment variable: ",
+        ev
       )
     )
   }

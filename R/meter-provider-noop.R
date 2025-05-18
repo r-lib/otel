@@ -25,22 +25,34 @@ meter_provider_noop <- list(
 
 meter_noop <- list(
   new = function(name = NULL, ...) {
-   self <- structure(
+    self <- structure(
       list(
         create_counter = function(
-            name, description = NULL, unit = NULL) {
+          name,
+          description = NULL,
+          unit = NULL
+        ) {
           counter_noop$new(name, description, unit)
         },
         create_up_down_counter = function(
-            name, description = NULL, unit = NULL) {
+          name,
+          description = NULL,
+          unit = NULL
+        ) {
           up_down_counter_noop$new(name, description, unit)
         },
         create_histogram = function(
-            name, description = NULL, unit = NULL) {
+          name,
+          description = NULL,
+          unit = NULL
+        ) {
           histogram_noop$new(name, description, unit)
         },
         create_gauge = function(
-            name, description = NULL, unit = NULL) {
+          name,
+          description = NULL,
+          unit = NULL
+        ) {
           gauge_noop$new(name, description, unit)
         }
       ),

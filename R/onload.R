@@ -49,7 +49,7 @@ setup_dev_env <- function() {
     assign(
       "start_span",
       start_span_dev,
-      envir= envir
+      envir = envir
     )
   }
 }

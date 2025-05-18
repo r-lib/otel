@@ -34,7 +34,7 @@ test_that("get_default_tracer", {
 
 test_that("start_span", {
   the$tracer_provider <- NULL
-  on.exit(the$tracer_provider <- NULL,add = TRUE)
+  on.exit(the$tracer_provider <- NULL, add = TRUE)
   withr::local_envvar(
     structure("none", names = default_tracer_exporter_envvar_r)
   )

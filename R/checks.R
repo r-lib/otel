@@ -8,7 +8,10 @@ as_string <- function(x, null = TRUE, call = NULL) {
 
   call <- call %||% match.call()
   stop(
-    "Invalid argument: ", call[[2]], " must be a string scalar, but it is ",
-    typename(x), "."
+    "Invalid argument: ",
+    call[[2]],
+    " must be a string scalar, but it is ",
+    typename(x),
+    "."
   )
 }

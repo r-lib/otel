@@ -15,19 +15,24 @@
 
 # safe start
 get_tracer <- function(name = NULL) {
-  tryCatch({                                                         # safe
-    name <- name %||%
-      utils::packageName() %||%
-      get_env("OTEL_SERVICE_NAME") %||%
-      basename(getwd())
-    # does setup if necessary
-    tp <- get_default_tracer_provider()
-    trc <- tp$get_tracer(name)
-    invisible(trc)
-  }, error = function(err) {                                         # safe
-    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
-    tracer_noop$new()                                                # safe
-  })                                                                 # safe
+  tryCatch(
+    {
+      # safe
+      name <- name %||%
+        utils::packageName() %||%
+        get_env("OTEL_SERVICE_NAME") %||%
+        basename(getwd())
+      # does setup if necessary
+      tp <- get_default_tracer_provider()
+      trc <- tp$get_tracer(name)
+      invisible(trc)
+    },
+    error = function(err) {
+      # safe
+      errmsg("OpenTelemetry error: ", conditionMessage(err)) # safe
+      tracer_noop$new() # safe
+    }
+  ) # safe
 }
 # safe end
 
@@ -44,19 +49,24 @@ get_tracer_safe <- get_tracer
 
 # safe start
 get_logger <- function(name = NULL) {
-  tryCatch({                                                         # safe
-    name <- name %||%
-      utils::packageName() %||%
-      get_env("OTEL_SERVICE_NAME") %||%
-      basename(getwd())
-    # does setup if necessary
-    tp <- get_default_logger_provider()
-    trc <- tp$get_logger(name)
-    invisible(trc)
-  }, error = function(err) {                                         # safe
-    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
-    logger_noop$new()                                                # safe
-  })                                                                 # safe
+  tryCatch(
+    {
+      # safe
+      name <- name %||%
+        utils::packageName() %||%
+        get_env("OTEL_SERVICE_NAME") %||%
+        basename(getwd())
+      # does setup if necessary
+      tp <- get_default_logger_provider()
+      trc <- tp$get_logger(name)
+      invisible(trc)
+    },
+    error = function(err) {
+      # safe
+      errmsg("OpenTelemetry error: ", conditionMessage(err)) # safe
+      logger_noop$new() # safe
+    }
+  ) # safe
 }
 # safe end
 
@@ -72,19 +82,24 @@ get_logger_safe <- get_logger
 
 # safe start
 get_meter <- function(name = NULL) {
-  tryCatch({                                                         # safe
-    name <- name %||%
-      utils::packageName() %||%
-      get_env("OTEL_SERVICE_NAME") %||%
-      basename(getwd())
-    # does setup if necessary
-    tp <- get_default_meter_provider()
-    trc <- tp$get_meter(name)
-    invisible(trc)
-  }, error = function(err) {                                         # safe
-    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
-    meter_noop$new()                                                # safe
-  })                                                                 # safe
+  tryCatch(
+    {
+      # safe
+      name <- name %||%
+        utils::packageName() %||%
+        get_env("OTEL_SERVICE_NAME") %||%
+        basename(getwd())
+      # does setup if necessary
+      tp <- get_default_meter_provider()
+      trc <- tp$get_meter(name)
+      invisible(trc)
+    },
+    error = function(err) {
+      # safe
+      errmsg("OpenTelemetry error: ", conditionMessage(err)) # safe
+      meter_noop$new() # safe
+    }
+  ) # safe
 }
 # safe end
 
@@ -104,21 +119,30 @@ get_meter_safe <- get_meter
 #' @export
 
 # safe start
-start_span <- function(name = NULL, session = NULL, ...,
-                       scope = parent.frame()) {
-  tryCatch({                                                         # safe
-    trc <- get_tracer()
-    if (!is.null(session)) {
-      if (inherits(session, "ShinySession")) {
-        session <- session$userData$otel_session
+start_span <- function(
+  name = NULL,
+  session = NULL,
+  ...,
+  scope = parent.frame()
+) {
+  tryCatch(
+    {
+      # safe
+      trc <- get_tracer()
+      if (!is.null(session)) {
+        if (inherits(session, "ShinySession")) {
+          session <- session$userData$otel_session
+        }
+        trc$activate_session(session)
       }
-      trc$activate_session(session)
+      invisible(trc$start_span(name = name, ..., scope = scope))
+    },
+    error = function(err) {
+      # safe
+      errmsg("OpenTelemetry error: ", conditionMessage(err)) # safe
+      invisible(span_noop$new()) # safe
     }
-    invisible(trc$start_span(name = name, ..., scope = scope))
-  }, error = function(err) {                                         # safe
-    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
-    invisible(span_noop$new())                                       # safe
-  })                                                                 # safe
+  ) # safe
 }
 # safe end
 

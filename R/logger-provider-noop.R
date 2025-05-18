@@ -19,7 +19,7 @@ logger_provider_noop <- list(
 
 logger_noop <- list(
   new = function(name = NULL, ...) {
-   self <- structure(
+    self <- structure(
       list(
         get_name = function() "default-logger",
         create_log_record = function() {
@@ -50,7 +50,7 @@ logger_noop <- list(
           FALSE
         },
         log = function(...) {
-         invisible(self)
+          invisible(self)
         }
       ),
       class = c("otel_logger_noop", "otel_logger")
