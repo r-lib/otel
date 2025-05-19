@@ -65,7 +65,7 @@ start_shiny_session <- function(
       session[["request"]][["HTTP_ORIGIN"]] %||% ""
     attributes[["QUERY_STRING"]] <- attributes[["QUERY_STRING"]] %||%
       session[["request"]][["QUERY_STRING"]] %||% ""
-    attributes[["SERVER_PORT"]] <- attributes[["$SERVER_PORT"]] %||%
+    attributes[["SERVER_PORT"]] <- attributes[["SERVER_PORT"]] %||%
       session[["request"]][["SERVER_PORT"]] %||% -1L
     try(attributes[["SERVER_PORT"]] <-
       as.integer(attributes[["SERVER_PORT"]]))

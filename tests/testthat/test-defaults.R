@@ -1,5 +1,5 @@
-test_that("get_default_traver_provider", {
-  on.exit(the$tracer_provider <- NULL, add = TRUE)
+test_that("get_default_tracer_provider", {
+  local_otel_cache()
   the$tracer_provider <- "foobar"
   expect_equal(get_default_tracer_provider(), "foobar")
   expect_equal(get_default_tracer_provider_dev(), "foobar")
@@ -44,7 +44,7 @@ test_that("get_default_traver_provider", {
 })
 
 test_that("setup_default_tracer_provider", {
-  on.exit(the$tracer_provider <- NULL, add = TRUE)
+  local_otel_cache()
   set_ev <- function(x, wh = c("r", "generic", "both")) {
     wh <- match.arg(wh)
     ev <- c(
@@ -124,4 +124,102 @@ test_that("setup_default_tracer_provider", {
   expect_snapshot(error = TRUE, {
     setup_default_tracer_provider()
   })
+})
+
+test_that("get_default_logger_provider", {
+  local_otel_cache()
+  the$logger_provider <- "foobar"
+  expect_equal(get_default_logger_provider(), "foobar")
+  expect_equal(get_default_logger_provider_dev(), "foobar")
+  fake(
+    get_default_logger_provider,
+    "setup_default_logger_provider",
+    function() {
+      the$logger_provider <- "new"
+    }
+  )
+  fake(
+    get_default_logger_provider_dev,
+    "setup_default_logger_provider",
+    function() {
+      the$logger_provider <- "new"
+    }
+  )
+  expect_equal(get_default_logger_provider(), "foobar")
+  expect_equal(get_default_logger_provider_dev(), "foobar")
+  the$logger_provider <- NULL
+  expect_equal(get_default_logger_provider(), "new")
+  expect_equal(get_default_logger_provider_dev(), "new")
+
+  fake(
+    get_default_logger_provider,
+    "setup_default_logger_provider",
+    function() stop("nope")
+  )
+  fake(
+    get_default_logger_provider_dev,
+    "setup_default_logger_provider",
+    function() stop("nope")
+  )
+  the$logger_provider <- NULL
+  expect_snapshot({
+    tp <- get_default_logger_provider()
+  })
+  expect_s3_class(tp, "otel_logger_provider_noop")
+  expect_snapshot(error = TRUE, {
+    get_default_logger_provider_dev()
+  })
+})
+
+test_that("setup_default_logger_provider", {
+  # TODO
+})
+
+test_that("get_default_meter_provider", {
+  local_otel_cache()
+  the$meter_provider <- "foobar"
+  expect_equal(get_default_meter_provider(), "foobar")
+  expect_equal(get_default_meter_provider_dev(), "foobar")
+  fake(
+    get_default_meter_provider,
+    "setup_default_meter_provider",
+    function() {
+      the$meter_provider <- "new"
+    }
+  )
+  fake(
+    get_default_meter_provider_dev,
+    "setup_default_meter_provider",
+    function() {
+      the$meter_provider <- "new"
+    }
+  )
+  expect_equal(get_default_meter_provider(), "foobar")
+  expect_equal(get_default_meter_provider_dev(), "foobar")
+  the$meter_provider <- NULL
+  expect_equal(get_default_meter_provider(), "new")
+  expect_equal(get_default_meter_provider_dev(), "new")
+
+  fake(
+    get_default_meter_provider,
+    "setup_default_meter_provider",
+    function() stop("nope")
+  )
+  fake(
+    get_default_meter_provider_dev,
+    "setup_default_meter_provider",
+    function() stop("nope")
+  )
+  the$meter_provider <- NULL
+  expect_snapshot({
+    tp <- get_default_meter_provider()
+  })
+  expect_s3_class(tp, "otel_meter_provider_noop")
+  expect_snapshot(error = TRUE, {
+    get_default_meter_provider_dev()
+  })
+})
+
+test_that("setup_default_meter_provider", {
+  # TODO
 })

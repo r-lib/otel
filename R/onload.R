@@ -1,23 +1,26 @@
+otel_clean_cache <- function() {
+  the$tracer_provider <- NULL
+  the$logger_provider <- NULL
+  the$meter_provider <- NULL
+  the$tracer_app <- NULL
+  the$span_app <- NULL
+}
+
 # nocov start
 the <- new.env(parent = emptyenv())
 the$mode <- "prod"
-the$tracer_provider <- NULL
-the$tracer_app <- NULL
-the$span_app <- NULL
-
-the$logger_provider <- NULL
 
 .onLoad <- function(libname, pkgname) {
+  otel_clean_cache()
   setup_dev_env()
   setup_r_trace()
 }
 #nocov end
 
-setup_dev_env <- function() {
+setup_dev_env <- function(envir = asNamespace(.packageName)) {
   ev <- tolower(Sys.getenv("OTEL_ENV"))
   if (ev %in% c("dev", "devel", "development")) {
     the$mode <- "dev"
-    envir <- asNamespace(.packageName)
     assign(
       "get_default_tracer_provider",
       get_default_tracer_provider_dev,
@@ -62,7 +65,7 @@ setup_r_trace <- function() {
 
   pkgs <- strsplit(ev, ",", fixed = TRUE)[[1]]
   for (pkg in pkgs) {
-    PKG <- gsub(".", "_", toupper(pkg))
+    PKG <- gsub(".", "_", toupper(pkg), fixed = TRUE)
     inc <- get_env(paste0("OTEL_INSTRUMENT_R_PKGS_", PKG, "_INCLUDE"))
     exc <- get_env(paste0("OTEL_INSTRUMENT_R_PKGS_", PKG, "_EXCLUDE"))
     if (!is.null(inc)) inc <- trimws(strsplit(inc, ",")[[1]])

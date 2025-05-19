@@ -1,6 +1,5 @@
 test_that("get_default_tracer", {
-  the$tracer_provider <- NULL
-  on.exit(the$tracer_provider <- NULL, add = TRUE)
+  local_otel_cache()
   withr::local_envvar(
     structure("none", names = default_tracer_exporter_envvar_r)
   )
@@ -32,9 +31,74 @@ test_that("get_default_tracer", {
   })
 })
 
+test_that("get_default_logger", {
+  local_otel_cache()
+  withr::local_envvar(
+    structure("none", names = default_logs_exporter_envvar_r)
+  )
+
+  lgr <- get_logger()
+  expect_s3_class(lgr, "otel_logger")
+  expect_s3_class(
+    get_default_logger_provider(),
+    "otel_logger_provider_noop"
+  )
+
+  the$logger_provider <- NULL
+  lgr <- get_logger_dev()
+  expect_s3_class(lgr, "otel_logger")
+  expect_s3_class(
+    get_default_logger_provider(),
+    "otel_logger_provider_noop"
+  )
+
+  fake(get_logger, "get_default_logger_provider", function() stop("nope"))
+  expect_snapshot(
+    lgr <- get_logger()
+  )
+  expect_equal(lgr, logger_noop$new())
+
+  fake(get_logger_dev, "get_default_logger_provider", function() stop("x"))
+  expect_snapshot(error = TRUE, {
+    get_logger_dev()
+  })
+})
+
+test_that("get_default_meter", {
+  local_otel_cache()
+  withr::local_envvar(
+    structure("none", names = default_metrics_exporter_envvar_r)
+  )
+
+  mtr <- get_meter()
+  expect_s3_class(mtr, "otel_meter")
+  expect_s3_class(
+    get_default_meter_provider(),
+    "otel_meter_provider_noop"
+  )
+
+  the$meter_provider <- NULL
+  mtr <- get_meter_dev()
+  expect_s3_class(mtr, "otel_meter")
+  expect_s3_class(
+    get_default_meter_provider(),
+    "otel_meter_provider_noop"
+  )
+
+  fake(get_meter, "get_default_meter_provider", function() stop("nope"))
+  expect_snapshot(
+    mtr <- get_meter()
+  )
+  expect_equal(mtr, meter_noop$new())
+
+  fake(get_meter_dev, "get_default_meter_provider", function() stop("x"))
+  expect_snapshot(error = TRUE, {
+    get_meter_dev()
+  })
+})
+
 test_that("start_span", {
-  the$tracer_provider <- NULL
-  on.exit(the$tracer_provider <- NULL, add = TRUE)
+  local_otel_cache()
   withr::local_envvar(
     structure("none", names = default_tracer_exporter_envvar_r)
   )

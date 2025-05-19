@@ -9,3 +9,101 @@ test_that("safe functions are used in prod", {
   expect_equal(start_shiny_session, start_shiny_session_safe)
   expect_equal(start_span, start_span_safe)
 })
+
+test_that("setup_dev_env", {
+  check_prod <- function(env) {
+    expect_null(env$get_default_tracer_provider)
+    expect_null(env$get_default_logger_provider)
+    expect_null(env$get_default_meter_provider)
+    expect_null(env$start_shiny_app)
+    expect_null(env$start_shiny_session)
+    expect_null(env$start_span)
+  }
+
+  check_dev <- function(env) {
+    expect_equal(
+      env$get_default_tracer_provider,
+      get_default_tracer_provider_dev
+    )
+    expect_equal(
+      env$get_default_logger_provider,
+      get_default_logger_provider_dev
+    )
+    expect_equal(
+      env$get_default_meter_provider,
+      get_default_meter_provider_dev
+    )
+    expect_equal(env$start_shiny_app, start_shiny_app_dev)
+    expect_equal(env$start_shiny_session, start_shiny_session_dev)
+    expect_equal(env$start_span, start_span_dev)
+  }
+
+  withr::local_envvar(OTEL_ENV = NA_character_)
+  fake <- new.env(parent = emptyenv())
+  setup_dev_env(fake)
+  check_prod(fake)
+
+  withr::local_envvar(OTEL_ENV = "prod")
+  fake <- new.env(parent = emptyenv())
+  setup_dev_env(fake)
+  check_prod(fake)
+
+  withr::local_envvar(OTEL_ENV = "dev")
+  fake <- new.env(parent = emptyenv())
+  setup_dev_env(fake)
+  check_dev(fake)
+})
+
+test_that("setup_r_trace", {
+  # env var not set
+  fake(setup_r_trace, "get_tracer", function(...) stop("no"))
+  withr::local_envvar(OTEL_INSTRUMENT_R_PKGS = NA_character_)
+  expect_silent(setup_r_trace())
+
+  # tracer not enabled
+  fake(
+    setup_r_trace,
+    "get_tracer",
+    function(...) list(is_enabled = function() FALSE)
+  )
+  fake(
+    setup_r_trace,
+    "trace_namespace",
+    function(...) stop("nono")
+  )
+  withr::local_envvar(OTEL_INSTRUMENT_R_PKGS = "foobar")
+  expect_silent(setup_r_trace())
+
+  # tracer enabled, package already loaded
+  fake(
+    setup_r_trace,
+    "get_tracer",
+    function(...) list(is_enabled = function() TRUE)
+  )
+  fake(setup_r_trace, "loadedNamespaces", "ok")
+  fake(setup_r_trace, "trace_namespace", function(...) res <<- list(...))
+  fake(setup_r_trace, "setHook", function(...) stop("not yet"))
+  withr::local_envvar(OTEL_INSTRUMENT_R_PKGS = "ok")
+  res <- NULL
+  setup_r_trace()
+  expect_snapshot(res)
+
+  # inclusions, exclusions
+  withr::local_envvar(
+    OTEL_INSTRUMENT_R_PKGS_OK_INCLUDE = "inc*",
+    OTEL_INSTRUMENT_R_PKGS_OK_EXCLUDE = "exclude.*"
+  )
+  res <- NULL
+  setup_r_trace()
+  expect_snapshot(res)
+
+  # not loaded, set hook
+  fake(setup_r_trace, "loadedNamespaces", "nothere")
+  fake(setup_r_trace, "setHook", function(...) res <<- list(...))
+  res <- NULL
+  setup_r_trace()
+  expect_snapshot({
+    res[[1]]
+    body(res[[2]])
+  })
+})

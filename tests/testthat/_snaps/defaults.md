@@ -1,4 +1,4 @@
-# get_default_traver_provider
+# get_default_tracer_provider
 
     Code
       tp <- get_default_tracer_provider()
@@ -60,4 +60,34 @@
     Condition
       Error in `setup_default_tracer_provider()`:
       ! Cannot set trace exporter otel::is_string from R_OTEL_TRACES_EXPORTER environment variable, it is not a list or environment with a 'new' member.
+
+# get_default_logger_provider
+
+    Code
+      tp <- get_default_logger_provider()
+    Message
+      OpenTelemetry error: nope
+
+---
+
+    Code
+      get_default_logger_provider_dev()
+    Condition
+      Error in `setup_default_logger_provider()`:
+      ! nope
+
+# get_default_meter_provider
+
+    Code
+      tp <- get_default_meter_provider()
+    Message
+      OpenTelemetry error: nope
+
+---
+
+    Code
+      get_default_meter_provider_dev()
+    Condition
+      Error in `setup_default_meter_provider()`:
+      ! nope
 
