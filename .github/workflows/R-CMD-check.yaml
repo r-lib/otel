@@ -25,9 +25,10 @@ jobs:
         config:
           - {os: macos-latest,   r: 'release'}
 
-          - {os: windows-latest, r: 'release'}
+          - {os: windows-latest, r: '4.4'}
+          # - {os: windows-latest, r: 'release'}
           # use 4.0 or 4.1 to check with rtools40's older compiler
-          - {os: windows-latest, r: 'oldrel-4'}
+          # - {os: windows-latest, r: 'oldrel-4'}
 
           - {os: ubuntu-latest,  r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,  r: 'release'}
@@ -55,6 +56,10 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
+
+      - uses: r-hub/actions/debug-shell@v1
+
+      - uses: r-hub/actions/setup-r-sysreqs@v1
 
       - uses: r-lib/actions/check-r-package@v2
         with:
