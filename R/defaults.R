@@ -56,6 +56,12 @@ get_default_tracer_provider <- function() {
 }
 # safe end
 
+set_default_service_name <- function() {
+  if (Sys.getenv("OTEL_SERVICE_NAME") == "") {
+    Sys.setenv("OTEL_SERVICE_NAME" = "R")
+  }
+}
+
 get_default_tracer_provider_safe <- get_default_tracer_provider
 
 setup_default_tracer_provider <- function() {
@@ -92,9 +98,11 @@ setup_default_tracer_provider <- function() {
         "a 'new' member."
       )
     }
+    set_default_service_name()
     tp$new()
 
   } else {
+    set_default_service_name()
     switch(
       ev,
       "none" = {
@@ -126,9 +134,6 @@ setup_default_tracer_provider <- function() {
     )
   }
 
-  if (Sys.getenv("OTEL_SERVICE_NAME") == "") {
-    Sys.setenv("OTEL_SERVICE_NAME" = "R")
-  }
   the$tracer_provider <- tp
   invisible(tp)
 }
@@ -186,9 +191,11 @@ setup_default_logger_provider <- function() {
         "a 'new' member."
       )
     }
+    set_default_service_name()
     tp$new()
 
   } else {
+    set_default_service_name()
     switch(
       ev,
       "none" = {
@@ -212,9 +219,6 @@ setup_default_logger_provider <- function() {
     )
   }
 
-  if (Sys.getenv("OTEL_SERVICE_NAME") == "") {
-    Sys.setenv("OTEL_SERVICE_NAME" = "R")
-  }
   the$logger_provider <- tp
   invisible(tp)
 }
@@ -272,9 +276,11 @@ setup_default_meter_provider <- function() {
         "a 'new' member."
       )
     }
+    set_default_service_name()
     tp$new()
 
   } else {
+    set_default_service_name()
     switch(
       ev,
       "none" = {
@@ -302,9 +308,6 @@ setup_default_meter_provider <- function() {
     )
   }
 
-  if (Sys.getenv("OTEL_SERVICE_NAME") == "") {
-    Sys.setenv("OTEL_SERVICE_NAME" = "R")
-  }
   the$meter_provider <- tp
   invisible(tp)
 }
