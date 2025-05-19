@@ -9,6 +9,9 @@
 
 ![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)
 [![R-CMD-check](https://github.com/r-lib/otel/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/otel/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/r-lib/otel/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/otel/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/r-lib/otel/graph/badge.svg)](https://app.codecov.io/gh/r-lib/otel)
 <!-- badges: end -->
 
 High-quality, ubiquitous, and portable telemetry to enable effective
