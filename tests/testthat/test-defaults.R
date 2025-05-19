@@ -1,3 +1,13 @@
+test_that("set_default_service_name", {
+  withr::local_envvar(OTEL_SERVICE_NAME = "ok")
+  set_default_service_name()
+  expect_equal(get_env("OTEL_SERVICE_NAME"), "ok")
+
+  withr::local_envvar(OTEL_SERVICE_NAME = NA_character_)
+  set_default_service_name()
+  expect_equal(get_env("OTEL_SERVICE_NAME"), "R")
+})
+
 test_that("get_default_tracer_provider", {
   local_otel_cache()
   the$tracer_provider <- "foobar"
