@@ -1,7 +1,7 @@
 test_that("start_shiny_app", {
   local_otel_cache()
   withr::local_envvar(
-    structure("none", names = default_tracer_exporter_envvar_r)
+    structure("none", names = default_traces_exporter_envvar_r)
   )
 
   trc <- start_shiny_app()

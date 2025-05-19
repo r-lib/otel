@@ -1,6 +1,6 @@
-default_tracer_exporter_envvar <- "OTEL_TRACES_EXPORTER"
-default_tracer_exporter_envvar_r <-
-  paste0("R_", default_tracer_exporter_envvar)
+default_traces_exporter_envvar <- "OTEL_TRACES_EXPORTER"
+default_traces_exporter_envvar_r <-
+  paste0("R_", default_traces_exporter_envvar)
 
 default_logs_exporter_envvar <- "OTEL_LOGS_EXPORTER"
 default_logs_exporter_envvar_r <-
@@ -16,11 +16,11 @@ default_metrics_exporter_envvar_r <-
 #' default.
 #'
 #' The default tracer provider is created based on the
-#' `r default_tracer_exporter_envvar_r` environment variable. This
+#' `r default_traces_exporter_envvar_r` environment variable. This
 #' environment variable is specifically for R applications with
 #' OpenTelemetry support.
 #'
-#' If this is not set, then the generic `r default_tracer_exporter_envvar`
+#' If this is not set, then the generic `r default_traces_exporter_envvar`
 #' environment variable is used. This applies to all applications that
 #' support OpenTelemetry and use the OpenTelemetry SDK.
 #'
@@ -59,10 +59,10 @@ get_default_tracer_provider <- function() {
 get_default_tracer_provider_safe <- get_default_tracer_provider
 
 setup_default_tracer_provider <- function() {
-  evar <- default_tracer_exporter_envvar_r
+  evar <- default_traces_exporter_envvar_r
   ev <- Sys.getenv(evar, NA_character_)
   if (is.na(ev)) {
-    evar <- default_tracer_exporter_envvar
+    evar <- default_traces_exporter_envvar
     ev <- Sys.getenv(evar, NA_character_)
   }
   tp <-  if (is.na(ev)) {

@@ -76,6 +76,38 @@
       Error in `setup_default_logger_provider()`:
       ! nope
 
+# setup_default_logger_provider
+
+    Code
+      setup_default_logger_provider()
+    Condition
+      Error in `setup_default_logger_provider()`:
+      ! Unknown OpenTelemetry exporter from R_OTEL_LOGS_EXPORTER environment variable: invalid
+
+---
+
+    Code
+      setup_default_logger_provider()
+    Condition
+      Error in `setup_default_logger_provider()`:
+      ! Cannot set logs exporter bad_package::logger_provider from R_OTEL_LOGS_EXPORTER environment variable, cannot load package bad_package.
+
+---
+
+    Code
+      setup_default_logger_provider()
+    Condition
+      Error in `setup_default_logger_provider()`:
+      ! Cannot set logs exporter otel::no_such_object from R_OTEL_LOGS_EXPORTER environment variable, cannot find provider no_such_object in package otel.
+
+---
+
+    Code
+      setup_default_logger_provider()
+    Condition
+      Error in `setup_default_logger_provider()`:
+      ! Cannot set logs exporter otel::is_string from R_OTEL_LOGS_EXPORTER environment variable, it is not a list or environment with a 'new' member.
+
 # get_default_meter_provider
 
     Code
@@ -90,4 +122,44 @@
     Condition
       Error in `setup_default_meter_provider()`:
       ! nope
+
+# setup_default_meter_provider
+
+    Code
+      setup_default_meter_provider()
+    Condition
+      Warning in `setup_default_meter_provider()`:
+      OpenTelemetry: Prometheus trace exporter is not supported yet
+
+---
+
+    Code
+      setup_default_meter_provider()
+    Condition
+      Error in `setup_default_meter_provider()`:
+      ! Unknown OpenTelemetry exporter from R_OTEL_LOGS_EXPORTER environment variable: invalid
+
+---
+
+    Code
+      setup_default_meter_provider()
+    Condition
+      Error in `setup_default_meter_provider()`:
+      ! Cannot set metrics exporter bad_package::meter_provider from R_OTEL_LOGS_EXPORTER environment variable, cannot load package bad_package.
+
+---
+
+    Code
+      setup_default_meter_provider()
+    Condition
+      Error in `setup_default_meter_provider()`:
+      ! Cannot set metrics exporter otel::no_such_object from R_OTEL_LOGS_EXPORTER environment variable, cannot find provider no_such_object in package otel.
+
+---
+
+    Code
+      setup_default_meter_provider()
+    Condition
+      Error in `setup_default_meter_provider()`:
+      ! Cannot set metrics exporter otel::is_string from R_OTEL_LOGS_EXPORTER environment variable, it is not a list or environment with a 'new' member.
 

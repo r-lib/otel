@@ -1,7 +1,7 @@
 test_that("get_default_tracer", {
   local_otel_cache()
   withr::local_envvar(
-    structure("none", names = default_tracer_exporter_envvar_r)
+    structure("none", names = default_traces_exporter_envvar_r)
   )
 
   trc <- get_tracer()
@@ -100,7 +100,7 @@ test_that("get_default_meter", {
 test_that("start_span", {
   local_otel_cache()
   withr::local_envvar(
-    structure("none", names = default_tracer_exporter_envvar_r)
+    structure("none", names = default_traces_exporter_envvar_r)
   )
 
   span <- start_span()

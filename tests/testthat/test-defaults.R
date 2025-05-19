@@ -49,10 +49,10 @@ test_that("setup_default_tracer_provider", {
     wh <- match.arg(wh)
     ev <- c(
       if (wh %in% c("r", "both")) {
-        structure(x, names = default_tracer_exporter_envvar_r)
+        structure(x, names = default_traces_exporter_envvar_r)
       },
       if (wh %in% c("generic", "both")) {
-        structure(x, names = default_tracer_exporter_envvar)
+        structure(x, names = default_traces_exporter_envvar)
       }
     )
     withr::local_envvar(ev, .local_envir = parent.frame())
@@ -172,7 +172,78 @@ test_that("get_default_logger_provider", {
 })
 
 test_that("setup_default_logger_provider", {
-  # TODO
+  local_otel_cache()
+  set_ev <- function(x, wh = c("r", "generic", "both")) {
+    wh <- match.arg(wh)
+    ev <- c(
+      if (wh %in% c("r", "both")) {
+        structure(x, names = default_logs_exporter_envvar_r)
+      },
+      if (wh %in% c("generic", "both")) {
+        structure(x, names = default_logs_exporter_envvar)
+      }
+    )
+    withr::local_envvar(ev, .local_envir = parent.frame())
+  }
+
+  set_ev(NA_character_, "both")
+  setup_default_logger_provider()
+  expect_s3_class(the$logger_provider, "otel_logger_provider_noop")
+
+  set_ev("none")
+  setup_default_logger_provider()
+  expect_s3_class(the$logger_provider, "otel_logger_provider_noop")
+
+  set_ev("console")
+  setup_default_logger_provider()
+  expect_s3_class(the$logger_provider, "otel_logger_provider_stdstream")
+
+  set_ev("stdout")
+  setup_default_logger_provider()
+  expect_s3_class(the$logger_provider, "otel_logger_provider_stdstream")
+
+  set_ev("stderr")
+  setup_default_logger_provider()
+  expect_s3_class(the$logger_provider, "otel_logger_provider_stdstream")
+
+  set_ev("otlp")
+  setup_default_logger_provider()
+  expect_s3_class(the$logger_provider, "otel_logger_provider_http")
+
+  set_ev("http")
+  setup_default_logger_provider()
+  expect_s3_class(the$logger_provider, "otel_logger_provider_http")
+
+  set_ev("invalid")
+  expect_snapshot(error = TRUE, {
+    setup_default_logger_provider()
+  })
+
+  # fall back to generic env var
+  set_ev(NA_character_)
+  set_ev("http", "generic")
+  setup_default_logger_provider()
+  expect_s3_class(the$logger_provider, "otel_logger_provider_http")
+
+  set_ev("otelsdk::logger_provider_http")
+  setup_default_logger_provider()
+  expect_s3_class(the$logger_provider, "otel_logger_provider_http")
+
+  set_ev(NA_character_, "both")
+  set_ev("bad_package::logger_provider")
+  expect_snapshot(error = TRUE, {
+    setup_default_logger_provider()
+  })
+
+  set_ev("otel::no_such_object")
+  expect_snapshot(error = TRUE, {
+    setup_default_logger_provider()
+  })
+
+  set_ev("otel::is_string")
+  expect_snapshot(error = TRUE, {
+    setup_default_logger_provider()
+  })
 })
 
 test_that("get_default_meter_provider", {
@@ -221,5 +292,80 @@ test_that("get_default_meter_provider", {
 })
 
 test_that("setup_default_meter_provider", {
-  # TODO
+  local_otel_cache()
+  set_ev <- function(x, wh = c("r", "generic", "both")) {
+    wh <- match.arg(wh)
+    ev <- c(
+      if (wh %in% c("r", "both")) {
+        structure(x, names = default_metrics_exporter_envvar_r)
+      },
+      if (wh %in% c("generic", "both")) {
+        structure(x, names = default_metrics_exporter_envvar)
+      }
+    )
+    withr::local_envvar(ev, .local_envir = parent.frame())
+  }
+
+  set_ev(NA_character_, "both")
+  setup_default_meter_provider()
+  expect_s3_class(the$meter_provider, "otel_meter_provider_noop")
+
+  set_ev("none")
+  setup_default_meter_provider()
+  expect_s3_class(the$meter_provider, "otel_meter_provider_noop")
+
+  set_ev("console")
+  setup_default_meter_provider()
+  expect_s3_class(the$meter_provider, "otel_meter_provider_stdstream")
+
+  set_ev("stdout")
+  setup_default_meter_provider()
+  expect_s3_class(the$meter_provider, "otel_meter_provider_stdstream")
+
+  set_ev("stderr")
+  setup_default_meter_provider()
+  expect_s3_class(the$meter_provider, "otel_meter_provider_stdstream")
+
+  set_ev("otlp")
+  setup_default_meter_provider()
+  expect_s3_class(the$meter_provider, "otel_meter_provider_http")
+
+  set_ev("http")
+  setup_default_meter_provider()
+  expect_s3_class(the$meter_provider, "otel_meter_provider_http")
+
+  set_ev("prometheus")
+  expect_snapshot(setup_default_meter_provider())
+  expect_s3_class(the$meter_provider, "otel_meter_provider_noop")
+
+  set_ev("invalid")
+  expect_snapshot(error = TRUE, {
+    setup_default_meter_provider()
+  })
+
+  # fall back to generic env var
+  set_ev(NA_character_)
+  set_ev("http", "generic")
+  setup_default_meter_provider()
+  expect_s3_class(the$meter_provider, "otel_meter_provider_http")
+
+  set_ev("otelsdk::meter_provider_http")
+  setup_default_meter_provider()
+  expect_s3_class(the$meter_provider, "otel_meter_provider_http")
+
+  set_ev(NA_character_, "both")
+  set_ev("bad_package::meter_provider")
+  expect_snapshot(error = TRUE, {
+    setup_default_meter_provider()
+  })
+
+  set_ev("otel::no_such_object")
+  expect_snapshot(error = TRUE, {
+    setup_default_meter_provider()
+  })
+
+  set_ev("otel::is_string")
+  expect_snapshot(error = TRUE, {
+    setup_default_meter_provider()
+  })
 })
