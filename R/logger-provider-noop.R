@@ -18,7 +18,7 @@ logger_provider_noop <- list(
 )
 
 logger_noop <- list(
-  new = function(name = NULL, ...) {
+  new = function(name = NULL, minimum_severity = "warn", ...) {
     self <- structure(
       list(
         get_name = function() "default-logger",
@@ -46,8 +46,14 @@ logger_noop <- list(
         fatal = function(...) {
           invisible(self)
         },
-        is_enabled = function(severity, event_id = NULL) {
+        is_enabled = function(severity = "warn", event_id = NULL) {
           FALSE
+        },
+        get_minimum_severity = function() {
+          c("maximumseverity" = 255L)
+        },
+        set_minimum_severity = function(minimum_severity) {
+          invisible(self)
         },
         log = function(...) {
           invisible(self)
