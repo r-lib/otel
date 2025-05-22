@@ -123,3 +123,28 @@ start_span <- function(name = NULL, session = NULL, ...,
 # safe end
 
 start_span_safe <- start_span
+
+#' Return the current span context
+#'
+#' This is sometimes useful when writing loggers or meters, to associate
+#' logging and metrics reporting with traces.
+#'
+#' @return The current span context. If these is no current span context,
+#' then an invalid span context is returned, i.e. `spc$is_valid()` will be
+#' `FALSE` for the returned `spc`.
+#'
+#' @export
+
+# safe start
+get_current_span_context <- function() {
+  tryCatch({                                                         # safe
+    trc <- get_tracer()
+    trc$get_current_span_context()
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    span_context_noop$new(NA_character_)                             # safe
+  })                                                                 # safe
+}
+# safe end
+
+get_current_span_context_safe <- get_current_span_context

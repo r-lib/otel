@@ -58,3 +58,26 @@
       Error in `get_tracer()`:
       ! nope
 
+# get_current_span_context
+
+    Code
+      spc2 <- get_current_span_context()
+    Message
+      Opentelemetry error: nope!
+
+---
+
+    Code
+      get_current_span_context_dev()
+    Condition
+      Error in `get_tracer()`:
+      ! nope!
+
+---
+
+    Code
+      get_current_span_context_dev()
+    Condition
+      Error in `trc$get_current_span_context()`:
+      ! nope!
+

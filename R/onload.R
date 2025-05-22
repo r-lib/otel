@@ -54,6 +54,11 @@ setup_dev_env <- function(envir = asNamespace(.packageName)) {
       start_span_dev,
       envir = envir
     )
+    assign(
+      "get_current_span_context",
+      get_current_span_context_dev,
+      envir = envir
+    )
   }
 }
 

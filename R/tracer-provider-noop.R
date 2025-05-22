@@ -24,6 +24,7 @@ tracer_noop <- list(
         start_span = function(name = NULL, ...) {
           span_noop$new(name, ...)
         },
+        get_current_span_context = function() span_context_noop$new(),
         is_enabled = function() FALSE,
         start_session = function() {
         },
@@ -44,11 +45,11 @@ tracer_noop <- list(
 )
 
 span_noop <- list(
-  new = function(name, ...) {
+  new = function(name = "", ...) {
     self <- structure(
       list(
         get_context = function() {
-          # TODO?
+          span_context_noop$new()
         },
 
         is_recording = function() {
@@ -88,5 +89,38 @@ span_noop <- list(
       ),
       class = c("otel_span_noop", "otel_span")
     )
+    self
   }
 )
+
+span_context_noop <- list(
+  new = function(...) {
+    self <- structure(
+      list(
+        is_valid = function() {
+          FALSE
+        },
+        get_trace_flags = function() {
+          list()
+        },
+        get_trace_id = function() {
+          invalid_trace_id
+        },
+        get_span_id = function() {
+          invalid_span_id
+        },
+        is_remote = function() {
+          FALSE
+        },
+        is_sampled = function() {
+          FALSE
+        }
+      ),
+      class = c("otel_span_context_noop", "otel_span_context")
+    )
+    self
+  }
+)
+
+invalid_trace_id <- strrep("0", 32)
+invalid_span_id <- strrep("0", 16)

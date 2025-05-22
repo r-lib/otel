@@ -44,6 +44,11 @@ start_span_dev <- function(name = NULL, session = NULL, ...,
     invisible(trc$start_span(name = name, ..., scope = scope))
 }
 
+get_current_span_context_dev <- function() {
+    trc <- get_tracer()
+    trc$get_current_span_context()
+}
+
 get_default_tracer_provider_dev <- function() {
     if (is.null(the$tracer_provider)) {
       setup_default_tracer_provider()
