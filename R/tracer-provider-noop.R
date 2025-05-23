@@ -115,7 +115,7 @@ span_context_noop <- list(
         is_sampled = function() {
           FALSE
         },
-        to_headers = function() {
+        to_http_headers = function() {
           structure(character(), names = character())
         }
       ),
