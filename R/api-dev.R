@@ -49,6 +49,11 @@ get_current_span_context_dev <- function() {
     trc$get_current_span_context()
 }
 
+extract_http_context_dev <- function(headers) {
+    trc <- get_tracer()
+    trc$extract_http_context(headers)
+}
+
 get_default_tracer_provider_dev <- function() {
     if (is.null(the$tracer_provider)) {
       setup_default_tracer_provider()

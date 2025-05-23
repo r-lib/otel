@@ -148,3 +148,27 @@ get_current_span_context <- function() {
 # safe end
 
 get_current_span_context_safe <- get_current_span_context
+
+#' Extract a span context from HTTP headers received from a client
+#'
+#' The return value can be used as the `parent` option when starting
+#' a span.
+#'
+#' @param headers A named list with one or two strings: `traceparent` is
+#' mandatory, and `tracestate` is optional.
+#'
+#' @export
+
+# safe start
+extract_http_context <- function(headers) {
+  tryCatch({                                                         # safe
+    trc <- get_tracer()
+    trc$extract_http_context(headers)
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    span_context_noop$new(NA_character_)                             # safe
+  })                                                                 # safe
+}
+# safe end
+
+extract_http_context_safe <- extract_http_context

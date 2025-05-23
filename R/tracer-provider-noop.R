@@ -37,6 +37,9 @@ tracer_noop <- list(
         finish_all_sessions = function() {
         },
         flush = function() {
+        },
+        extract_http_context = function(headers) {
+          span_context_noop$new()
         }
       ),
       class = c("otel_tracer_noop", "otel_tracer")
