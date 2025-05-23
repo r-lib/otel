@@ -114,6 +114,9 @@ span_context_noop <- list(
         },
         is_sampled = function() {
           FALSE
+        },
+        to_headers = function() {
+          structure(character(), names = character())
         }
       ),
       class = c("otel_span_context_noop", "otel_span_context")
