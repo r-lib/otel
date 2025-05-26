@@ -1,0 +1,8 @@
+otel::start_shiny_app("kmeans-shiny-app")
+meter <- otel::get_meter()
+otel_mtr_sessions <- meter$create_counter("sessions")
+otel_mtr_plots <- meter$create_counter("plots")
+otel_mts_data_changes <- meter$create_counter("data-changes")
+otel_mts_kmeans_runs <- meter$create_counter("kmeans-runs")
+otel_logger <- otel::get_logger()
+otel_logger$set_minimum_severity("debug")
