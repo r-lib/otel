@@ -50,7 +50,7 @@ log_dev <- function(msg, ..., severity = "info", .envir = parent.frame()) {
     invisible(lgr)
 }
 
-counter_add_dev <- function(name, value, attributes = NULL, context = NULL) {
+counter_add_dev <- function(name, value = 1L, attributes = NULL, context = NULL) {
     mtr <- get_meter()
     ctr <- mtr$create_counter(name)
     ctr$add(value, attributes, context)
@@ -59,7 +59,7 @@ counter_add_dev <- function(name, value, attributes = NULL, context = NULL) {
 
 up_down_counter_add_dev <- function(
   name,
-  value,
+  value = 1L,
   attributes = NULL,
   context = NULL
 ) {

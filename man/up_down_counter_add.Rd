@@ -5,7 +5,7 @@
 \title{Increase or decrease an OpenTelemetry up-down counter using the default
 meter}
 \usage{
-up_down_counter_add(name, value, attributes = NULL, context = NULL)
+up_down_counter_add(name, value = 1L, attributes = NULL, context = NULL)
 }
 \arguments{
 \item{name}{Name of the up-down counter.}

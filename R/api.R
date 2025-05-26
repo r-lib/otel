@@ -203,7 +203,7 @@ md_log_severity_levels <- paste0(
 #' @export
 
 # safe start
-counter_add <- function(name, value, attributes = NULL, context = NULL) {
+counter_add <- function(name, value = 1L, attributes = NULL, context = NULL) {
   tryCatch({                                                         # safe
     mtr <- get_meter()
     ctr <- mtr$create_counter(name)
@@ -236,7 +236,7 @@ counter_add_safe <- counter_add
 # safe start
 up_down_counter_add <- function(
   name,
-  value,
+  value = 1L,
   attributes = NULL,
   context = NULL
 ) {

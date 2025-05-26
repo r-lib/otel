@@ -4,7 +4,7 @@
 \alias{counter_add}
 \title{Increase an OpenTelemetry counter using the default meter}
 \usage{
-counter_add(name, value, attributes = NULL, context = NULL)
+counter_add(name, value = 1L, attributes = NULL, context = NULL)
 }
 \arguments{
 \item{name}{Name of the counter.}
