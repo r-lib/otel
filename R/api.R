@@ -124,6 +124,69 @@ start_span <- function(name = NULL, session = NULL, ...,
 
 start_span_safe <- start_span
 
+#' Log an OpenTelemetry log message, using the default logger
+#'
+#' @param msg Log message, may contain R expressions to evaluate within
+#'   braces.
+#' @param severity Log severity, a string, one of
+#'   `r md_log_severity_levels`.
+#' @param ... Additional arguments are passed to the `$log()` method of
+#'   the default logger.
+#' @param .envir Environment to evaluate the interpolated  expressions of
+#'   the log message in.
+#'
+#' @return The logger, invisibly.
+#'
+#' @export
+
+# safe start
+log <- function(msg, ..., severity = "info", .envir = parent.frame()) {
+  tryCatch({                                                         # safe
+    lgr <- get_logger()
+    lgr$log(msg, severity, ..., .envir = .envir)
+    invisible(lgr)
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    span_context_noop$new(NA_character_)                             # safe
+  })                                                                 # safe
+}
+# safe end
+
+log_severity_levels <- c(
+  "trace" = 1L,
+  "trace2" = 2L,
+  "trace3" = 3L,
+  "trace4" = 4L,
+  "debug" = 5L,
+  "debug2" = 6L,
+  "debug3" = 7L,
+  "debug4" = 8L,
+  "info" = 9L,
+  "info2" = 10L,
+  "info3" = 11L,
+  "info4" = 12L,
+  "warn" = 13L,
+  "warn2" = 14L,
+  "warn3" = 15L,
+  "warn4" = 16L,
+  "error" = 17L,
+  "error2" = 18L,
+  "error3" = 19L,
+  "error4" = 20L,
+  "fatal" = 21L,
+  "fatal2" = 22L,
+  "fatal3" = 23L,
+  "fatal4" = 24L,
+  NULL
+)
+
+md_log_severity_levels <- paste0(
+  "\"",
+  log_severity_levels,
+  "\"",
+  collapse = ", "
+)
+
 #' Return the current span context
 #'
 #' This is sometimes useful when writing loggers or meters, to associate

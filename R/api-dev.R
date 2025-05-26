@@ -44,6 +44,12 @@ start_span_dev <- function(name = NULL, session = NULL, ...,
     invisible(trc$start_span(name = name, ..., scope = scope))
 }
 
+log_dev <- function(msg, ..., severity = "info", .envir = parent.frame()) {
+    lgr <- get_logger()
+    lgr$log(msg, severity, ..., .envir = .envir)
+    invisible(lgr)
+}
+
 get_current_span_context_dev <- function() {
     trc <- get_tracer()
     trc$get_current_span_context()
