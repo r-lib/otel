@@ -30,7 +30,7 @@ function(input, output, session) {
   output$plot1 <- renderPlot({
     otel::start_span("plot", session)
     otel::counter_add("plots")
-    otel::log$debug("Plot")
+    otel::log("Plot")
     palette(c(
       "#E41A1C",
       "#377EB8",
