@@ -152,6 +152,8 @@ log <- function(msg, ..., severity = "info", .envir = parent.frame()) {
 }
 # safe end
 
+log_safe <- log
+
 log_severity_levels <- c(
   "trace" = 1L,
   "trace2" = 2L,
@@ -186,6 +188,131 @@ md_log_severity_levels <- paste0(
   "\"",
   collapse = ", "
 )
+
+#' Increase an OpenTelemetry counter using the default meter
+#'
+#' @param name Name of the counter.
+#' @param value Value to add to the counter, defaults to 1.
+#' @param attributes Additional attributes to add.
+#' @param context Span context. If missing the current context is used,
+#'   if any.
+#'
+#' @return The counter object, invisibly.
+#'
+#' @family OpenTelemetry metrics instruments
+#' @export
+
+# safe start
+counter_add <- function(name, value, attributes = NULL, context = NULL) {
+  tryCatch({                                                         # safe
+    mtr <- get_meter()
+    ctr <- mtr$create_counter(name)
+    ctr$add(value, attributes, context)
+    invisible(ctr)
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    counter_noop$new()                                               # safe
+  })                                                                 # safe
+}
+# safe end
+
+counter_add_safe <- counter_add
+
+#' Increase or decrease an OpenTelemetry up-down counter using the default
+#' meter
+#'
+#' @param name Name of the up-down counter.
+#' @param value Value to add to or subtract from the counter, defaults
+#'   to 1.
+#' @param attributes Additional attributes to add.
+#' @param context Span context. If missing the current context is used,
+#'   if any.
+#'
+#' @return The up-down counter object, invisibly.
+#'
+#' @family OpenTelemetry metrics instruments
+#' @export
+
+# safe start
+up_down_counter_add <- function(
+  name,
+  value,
+  attributes = NULL,
+  context = NULL
+) {
+  tryCatch({                                                         # safe
+    mtr <- get_meter()
+    ctr <- mtr$create_up_down_counter(name)
+    ctr$add(value, attributes, context)
+    invisible(ctr)
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    up_down_counter_noop$new()                                       # safe
+  })                                                                 # safe
+}
+# safe end
+
+up_down_counter_add_safe <- up_down_counter_add
+
+#' Record a value of an OpenTelemetry histogram using the default
+#' meter
+#'
+#' @param name Name of the histogram.
+#' @param value Value to record.
+#' @param attributes Additional attributes to add.
+#' @param context Span context. If missing the current context is used,
+#'   if any.
+#'
+#' @return The histogram object, invisibly.
+#'
+#' @family OpenTelemetry metrics instruments
+#' @export
+
+# safe start
+histogram_record <- function(name, value, attributes = NULL, context = NULL) {
+  tryCatch({                                                         # safe
+    mtr <- get_meter()
+    ctr <- mtr$create_histogram(name)
+    ctr$record(value, attributes, context)
+    invisible(ctr)
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    histogram_noop$new()                                             # safe
+  })                                                                 # safe
+}
+# safe end
+
+histogram_record_safe <- histogram_record
+
+#' Record a value of an OpenTelemetry gauge using the default
+#' meter
+#'
+#' @param name Name of the gauge
+#' @param value Value to record.
+#' @param attributes Additional attributes to add.
+#' @param context Span context. If missing the current context is used,
+#'   if any.
+#'
+#' @return The gauge object, invisibly.
+#'
+#' @family OpenTelemetry metrics instruments
+#' @export
+
+# safe start
+gauge_record <- function(name, value, attributes = NULL, context = NULL) {
+  tryCatch({                                                         # safe
+    mtr <- get_meter()
+    ctr <- mtr$create_gauge(name)
+    ctr$record(value, attributes, context)
+    invisible(ctr)
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    gauge_noop$new()                                             # safe
+  })                                                                 # safe
+}
+# safe end
+
+gauge_record_safe <- gauge_record
 
 #' Return the current span context
 #'

@@ -1,6 +1,6 @@
 function(input, output, session) {
   otel::start_shiny_session(session)
-  otel_mtr_sessions$add()
+  otel::counter_add("sessions")
   otel::log("Start new Shiny session")
 
   # Combine the selected variables into a new data frame
@@ -10,7 +10,7 @@ function(input, output, session) {
       session,
       attributes = list(columns = c(input$xcol, input$ycol))
     )
-    otel_mts_data_changes$add()
+    otel::counter_add("data-changes")
     otel::log("Select new data {input$xcol} & {input$ycol}", "info")
     iris[, c(input$xcol, input$ycol)]
   })
@@ -21,7 +21,7 @@ function(input, output, session) {
       session,
       attributes = list(clusters = input$clusters)
     )
-    otel_mts_kmeans_runs$add()
+    otel::counter_add("kmeans-runs")
     otel::log("Run kmeans with {input$clusters} clusters")
     Sys.sleep(1)
     kmeans(selectedData(), input$clusters)
@@ -29,7 +29,7 @@ function(input, output, session) {
 
   output$plot1 <- renderPlot({
     otel::start_span("plot", session)
-    otel_mtr_plots$add()
+    otel::counter_add("plots")
     otel::log$debug("Plot")
     palette(c(
       "#E41A1C",

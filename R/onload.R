@@ -4,6 +4,7 @@ otel_clean_cache <- function() {
   the$meter_provider <- NULL
   the$tracer_app <- NULL
   the$span_app <- NULL
+  the$instruments <- NULL
 }
 
 # nocov start
@@ -52,6 +53,31 @@ setup_dev_env <- function(envir = asNamespace(.packageName)) {
     assign(
       "start_span",
       start_span_dev,
+      envir = envir
+    )
+    assign(
+      "log",
+      log_dev,
+      envir = envir
+    )
+    assign(
+      "counter_add",
+      counter_add_dev,
+      envir = envir
+    )
+    assign(
+      "up_down_counter_add",
+      up_down_counter_add_dev,
+      envir = envir
+    )
+    assign(
+      "histogram_record",
+      histogram_record_dev,
+      envir = envir
+    )
+    assign(
+      "gauge_record",
+      gauge_record_dev,
       envir = envir
     )
     assign(

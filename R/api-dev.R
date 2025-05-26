@@ -50,6 +50,39 @@ log_dev <- function(msg, ..., severity = "info", .envir = parent.frame()) {
     invisible(lgr)
 }
 
+counter_add_dev <- function(name, value, attributes = NULL, context = NULL) {
+    mtr <- get_meter()
+    ctr <- mtr$create_counter(name)
+    ctr$add(value, attributes, context)
+    invisible(ctr)
+}
+
+up_down_counter_add_dev <- function(
+  name,
+  value,
+  attributes = NULL,
+  context = NULL
+) {
+    mtr <- get_meter()
+    ctr <- mtr$create_up_down_counter(name)
+    ctr$add(value, attributes, context)
+    invisible(ctr)
+}
+
+histogram_record_dev <- function(name, value, attributes = NULL, context = NULL) {
+    mtr <- get_meter()
+    ctr <- mtr$create_histogram(name)
+    ctr$record(value, attributes, context)
+    invisible(ctr)
+}
+
+gauge_record_dev <- function(name, value, attributes = NULL, context = NULL) {
+    mtr <- get_meter()
+    ctr <- mtr$create_gauge(name)
+    ctr$record(value, attributes, context)
+    invisible(ctr)
+}
+
 get_current_span_context_dev <- function() {
     trc <- get_tracer()
     trc$get_current_span_context()

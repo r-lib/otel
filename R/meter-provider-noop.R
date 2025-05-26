@@ -76,7 +76,7 @@ counter_noop <- list(
   }
 )
 
-up_down_counter <- list(
+up_down_counter_noop <- list(
   new = function(name = NULL, ...) {
     self <- structure(
       list(
@@ -90,7 +90,7 @@ up_down_counter <- list(
   }
 )
 
-histogram <- list(
+histogram_noop <- list(
   new = function(name = NULL, ...) {
     self <- structure(
       list(
@@ -104,7 +104,7 @@ histogram <- list(
   }
 )
 
-gauge <- list(
+gauge_noop <- list(
   new = function(name = NULL, ...) {
     self <- structure(
       list(
