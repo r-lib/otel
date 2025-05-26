@@ -147,7 +147,7 @@ log <- function(msg, ..., severity = "info", .envir = parent.frame()) {
     invisible(lgr)
   }, error = function(err) {                                         # safe
     errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
-    span_context_noop$new(NA_character_)                             # safe
+    logger_noop$new()                                                # safe
   })                                                                 # safe
 }
 # safe end
