@@ -8,7 +8,7 @@
 \alias{clear_baggage}
 \title{Baggage API}
 \usage{
-set_baggage_value(key, value)
+set_baggage_value(.new = list(), ...)
 
 get_baggage_value(key)
 
@@ -19,6 +19,9 @@ get_baggage()
 clear_baggage()
 }
 \arguments{
+\item{.new}{A named list of strings, or a named character vector,
+representing the keys (names) and values (values) to set.}
+
 \item{key}{String (character scalar), the baggage key to set or query.}
 
 \item{value}{String (character scalar), the baggage value to set. It

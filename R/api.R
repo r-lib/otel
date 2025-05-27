@@ -350,3 +350,119 @@ extract_http_context <- function(headers) {
 # safe end
 
 extract_http_context_safe <- extract_http_context
+
+#' Baggage API
+#'
+#' Custom contextual information.
+#'
+#' In OpenTelemetry, Baggage is custom contextual information that resides
+#' next to context and is passed to other in-process contexts, and can be
+#' passed to other processes as well.
+#'
+#' Baggage is a key-value store, where both the keys and the values are
+#' UTF-8 strings.
+#'
+#' `set_baggage_value()` sets `value` for `key` in the
+#' _current context_. If `key` was previously set, it is overwritten.
+#'
+#' @param .new A named list of strings, or a named character vector,
+#'   representing the keys (names) and values (values) to set.
+#' @param key String (character scalar), the baggage key to set or query.
+#' @param value String (character scalar), the baggage value to set. It
+#' cannot be `NA`.
+#'
+#' @return `set_baggage_value()` returns `NULL`, invisibly.
+#'
+#' @export
+#' @rdname baggage
+
+# safe start
+set_baggage_value <- function(.new = list(), ...) {
+  tryCatch({                                                         # safe
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    span_context_noop$new(NA_character_)                             # safe
+  })                                                                 # safe
+
+}
+# safe end
+
+#' @details
+#' `get_baggage_value()` queries the baggage value of `key` in the
+#' _current context_. You can use it to query values passed on from other
+#' contexts, e.g. from parent spans, or from other processes. It returns
+#' `NA_character_` if `key` is not set in the current context.
+#'
+#' @return `get_baggage_value()` returns a string scalar, the
+#' value that belongs to `key`, or `NA_character_` if `key` is not set.
+#'
+#' @rdname baggage
+#' @export
+
+# safe start
+get_baggage_value <- function(key) {
+  tryCatch({                                                         # safe
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    span_context_noop$new(NA_character_)                             # safe
+  })                                                                 # safe
+}
+# safe end
+
+#' @details
+#' `remove_baggage_value()` removed `key` from the baggage of the
+#' _current context_, if it was set. If it was not set then it does not do
+#' anything.
+#'
+#' @return `remove_baggage_value()` returns `NULL`, invisibly.
+#'
+#' @export
+#' @rdname baggage
+
+# safe start
+remove_baggage_value <- function(key) {
+  tryCatch({                                                         # safe
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    span_context_noop$new(NA_character_)                             # safe
+  })                                                                 # safe
+}
+# safe end
+
+#' @details
+#' `get_baggage()` returns all keys and thei corresponding values
+#' of the baggage of the _current context_.
+#'
+#' @return `get_baggage()` returns a named character vector.
+#'
+#' @export
+#' @rdname baggage
+
+# safe start
+get_baggage <- function() {
+  tryCatch({                                                         # safe
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    span_context_noop$new(NA_character_)                             # safe
+  })                                                                 # safe
+}
+# safe end
+
+#' @details
+#' `clear_baggage()` removed all keys from the baggage of the
+#' _current context_.
+#'
+#' @return `clear_baggage()` returns `NULL`, invisibly.
+#'
+#' @export
+#' @rdname baggage
+
+# safe start
+clear_baggage <- function() {
+  tryCatch({                                                         # safe
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    span_context_noop$new(NA_character_)                             # safe
+  })                                                                 # safe
+}
+# safe end

@@ -81,6 +81,22 @@ extract_http_context_dev <- function(headers) {
     trc$extract_http_context(headers)
 }
 
+set_baggage_value_dev <- function(.new = list(), ...) {
+
+}
+
+get_baggage_value_dev <- function(key) {
+}
+
+remove_baggage_value_dev <- function(key) {
+}
+
+get_baggage_dev <- function() {
+}
+
+clear_baggage_dev <- function() {
+}
+
 get_default_tracer_provider_dev <- function() {
     if (is.null(the$tracer_provider)) {
       setup_default_tracer_provider()
