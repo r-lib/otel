@@ -1,9 +1,5 @@
 
 get_tracer_dev <- function(name = NULL) {
-    name <- name %||%
-      utils::packageName() %||%
-      get_env("OTEL_SERVICE_NAME") %||%
-      basename(getwd())
     # does setup if necessary
     tp <- get_default_tracer_provider()
     trc <- tp$get_tracer(name)
@@ -11,10 +7,6 @@ get_tracer_dev <- function(name = NULL) {
 }
 
 get_logger_dev <- function(name = NULL) {
-    name <- name %||%
-      utils::packageName() %||%
-      get_env("OTEL_SERVICE_NAME") %||%
-      basename(getwd())
     # does setup if necessary
     tp <- get_default_logger_provider()
     trc <- tp$get_logger(name)
@@ -22,10 +14,6 @@ get_logger_dev <- function(name = NULL) {
 }
 
 get_meter_dev <- function(name = NULL) {
-    name <- name %||%
-      utils::packageName() %||%
-      get_env("OTEL_SERVICE_NAME") %||%
-      basename(getwd())
     # does setup if necessary
     tp <- get_default_meter_provider()
     trc <- tp$get_meter(name)

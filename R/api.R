@@ -16,10 +16,6 @@
 # safe start
 get_tracer <- function(name = NULL) {
   tryCatch({                                                         # safe
-    name <- name %||%
-      utils::packageName() %||%
-      get_env("OTEL_SERVICE_NAME") %||%
-      basename(getwd())
     # does setup if necessary
     tp <- get_default_tracer_provider()
     trc <- tp$get_tracer(name)
@@ -45,10 +41,6 @@ get_tracer_safe <- get_tracer
 # safe start
 get_logger <- function(name = NULL) {
   tryCatch({                                                         # safe
-    name <- name %||%
-      utils::packageName() %||%
-      get_env("OTEL_SERVICE_NAME") %||%
-      basename(getwd())
     # does setup if necessary
     tp <- get_default_logger_provider()
     trc <- tp$get_logger(name)
@@ -73,10 +65,6 @@ get_logger_safe <- get_logger
 # safe start
 get_meter <- function(name = NULL) {
   tryCatch({                                                         # safe
-    name <- name %||%
-      utils::packageName() %||%
-      get_env("OTEL_SERVICE_NAME") %||%
-      basename(getwd())
     # does setup if necessary
     tp <- get_default_meter_provider()
     trc <- tp$get_meter(name)
