@@ -81,3 +81,86 @@
       Error in `trc$get_current_span_context()`:
       ! nope!
 
+# log
+
+    Code
+      lgr2 <- log("another nothing")
+    Message
+      Opentelemetry error: denied!
+
+---
+
+    Code
+      log_dev("nothing")
+    Condition
+      Error in `lgr$log()`:
+      ! no
+
+# counter_add
+
+    Code
+      mtr2 <- counter_add("cx")
+    Message
+      Opentelemetry error: not today
+
+---
+
+    Code
+      counter_add_dev("cx")
+    Condition
+      Error in `invisible()`:
+      ! sorry
+
+# up_down_counter_add
+
+    Code
+      mtr2 <- up_down_counter_add("cx")
+    Message
+      Opentelemetry error: not today
+
+---
+
+    Code
+      up_down_counter_add_dev("cx")
+    Condition
+      Error in `invisible()`:
+      ! sorry
+
+# histogram_record
+
+    Code
+      mtr2 <- histogram_record("cx")
+    Message
+      Opentelemetry error: not today
+
+---
+
+    Code
+      histogram_record_dev("cx")
+    Condition
+      Error in `invisible()`:
+      ! sorry
+
+# gauge_record
+
+    Code
+      mtr2 <- gauge_record("cx")
+    Message
+      Opentelemetry error: not today
+
+---
+
+    Code
+      gauge_record_dev("cx")
+    Condition
+      Error in `invisible()`:
+      ! sorry
+
+# extract_http_context
+
+    Code
+      extract_http_context_dev(c("does not matter"))
+    Condition
+      Error in `trc$extract_http_context()`:
+      ! no context
+
