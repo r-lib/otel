@@ -142,6 +142,14 @@ log <- function(msg, ..., severity = "info", .envir = parent.frame()) {
 
 log_safe <- log
 
+#' OpenTelemetry log severity levels
+#'
+#' A named integer vector, the severity levels in numeric form.
+#' The names are the severity levels in text form. otel functions accept
+#' both forms as severity levels, but the text form is more readable.
+#'
+#' @export
+
 log_severity_levels <- c(
   "trace" = 1L,
   "trace2" = 2L,
