@@ -127,6 +127,3 @@ span_context_noop <- list(
     self
   }
 )
-
-invalid_trace_id <- strrep("0", 32)
-invalid_span_id <- strrep("0", 16)

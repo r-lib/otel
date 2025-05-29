@@ -148,6 +148,7 @@ log_safe <- log
 #' The names are the severity levels in text form. otel functions accept
 #' both forms as severity levels, but the text form is more readable.
 #'
+#' @family OpenTelemetry constants
 #' @export
 
 log_severity_levels <- c(
