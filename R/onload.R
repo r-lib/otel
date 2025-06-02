@@ -1,10 +1,34 @@
+# used by otelsdk
+otel_cache_vars <- c(
+  "tracer_provider",
+  "logger_provider",
+  "meter_provider",
+  "tracer_app",
+  "span_app",
+  "instruments"
+)
+
+# used by otelsdk
 otel_clean_cache <- function() {
-  the$tracer_provider <- NULL
-  the$logger_provider <- NULL
-  the$meter_provider <- NULL
-  the$tracer_app <- NULL
-  the$span_app <- NULL
-  the$instruments <- NULL
+  for (nm in otel_cache_vars) {
+    the[[nm]] <- NULL
+  }
+}
+
+# used by otelsdk
+otel_save_cache <- function() {
+  copy <- new.env(parent = emptyenv())
+  for (nm in otel_cache_vars) {
+    copy[[nm]] <- the[[nm]]
+  }
+  copy
+}
+
+# used by otelsdk
+otel_restore_cache <- function(copy) {
+  for (nm in names(copy)) {
+    the[[nm]] <- copy[[nm]]
+  }
 }
 
 # nocov start
