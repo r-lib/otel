@@ -29,18 +29,12 @@ tracer_noop <- list(
         },
         get_current_span_context = function() span_context_noop$new(),
         is_enabled = function() FALSE,
-        start_session = function() {
-        },
-        activate_session = function(session) {
-        },
-        deactivate_session = function(session) {
-        },
-        finish_session = function(session) {
-        },
-        finish_all_sessions = function() {
-        },
-        flush = function() {
-        },
+        start_session = function() {},
+        activate_session = function(session) {},
+        deactivate_session = function(session) {},
+        finish_session = function(session) {},
+        finish_all_sessions = function() {},
+        flush = function() {},
         extract_http_context = function(headers) {
           span_context_noop$new()
         }
