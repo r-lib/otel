@@ -12,6 +12,9 @@ meter_provider_noop <- list(
         shutdown = function(timeout = NULL, ...) {
           # noop
           invisible(self)
+        },
+        get_metrics = function() {
+          list()
         }
       ),
       class = c(

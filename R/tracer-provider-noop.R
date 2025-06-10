@@ -7,6 +7,9 @@ tracer_provider_noop <- list(
         },
         flush = function() {
           # noop
+        },
+        get_spans = function() {
+          list()
         }
       ),
       class = c(
