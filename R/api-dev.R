@@ -27,7 +27,7 @@ start_span_dev <- function(name = NULL, session = NULL, ...,
       if (inherits(session, "ShinySession")) {
         session <- session$userData$otel_session
       }
-      trc$activate_session(session)
+      session$activate_session()
     }
     invisible(trc$start_span(name = name, ..., scope = scope))
 }
@@ -71,9 +71,9 @@ gauge_record_dev <- function(name, value, attributes = NULL, context = NULL) {
     invisible(ctr)
 }
 
-get_current_span_context_dev <- function() {
+get_active_span_context_dev <- function() {
     trc <- get_tracer()
-    trc$get_current_span_context()
+    trc$get_active_span_context()
 }
 
 extract_http_context_dev <- function(headers) {
@@ -112,7 +112,6 @@ start_shiny_app_dev <- function(service_name = NULL, ...) {
     the$span_app <- the$tracer_app$start_span("app", scope = NULL, ...)
     if (the$tracer_app$is_enabled()) {
       shiny::onStop(function() {
-        the$tracer_app$finish_all_sessions()
         the$span_app$end()
       })
     }
@@ -123,9 +122,9 @@ start_shiny_session_dev <- function(
     session, attributes = NULL, options = NULL, ...) {
     name <- get_env("OTEL_SERVICE_NAME")
     trc <- get_tracer(name)
-    # inactive tracer, do nothing, but return a span
+    # inactive tracer, do nothing, but return a (session) span
     if (!trc$is_enabled()) {
-      return(invisible(trc$start_span("session", options, ...)))
+      return(invisible(trc$start_session("session", options, ...)))
     }
 
     attributes[["PATH_INFO"]] <- attributes[["PATH_INFO"]] %||%
@@ -145,12 +144,7 @@ start_shiny_session_dev <- function(
 
     assign(
       "otel_session",
-      trc$start_session(),
-      envir = session$userData
-    )
-    assign(
-      "session_span",
-      trc$start_span(
+      trc$start_session(
         "session",
         attributes = attributes,
         options = options,
@@ -160,9 +154,8 @@ start_shiny_session_dev <- function(
       envir = session$userData
     )
     session$onSessionEnded(function(...) {
-      session$userData$session_span$end()
-      trc$finish_session(session$userData$otel_session)
+      session$userData$otel_session$end()
     })
 
-    invisible(session$userData$session_span)
+    invisible(session$userData$otel_session)
 }

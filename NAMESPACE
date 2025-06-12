@@ -3,7 +3,7 @@
 export(counter_add)
 export(extract_http_context)
 export(gauge_record)
-export(get_current_span_context)
+export(get_active_span_context)
 export(get_default_logger_provider)
 export(get_default_meter_provider)
 export(get_default_tracer_provider)

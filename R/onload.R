@@ -105,8 +105,8 @@ setup_dev_env <- function(envir = asNamespace(.packageName)) {
       envir = envir
     )
     assign(
-      "get_current_span_context",
-      get_current_span_context_dev,
+      "get_active_span_context",
+      get_active_span_context_dev,
       envir = envir
     )
     assign(
@@ -119,17 +119,25 @@ setup_dev_env <- function(envir = asNamespace(.packageName)) {
 
 setup_r_trace <- function() {
   ev <- trimws(Sys.getenv("OTEL_INSTRUMENT_R_PKGS", ""))
-  if (ev == "") return()
+  if (ev == "") {
+    return()
+  }
 
-  if (!get_tracer()$is_enabled()) return()
+  if (!get_tracer()$is_enabled()) {
+    return()
+  }
 
   pkgs <- strsplit(ev, ",", fixed = TRUE)[[1]]
   for (pkg in pkgs) {
     PKG <- gsub(".", "_", toupper(pkg), fixed = TRUE)
     inc <- get_env(paste0("OTEL_INSTRUMENT_R_PKGS_", PKG, "_INCLUDE"))
     exc <- get_env(paste0("OTEL_INSTRUMENT_R_PKGS_", PKG, "_EXCLUDE"))
-    if (!is.null(inc)) inc <- trimws(strsplit(inc, ",")[[1]])
-    if (!is.null(exc)) exc <- trimws(strsplit(exc, ",")[[1]])
+    if (!is.null(inc)) {
+      inc <- trimws(strsplit(inc, ",")[[1]])
+    }
+    if (!is.null(exc)) {
+      exc <- trimws(strsplit(exc, ",")[[1]])
+    }
     if (pkg %in% loadedNamespaces()) {
       trace_namespace(pkg, inc, exc)
     } else {

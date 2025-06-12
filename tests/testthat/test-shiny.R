@@ -33,7 +33,6 @@ test_that("start_shiny_app_dev 2", {
   local_otel_cache()
   fake(start_shiny_app_dev, "get_tracer", function(...) {
     list(
-      finish_all_sessions = function() message("finish_all_sessions"),
       start_span = function(...) {
         message("start_span")
         list(end = function() message("end_span"))
@@ -61,18 +60,11 @@ test_that("start_shiny_session", {
   fake(start_shiny_session, "get_tracer", function(...) {
     fake_trc <- new.env()
     fake_trc$is_enabled <- function() TRUE
-    fake_trc$start_session <- function() {
+    fake_trc$start_session <- function(...) {
       message("start_session")
-      "mysession"
-    }
-    fake_trc$start_span <- function(...) {
-      message("start_span")
       list(..., end = function() {
-        message("end_span")
+        message("end_session")
       })
-    }
-    fake_trc$finish_session <- function(...) {
-      message("finish_session")
     }
     fake_trc
   })
@@ -98,7 +90,7 @@ test_that("start_shiny_session", {
   # error
   fake(start_shiny_session, "get_tracer", function(...) stop("boo!"))
   expect_snapshot(spn <- start_shiny_session())
-  expect_equal(spn, span_noop$new())
+  expect_equal(spn, session_noop$new())
 })
 
 test_that("start_shiny_session_dev", {
@@ -123,18 +115,11 @@ test_that("start_shiny_session_dev 2", {
   fake(start_shiny_session_dev, "get_tracer", function(...) {
     fake_trc <- new.env()
     fake_trc$is_enabled <- function() TRUE
-    fake_trc$start_session <- function() {
+    fake_trc$start_session <- function(...) {
       message("start_session")
-      "mysession"
-    }
-    fake_trc$start_span <- function(...) {
-      message("start_span")
       list(..., end = function() {
-        message("end_span")
+        message("end_session")
       })
-    }
-    fake_trc$finish_session <- function(...) {
-      message("finish_session")
     }
     fake_trc
   })
