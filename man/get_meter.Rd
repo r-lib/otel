@@ -15,3 +15,12 @@ package.}
 \description{
 Get a meter from the default meter provider
 }
+\seealso{
+Other OpenTelemetry metrics: 
+\code{\link{counter_add}()},
+\code{\link{gauge_record}()},
+\code{\link{histogram_record}()},
+\code{\link{is_measuring}()},
+\code{\link{up_down_counter_add}()}
+}
+\concept{OpenTelemetry metrics}

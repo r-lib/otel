@@ -15,3 +15,10 @@ package.}
 \description{
 Get a logger from the default logger provider
 }
+\seealso{
+Other OpenTelemetry logging: 
+\code{\link{is_logging}()},
+\code{\link{log}()},
+\code{\link{log_severity_levels}}
+}
+\concept{OpenTelemetry logging}

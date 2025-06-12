@@ -1,4 +1,19 @@
 
+is_tracing_dev <- function() {
+    trc <- get_tracer()
+    trc$is_enabled()
+}
+
+is_logging_dev <- function() {
+    lgr <- get_logger()
+    !inherits(lgr, "otel_logger_noop")
+}
+
+is_measuring_dev <- function() {
+    mtr <- get_meter()
+    !inherits(mtr, "otel_meter_noop")
+}
+
 get_tracer_dev <- function(name = NULL) {
     # does setup if necessary
     tp <- get_default_tracer_provider()

@@ -1,6 +1,70 @@
 # -------------------------------------------------------------------------
 # Simplified API
 
+#' Check whether OpenTelemetry tracing is active
+#'
+#' @return `TRUE` is OpenTelemetry tracing is active, `FALSE` otherwise.
+#'
+#' @export
+#' @family OpenTelemetry tracing
+
+# safe start
+is_tracing <- function() {
+  tryCatch({                                                         # safe
+    trc <- get_tracer()
+    trc$is_enabled()
+  }, error = function(err) {                                         # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
+    FALSE                                                            # safe
+  })                                                                 # safe
+}
+# safe end
+
+is_tracing_safe <- is_tracing
+
+#' Check whether OpenTelemetry logging is active
+#'
+#' @return `TRUE` is OpenTelemetry logging is active, `FALSE` otherwise.
+#'
+#' @export
+#' @family OpenTelemetry logging
+
+# safe start
+is_logging <- function() {
+  tryCatch({                                                         # safe
+    lgr <- get_logger()
+    !inherits(lgr, "otel_logger_noop")
+  }, error = function(err) {                                         # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
+    FALSE                                                            # safe
+  })                                                                 # safe
+}
+# safe end
+
+is_logging_safe <- is_logging
+
+#' Check whether OpenTelemetry metrics collection is active
+#'
+#' @return `TRUE` is OpenTelemetry metrics collection  is active,
+#' `FALSE` otherwise.
+#'
+#' @export
+#' @family OpenTelemetry metrics
+
+# safe start
+is_measuring <- function() {
+  tryCatch({                                                         # safe
+    mtr <- get_meter()
+    !inherits(mtr, "otel_meter_noop")
+  }, error = function(err) {                                         # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
+    FALSE                                                            # safe
+  })                                                                 # safe
+}
+# safe end
+
+is_measuring_safe <- is_measuring
+
 #' Get a tracer from the default tracer provider
 #'
 #' Calls [get_default_tracer_provider()] to get the default tracer
@@ -12,6 +76,7 @@
 #'   package.
 #' @return An OpenTelemetry tracer, an `otel_tracer` object.
 #' @export
+#' @family OpenTelemetry tracing
 
 # safe start
 get_tracer <- function(name = NULL) {
@@ -37,6 +102,7 @@ get_tracer_safe <- get_tracer
 #'   package.
 #'
 #' @export
+#' @family OpenTelemetry logging
 
 # safe start
 get_logger <- function(name = NULL) {
@@ -61,6 +127,7 @@ get_logger_safe <- get_logger
 #'   or the name of the current working directory if not called from a
 #'   package.
 #' @export
+#' @family OpenTelemetry metrics
 
 # safe start
 get_meter <- function(name = NULL) {
@@ -90,6 +157,7 @@ get_meter_safe <- get_meter
 #' @return The new Opentelemetry span object, invisibly.
 #'
 #' @export
+#' @family OpenTelemetry tracing
 
 # safe start
 start_span <- function(name = NULL, session = NULL, ...,
@@ -126,6 +194,7 @@ start_span_safe <- start_span
 #' @return The logger, invisibly.
 #'
 #' @export
+#' @family OpenTelemetry logging
 
 # safe start
 log <- function(msg, ..., severity = "info", .envir = parent.frame()) {
@@ -150,6 +219,7 @@ log_safe <- log
 #'
 #' @family OpenTelemetry constants
 #' @export
+#' @family OpenTelemetry logging
 
 log_severity_levels <- c(
   "trace" = 1L,
@@ -198,6 +268,7 @@ md_log_severity_levels <- paste0(
 #'
 #' @family OpenTelemetry metrics instruments
 #' @export
+#' @family OpenTelemetry metrics
 
 # safe start
 counter_add <- function(name, value = 1L, attributes = NULL, context = NULL) {
@@ -229,6 +300,7 @@ counter_add_safe <- counter_add
 #'
 #' @family OpenTelemetry metrics instruments
 #' @export
+#' @family OpenTelemetry metrics
 
 # safe start
 up_down_counter_add <- function(
@@ -264,6 +336,7 @@ up_down_counter_add_safe <- up_down_counter_add
 #'
 #' @family OpenTelemetry metrics instruments
 #' @export
+#' @family OpenTelemetry metrics
 
 # safe start
 histogram_record <- function(name, value, attributes = NULL, context = NULL) {
@@ -294,6 +367,7 @@ histogram_record_safe <- histogram_record
 #'
 #' @family OpenTelemetry metrics instruments
 #' @export
+#' @family OpenTelemetry metrics
 
 # safe start
 gauge_record <- function(name, value, attributes = NULL, context = NULL) {
@@ -321,6 +395,7 @@ gauge_record_safe <- gauge_record
 #' `FALSE` for the returned `spc`.
 #'
 #' @export
+#' @family OpenTelemetry tracing
 
 # safe start
 get_active_span_context <- function() {
@@ -345,6 +420,7 @@ get_active_span_context_safe <- get_active_span_context
 #' mandatory, and `tracestate` is optional.
 #'
 #' @export
+#' @family OpenTelemetry tracing
 
 # safe start
 extract_http_context <- function(headers) {

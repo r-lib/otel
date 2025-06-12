@@ -29,5 +29,13 @@ Other OpenTelemetry metrics instruments:
 \code{\link{counter_add}()},
 \code{\link{gauge_record}()},
 \code{\link{up_down_counter_add}()}
+
+Other OpenTelemetry metrics: 
+\code{\link{counter_add}()},
+\code{\link{gauge_record}()},
+\code{\link{get_meter}()},
+\code{\link{is_measuring}()},
+\code{\link{up_down_counter_add}()}
 }
+\concept{OpenTelemetry metrics}
 \concept{OpenTelemetry metrics instruments}

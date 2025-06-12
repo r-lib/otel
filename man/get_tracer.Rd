@@ -19,3 +19,11 @@ An OpenTelemetry tracer, an \code{otel_tracer} object.
 Calls \code{\link[=get_default_tracer_provider]{get_default_tracer_provider()}} to get the default tracer
 provider. Then calls its \verb{$get_tracer()} method to create a new tracer.
 }
+\seealso{
+Other OpenTelemetry tracing: 
+\code{\link{extract_http_context}()},
+\code{\link{get_active_span_context}()},
+\code{\link{is_tracing}()},
+\code{\link{start_span}()}
+}
+\concept{OpenTelemetry tracing}

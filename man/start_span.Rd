@@ -23,3 +23,11 @@ The new Opentelemetry span object, invisibly.
 \description{
 Start a new OpenTelemetry span, using the default tracer
 }
+\seealso{
+Other OpenTelemetry tracing: 
+\code{\link{extract_http_context}()},
+\code{\link{get_active_span_context}()},
+\code{\link{get_tracer}()},
+\code{\link{is_tracing}()}
+}
+\concept{OpenTelemetry tracing}

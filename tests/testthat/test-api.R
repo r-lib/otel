@@ -1,3 +1,65 @@
+test_that("is_tracing", {
+  fake(is_tracing, "get_tracer", list(is_enabled = function() FALSE))
+  expect_false(is_tracing())
+
+  fake(is_tracing, "get_tracer", function() stop("nope"))
+  expect_snapshot(is_tracing())
+
+  fake(is_tracing_dev, "get_tracer", list(is_enabled = function() FALSE))
+  expect_false(is_tracing_dev())
+
+  fake(is_tracing_dev, "get_tracer", function() stop("nope"))
+  expect_snapshot(error = TRUE, is_tracing_dev())
+})
+
+test_that("is_logging", {
+  fake(is_logging, "get_logger", structure(list(), class = "otel_logger_noop"))
+  expect_false(is_logging())
+
+  fake(is_logging, "get_logger", structure(list(), class = "otel_logger"))
+  expect_true(is_logging())
+
+  fake(is_logging, "get_logger", function() stop("nope"))
+  expect_snapshot(is_logging())
+
+  fake(
+    is_logging_dev,
+    "get_logger",
+    structure(list(), class = "otel_logger_noop")
+  )
+  expect_false(is_logging_dev())
+
+  fake(is_logging_dev, "get_logger", structure(list(), class = "otel_logger"))
+  expect_true(is_logging_dev())
+
+  fake(is_logging_dev, "get_logger", function() stop("nope"))
+  expect_snapshot(error = TRUE, is_logging_dev())
+})
+
+test_that("is_measuring", {
+  fake(is_measuring, "get_meter", structure(list(), class = "otel_meter_noop"))
+  expect_false(is_measuring())
+
+  fake(is_measuring, "get_meter", structure(list(), class = "otel_meter"))
+  expect_true(is_measuring())
+
+  fake(is_measuring, "get_meter", function() stop("nope"))
+  expect_snapshot(is_measuring())
+
+  fake(
+    is_measuring_dev,
+    "get_meter",
+    structure(list(), class = "otel_meter_noop")
+  )
+  expect_false(is_measuring_dev())
+
+  fake(is_measuring_dev, "get_meter", structure(list(), class = "otel_meter"))
+  expect_true(is_measuring_dev())
+
+  fake(is_measuring_dev, "get_meter", function() stop("nope"))
+  expect_snapshot(error = TRUE, is_measuring_dev())
+})
+
 test_that("get_default_tracer", {
   local_otel_cache()
   withr::local_envvar(
@@ -311,7 +373,7 @@ test_that("extract_http_context", {
 
   # error
   fake(extract_http_context, "get_tracer", function() stop("out of context"))
-  spc2 <- extract_http_context(c("does not matter"))
+  expect_snapshot(spc2 <- extract_http_context(c("does not matter")))
   expect_s3_class(spc2, "otel_span_context_noop")
 
   spc3 <- extract_http_context_dev(c("does not matter"))

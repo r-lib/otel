@@ -1,3 +1,54 @@
+# is_tracing
+
+    Code
+      is_tracing()
+    Message
+      OpenTelemetry error: nope
+    Output
+      [1] FALSE
+
+---
+
+    Code
+      is_tracing_dev()
+    Condition
+      Error in `get_tracer()`:
+      ! nope
+
+# is_logging
+
+    Code
+      is_logging()
+    Message
+      OpenTelemetry error: nope
+    Output
+      [1] FALSE
+
+---
+
+    Code
+      is_logging_dev()
+    Condition
+      Error in `get_logger()`:
+      ! nope
+
+# is_measuring
+
+    Code
+      is_measuring()
+    Message
+      OpenTelemetry error: nope
+    Output
+      [1] FALSE
+
+---
+
+    Code
+      is_measuring_dev()
+    Condition
+      Error in `get_meter()`:
+      ! nope
+
 # get_default_tracer
 
     Code
@@ -157,6 +208,13 @@
       ! sorry
 
 # extract_http_context
+
+    Code
+      spc2 <- extract_http_context(c("does not matter"))
+    Message
+      Opentelemetry error: out of context
+
+---
 
     Code
       extract_http_context_dev(c("does not matter"))

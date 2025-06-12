@@ -25,3 +25,10 @@ The logger, invisibly.
 \description{
 Log an OpenTelemetry log message, using the default logger
 }
+\seealso{
+Other OpenTelemetry logging: 
+\code{\link{get_logger}()},
+\code{\link{is_logging}()},
+\code{\link{log_severity_levels}}
+}
+\concept{OpenTelemetry logging}

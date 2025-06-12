@@ -15,3 +15,11 @@ then an invalid span context is returned, i.e. \code{spc$is_valid()} will be
 This is sometimes useful when writing loggers or meters, to associate
 logging and metrics reporting with traces.
 }
+\seealso{
+Other OpenTelemetry tracing: 
+\code{\link{extract_http_context}()},
+\code{\link{get_tracer}()},
+\code{\link{is_tracing}()},
+\code{\link{start_span}()}
+}
+\concept{OpenTelemetry tracing}

@@ -46,6 +46,9 @@ setup_dev_env <- function(envir = asNamespace(.packageName)) {
   ev <- tolower(Sys.getenv("OTEL_ENV"))
   if (ev %in% c("dev", "devel", "development")) {
     the$mode <- "dev"
+    assign("is_tracing", is_tracing_dev, envir = envir)
+    assign("is_logging", is_logging_dev, envir = envir)
+    assign("is_measuring", is_measuring_dev, envir = envir)
     assign(
       "get_default_tracer_provider",
       get_default_tracer_provider_dev,
