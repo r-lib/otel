@@ -10,6 +10,21 @@ test_that("safe functions are used in prod", {
   expect_equal(start_span, start_span_safe)
 })
 
+test_that("otel_save_cache, otel_restore_cache", {
+  on.exit(otel_clean_cache(), add = TRUE)
+  otel_clean_cache()
+  the[["tracer_provider"]] <- "bar"
+  the[["meter_provider"]] <- 1:10
+  the[["mode"]] <- "prod"
+  env <- otel_save_cache()
+  expect_true(is.environment(env))
+  expect_snapshot(as.list(env))
+  otel_clean_cache()
+  otel_restore_cache(env)
+  expect_true(is.environment(the))
+  expect_snapshot(as.list(the))
+})
+
 test_that("setup_dev_env", {
   check_prod <- function(env) {
     expect_null(env$get_default_tracer_provider)
