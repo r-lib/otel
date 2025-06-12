@@ -108,18 +108,19 @@ test_that("start_span", {
   spand <- start_span_dev()
   expect_s3_class(spand, "otel_span_noop")
 
-  span2 <- start_span(session = "foo")
+  sess <- session_noop$new()
+  span2 <- start_span(session = sess)
   expect_s3_class(span2, "otel_span_noop")
-  span2d <- start_span_dev(session = "foo")
+  span2d <- start_span_dev(session = sess)
   expect_s3_class(span2d, "otel_span_noop")
 
-  span3 <- start_span(
-    session = structure(list(), class = "ShinySession")
+  shiny_sess <- structure(
+    list(userData = list(otel_session = session_noop$new())),
+    class = "ShinySession"
   )
+  span3 <- start_span(session = shiny_sess)
   expect_s3_class(span3, "otel_span_noop")
-  span3d <- start_span_dev(
-    session = structure(list(), class = "ShinySession")
-  )
+  span3d <- start_span_dev(session = shiny_sess)
   expect_s3_class(span3d, "otel_span_noop")
 
   fake(start_span, "get_tracer", function() stop("nope"))
@@ -140,32 +141,32 @@ test_that("get_current_span_context", {
     structure("none", names = default_traces_exporter_envvar_r)
   )
 
-  spc <- get_current_span_context()
+  spc <- get_active_span_context()
   expect_s3_class(spc, "otel_span_context")
   expect_s3_class(spc, "otel_span_context_noop")
   expect_false(spc$is_valid())
 
   # recover from error
-  fake(get_current_span_context, "get_tracer", function() stop("nope!"))
+  fake(get_active_span_context, "get_tracer", function() stop("nope!"))
   expect_snapshot({
-    spc2 <- get_current_span_context()
+    spc2 <- get_active_span_context()
   })
   expect_s3_class(spc2, "otel_span_context_noop")
 
   # error
-  fake(get_current_span_context_dev, "get_tracer", function() stop("nope!"))
+  fake(get_active_span_context_dev, "get_tracer", function() stop("nope!"))
   expect_snapshot(error = TRUE, {
-    get_current_span_context_dev()
+    get_active_span_context_dev()
   })
 
   # error 2
   fake(
-    get_current_span_context_dev,
+    get_active_span_context_dev,
     "get_tracer",
-    function() list(get_current_span_context = function() stop("nope!"))
+    function() list(get_active_span_context = function() stop("nope!"))
   )
   expect_snapshot(error = TRUE, {
-    get_current_span_context_dev()
+    get_active_span_context_dev()
   })
 })
 

@@ -15,7 +15,7 @@ to 1.}
 
 \item{attributes}{Additional attributes to add.}
 
-\item{context}{Span context. If missing the current context is used,
+\item{context}{Span context. If missing the active context is used,
 if any.}
 }
 \value{

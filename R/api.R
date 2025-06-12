@@ -100,7 +100,7 @@ start_span <- function(name = NULL, session = NULL, ...,
       if (inherits(session, "ShinySession")) {
         session <- session$userData$otel_session
       }
-      trc$activate_session(session)
+      session$activate_session()
     }
     invisible(trc$start_span(name = name, ..., scope = scope))
   }, error = function(err) {                                         # safe
@@ -191,7 +191,7 @@ md_log_severity_levels <- paste0(
 #' @param name Name of the counter.
 #' @param value Value to add to the counter, defaults to 1.
 #' @param attributes Additional attributes to add.
-#' @param context Span context. If missing the current context is used,
+#' @param context Span context. If missing the active context is used,
 #'   if any.
 #'
 #' @return The counter object, invisibly.
@@ -222,7 +222,7 @@ counter_add_safe <- counter_add
 #' @param value Value to add to or subtract from the counter, defaults
 #'   to 1.
 #' @param attributes Additional attributes to add.
-#' @param context Span context. If missing the current context is used,
+#' @param context Span context. If missing the active context is used,
 #'   if any.
 #'
 #' @return The up-down counter object, invisibly.
@@ -257,7 +257,7 @@ up_down_counter_add_safe <- up_down_counter_add
 #' @param name Name of the histogram.
 #' @param value Value to record.
 #' @param attributes Additional attributes to add.
-#' @param context Span context. If missing the current context is used,
+#' @param context Span context. If missing the active context is used,
 #'   if any.
 #'
 #' @return The histogram object, invisibly.
@@ -287,7 +287,7 @@ histogram_record_safe <- histogram_record
 #' @param name Name of the gauge
 #' @param value Value to record.
 #' @param attributes Additional attributes to add.
-#' @param context Span context. If missing the current context is used,
+#' @param context Span context. If missing the active context is used,
 #'   if any.
 #'
 #' @return The gauge object, invisibly.
@@ -311,22 +311,22 @@ gauge_record <- function(name, value, attributes = NULL, context = NULL) {
 
 gauge_record_safe <- gauge_record
 
-#' Return the current span context
+#' Returns the active span context
 #'
 #' This is sometimes useful when writing loggers or meters, to associate
 #' logging and metrics reporting with traces.
 #'
-#' @return The current span context. If these is no current span context,
+#' @return The active span context. If these is no active span context,
 #' then an invalid span context is returned, i.e. `spc$is_valid()` will be
 #' `FALSE` for the returned `spc`.
 #'
 #' @export
 
 # safe start
-get_current_span_context <- function() {
+get_active_span_context <- function() {
   tryCatch({                                                         # safe
     trc <- get_tracer()
-    trc$get_current_span_context()
+    trc$get_active_span_context()
   }, error = function(err) {                                         # safe
     errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
     span_context_noop$new(NA_character_)                             # safe
@@ -334,7 +334,7 @@ get_current_span_context <- function() {
 }
 # safe end
 
-get_current_span_context_safe <- get_current_span_context
+get_active_span_context_safe <- get_active_span_context
 
 #' Extract a span context from HTTP headers received from a client
 #'

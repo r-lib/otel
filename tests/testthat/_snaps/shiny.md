@@ -19,7 +19,6 @@
       start_shiny_app_dev()
     Message
       start_span
-      finish_all_sessions
       end_span
 
 # start_shiny_session
@@ -28,9 +27,7 @@
       spn <- start_shiny_session(session = ssn, attributes = attr, options = opts)
     Message
       start_session
-      start_span
-      end_span
-      finish_session
+      end_session
 
 ---
 
@@ -74,9 +71,7 @@
       spn <- start_shiny_session_dev(session = ssn, attributes = attr, options = opts)
     Message
       start_session
-      start_span
-      end_span
-      finish_session
+      end_session
 
 ---
 
