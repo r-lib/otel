@@ -94,7 +94,7 @@ span_noop <- list(
 session_noop <- list(
   new = function(name = "", ...) {
     s <- span_noop$new(name = name, ...)
-    s$activate_session <- function() {}
+    s$activate_session <- function(...) {}
     s$deactivate_session <- function() {}
     class(s) <- c("otel_session", class(s))
     s
