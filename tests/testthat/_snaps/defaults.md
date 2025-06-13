@@ -137,7 +137,7 @@
       setup_default_meter_provider()
     Condition
       Error in `setup_default_meter_provider()`:
-      ! Unknown OpenTelemetry exporter from R_OTEL_LOGS_EXPORTER environment variable: invalid
+      ! Unknown OpenTelemetry exporter from R_OTEL_METRICS_EXPORTER environment variable: invalid
 
 ---
 
@@ -145,7 +145,7 @@
       setup_default_meter_provider()
     Condition
       Error in `setup_default_meter_provider()`:
-      ! Cannot set metrics exporter bad_package::meter_provider from R_OTEL_LOGS_EXPORTER environment variable, cannot load package bad_package.
+      ! Cannot set metrics exporter bad_package::meter_provider from R_OTEL_METRICS_EXPORTER environment variable, cannot load package bad_package.
 
 ---
 
@@ -153,7 +153,7 @@
       setup_default_meter_provider()
     Condition
       Error in `setup_default_meter_provider()`:
-      ! Cannot set metrics exporter otel::no_such_object from R_OTEL_LOGS_EXPORTER environment variable, cannot find provider no_such_object in package otel.
+      ! Cannot set metrics exporter otel::no_such_object from R_OTEL_METRICS_EXPORTER environment variable, cannot find provider no_such_object in package otel.
 
 ---
 
@@ -161,5 +161,5 @@
       setup_default_meter_provider()
     Condition
       Error in `setup_default_meter_provider()`:
-      ! Cannot set metrics exporter otel::is_string from R_OTEL_LOGS_EXPORTER environment variable, it is not a list or environment with a 'new' member.
+      ! Cannot set metrics exporter otel::is_string from R_OTEL_METRICS_EXPORTER environment variable, it is not a list or environment with a 'new' member.
 

@@ -8,7 +8,7 @@ default_logs_exporter_envvar_r <-
 
 default_metrics_exporter_envvar <- "OTEL_METRICS_EXPORTER"
 default_metrics_exporter_envvar_r <-
-  paste0("R_", default_logs_exporter_envvar)
+  paste0("R_", default_metrics_exporter_envvar)
 
 #' Get the default tracer provider
 #'
