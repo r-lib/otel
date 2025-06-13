@@ -197,6 +197,23 @@ test_that("start_span", {
   })
 })
 
+test_that("start_session", {
+  local_otel_off()
+
+  expect_equal(start_session("foo"), session_noop$new("foo"))
+
+  fake(start_session, "get_tracer", function() stop("no!"))
+  expect_snapshot(sess <- start_session())
+  expect_equal(sess, session_noop$new())
+
+  expect_equal(start_session_dev("foo"), session_noop$new("foo"))
+
+  fake(start_session_dev, "get_tracer", function() stop("no!"))
+  expect_snapshot(error = TRUE, {
+    start_session_dev()
+  })
+})
+
 test_that("get_current_span_context", {
   local_otel_cache()
   withr::local_envvar(

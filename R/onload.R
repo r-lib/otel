@@ -82,11 +82,13 @@ setup_dev_env <- function(envir = asNamespace(.packageName)) {
       start_span_dev,
       envir = envir
     )
-    assign(
-      "log",
-      log_dev,
-      envir = envir
-    )
+    assign("log", log_dev, envir = envir)
+    assign("log_trace", log_trace_dev, envir = envir)
+    assign("log_debug", log_debug_dev, envir = envir)
+    assign("log_info", log_info_dev, envir = envir)
+    assign("log_warn", log_warn_dev, envir = envir)
+    assign("log_error", log_error_dev, envir = envir)
+    assign("log_fatal", log_fatal_dev, envir = envir)
     assign(
       "counter_add",
       counter_add_dev,

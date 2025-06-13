@@ -28,6 +28,7 @@ Other OpenTelemetry tracing:
 \code{\link{extract_http_context}()},
 \code{\link{get_active_span_context}()},
 \code{\link{get_tracer}()},
-\code{\link{is_tracing}()}
+\code{\link{is_tracing}()},
+\code{\link{start_session}()}
 }
 \concept{OpenTelemetry tracing}

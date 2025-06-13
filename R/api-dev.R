@@ -47,6 +47,11 @@ start_span_dev <- function(name = NULL, session = NULL, ...,
     invisible(trc$start_span(name = name, ..., scope = scope))
 }
 
+start_session_dev <- function(name = NULL, ...) {
+    trc <- get_tracer()
+    invisible(trc$start_session(name = name, ...))
+}
+
 log_dev <- function(msg, ..., severity = "info", .envir = parent.frame()) {
     lgr <- get_logger()
     lgr$log(msg, severity, ..., .envir = .envir)

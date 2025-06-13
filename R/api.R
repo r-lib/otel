@@ -180,6 +180,34 @@ start_span <- function(name = NULL, session = NULL, ...,
 
 start_span_safe <- start_span
 
+#' Start a new OpenTelemetry session span, using the default tracer
+#'
+#' A session span is special because it has its own context stack, so it
+#' behaves like a separate process. You can switch to this "process" by
+#' calling the span's `$activate_session()` method, and switch back to
+#' context stack of the main process by calling the `$deactivate_session`
+#' method.
+#'
+#' @param ... Additional arguments are passed to the default tracer's
+#'   `start_session()` method.
+#' @inheritParams start_span
+#' @export
+#' @family OpenTelemetry tracing
+
+# safe start
+start_session <- function(name = NULL, ...) {
+  tryCatch({                                                         # safe
+    trc <- get_tracer()
+    invisible(trc$start_session(name = name, ...))
+  }, error = function(err) {                                         # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
+    invisible(session_noop$new())                                    # safe
+  })                                                                 # safe
+}
+# safe end
+
+start_session_safe <- start_session
+
 #' Log an OpenTelemetry log message, using the default logger
 #'
 #' @param msg Log message, may contain R expressions to evaluate within
