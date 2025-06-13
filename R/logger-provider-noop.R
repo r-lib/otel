@@ -18,7 +18,7 @@ logger_provider_noop <- list(
 )
 
 logger_noop <- list(
-  new = function(name = NULL, minimum_severity = "info", ...) {
+  new = function(name = NULL, minimum_severity = NULL, ...) {
     self <- structure(
       list(
         get_name = function() "default-logger",
