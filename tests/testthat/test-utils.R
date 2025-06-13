@@ -44,3 +44,21 @@ test_that("glob_filter", {
     glob_filter(fns, include = c("default_*", "?auge"), exclude = "*_r")
   })
 })
+
+test_that("get_env_count", {
+  withr::local_envvar(FOO = 10)
+  expect_equal(get_env_count("FOO", stop("no")), 10L)
+
+  withr::local_envvar(FOO = "bad")
+  expect_equal(get_env_count("FOO", 1L), 1L)
+  expect_equal(get_env_count("FOO", "1"), 1L)
+
+  withr::local_envvar(FOO = "-100")
+  expect_equal(get_env_count("FOO", 1L), 1L)
+  expect_equal(get_env_count("FOO", "1"), 1L)
+
+  expect_snapshot(error = TRUE, {
+    get_env_count("FOO", -1L)
+    get_env_count("FOO", "bad-default")
+  })
+})

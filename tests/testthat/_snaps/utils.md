@@ -38,3 +38,16 @@
     Output
       [1] "default_logs_exporter_envvar" "gauge"                       
 
+# get_env_count
+
+    Code
+      get_env_count("FOO", -1L)
+    Condition
+      Error in `get_env_count()`:
+      ! Invalid `default` in `get_env_count()`, must be a non-negative integer scalar.
+    Code
+      get_env_count("FOO", "bad-default")
+    Condition
+      Error in `get_env_count()`:
+      ! Invalid `default` in `get_env_count()`, must be a non-negative integer scalar.
+

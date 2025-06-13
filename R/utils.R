@@ -37,3 +37,19 @@ glob_filter <- function(x, include = NULL, exclude = NULL) {
   }
   res
 }
+
+get_env_count <- function(var, default) {
+  strval <- Sys.getenv(var)
+  intval <- suppressWarnings(as.integer(strval))
+  if (!is.na(intval) && intval >= 0) {
+    return(intval)
+  }
+  intval <- suppressWarnings(as.integer(default))
+  if (!is.na(intval) && intval >= 0) {
+    return(intval)
+  }
+  stop(
+    "Invalid `default` in `get_env_count()`, must be a non-negative ",
+    "integer scalar."
+  )
+}
