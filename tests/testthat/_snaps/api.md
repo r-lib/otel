@@ -147,6 +147,96 @@
       Error in `lgr$log()`:
       ! no
 
+# log_trace
+
+    Code
+      lgr2 <- log_trace("another nothing")
+    Message
+      Opentelemetry error: denied!
+
+---
+
+    Code
+      log_trace_dev("nothing")
+    Condition
+      Error in `lgr$log()`:
+      ! no
+
+# log_debug
+
+    Code
+      lgr2 <- log_debug("another nothing")
+    Message
+      Opentelemetry error: denied!
+
+---
+
+    Code
+      log_debug_dev("nothing")
+    Condition
+      Error in `lgr$log()`:
+      ! no
+
+# log_info
+
+    Code
+      lgr2 <- log_info("another nothing")
+    Message
+      Opentelemetry error: denied!
+
+---
+
+    Code
+      log_info_dev("nothing")
+    Condition
+      Error in `lgr$log()`:
+      ! no
+
+# log_warn
+
+    Code
+      lgr2 <- log_warn("another nothing")
+    Message
+      Opentelemetry error: denied!
+
+---
+
+    Code
+      log_warn_dev("nothing")
+    Condition
+      Error in `lgr$log()`:
+      ! no
+
+# log_error
+
+    Code
+      lgr2 <- log_error("another nothing")
+    Message
+      Opentelemetry error: denied!
+
+---
+
+    Code
+      log_error_dev("nothing")
+    Condition
+      Error in `lgr$log()`:
+      ! no
+
+# log_fatal
+
+    Code
+      lgr2 <- log_fatal("another nothing")
+    Message
+      Opentelemetry error: denied!
+
+---
+
+    Code
+      log_fatal_dev("nothing")
+    Condition
+      Error in `lgr$log()`:
+      ! no
+
 # counter_add
 
     Code

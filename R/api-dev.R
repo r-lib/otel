@@ -53,6 +53,42 @@ log_dev <- function(msg, ..., severity = "info", .envir = parent.frame()) {
     invisible(lgr)
 }
 
+log_trace_dev <- function(msg, ..., .envir = parent.frame()) {
+    lgr <- get_logger()
+    lgr$log(msg, "trace", ..., .envir = .envir)
+    invisible(lgr)
+}
+
+log_debug_dev <- function(msg, ..., .envir = parent.frame()) {
+    lgr <- get_logger()
+    lgr$log(msg, "debug", ..., .envir = .envir)
+    invisible(lgr)
+}
+
+log_info_dev <- function(msg, ..., .envir = parent.frame()) {
+    lgr <- get_logger()
+    lgr$log(msg, "info", ..., .envir = .envir)
+    invisible(lgr)
+}
+
+log_warn_dev <- function(msg, ..., .envir = parent.frame()) {
+    lgr <- get_logger()
+    lgr$log(msg, "warn", ..., .envir = .envir)
+    invisible(lgr)
+}
+
+log_error_dev <- function(msg, ..., .envir = parent.frame()) {
+    lgr <- get_logger()
+    lgr$log(msg, "error", ..., .envir = .envir)
+    invisible(lgr)
+}
+
+log_fatal_dev <- function(msg, ..., .envir = parent.frame()) {
+    lgr <- get_logger()
+    lgr$log(msg, "fatal", ..., .envir = .envir)
+    invisible(lgr)
+}
+
 counter_add_dev <- function(name, value = 1L, attributes = NULL, context = NULL) {
     mtr <- get_meter()
     ctr <- mtr$create_counter(name)

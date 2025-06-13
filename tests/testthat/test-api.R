@@ -258,6 +258,150 @@ test_that("log", {
   })
 })
 
+test_that("log_trace", {
+  local_otel_off()
+  lgr <- log_trace("log message going nowhere")
+  expect_s3_class(lgr, "otel_logger_noop")
+
+  # error
+  fake(log_trace, "get_logger", function() stop("denied!"))
+  expect_snapshot({
+    lgr2 <- log_trace("another nothing")
+  })
+  expect_s3_class(lgr, "otel_logger_noop")
+
+  lgr3 <- log_trace_dev("Still nowhere")
+  expect_s3_class(lgr3, "otel_logger_noop")
+
+  # error
+  fake(log_trace_dev, "get_logger", function() {
+    list(log = function(...) stop("no"))
+  })
+  expect_snapshot(error = TRUE, {
+    log_trace_dev("nothing")
+  })
+})
+
+test_that("log_debug", {
+  local_otel_off()
+  lgr <- log_debug("log message going nowhere")
+  expect_s3_class(lgr, "otel_logger_noop")
+
+  # error
+  fake(log_debug, "get_logger", function() stop("denied!"))
+  expect_snapshot({
+    lgr2 <- log_debug("another nothing")
+  })
+  expect_s3_class(lgr, "otel_logger_noop")
+
+  lgr3 <- log_debug_dev("Still nowhere")
+  expect_s3_class(lgr3, "otel_logger_noop")
+
+  # error
+  fake(log_debug_dev, "get_logger", function() {
+    list(log = function(...) stop("no"))
+  })
+  expect_snapshot(error = TRUE, {
+    log_debug_dev("nothing")
+  })
+})
+
+test_that("log_info", {
+  local_otel_off()
+  lgr <- log_info("log message going nowhere")
+  expect_s3_class(lgr, "otel_logger_noop")
+
+  # error
+  fake(log_info, "get_logger", function() stop("denied!"))
+  expect_snapshot({
+    lgr2 <- log_info("another nothing")
+  })
+  expect_s3_class(lgr, "otel_logger_noop")
+
+  lgr3 <- log_info_dev("Still nowhere")
+  expect_s3_class(lgr3, "otel_logger_noop")
+
+  # error
+  fake(log_info_dev, "get_logger", function() {
+    list(log = function(...) stop("no"))
+  })
+  expect_snapshot(error = TRUE, {
+    log_info_dev("nothing")
+  })
+})
+
+test_that("log_warn", {
+  local_otel_off()
+  lgr <- log_warn("log message going nowhere")
+  expect_s3_class(lgr, "otel_logger_noop")
+
+  # error
+  fake(log_warn, "get_logger", function() stop("denied!"))
+  expect_snapshot({
+    lgr2 <- log_warn("another nothing")
+  })
+  expect_s3_class(lgr, "otel_logger_noop")
+
+  lgr3 <- log_warn_dev("Still nowhere")
+  expect_s3_class(lgr3, "otel_logger_noop")
+
+  # error
+  fake(log_warn_dev, "get_logger", function() {
+    list(log = function(...) stop("no"))
+  })
+  expect_snapshot(error = TRUE, {
+    log_warn_dev("nothing")
+  })
+})
+
+test_that("log_error", {
+  local_otel_off()
+  lgr <- log_error("log message going nowhere")
+  expect_s3_class(lgr, "otel_logger_noop")
+
+  # error
+  fake(log_error, "get_logger", function() stop("denied!"))
+  expect_snapshot({
+    lgr2 <- log_error("another nothing")
+  })
+  expect_s3_class(lgr, "otel_logger_noop")
+
+  lgr3 <- log_error_dev("Still nowhere")
+  expect_s3_class(lgr3, "otel_logger_noop")
+
+  # error
+  fake(log_error_dev, "get_logger", function() {
+    list(log = function(...) stop("no"))
+  })
+  expect_snapshot(error = TRUE, {
+    log_error_dev("nothing")
+  })
+})
+
+test_that("log_fatal", {
+  local_otel_off()
+  lgr <- log_fatal("log message going nowhere")
+  expect_s3_class(lgr, "otel_logger_noop")
+
+  # error
+  fake(log_fatal, "get_logger", function() stop("denied!"))
+  expect_snapshot({
+    lgr2 <- log_fatal("another nothing")
+  })
+  expect_s3_class(lgr, "otel_logger_noop")
+
+  lgr3 <- log_fatal_dev("Still nowhere")
+  expect_s3_class(lgr3, "otel_logger_noop")
+
+  # error
+  fake(log_fatal_dev, "get_logger", function() {
+    list(log = function(...) stop("no"))
+  })
+  expect_snapshot(error = TRUE, {
+    log_fatal_dev("nothing")
+  })
+})
+
 test_that("counter_add", {
   local_otel_cache()
   withr::local_envvar(

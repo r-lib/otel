@@ -209,7 +209,125 @@ log <- function(msg, ..., severity = "info", .envir = parent.frame()) {
 }
 # safe end
 
-log_safe <- log
+#' @details `log_trace()` is the same as `log()` with `severity_level`
+#'   "trace".
+#' @rdname log
+#' @export
+
+# safe start
+log_trace <- function(msg, ..., .envir = parent.frame()) {
+  tryCatch({                                                         # safe
+    lgr <- get_logger()
+    lgr$log(msg, "trace", ..., .envir = .envir)
+    invisible(lgr)
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    logger_noop$new()                                                # safe
+  })                                                                 # safe
+}
+# safe end
+
+log_trace_safe <- log_trace
+
+#' @details `log_debug()` is the same as `log()` with `severity_level`
+#'   "debug".
+#' @rdname log
+#' @export
+
+# safe start
+log_debug <- function(msg, ..., .envir = parent.frame()) {
+  tryCatch({                                                         # safe
+    lgr <- get_logger()
+    lgr$log(msg, "debug", ..., .envir = .envir)
+    invisible(lgr)
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    logger_noop$new()                                                # safe
+  })                                                                 # safe
+}
+# safe end
+
+log_debug_safe <- log_debug
+
+#' @details `log_info()` is the same as `log()` with `severity_level`
+#'   "info".
+#' @rdname log
+#' @export
+
+# safe start
+log_info <- function(msg, ..., .envir = parent.frame()) {
+  tryCatch({                                                         # safe
+    lgr <- get_logger()
+    lgr$log(msg, "info", ..., .envir = .envir)
+    invisible(lgr)
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    logger_noop$new()                                                # safe
+  })                                                                 # safe
+}
+# safe end
+
+log_info_safe <- log_info
+
+#' @details `log_warn()` is the same as `log()` with `severity_level`
+#'   "warn".
+#' @rdname log
+#' @export
+
+# safe start
+log_warn <- function(msg, ..., .envir = parent.frame()) {
+  tryCatch({                                                         # safe
+    lgr <- get_logger()
+    lgr$log(msg, "warn", ..., .envir = .envir)
+    invisible(lgr)
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    logger_noop$new()                                                # safe
+  })                                                                 # safe
+}
+# safe end
+
+log_warn_safe <- log_warn
+
+#' @details `log_error()` is the same as `log()` with `severity_level`
+#'   "error".
+#' @rdname log
+#' @export
+
+# safe start
+log_error <- function(msg, ..., .envir = parent.frame()) {
+  tryCatch({                                                         # safe
+    lgr <- get_logger()
+    lgr$log(msg, "error", ..., .envir = .envir)
+    invisible(lgr)
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    logger_noop$new()                                                # safe
+  })                                                                 # safe
+}
+# safe end
+
+log_error_safe <- log_error
+
+#' @details `log_fatal()` is the same as `log()` with `severity_level`
+#'   "fatal".
+#' @rdname log
+#' @export
+
+# safe start
+log_fatal <- function(msg, ..., .envir = parent.frame()) {
+  tryCatch({                                                         # safe
+    lgr <- get_logger()
+    lgr$log(msg, "fatal", ..., .envir = .envir)
+    invisible(lgr)
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    logger_noop$new()                                                # safe
+  })                                                                 # safe
+}
+# safe end
+
+log_debug_safe <- log_debug
 
 #' OpenTelemetry log severity levels
 #'

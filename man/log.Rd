@@ -2,9 +2,27 @@
 % Please edit documentation in R/api.R
 \name{log}
 \alias{log}
+\alias{log_trace}
+\alias{log_debug}
+\alias{log_info}
+\alias{log_warn}
+\alias{log_error}
+\alias{log_fatal}
 \title{Log an OpenTelemetry log message, using the default logger}
 \usage{
 log(msg, ..., severity = "info", .envir = parent.frame())
+
+log_trace(msg, ..., .envir = parent.frame())
+
+log_debug(msg, ..., .envir = parent.frame())
+
+log_info(msg, ..., .envir = parent.frame())
+
+log_warn(msg, ..., .envir = parent.frame())
+
+log_error(msg, ..., .envir = parent.frame())
+
+log_fatal(msg, ..., .envir = parent.frame())
 }
 \arguments{
 \item{msg}{Log message, may contain R expressions to evaluate within
@@ -24,6 +42,25 @@ The logger, invisibly.
 }
 \description{
 Log an OpenTelemetry log message, using the default logger
+}
+\details{
+\code{log_trace()} is the same as \code{log()} with \code{severity_level}
+"trace".
+
+\code{log_debug()} is the same as \code{log()} with \code{severity_level}
+"debug".
+
+\code{log_info()} is the same as \code{log()} with \code{severity_level}
+"info".
+
+\code{log_warn()} is the same as \code{log()} with \code{severity_level}
+"warn".
+
+\code{log_error()} is the same as \code{log()} with \code{severity_level}
+"error".
+
+\code{log_fatal()} is the same as \code{log()} with \code{severity_level}
+"fatal".
 }
 \seealso{
 Other OpenTelemetry logging: 
