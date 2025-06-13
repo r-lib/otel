@@ -4,12 +4,12 @@
 \alias{start_session}
 \title{Start a new OpenTelemetry session span, using the default tracer}
 \usage{
-start_session(name = NULL, ...)
+start_session(name = NULL, ..., scope = parent.frame())
 }
 \arguments{
 \item{name}{Name of the span.}
 
-\item{...}{Additional arguments are passed to the default tracer's
+\item{..., scope}{Additional arguments are passed to the default tracer's
 \code{start_session()} method.}
 }
 \description{

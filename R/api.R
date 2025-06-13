@@ -188,17 +188,17 @@ start_span_safe <- start_span
 #' context stack of the main process by calling the `$deactivate_session`
 #' method.
 #'
-#' @param ... Additional arguments are passed to the default tracer's
+#' @param ...,scope Additional arguments are passed to the default tracer's
 #'   `start_session()` method.
 #' @inheritParams start_span
 #' @export
 #' @family OpenTelemetry tracing
 
 # safe start
-start_session <- function(name = NULL, ...) {
+start_session <- function(name = NULL, ..., scope = parent.frame()) {
   tryCatch({                                                         # safe
     trc <- get_tracer()
-    invisible(trc$start_session(name = name, ...))
+    invisible(trc$start_session(name = name, ..., scope = scope))
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     invisible(session_noop$new())                                    # safe

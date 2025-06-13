@@ -200,13 +200,13 @@ test_that("start_span", {
 test_that("start_session", {
   local_otel_off()
 
-  expect_equal(start_session("foo"), session_noop$new("foo"))
+  expect_s3_class(start_session("foo"), "otel_session_noop")
 
   fake(start_session, "get_tracer", function() stop("no!"))
   expect_snapshot(sess <- start_session())
   expect_equal(sess, session_noop$new())
 
-  expect_equal(start_session_dev("foo"), session_noop$new("foo"))
+  expect_s3_class(start_session_dev("foo"), "otel_session_noop")
 
   fake(start_session_dev, "get_tracer", function() stop("no!"))
   expect_snapshot(error = TRUE, {
