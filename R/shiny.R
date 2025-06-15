@@ -61,6 +61,8 @@ start_shiny_session <- function(
     try(attributes[["SERVER_PORT"]] <-
       as.integer(attributes[["SERVER_PORT"]]))
 
+    options[["parent"]] <- options[["parent"]] %||% NA
+
     assign(
       "otel_session",
       trc$start_session(
