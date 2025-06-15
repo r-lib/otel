@@ -218,6 +218,9 @@ start_session_safe <- start_session
 #'   the default logger.
 #' @param .envir Environment to evaluate the interpolated  expressions of
 #'   the log message in.
+#' @param session Optionally a session span to activate before logging.
+#' @param session_scope The scope of the session span, it will be
+#'   automatically deactivated after this scope.
 #'
 #' @return The logger, invisibly.
 #'
@@ -225,10 +228,24 @@ start_session_safe <- start_session
 #' @family OpenTelemetry logging
 
 # safe start
-log <- function(msg, ..., severity = "info", .envir = parent.frame()) {
+log <- function(
+  msg,
+  ...,
+  severity = "info",
+  .envir = parent.frame(),
+  session = NULL,
+  session_scope = parent.frame()
+) {
   tryCatch({                                                         # safe
     lgr <- get_logger()
-    lgr$log(msg, severity, ..., .envir = .envir)
+    lgr$log(
+      msg,
+      severity,
+      ...,
+      .envir = .envir,
+      session = session,
+      session_scope = session_scope
+    )
     invisible(lgr)
   }, error = function(err) {                                         # safe
     errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
@@ -243,10 +260,23 @@ log <- function(msg, ..., severity = "info", .envir = parent.frame()) {
 #' @export
 
 # safe start
-log_trace <- function(msg, ..., .envir = parent.frame()) {
+log_trace <- function(
+  msg,
+  ...,
+  .envir = parent.frame(),
+  session = NULL,
+  session_scope = parent.frame()
+) {
   tryCatch({                                                         # safe
     lgr <- get_logger()
-    lgr$log(msg, "trace", ..., .envir = .envir)
+    lgr$log(
+      msg,
+      "trace",
+      ...,
+      .envir = .envir,
+      session = session,
+      session_scope = session_scope
+    )
     invisible(lgr)
   }, error = function(err) {                                         # safe
     errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
@@ -263,10 +293,23 @@ log_trace_safe <- log_trace
 #' @export
 
 # safe start
-log_debug <- function(msg, ..., .envir = parent.frame()) {
+log_debug <- function(
+  msg,
+  ...,
+  .envir = parent.frame(),
+  session = NULL,
+  session_scope = parent.frame()
+) {
   tryCatch({                                                         # safe
     lgr <- get_logger()
-    lgr$log(msg, "debug", ..., .envir = .envir)
+    lgr$log(
+      msg,
+      "debug",
+      ...,
+      .envir = .envir,
+      session = session,
+      session_scope = session_scope
+    )
     invisible(lgr)
   }, error = function(err) {                                         # safe
     errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
@@ -283,10 +326,23 @@ log_debug_safe <- log_debug
 #' @export
 
 # safe start
-log_info <- function(msg, ..., .envir = parent.frame()) {
+log_info <- function(
+  msg,
+  ...,
+  .envir = parent.frame(),
+  session = NULL,
+  session_scope = parent.frame()
+) {
   tryCatch({                                                         # safe
     lgr <- get_logger()
-    lgr$log(msg, "info", ..., .envir = .envir)
+    lgr$log(
+      msg,
+      "info",
+      ...,
+      .envir = .envir,
+      session = session,
+      session_scope = session_scope
+    )
     invisible(lgr)
   }, error = function(err) {                                         # safe
     errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
@@ -303,10 +359,23 @@ log_info_safe <- log_info
 #' @export
 
 # safe start
-log_warn <- function(msg, ..., .envir = parent.frame()) {
+log_warn <- function(
+  msg,
+  ...,
+  .envir = parent.frame(),
+  session = NULL,
+  session_scope = parent.frame()
+) {
   tryCatch({                                                         # safe
     lgr <- get_logger()
-    lgr$log(msg, "warn", ..., .envir = .envir)
+    lgr$log(
+      msg,
+      "warn",
+      ...,
+      .envir = .envir,
+      session = session,
+      session_scope = session_scope
+    )
     invisible(lgr)
   }, error = function(err) {                                         # safe
     errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
@@ -323,10 +392,23 @@ log_warn_safe <- log_warn
 #' @export
 
 # safe start
-log_error <- function(msg, ..., .envir = parent.frame()) {
+log_error <- function(
+  msg,
+  ...,
+  .envir = parent.frame(),
+  session = NULL,
+  session_scope = parent.frame()
+) {
   tryCatch({                                                         # safe
     lgr <- get_logger()
-    lgr$log(msg, "error", ..., .envir = .envir)
+    lgr$log(
+      msg,
+      "error",
+      ...,
+      .envir = .envir,
+      session = session,
+      session_scope = session_scope
+    )
     invisible(lgr)
   }, error = function(err) {                                         # safe
     errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
@@ -343,10 +425,23 @@ log_error_safe <- log_error
 #' @export
 
 # safe start
-log_fatal <- function(msg, ..., .envir = parent.frame()) {
+log_fatal <- function(
+  msg,
+  ...,
+  .envir = parent.frame(),
+  session = NULL,
+  session_scope = parent.frame()
+) {
   tryCatch({                                                         # safe
     lgr <- get_logger()
-    lgr$log(msg, "fatal", ..., .envir = .envir)
+    lgr$log(
+      msg,
+      "fatal",
+      ...,
+      .envir = .envir,
+      session = session,
+      session_scope = session_scope
+    )
     invisible(lgr)
   }, error = function(err) {                                         # safe
     errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
@@ -409,6 +504,10 @@ md_log_severity_levels <- paste0(
 #' @param attributes Additional attributes to add.
 #' @param context Span context. If missing the active context is used,
 #'   if any.
+#' @param session Optionally a session span to activate before updating
+#'   the counter.
+#' @param session_scope The session span will be automatically deactivated
+#'   after this scope.
 #'
 #' @return The counter object, invisibly.
 #'
@@ -417,11 +516,18 @@ md_log_severity_levels <- paste0(
 #' @family OpenTelemetry metrics
 
 # safe start
-counter_add <- function(name, value = 1L, attributes = NULL, context = NULL) {
+counter_add <- function(
+  name,
+  value = 1L,
+  attributes = NULL,
+  context = NULL,
+  session = NULL,
+  session_scope = parent.frame()
+) {
   tryCatch({                                                         # safe
     mtr <- get_meter()
     ctr <- mtr$create_counter(name)
-    ctr$add(value, attributes, context)
+    ctr$add(value, attributes, context, session, session_scope)
     invisible(ctr)
   }, error = function(err) {                                         # safe
     errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
@@ -441,6 +547,10 @@ counter_add_safe <- counter_add
 #' @param attributes Additional attributes to add.
 #' @param context Span context. If missing the active context is used,
 #'   if any.
+#' @param session Optionally a session span to activate before updating
+#'   the counter.
+#' @param session_scope The session span will be automatically deactivated
+#'   after this scope.
 #'
 #' @return The up-down counter object, invisibly.
 #'
@@ -453,12 +563,14 @@ up_down_counter_add <- function(
   name,
   value = 1L,
   attributes = NULL,
-  context = NULL
+  context = NULL,
+  session = NULL,
+  session_scope = parent.frame()
 ) {
   tryCatch({                                                         # safe
     mtr <- get_meter()
     ctr <- mtr$create_up_down_counter(name)
-    ctr$add(value, attributes, context)
+    ctr$add(value, attributes, context, session, session_scope)
     invisible(ctr)
   }, error = function(err) {                                         # safe
     errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
@@ -477,6 +589,10 @@ up_down_counter_add_safe <- up_down_counter_add
 #' @param attributes Additional attributes to add.
 #' @param context Span context. If missing the active context is used,
 #'   if any.
+#' @param session Optionally a session span to activate before updating
+#'   the counter.
+#' @param session_scope The session span will be automatically deactivated
+#'   after this scope.
 #'
 #' @return The histogram object, invisibly.
 #'
@@ -485,11 +601,18 @@ up_down_counter_add_safe <- up_down_counter_add
 #' @family OpenTelemetry metrics
 
 # safe start
-histogram_record <- function(name, value, attributes = NULL, context = NULL) {
+histogram_record <- function(
+  name,
+  value,
+  attributes = NULL,
+  context = NULL,
+  session = NULL,
+  session_scope = parent.frame()
+) {
   tryCatch({                                                         # safe
     mtr <- get_meter()
     ctr <- mtr$create_histogram(name)
-    ctr$record(value, attributes, context)
+    ctr$record(value, attributes, context, session, session_scope)
     invisible(ctr)
   }, error = function(err) {                                         # safe
     errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
@@ -508,6 +631,10 @@ histogram_record_safe <- histogram_record
 #' @param attributes Additional attributes to add.
 #' @param context Span context. If missing the active context is used,
 #'   if any.
+#' @param session Optionally a session span to activate before updating
+#'   the counter.
+#' @param session_scope The session span will be automatically deactivated
+#'   after this scope.
 #'
 #' @return The gauge object, invisibly.
 #'
@@ -516,15 +643,22 @@ histogram_record_safe <- histogram_record
 #' @family OpenTelemetry metrics
 
 # safe start
-gauge_record <- function(name, value, attributes = NULL, context = NULL) {
+gauge_record <- function(
+  name,
+  value,
+  attributes = NULL,
+  context = NULL,
+  session = NULL,
+  session_scope = parent.frame()
+) {
   tryCatch({                                                         # safe
     mtr <- get_meter()
     ctr <- mtr$create_gauge(name)
-    ctr$record(value, attributes, context)
+    ctr$record(value, attributes, context, session, session_scope)
     invisible(ctr)
   }, error = function(err) {                                         # safe
     errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
-    gauge_noop$new()                                             # safe
+    gauge_noop$new()                                                 # safe
   })                                                                 # safe
 }
 # safe end

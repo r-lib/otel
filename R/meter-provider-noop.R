@@ -69,7 +69,7 @@ counter_noop <- list(
   new = function(name = NULL, ...) {
     self <- structure(
       list(
-        add = function(value, attributes = NULL, context = NULL) {
+        add = function(value, attributes = NULL, context = NULL, ...) {
           invisible(self)
         }
       ),
@@ -83,7 +83,7 @@ up_down_counter_noop <- list(
   new = function(name = NULL, ...) {
     self <- structure(
       list(
-        add = function(value, attributes = NULL, context = NULL) {
+        add = function(value, attributes = NULL, context = NULL, ...) {
           invisible(self)
         }
       ),
@@ -97,7 +97,7 @@ histogram_noop <- list(
   new = function(name = NULL, ...) {
     self <- structure(
       list(
-        record = function(value, attributes = NULL, context = NULL) {
+        record = function(value, attributes = NULL, context = NULL, ...) {
           invisible(self)
         }
       ),
@@ -111,7 +111,7 @@ gauge_noop <- list(
   new = function(name = NULL, ...) {
     self <- structure(
       list(
-        record = function(value, attributes = NULL, context = NULL) {
+        record = function(value, attributes = NULL, context = NULL, ...) {
           invisible(self)
         }
       ),

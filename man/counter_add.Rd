@@ -4,7 +4,14 @@
 \alias{counter_add}
 \title{Increase an OpenTelemetry counter using the default meter}
 \usage{
-counter_add(name, value = 1L, attributes = NULL, context = NULL)
+counter_add(
+  name,
+  value = 1L,
+  attributes = NULL,
+  context = NULL,
+  session = NULL,
+  session_scope = parent.frame()
+)
 }
 \arguments{
 \item{name}{Name of the counter.}
@@ -15,6 +22,12 @@ counter_add(name, value = 1L, attributes = NULL, context = NULL)
 
 \item{context}{Span context. If missing the active context is used,
 if any.}
+
+\item{session}{Optionally a session span to activate before updating
+the counter.}
+
+\item{session_scope}{The session span will be automatically deactivated
+after this scope.}
 }
 \value{
 The counter object, invisibly.
