@@ -5,7 +5,7 @@ function(input, output, session) {
   selectedData <- reactive({
     otel::start_span(
       "data",
-      session,
+      session$userData$otel_session,
       attributes = list(columns = c(input$xcol, input$ycol))
     )
     iris[, c(input$xcol, input$ycol)]
@@ -14,7 +14,7 @@ function(input, output, session) {
   clusters <- reactive({
     otel::start_span(
       "kmeans",
-      session,
+      session$userData$otel_session,
       attributes = list(clusters = input$clusters)
     )
     Sys.sleep(1)
@@ -22,7 +22,7 @@ function(input, output, session) {
   })
 
   output$plot1 <- renderPlot({
-    otel::start_span("plot", session)
+    otel::start_span("plot", session$userData$otel_session)
     palette(c(
       "#E41A1C",
       "#377EB8",

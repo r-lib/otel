@@ -3,18 +3,18 @@ function(input, output, session) {
 
   # Combine the selected variables into a new data frame
   selectedData <- reactive({
-    otel::start_span("data", session)
+    otel::start_span("data", session$userData$otel_session)
     iris[, c(input$xcol, input$ycol)]
   })
 
   clusters <- reactive({
-    otel::start_span("kmeans", session)
+    otel::start_span("kmeans", session$userData$otel_session)
     Sys.sleep(1)
     kmeans(selectedData(), input$clusters)
   })
 
   output$plot1 <- renderPlot({
-    otel::start_span("plot", session)
+    otel::start_span("plot", session$userData$otel_session)
     palette(c(
       "#E41A1C",
       "#377EB8",

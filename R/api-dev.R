@@ -39,9 +39,6 @@ start_span_dev <- function(name = NULL, session = NULL, ...,
                        scope = parent.frame()) {
     trc <- get_tracer()
     if (!is.null(session)) {
-      if (inherits(session, "ShinySession")) {
-        session <- session$userData$otel_session
-      }
       session$activate_session(scope = scope)
     }
     invisible(trc$start_span(name = name, ..., scope = scope))

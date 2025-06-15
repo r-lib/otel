@@ -176,15 +176,6 @@ test_that("start_span", {
   span2d <- start_span_dev(session = sess)
   expect_s3_class(span2d, "otel_span_noop")
 
-  shiny_sess <- structure(
-    list(userData = list(otel_session = session_noop$new())),
-    class = "ShinySession"
-  )
-  span3 <- start_span(session = shiny_sess)
-  expect_s3_class(span3, "otel_span_noop")
-  span3d <- start_span_dev(session = shiny_sess)
-  expect_s3_class(span3d, "otel_span_noop")
-
   fake(start_span, "get_tracer", function() stop("nope"))
   expect_snapshot({
     span4 <- start_span()

@@ -10,9 +10,8 @@ start_span(name = NULL, session = NULL, ..., scope = parent.frame())
 \item{name}{Name of the span.}
 
 \item{session}{Optionally, an OpenTelemetry session to activate before
-starting the span. It can also be a Shiny session (\code{ShinySession}
-object), that was previously used as an argument to
-\code{\link[=start_shiny_session]{start_shiny_session()}}.}
+starting the span. It will be automatically deactivated once \code{scope}
+ends.}
 
 \item{..., scope}{Additional arguments are passed to the default tracer's
 \code{start_span()} method.}

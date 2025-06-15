@@ -149,9 +149,8 @@ get_meter_safe <- get_meter
 #'
 #' @param name Name of the span.
 #' @param session Optionally, an OpenTelemetry session to activate before
-#'   starting the span. It can also be a Shiny session (`ShinySession`
-#'   object), that was previously used as an argument to
-#'   [start_shiny_session()].
+#'   starting the span. It will be automatically deactivated once `scope`
+#'   ends.
 #' @param ...,scope Additional arguments are passed to the default tracer's
 #'   `start_span()` method.
 #' @return The new Opentelemetry span object, invisibly.
@@ -165,9 +164,6 @@ start_span <- function(name = NULL, session = NULL, ...,
   tryCatch({                                                         # safe
     trc <- get_tracer()
     if (!is.null(session)) {
-      if (inherits(session, "ShinySession")) {
-        session <- session$userData$otel_session
-      }
       session$activate_session(scope = scope)
     }
     invisible(trc$start_span(name = name, ..., scope = scope))
