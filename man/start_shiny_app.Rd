@@ -4,14 +4,11 @@
 \alias{start_shiny_app}
 \title{Start tracing a Shiny app}
 \usage{
-start_shiny_app(service_name = NULL, ...)
+start_shiny_app(service_name = NULL)
 }
 \arguments{
 \item{service_name}{The name of the app. Defaults to the name of the
 current working directory.}
-
-\item{...}{Additional arguments are passed to \verb{$start_span} for the
-\code{app} span.}
 }
 \value{
 The OpenTelemetry tracer (\code{otel_tracer}), invisibly.
