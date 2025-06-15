@@ -77,7 +77,7 @@ span_noop <- list(
           invisible(self)
         },
 
-        end = function(options = NULL) {
+        end = function(options = NULL, status_code = NULL) {
           invisible(self)
         },
 
