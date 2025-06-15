@@ -38,10 +38,12 @@ get_meter_dev <- function(name = NULL) {
 start_span_dev <- function(name = NULL, session = NULL, ...,
                        scope = parent.frame()) {
     trc <- get_tracer()
-    if (!is.null(session)) {
-      session$activate_session(scope = scope)
-    }
-    invisible(trc$start_span(name = name, ..., scope = scope))
+    invisible(trc$start_span(
+      name = name,
+      session = session,
+      ...,
+      scope = scope
+    ))
 }
 
 start_session_dev <- function(name = NULL, ..., scope = parent.frame()) {
@@ -301,6 +303,8 @@ start_shiny_session_dev <- function(
       session[["request"]][["SERVER_PORT"]] %||% -1L
     try(attributes[["SERVER_PORT"]] <-
       as.integer(attributes[["SERVER_PORT"]]))
+
+    options[["parent"]] <- options[["parent"]] %||% NA
 
     assign(
       "otel_session",

@@ -163,10 +163,12 @@ start_span <- function(name = NULL, session = NULL, ...,
                        scope = parent.frame()) {
   tryCatch({                                                         # safe
     trc <- get_tracer()
-    if (!is.null(session)) {
-      session$activate_session(scope = scope)
-    }
-    invisible(trc$start_span(name = name, ..., scope = scope))
+    invisible(trc$start_span(
+      name = name,
+      session = session,
+      ...,
+      scope = scope
+    ))
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     invisible(span_noop$new())                                       # safe
