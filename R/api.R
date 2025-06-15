@@ -168,7 +168,7 @@ start_span <- function(name = NULL, session = NULL, ...,
       if (inherits(session, "ShinySession")) {
         session <- session$userData$otel_session
       }
-      session$activate_session()
+      session$activate_session(scope = scope)
     }
     invisible(trc$start_span(name = name, ..., scope = scope))
   }, error = function(err) {                                         # safe
