@@ -25,8 +25,11 @@ function(input, output, session) {
       session$userData$otel_session,
       attributes = list(clusters = input$clusters)
     )
-    otel::counter_add("kmeans-runs")
-    otel::log("Run kmeans with {input$clusters} clusters")
+    otel::counter_add("kmeans-runs", session = session$userData$otel_session)
+    otel::log(
+      "Run kmeans with {input$clusters} clusters",
+      session = session$userData$otel_session
+    )
     Sys.sleep(1)
     kmeans(selectedData(), input$clusters)
   })
