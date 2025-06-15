@@ -17,9 +17,6 @@
 
     Code
       start_shiny_app_dev()
-    Message
-      start_span
-      end_span
 
 # start_shiny_session
 

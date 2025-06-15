@@ -15,9 +15,6 @@
       $logger_provider
       NULL
       
-      $span_app
-      NULL
-      
       $tracer_app
       NULL
       
@@ -37,9 +34,6 @@
       [1] "bar"
       
       $logger_provider
-      NULL
-      
-      $span_app
       NULL
       
       $mode

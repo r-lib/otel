@@ -3,14 +3,12 @@
 #' Call this function from `global.R`.
 #' @param service_name The name of the app. Defaults to the name of the
 #'   current working directory.
-#' @param ... Additional arguments are passed to `$start_span` for the
-#'   `app` span.
 #' @return The OpenTelemetry tracer (`otel_tracer`), invisibly.
 #'
 #' @export
 
 # safe start
-start_shiny_app <- function(service_name = NULL, ...) {
+start_shiny_app <- function(service_name = NULL) {
   tryCatch({                                                         # safe
     service_name <- service_name %||%
       get_env("OTEL_SERVICE_NAME") %||%
@@ -18,12 +16,6 @@ start_shiny_app <- function(service_name = NULL, ...) {
     service_name <- as_string(service_name, null = FALSE)
     Sys.setenv(OTEL_SERVICE_NAME = service_name)
     the$tracer_app <- get_tracer(service_name)
-    the$span_app <- the$tracer_app$start_span("app", scope = NULL, ...)
-    if (the$tracer_app$is_enabled()) {
-      shiny::onStop(function() {
-        the$span_app$end()
-      })
-    }
     invisible(the$tracer_app)
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
@@ -68,8 +60,6 @@ start_shiny_session <- function(
       session[["request"]][["SERVER_PORT"]] %||% -1L
     try(attributes[["SERVER_PORT"]] <-
       as.integer(attributes[["SERVER_PORT"]]))
-
-    options[["parent"]] <- options[["parent"]] %||% the$span_app
 
     assign(
       "otel_session",

@@ -4,7 +4,6 @@ otel_cache_vars <- c(
   "logger_provider",
   "meter_provider",
   "tracer_app",
-  "span_app",
   "instruments"
 )
 

@@ -270,19 +270,13 @@ get_default_meter_provider_dev <- function() {
     the$meter_provider
 }
 
-start_shiny_app_dev <- function(service_name = NULL, ...) {
+start_shiny_app_dev <- function(service_name = NULL) {
     service_name <- service_name %||%
       get_env("OTEL_SERVICE_NAME") %||%
       basename(getwd())
     service_name <- as_string(service_name, null = FALSE)
     Sys.setenv(OTEL_SERVICE_NAME = service_name)
     the$tracer_app <- get_tracer(service_name)
-    the$span_app <- the$tracer_app$start_span("app", scope = NULL, ...)
-    if (the$tracer_app$is_enabled()) {
-      shiny::onStop(function() {
-        the$span_app$end()
-      })
-    }
     invisible(the$tracer_app)
 }
 
@@ -307,8 +301,6 @@ start_shiny_session_dev <- function(
       session[["request"]][["SERVER_PORT"]] %||% -1L
     try(attributes[["SERVER_PORT"]] <-
       as.integer(attributes[["SERVER_PORT"]]))
-
-    options[["parent"]] <- options[["parent"]] %||% the$span_app
 
     assign(
       "otel_session",

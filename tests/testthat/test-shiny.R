@@ -12,7 +12,6 @@ test_that("start_shiny_app", {
   tmp <- tempfile()
   on.exit(unlink(tmp), add = TRUE)
   the$tracer_provider <- otelsdk::tracer_provider_stdstream$new(tmp)
-  the$span_app <- NULL
 
   fake(start_shiny_app, "shiny::onStop", function(fn) fn())
   trc <- start_shiny_app()
