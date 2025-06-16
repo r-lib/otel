@@ -312,6 +312,23 @@
       Error in `invisible()`:
       ! sorry
 
+# pack_http_context
+
+    Code
+      pack_http_context()
+    Message
+      Opentelemetry error: sorry
+    Output
+      named character(0)
+
+---
+
+    Code
+      pack_http_context_dev()
+    Condition
+      Error in `get_tracer()`:
+      ! sorry
+
 # extract_http_context
 
     Code

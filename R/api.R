@@ -689,6 +689,30 @@ get_active_span_context <- function() {
 
 get_active_span_context_safe <- get_active_span_context
 
+#' Pack the currently active span context into standard HTTP OpenTelemetry
+#' headers
+#'
+#' The returned headers can be sent over HTTP, or set as environment
+#' variables for subprocesses.
+#'
+#' @return A named character vector, with lovercase names.
+#'
+#' @export
+
+# safe start
+pack_http_context <- function() {
+  tryCatch({                                                         # safe
+    trc <- get_tracer()
+    trc$get_active_span_context()$to_http_headers()
+  }, error = function(err) {                                         # safe
+    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    structure(character(), names = character())                      # safe
+  })                                                                 # safe
+}
+# safe end
+
+pack_http_context_safe <- pack_http_context
+
 #' Extract a span context from HTTP headers received from a client
 #'
 #' The return value can be used as the `parent` option when starting

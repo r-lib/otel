@@ -118,6 +118,11 @@ setup_dev_env <- function(envir = asNamespace(.packageName)) {
       extract_http_context_dev,
       envir = envir
     )
+    assign(
+      "pack_http_context",
+      pack_http_context_dev,
+      envir = envir
+    )
   }
 }
 

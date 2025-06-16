@@ -246,6 +246,11 @@ get_active_span_context_dev <- function() {
     trc$get_active_span_context()
 }
 
+pack_http_context_dev <- function() {
+    trc <- get_tracer()
+    trc$get_active_span_context()$to_http_headers()
+}
+
 extract_http_context_dev <- function(headers) {
     trc <- get_tracer()
     trc$extract_http_context(headers)

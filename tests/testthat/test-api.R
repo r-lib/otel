@@ -514,6 +514,33 @@ test_that("gauge_record", {
   })
 })
 
+test_that("pack_http_context", {
+  local_otel_off()
+  fake(
+    pack_http_context,
+    "get_tracer",
+    list(get_active_span_context = function() {
+      list(to_http_headers = function() c(FOO = "bar"))
+    })
+  )
+  expect_equal(pack_http_context(), c(FOO = "bar"))
+
+  fake(
+    pack_http_context_dev,
+    "get_tracer",
+    list(get_active_span_context = function() {
+      list(to_http_headers = function() c(FOO = "bar"))
+    })
+  )
+  expect_equal(pack_http_context_dev(), c(FOO = "bar"))
+
+  fake(pack_http_context, "get_tracer", function() stop("sorry"))
+  expect_snapshot(pack_http_context())
+
+  fake(pack_http_context_dev, "get_tracer", function() stop("sorry"))
+  expect_snapshot(error = TRUE, pack_http_context_dev())
+})
+
 test_that("extract_http_context", {
   local_otel_cache()
   withr::local_envvar(
