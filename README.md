@@ -115,8 +115,9 @@ otel has convenience functions to tie otel sesssions to Shiny sessions:
   up.
 - Use `start_shiny_session()` from the server function, at the start of
   a new session, and pass the Shiny session object to it.
-- Pass the Shiny session to all `otel::start_span()` calls from reactive
-  expressions, to make sure that they are logged to the correct session.
+- Pass the OpenTelemetry session span to all `otel::start_span()` calls
+  from reactive expressions, to make sure that they are logged to the
+  correct session.
 
 See the examples included in the otel package.
 
