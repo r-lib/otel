@@ -107,6 +107,8 @@ using sessions:
   next garbage collection, assuming there are no references to the
   session span.)
 
+## Shiny apps
+
 otel has convenience functions to tie otel sesssions to Shiny sessions:
 
 - Use `start_shiny_app()` from the `global.R` file, before the app start
