@@ -60,6 +60,25 @@ test_that("fix bad names", {
   )
 })
 
+test_that("non-finite real values", {
+  expect_equal(
+    as_attributes(list(a = c(1, NA_real_))),
+    list(a = c("1", "NA"))
+  )
+  expect_equal(
+    as_attributes(list(a = c(1, NaN))),
+    list(a = c("1", "NaN"))
+  )
+  expect_equal(
+    as_attributes(list(a = c(1, Inf))),
+    list(a = c("1", "Inf"))
+  )
+  expect_equal(
+    as_attributes(list(a = c(1, -Inf))),
+    list(a = c("1", "-Inf"))
+  )
+})
+
 test_that("print unsupported types", {
   withr::local_envvar(
     OTEL_ATTRIBUTE_COUNT_LIMIT = NA_character_,

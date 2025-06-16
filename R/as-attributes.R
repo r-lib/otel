@@ -58,6 +58,10 @@ as_attributes <- function(x) {
     if (length(x[[i]]) > val_len_limit) {
       length(x[[i]]) <- val_len_limit
     }
+    if (is.double(x[[i]]) && !all(is.finite(x[[i]]))) {
+      # as.character keeps NAs, which is not what we want here
+      x[[i]] <- paste(x[[i]])
+    }
   }
 
   structure(x, names = nms)
