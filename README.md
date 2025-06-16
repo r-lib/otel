@@ -79,18 +79,33 @@ Bye default otel and otelsdk run in production mode. In production mode
 otel (and otelsdk) functions never error. This behavior does not help
 catching errors early during the developent of the instrumented project.
 Set the `OTEL_ENV` environment variable to `dev` to switch to
-development mode, where otel and otelsdk functions fail onerrors.
+development mode, where otel and otelsdk functions fail on errors.
 
 ## Concurrency and sessions
 
 To support concurrency on a single thread, e.g. a Shiny app serving
-multiple requrests at the same time, you can create multiple sessions
-and switch between them manually. To do this obtain a tracer with the
-`get_tracer()` function and use its `$start_session()`,
-`$activate_session()`, `$deactivate_session()`, `$finish_session()` and
-`$finish_all_sessions()` methods.
+multiple requests at the same time, you can create multiple sessions and
+switch between them manually. We recommend the following practices when
+using sessions:
 
-## Shiny apps
+- Create a new session span with `otel::start_session()`.
+- Assign the returned span into the corresponding object of the
+  concurrent and/or asynchronous computation. The session span has a
+  finalizer that closes the span and deletes the session.
+- When running code that belongs to the session, activate the session
+  with its `activate_session()` method. By default the session is
+  automatically deactivated when the context that activated it ends.
+- Alternatively, if you want to create a new span inside the session,
+  then use the `session` argument of `otel::start_span()`. This
+  activates the session before creating the new span.
+- When logging use the `session` argument of `otel::log()` or the other
+  logging functions.
+- For metrics, use the `session` argument of `otel::counter_add()` or
+  the other instrument functions.
+- When the concurrent computation ends, close the session span manually
+  with its `$end()` method. (Otherwise it would be only closed at the
+  next garbage collection, assuming there are no references to the
+  session span.)
 
 otel has convenience functions to tie otel sesssions to Shiny sessions:
 
