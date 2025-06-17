@@ -46,9 +46,16 @@ start_span_dev <- function(name = NULL, session = NULL, ...,
     ))
 }
 
-start_session_dev <- function(name = NULL, ..., scope = parent.frame()) {
+start_session_dev <- function(
+  name = NULL,
+  session = NULL,
+  ...,
+  scope = parent.frame()
+) {
     trc <- get_tracer()
-    invisible(trc$start_session(name = name, ..., scope = scope))
+    invisible(
+      trc$start_session(name = name, session = session, ..., scope = scope)
+    )
 }
 
 log_dev <- function(

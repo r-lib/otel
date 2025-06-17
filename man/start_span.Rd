@@ -9,7 +9,7 @@ start_span(name = NULL, session = NULL, ..., scope = parent.frame())
 \arguments{
 \item{name}{Name of the span.}
 
-\item{session}{Optionally, an OpenTelemetry session to activate before
+\item{session}{Optionally, a session span to activate before
 starting the span. It will be automatically deactivated once \code{scope}
 ends.}
 

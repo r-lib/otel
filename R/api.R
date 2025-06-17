@@ -148,7 +148,7 @@ get_meter_safe <- get_meter
 #' Start a new OpenTelemetry span, using the default tracer
 #'
 #' @param name Name of the span.
-#' @param session Optionally, an OpenTelemetry session to activate before
+#' @param session Optionally, a session span to activate before
 #'   starting the span. It will be automatically deactivated once `scope`
 #'   ends.
 #' @param ...,scope Additional arguments are passed to the default tracer's
@@ -186,6 +186,9 @@ start_span_safe <- start_span
 #' context stack of the main process by calling the `$deactivate_session`
 #' method.
 #'
+#' @param session Optionally, an existing session span to activate before
+#'   starting the new session span. The new session span will be a child
+#'   span of the active span in `session`.
 #' @param ...,scope Additional arguments are passed to the default tracer's
 #'   `start_session()` method.
 #' @inheritParams start_span
@@ -193,10 +196,17 @@ start_span_safe <- start_span
 #' @family OpenTelemetry tracing
 
 # safe start
-start_session <- function(name = NULL, ..., scope = parent.frame()) {
+start_session <- function(
+  name = NULL,
+  session = NULL,
+  ...,
+  scope = parent.frame()
+) {
   tryCatch({                                                         # safe
     trc <- get_tracer()
-    invisible(trc$start_session(name = name, ..., scope = scope))
+    invisible(
+      trc$start_session(name = name, session = session, ..., scope = scope)
+    )
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     invisible(session_noop$new())                                    # safe
