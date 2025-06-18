@@ -40,6 +40,24 @@ start_span_dev <- function(name = NULL, ..., scope = parent.frame()) {
     invisible(trc$start_span(name = name, ..., scope = scope))
 }
 
+start_session_dev <- function(name = NULL, ..., session_scope = parent.frame()) {
+    trc <- get_tracer()
+    invisible(
+      trc$start_session(name = name, ..., session_scope = session_scope)
+    )
+}
+
+local_session_dev <- function(session, session_scope = parent.frame()) {
+    invisible(session$activate(session_scope))
+}
+
+with_session_dev <- function(session, expr) {
+  local({
+      invisible(session$activate())
+    expr
+  })
+}
+
 log_dev <- function(msg, ..., severity = "info", .envir = parent.frame()) {
     lgr <- get_logger()
     lgr$log(msg, severity, ..., .envir = .envir)

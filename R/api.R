@@ -169,6 +169,81 @@ start_span <- function(name = NULL, ..., scope = parent.frame()) {
 
 start_span_safe <- start_span
 
+#' Start a new OpenTelemetry session span, using the default tracer
+#'
+#' Session spans are for instrumenting concurrent code in R.
+#'
+#' A session span does not end at the end of an R function, but has to
+#' be ended explicitly, using its `$end()` method.
+#'
+#' A session span can be activated using [with_session()] or
+#' [local_session()].
+#'
+#' @param ...,session_scope Additional arguments are passed to the default
+#'   tracer's `start_session()` method.
+#' @inheritParams start_span
+#' @export
+#' @family OpenTelemetry tracing
+
+# safe start
+start_session <- function(name = NULL, ..., session_scope = parent.frame()) {
+  tryCatch({                                                         # safe
+    trc <- get_tracer()
+    invisible(
+      trc$start_session(name = name, ..., session_scope = session_scope)
+    )
+  }, error = function(err) {                                         # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
+    invisible(session_noop$new())                                    # safe
+  })                                                                 # safe
+}
+# safe end
+
+start_session_safe <- start_session
+
+#' Activate an OpenTelemetry session span for a frame
+#'
+#' @param session The OpenTelemetry session span to activate.
+#' @param session_scope The frame to activate it for, defaults to the
+#'   caller frame.
+#'
+#' @export
+
+# safe start
+local_session <- function(session, session_scope = parent.frame()) {
+  tryCatch({                                                         # safe
+    invisible(session$activate(session_scope))
+  }, error = function(err) {                                         # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
+    invisible(session_noop$new())                                    # safe
+  })                                                                 # safe
+}
+# safe end
+
+local_session_safe <- local_session
+
+#' Evaluate R code with an active OpenTelemetry session span
+#'
+#' @param session The OpenTelemetry session span to activate.
+#' @param expr R expression to evaluate
+#' @return The return value of `expr`.
+#' @export
+
+# safe start
+with_session <- function(session, expr) {
+  local({
+    tryCatch({                                                       # safe
+      invisible(session$activate())
+    }, error = function(err) {                                       # safe
+      errmsg("OpenTelemetry error: ", conditionMessage(err))         # safe
+    })                                                               # safe
+    expr
+  })
+}
+# safe end
+
+with_session_safe <- with_session
+
 #' Log an OpenTelemetry log message, using the default logger
 #'
 #' @param msg Log message, may contain R expressions to evaluate within
