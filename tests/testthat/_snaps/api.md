@@ -109,6 +109,51 @@
       Error in `get_tracer()`:
       ! nope
 
+# start_session
+
+    Code
+      sessx <- start_session()
+    Message
+      OpenTelemetry error: no session
+
+---
+
+    Code
+      start_session_dev()
+    Condition
+      Error in `get_tracer()`:
+      ! no session
+
+# local_session
+
+    Code
+      local_session(sess)
+    Message
+      OpenTelemetry error: no!
+
+---
+
+    Code
+      local_session_dev(sess)
+    Condition
+      Error in `session$activate()`:
+      ! no!
+
+# with_session
+
+    Code
+      ret <- with_session(sess, 1 + 1)
+    Message
+      OpenTelemetry error: no!
+
+---
+
+    Code
+      with_session_dev(sess, 1 + 1)
+    Condition
+      Error in `session$activate()`:
+      ! no!
+
 # get_current_span_context
 
     Code

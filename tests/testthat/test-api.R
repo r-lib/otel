@@ -182,6 +182,48 @@ test_that("start_span", {
   })
 })
 
+test_that("start_session", {
+  local_otel_off()
+  sess <- start_session()
+  expect_s3_class(sess, "otel_span_noop")
+  sessd <- start_session_dev()
+  expect_s3_class(sessd, "otel_span_noop")
+
+  fake(start_session, "get_tracer", function() stop("no session"))
+  expect_snapshot(sessx <- start_session())
+  expect_s3_class(sessx, "otel_span_noop")
+
+  fake(start_session_dev, "get_tracer", function() stop("no session"))
+  expect_snapshot(error = TRUE, start_session_dev())
+})
+
+test_that("local_session", {
+  local_otel_off()
+  sess <- start_session()
+  expect_silent(local_session(sess))
+  expect_silent(local_session_dev(sess))
+
+  sess$activate <- function(...) stop("no!")
+  expect_snapshot(local_session(sess))
+
+  expect_snapshot(error = TRUE, local_session_dev(sess))
+})
+
+test_that("with_session", {
+  local_otel_off()
+  sess <- start_session()
+  expect_silent(ret <- with_session(sess, 1 + 1))
+  expect_equal(ret, 2)
+  expect_silent(ret <- with_session_dev(sess, 1 + 1))
+  expect_equal(ret, 2)
+
+  sess$activate <- function(...) stop("no!")
+  expect_snapshot(ret <- with_session(sess, 1 + 1))
+  expect_equal(ret, 2)
+
+  expect_snapshot(error = TRUE, with_session_dev(sess, 1 + 1))
+})
+
 test_that("get_current_span_context", {
   local_otel_cache()
   withr::local_envvar(
