@@ -83,6 +83,10 @@ span_noop <- list(
 
         record_exception = function(attributes = NULL) {
           invisible(self)
+        },
+
+        activate = function(session_scope) {
+          invisible(self)
         }
       ),
       class = c("otel_span_noop", "otel_span")
