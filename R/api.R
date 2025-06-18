@@ -194,7 +194,7 @@ start_session <- function(name = NULL, ..., session_scope = parent.frame()) {
     )
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
-    invisible(session_noop$new())                                    # safe
+    invisible(span_noop$new())                                       # safe
   })                                                                 # safe
 }
 # safe end
@@ -215,7 +215,6 @@ local_session <- function(session, session_scope = parent.frame()) {
     invisible(session$activate(session_scope))
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
-    invisible(session_noop$new())                                    # safe
   })                                                                 # safe
 }
 # safe end
