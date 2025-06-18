@@ -27,6 +27,9 @@ tracer_noop <- list(
         start_span = function(name = NULL, ...) {
           span_noop$new(name, ...)
         },
+        start_session = function(name = NULL, ...) {
+          span_noop$new(name, ...)
+        },
         get_active_span_context = function() span_context_noop$new(),
         is_enabled = function() FALSE,
         flush = function() {},
