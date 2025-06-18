@@ -10,62 +10,19 @@
 \alias{log_fatal}
 \title{Log an OpenTelemetry log message, using the default logger}
 \usage{
-log(
-  msg,
-  ...,
-  severity = "info",
-  .envir = parent.frame(),
-  session = NULL,
-  session_scope = parent.frame()
-)
+log(msg, ..., severity = "info", .envir = parent.frame())
 
-log_trace(
-  msg,
-  ...,
-  .envir = parent.frame(),
-  session = NULL,
-  session_scope = parent.frame()
-)
+log_trace(msg, ..., .envir = parent.frame())
 
-log_debug(
-  msg,
-  ...,
-  .envir = parent.frame(),
-  session = NULL,
-  session_scope = parent.frame()
-)
+log_debug(msg, ..., .envir = parent.frame())
 
-log_info(
-  msg,
-  ...,
-  .envir = parent.frame(),
-  session = NULL,
-  session_scope = parent.frame()
-)
+log_info(msg, ..., .envir = parent.frame())
 
-log_warn(
-  msg,
-  ...,
-  .envir = parent.frame(),
-  session = NULL,
-  session_scope = parent.frame()
-)
+log_warn(msg, ..., .envir = parent.frame())
 
-log_error(
-  msg,
-  ...,
-  .envir = parent.frame(),
-  session = NULL,
-  session_scope = parent.frame()
-)
+log_error(msg, ..., .envir = parent.frame())
 
-log_fatal(
-  msg,
-  ...,
-  .envir = parent.frame(),
-  session = NULL,
-  session_scope = parent.frame()
-)
+log_fatal(msg, ..., .envir = parent.frame())
 }
 \arguments{
 \item{msg}{Log message, may contain R expressions to evaluate within
@@ -78,11 +35,7 @@ the default logger.}
 "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24".}
 
 \item{.envir}{Environment to evaluate the interpolated  expressions of
-the log message in.}
-
-\item{session}{Optionally a session span to activate before logging.}
-
-\item{session_scope}{The scope of the session span, it will be
+the log message in.
 automatically deactivated after this scope.}
 }
 \value{

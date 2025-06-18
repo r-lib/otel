@@ -4,14 +4,10 @@
 \alias{start_span}
 \title{Start a new OpenTelemetry span, using the default tracer}
 \usage{
-start_span(name = NULL, session = NULL, ..., scope = parent.frame())
+start_span(name = NULL, ..., scope = parent.frame())
 }
 \arguments{
 \item{name}{Name of the span.}
-
-\item{session}{Optionally, a session span to activate before
-starting the span. It will be automatically deactivated once \code{scope}
-ends.}
 
 \item{..., scope}{Additional arguments are passed to the default tracer's
 \code{start_span()} method.}

@@ -35,174 +35,75 @@ get_meter_dev <- function(name = NULL) {
     invisible(trc)
 }
 
-start_span_dev <- function(name = NULL, session = NULL, ...,
-                       scope = parent.frame()) {
+start_span_dev <- function(name = NULL, ..., scope = parent.frame()) {
     trc <- get_tracer()
-    invisible(trc$start_span(
-      name = name,
-      session = session,
-      ...,
-      scope = scope
-    ))
+    invisible(trc$start_span(name = name, ..., scope = scope))
 }
 
-start_session_dev <- function(
-  name = NULL,
-  session = NULL,
-  ...,
-  scope = parent.frame()
-) {
+start_session_dev <- function(name = NULL, ..., session_scope = parent.frame()) {
     trc <- get_tracer()
     invisible(
-      trc$start_session(name = name, session = session, ..., scope = scope)
+      trc$start_session(name = name, ..., session_scope = session_scope)
     )
 }
 
-log_dev <- function(
-  msg,
-  ...,
-  severity = "info",
-  .envir = parent.frame(),
-  session = NULL,
-  session_scope = parent.frame()
-) {
+local_session_dev <- function(session, session_scope = parent.frame()) {
+    invisible(session$activate(session_scope))
+}
+
+with_session_dev <- function(session, expr) {
+  local({
+      invisible(session$activate())
+    expr
+  })
+}
+
+log_dev <- function(msg, ..., severity = "info", .envir = parent.frame()) {
     lgr <- get_logger()
-    lgr$log(
-      msg,
-      severity,
-      ...,
-      .envir = .envir,
-      session = session,
-      session_scope = session_scope
-    )
+    lgr$log(msg, severity, ..., .envir = .envir)
     invisible(lgr)
 }
 
-log_trace_dev <- function(
-  msg,
-  ...,
-  .envir = parent.frame(),
-  session = NULL,
-  session_scope = parent.frame()
-) {
+log_trace_dev <- function(msg, ..., .envir = parent.frame()) {
     lgr <- get_logger()
-    lgr$log(
-      msg,
-      "trace",
-      ...,
-      .envir = .envir,
-      session = session,
-      session_scope = session_scope
-    )
+    lgr$log(msg, "trace", ..., .envir = .envir)
     invisible(lgr)
 }
 
-log_debug_dev <- function(
-  msg,
-  ...,
-  .envir = parent.frame(),
-  session = NULL,
-  session_scope = parent.frame()
-) {
+log_debug_dev <- function(msg, ..., .envir = parent.frame()) {
     lgr <- get_logger()
-    lgr$log(
-      msg,
-      "debug",
-      ...,
-      .envir = .envir,
-      session = session,
-      session_scope = session_scope
-    )
+    lgr$log(msg, "debug", ..., .envir = .envir)
     invisible(lgr)
 }
 
-log_info_dev <- function(
-  msg,
-  ...,
-  .envir = parent.frame(),
-  session = NULL,
-  session_scope = parent.frame()
-) {
+log_info_dev <- function(msg, ..., .envir = parent.frame()) {
     lgr <- get_logger()
-    lgr$log(
-      msg,
-      "info",
-      ...,
-      .envir = .envir,
-      session = session,
-      session_scope = session_scope
-    )
+    lgr$log(msg, "info", ..., .envir = .envir)
     invisible(lgr)
 }
 
-log_warn_dev <- function(
-  msg,
-  ...,
-  .envir = parent.frame(),
-  session = NULL,
-  session_scope = parent.frame()
-) {
+log_warn_dev <- function(msg, ..., .envir = parent.frame()) {
     lgr <- get_logger()
-    lgr$log(
-      msg,
-      "warn",
-      ...,
-      .envir = .envir,
-      session = session,
-      session_scope = session_scope
-    )
+    lgr$log(msg, "warn", ..., .envir = .envir)
     invisible(lgr)
 }
 
-log_error_dev <- function(
-  msg,
-  ...,
-  .envir = parent.frame(),
-  session = NULL,
-  session_scope = parent.frame()
-) {
+log_error_dev <- function(msg, ..., .envir = parent.frame()) {
     lgr <- get_logger()
-    lgr$log(
-      msg,
-      "error",
-      ...,
-      .envir = .envir,
-      session = session,
-      session_scope = session_scope
-    )
+    lgr$log(msg, "error", ..., .envir = .envir)
     invisible(lgr)
 }
 
-log_fatal_dev <- function(
-  msg,
-  ...,
-  .envir = parent.frame(),
-  session = NULL,
-  session_scope = parent.frame()
-) {
+log_fatal_dev <- function(msg, ..., .envir = parent.frame()) {
     lgr <- get_logger()
-    lgr$log(
-      msg,
-      "fatal",
-      ...,
-      .envir = .envir,
-      session = session,
-      session_scope = session_scope
-    )
+    lgr$log(msg, "fatal", ..., .envir = .envir)
     invisible(lgr)
 }
 
-counter_add_dev <- function(
-  name,
-  value = 1L,
-  attributes = NULL,
-  context = NULL,
-  session = NULL,
-  session_scope = parent.frame()
-) {
+counter_add_dev <- function(name, value = 1L, attributes = NULL, context = NULL) {
     mtr <- get_meter()
     ctr <- mtr$create_counter(name)
-    ctr$add(value, attributes, context, session, session_scope)
+    ctr$add(value, attributes, context)
     invisible(ctr)
 }
 
@@ -210,41 +111,25 @@ up_down_counter_add_dev <- function(
   name,
   value = 1L,
   attributes = NULL,
-  context = NULL,
-  session = NULL,
-  session_scope = parent.frame()
+  context = NULL
 ) {
     mtr <- get_meter()
     ctr <- mtr$create_up_down_counter(name)
-    ctr$add(value, attributes, context, session, session_scope)
+    ctr$add(value, attributes, context)
     invisible(ctr)
 }
 
-histogram_record_dev <- function(
-  name,
-  value,
-  attributes = NULL,
-  context = NULL,
-  session = NULL,
-  session_scope = parent.frame()
-) {
+histogram_record_dev <- function(name, value, attributes = NULL, context = NULL) {
     mtr <- get_meter()
     ctr <- mtr$create_histogram(name)
-    ctr$record(value, attributes, context, session, session_scope)
+    ctr$record(value, attributes, context)
     invisible(ctr)
 }
 
-gauge_record_dev <- function(
-  name,
-  value,
-  attributes = NULL,
-  context = NULL,
-  session = NULL,
-  session_scope = parent.frame()
-) {
+gauge_record_dev <- function(name, value, attributes = NULL, context = NULL) {
     mtr <- get_meter()
     ctr <- mtr$create_gauge(name)
-    ctr$record(value, attributes, context, session, session_scope)
+    ctr$record(value, attributes, context)
     invisible(ctr)
 }
 
@@ -300,7 +185,7 @@ start_shiny_session_dev <- function(
     trc <- get_tracer(name)
     # inactive tracer, do nothing, but return a (session) span
     if (!trc$is_enabled()) {
-      return(invisible(trc$start_session("session", options, ...)))
+      return(invisible(trc$start_span("session", options, ..., scope = NULL)))
     }
 
     attributes[["PATH_INFO"]] <- attributes[["PATH_INFO"]] %||%
@@ -320,7 +205,7 @@ start_shiny_session_dev <- function(
 
     assign(
       "otel_session",
-      trc$start_session(
+      trc$start_span(
         "session",
         attributes = attributes,
         options = options,

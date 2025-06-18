@@ -45,7 +45,7 @@ start_shiny_session <- function(
     trc <- get_tracer(name)
     # inactive tracer, do nothing, but return a (session) span
     if (!trc$is_enabled()) {
-      return(invisible(trc$start_session("session", options, ...)))
+      return(invisible(trc$start_span("session", options, ..., scope = NULL)))
     }
 
     attributes[["PATH_INFO"]] <- attributes[["PATH_INFO"]] %||%
@@ -65,7 +65,7 @@ start_shiny_session <- function(
 
     assign(
       "otel_session",
-      trc$start_session(
+      trc$start_span(
         "session",
         attributes = attributes,
         options = options,
@@ -81,7 +81,7 @@ start_shiny_session <- function(
     invisible(session$userData$otel_session)
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
-    invisible(session_noop$new())                                    # safe
+    invisible(span_noop$new())                                       # safe
   })                                                                 # safe
 }
 # safe end

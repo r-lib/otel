@@ -4,24 +4,23 @@
 \alias{start_session}
 \title{Start a new OpenTelemetry session span, using the default tracer}
 \usage{
-start_session(name = NULL, session = NULL, ..., scope = parent.frame())
+start_session(name = NULL, ..., session_scope = parent.frame())
 }
 \arguments{
 \item{name}{Name of the span.}
 
-\item{session}{Optionally, an existing session span to activate before
-starting the new session span. The new session span will be a child
-span of the active span in \code{session}.}
-
-\item{..., scope}{Additional arguments are passed to the default tracer's
-\code{start_session()} method.}
+\item{..., session_scope}{Additional arguments are passed to the default
+tracer's \code{start_session()} method.}
 }
 \description{
-A session span is special because it has its own context stack, so it
-behaves like a separate process. You can switch to this "process" by
-calling the span's \verb{$activate_session()} method, and switch back to
-context stack of the main process by calling the \verb{$deactivate_session}
-method.
+Session spans are for instrumenting concurrent code in R.
+}
+\details{
+A session span does not end at the end of an R function, but has to
+be ended explicitly, using its \verb{$end()} method.
+
+A session span can be activated using \code{\link[=with_session]{with_session()}} or
+\code{\link[=local_session]{local_session()}}.
 }
 \seealso{
 Other OpenTelemetry tracing: 

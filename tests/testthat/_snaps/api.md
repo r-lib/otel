@@ -109,21 +109,6 @@
       Error in `get_tracer()`:
       ! nope
 
-# start_session
-
-    Code
-      sess <- start_session()
-    Message
-      OpenTelemetry error: no!
-
----
-
-    Code
-      start_session_dev()
-    Condition
-      Error in `get_tracer()`:
-      ! no!
-
 # get_current_span_context
 
     Code

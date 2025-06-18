@@ -5,14 +5,7 @@
 \title{Record a value of an OpenTelemetry histogram using the default
 meter}
 \usage{
-histogram_record(
-  name,
-  value,
-  attributes = NULL,
-  context = NULL,
-  session = NULL,
-  session_scope = parent.frame()
-)
+histogram_record(name, value, attributes = NULL, context = NULL)
 }
 \arguments{
 \item{name}{Name of the histogram.}
@@ -23,12 +16,6 @@ histogram_record(
 
 \item{context}{Span context. If missing the active context is used,
 if any.}
-
-\item{session}{Optionally a session span to activate before updating
-the counter.}
-
-\item{session_scope}{The session span will be automatically deactivated
-after this scope.}
 }
 \value{
 The histogram object, invisibly.
