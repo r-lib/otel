@@ -59,7 +59,7 @@ test_that("start_shiny_session", {
   fake(start_shiny_session, "get_tracer", function(...) {
     fake_trc <- new.env()
     fake_trc$is_enabled <- function() TRUE
-    fake_trc$start_session <- function(...) {
+    fake_trc$start_span <- function(...) {
       message("start_session")
       list(..., end = function() {
         message("end_session")
@@ -89,7 +89,7 @@ test_that("start_shiny_session", {
   # error
   fake(start_shiny_session, "get_tracer", function(...) stop("boo!"))
   expect_snapshot(spn <- start_shiny_session())
-  expect_equal(spn, session_noop$new())
+  expect_equal(spn, span_noop$new())
 })
 
 test_that("start_shiny_session_dev", {
@@ -114,7 +114,7 @@ test_that("start_shiny_session_dev 2", {
   fake(start_shiny_session_dev, "get_tracer", function(...) {
     fake_trc <- new.env()
     fake_trc$is_enabled <- function() TRUE
-    fake_trc$start_session <- function(...) {
+    fake_trc$start_span <- function(...) {
       message("start_session")
       list(..., end = function() {
         message("end_session")

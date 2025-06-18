@@ -29,9 +29,6 @@ tracer_noop <- list(
         },
         get_active_span_context = function() span_context_noop$new(),
         is_enabled = function() FALSE,
-        start_session = function(name = NULL, ...) {
-          session_noop$new(name, ...)
-        },
         flush = function() {},
         extract_http_context = function(headers) {
           span_context_noop$new()
@@ -88,16 +85,6 @@ span_noop <- list(
       class = c("otel_span_noop", "otel_span")
     )
     self
-  }
-)
-
-session_noop <- list(
-  new = function(name = "", ...) {
-    s <- span_noop$new(name = name, ...)
-    s$activate_session <- function(...) {}
-    s$deactivate_session <- function() {}
-    class(s) <- c("otel_session_noop", "otel_session", class(s))
-    s
   }
 )
 
