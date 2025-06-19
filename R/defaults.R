@@ -1,14 +1,19 @@
+# To ensure consistent naming across projects, this specification
+# recommends that language specific environment variables are formed using
+# the following convention:
+# ```
+# OTEL_{LANGUAGE}_{FEATURE}
+# ```
+# https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/#language-specific-environment-variables
+
 default_traces_exporter_envvar <- "OTEL_TRACES_EXPORTER"
-default_traces_exporter_envvar_r <-
-  paste0("R_", default_traces_exporter_envvar)
+default_traces_exporter_envvar_r <- "OTEL_R_TRACES_EXPORTER"
 
 default_logs_exporter_envvar <- "OTEL_LOGS_EXPORTER"
-default_logs_exporter_envvar_r <-
-  paste0("R_", default_logs_exporter_envvar)
+default_logs_exporter_envvar_r <- "OTEL_R_LOGS_EXPORTER"
 
 default_metrics_exporter_envvar <- "OTEL_METRICS_EXPORTER"
-default_metrics_exporter_envvar_r <-
-  paste0("R_", default_metrics_exporter_envvar)
+default_metrics_exporter_envvar_r <- "OTEL_R_METRICS_EXPORTER"
 
 #' Get the default tracer provider
 #'
