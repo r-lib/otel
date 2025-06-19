@@ -70,10 +70,7 @@ is_measuring_safe <- is_measuring
 #' Calls [get_default_tracer_provider()] to get the default tracer
 #' provider. Then calls its `$get_tracer()` method to create a new tracer.
 #'
-#' @param name Name of the new tracer. This is typically the name of the
-#'   package or project. Defaults to the name of the calling package,
-#'   or the name of the current working directory if not called from a
-#'   package.
+#' @param name Name of the new tracer. If missing, then deduced automatically.
 #' @return An OpenTelemetry tracer, an `otel_tracer` object.
 #' @export
 #' @family OpenTelemetry tracing
@@ -96,10 +93,7 @@ get_tracer_safe <- get_tracer
 
 #' Get a logger from the default logger provider
 #'
-#' @param name Name of the new logger. This is typically the name of the
-#'   package or project. Defaults to the name of the calling package,
-#'   or the name of the current working directory if not called from a
-#'   package.
+#' @param name Name of the new tracer. If missing, then deduced automatically.
 #'
 #' @export
 #' @family OpenTelemetry logging
@@ -122,10 +116,7 @@ get_logger_safe <- get_logger
 
 #' Get a meter from the default meter provider
 #'
-#' @param name Name of the new meter. This is typically the name of the
-#'   package or project. Defaults to the name of the calling package,
-#'   or the name of the current working directory if not called from a
-#'   package.
+#' @param name Name of the new tracer. If missing, then deduced automatically.
 #' @export
 #' @family OpenTelemetry metrics
 
@@ -148,6 +139,7 @@ get_meter_safe <- get_meter
 #' Start a new OpenTelemetry span, using the default tracer
 #'
 #' @param name Name of the span.
+#' @param tracer_name The name of the tracer to use, see [get_tracer()].
 #' @param ...,scope Additional arguments are passed to the default tracer's
 #'   `start_span()` method.
 #' @return The new Opentelemetry span object, invisibly.
@@ -156,9 +148,14 @@ get_meter_safe <- get_meter
 #' @family OpenTelemetry tracing
 
 # safe start
-start_span <- function(name = NULL, ..., scope = parent.frame()) {
+start_span <- function(
+  name = NULL,
+  tracer_name = NULL,
+  ...,
+  scope = parent.frame()
+) {
   tryCatch({                                                         # safe
-    trc <- get_tracer()
+    trc <- get_tracer(tracer_name)
     invisible(trc$start_span(name = name, ..., scope = scope))
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
@@ -186,9 +183,14 @@ start_span_safe <- start_span
 #' @family OpenTelemetry tracing
 
 # safe start
-start_session <- function(name = NULL, ..., session_scope = parent.frame()) {
+start_session <- function(
+  name = NULL,
+  tracer_name = NULL,
+  ...,
+  session_scope = parent.frame()
+) {
   tryCatch({                                                         # safe
-    trc <- get_tracer()
+    trc <- get_tracer(tracer_name)
     invisible(
       trc$start_session(name = name, ..., session_scope = session_scope)
     )

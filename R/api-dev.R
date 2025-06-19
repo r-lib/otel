@@ -35,13 +35,23 @@ get_meter_dev <- function(name = NULL) {
     invisible(trc)
 }
 
-start_span_dev <- function(name = NULL, ..., scope = parent.frame()) {
-    trc <- get_tracer()
+start_span_dev <- function(
+  name = NULL,
+  tracer_name = NULL,
+  ...,
+  scope = parent.frame()
+) {
+    trc <- get_tracer(tracer_name)
     invisible(trc$start_span(name = name, ..., scope = scope))
 }
 
-start_session_dev <- function(name = NULL, ..., session_scope = parent.frame()) {
-    trc <- get_tracer()
+start_session_dev <- function(
+  name = NULL,
+  tracer_name = NULL,
+  ...,
+  session_scope = parent.frame()
+) {
+    trc <- get_tracer(tracer_name)
     invisible(
       trc$start_session(name = name, ..., session_scope = session_scope)
     )

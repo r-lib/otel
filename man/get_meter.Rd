@@ -7,10 +7,7 @@
 get_meter(name = NULL)
 }
 \arguments{
-\item{name}{Name of the new meter. This is typically the name of the
-package or project. Defaults to the name of the calling package,
-or the name of the current working directory if not called from a
-package.}
+\item{name}{Name of the new tracer. If missing, then deduced automatically.}
 }
 \description{
 Get a meter from the default meter provider

@@ -13,10 +13,15 @@ trace_env <- function(
   nms <- glob_filter(ls(env), include, exclude)
   for (nm in nms) {
     obj <- get(nm, envir = env)
-    if (!is.function(obj)) next
+    if (!is.function(obj)) {
+      next
+    }
     span_name <- paste0(name, "::", nm)
     tr1 <- substitute(
-      .__span <- otel::start_span(sn, scope = NULL),
+      .__span <- otel::start_session(
+        sn,
+        tracer_name = "org.r-lib.otel"
+      ),
       list(sn = span_name)
     )
     suppressMessages(trace(

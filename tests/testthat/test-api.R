@@ -170,13 +170,13 @@ test_that("start_span", {
   spand <- start_span_dev()
   expect_s3_class(spand, "otel_span_noop")
 
-  fake(start_span, "get_tracer", function() stop("nope"))
+  fake(start_span, "get_tracer", function(...) stop("nope"))
   expect_snapshot({
     span4 <- start_span()
   })
   expect_s3_class(span, "otel_span_noop")
 
-  fake(start_span_dev, "get_tracer", function() stop("nope"))
+  fake(start_span_dev, "get_tracer", function(...) stop("nope"))
   expect_snapshot(error = TRUE, {
     span4 <- start_span_dev()
   })
@@ -189,11 +189,11 @@ test_that("start_session", {
   sessd <- start_session_dev()
   expect_s3_class(sessd, "otel_span_noop")
 
-  fake(start_session, "get_tracer", function() stop("no session"))
+  fake(start_session, "get_tracer", function(...) stop("no session"))
   expect_snapshot(sessx <- start_session())
   expect_s3_class(sessx, "otel_span_noop")
 
-  fake(start_session_dev, "get_tracer", function() stop("no session"))
+  fake(start_session_dev, "get_tracer", function(...) stop("no session"))
   expect_snapshot(error = TRUE, start_session_dev())
 })
 

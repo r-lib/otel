@@ -7,10 +7,7 @@
 get_logger(name = NULL)
 }
 \arguments{
-\item{name}{Name of the new logger. This is typically the name of the
-package or project. Defaults to the name of the calling package,
-or the name of the current working directory if not called from a
-package.}
+\item{name}{Name of the new tracer. If missing, then deduced automatically.}
 }
 \description{
 Get a logger from the default logger provider

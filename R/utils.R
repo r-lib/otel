@@ -2,7 +2,7 @@
 
 errmsg <- function(..., class = "otel_error_message") {
   cnd <- structure(
-    list(message = paste0(..., collapse = "")),
+    list(message = paste0(c(..., "\n"), collapse = "")),
     class = c(class, "message", "condition")
   )
   message(cnd)
