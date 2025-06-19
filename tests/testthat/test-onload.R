@@ -72,7 +72,7 @@ test_that("setup_dev_env", {
 test_that("setup_r_trace", {
   # env var not set
   fake(setup_r_trace, "get_tracer", function(...) stop("no"))
-  withr::local_envvar(OTEL_INSTRUMENT_R_PKGS = NA_character_)
+  withr::local_envvar(OTEL_R_INSTRUMENT_PKGS = NA_character_)
   expect_silent(setup_r_trace())
 
   # tracer not enabled
@@ -86,7 +86,7 @@ test_that("setup_r_trace", {
     "trace_namespace",
     function(...) stop("nono")
   )
-  withr::local_envvar(OTEL_INSTRUMENT_R_PKGS = "foobar")
+  withr::local_envvar(OTEL_R_INSTRUMENT_PKGS = "foobar")
   expect_silent(setup_r_trace())
 
   # tracer enabled, package already loaded
@@ -98,15 +98,15 @@ test_that("setup_r_trace", {
   fake(setup_r_trace, "loadedNamespaces", "ok")
   fake(setup_r_trace, "trace_namespace", function(...) res <<- list(...))
   fake(setup_r_trace, "setHook", function(...) stop("not yet"))
-  withr::local_envvar(OTEL_INSTRUMENT_R_PKGS = "ok")
+  withr::local_envvar(OTEL_R_INSTRUMENT_PKGS = "ok")
   res <- NULL
   setup_r_trace()
   expect_snapshot(res)
 
   # inclusions, exclusions
   withr::local_envvar(
-    OTEL_INSTRUMENT_R_PKGS_OK_INCLUDE = "inc*",
-    OTEL_INSTRUMENT_R_PKGS_OK_EXCLUDE = "exclude.*"
+    OTEL_R_INSTRUMENT_PKGS_OK_INCLUDE = "inc*",
+    OTEL_R_INSTRUMENT_PKGS_OK_EXCLUDE = "exclude.*"
   )
   res <- NULL
   setup_r_trace()

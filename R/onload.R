@@ -126,7 +126,7 @@ setup_dev_env <- function(envir = asNamespace(.packageName)) {
 }
 
 setup_r_trace <- function() {
-  ev <- trimws(Sys.getenv("OTEL_INSTRUMENT_R_PKGS", ""))
+  ev <- trimws(Sys.getenv("OTEL_R_INSTRUMENT_PKGS", ""))
   if (ev == "") {
     return()
   }
@@ -138,8 +138,8 @@ setup_r_trace <- function() {
   pkgs <- strsplit(ev, ",", fixed = TRUE)[[1]]
   for (pkg in pkgs) {
     PKG <- gsub(".", "_", toupper(pkg), fixed = TRUE)
-    inc <- get_env(paste0("OTEL_INSTRUMENT_R_PKGS_", PKG, "_INCLUDE"))
-    exc <- get_env(paste0("OTEL_INSTRUMENT_R_PKGS_", PKG, "_EXCLUDE"))
+    inc <- get_env(paste0("OTEL_R_INSTRUMENT_PKGS_", PKG, "_INCLUDE"))
+    exc <- get_env(paste0("OTEL_R_INSTRUMENT_PKGS_", PKG, "_EXCLUDE"))
     if (!is.null(inc)) {
       inc <- trimws(strsplit(inc, ",")[[1]])
     }
