@@ -124,6 +124,9 @@ setup_default_tracer_provider <- function() {
       "http" = {
         otelsdk::tracer_provider_http$new()
       },
+      "otlp/file" = {
+        otelsdk::tracer_provider_file$new()
+      },
       "jaeger" = {
         warning("OpenTelemetry: Jaeger trace exporter is not supported yet")
         tracer_provider_noop$new()
@@ -217,6 +220,9 @@ setup_default_logger_provider <- function() {
       "http" = {
         otelsdk::logger_provider_http$new()
       },
+      "otlp/file" = {
+        otelsdk::logger_provider_file$new()
+      },
       stop(
         "Unknown OpenTelemetry exporter from ", evar,
         " environment variable: ", ev
@@ -301,6 +307,9 @@ setup_default_meter_provider <- function() {
       "otlp" = ,
       "http" = {
         otelsdk::meter_provider_http$new()
+      },
+      "otlp/file" = {
+        otelsdk::meter_provider_file$new()
       },
       "prometheus" = {
         warning("OpenTelemetry: Prometheus trace exporter is not supported yet")
