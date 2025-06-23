@@ -91,7 +91,7 @@ We recommend the following practices when using sessions:
 
 ## Shiny apps
 
-otel has convenience functions to tie otel sesssions to Shiny sessions:
+otel has convenience functions to tie otel sessions to Shiny sessions:
 
 * Use `start_shiny_app()` from the `global.R` file, before the app start up.
 * Use `start_shiny_session()` from the server function, at the start of a new session, and pass the Shiny session object to it.

@@ -109,7 +109,7 @@ using sessions:
 
 ## Shiny apps
 
-otel has convenience functions to tie otel sesssions to Shiny sessions:
+otel has convenience functions to tie otel sessions to Shiny sessions:
 
 - Use `start_shiny_app()` from the `global.R` file, before the app start
   up.
