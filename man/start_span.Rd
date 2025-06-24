@@ -4,15 +4,21 @@
 \alias{start_span}
 \title{Start a new OpenTelemetry span, using the default tracer}
 \usage{
-start_span(name = NULL, tracer_name = NULL, ..., scope = parent.frame())
+start_span(
+  name = NULL,
+  tracer_name = NULL,
+  ...,
+  scope = parent.frame(),
+  activation_scope = parent.frame()
+)
 }
 \arguments{
 \item{name}{Name of the span.}
 
 \item{tracer_name}{The name of the tracer to use, see \code{\link[=get_tracer]{get_tracer()}}.}
 
-\item{..., scope}{Additional arguments are passed to the default tracer's
-\code{start_span()} method.}
+\item{..., scope, activation_scope}{Additional arguments are passed to
+the default tracer's \code{start_span()} method.}
 }
 \value{
 The new Opentelemetry span object, invisibly.
@@ -25,7 +31,6 @@ Other OpenTelemetry tracing:
 \code{\link{extract_http_context}()},
 \code{\link{get_active_span_context}()},
 \code{\link{get_tracer}()},
-\code{\link{is_tracing}()},
-\code{\link{start_session}()}
+\code{\link{is_tracing}()}
 }
 \concept{OpenTelemetry tracing}

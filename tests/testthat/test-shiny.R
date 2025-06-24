@@ -60,9 +60,9 @@ test_that("start_shiny_session", {
     fake_trc <- new.env()
     fake_trc$is_enabled <- function() TRUE
     fake_trc$start_span <- function(...) {
-      message("start_session")
+      message("start session")
       list(..., end = function() {
-        message("end_session")
+        message("end session")
       })
     }
     fake_trc
@@ -115,9 +115,9 @@ test_that("start_shiny_session_dev 2", {
     fake_trc <- new.env()
     fake_trc$is_enabled <- function() TRUE
     fake_trc$start_span <- function(...) {
-      message("start_session")
+      message("start session")
       list(..., end = function() {
-        message("end_session")
+        message("end session")
       })
     }
     fake_trc

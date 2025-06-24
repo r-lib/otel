@@ -65,29 +65,27 @@ To exclude functions from instrumentation, set the `OTEL_INSTRUMENT_R_PKGS_<PKG>
 
 Bye default otel and otelsdk run in production mode. In production mode otel (and otelsdk) functions never error. This behavior does not help catching errors early during the developent of the instrumented project. Set the `OTEL_ENV` environment variable to `dev` to switch to development mode, where otel and otelsdk functions fail on errors.
 
-## Concurrency and sessions
+## Concurrency
 
-To support concurrency on a single thread, e.g. a Shiny app serving multiple requests at the same time, you can create multiple sessions and switch between them manually.
-We recommend the following practices when using sessions:
+To support concurrency on a single thread, e.g. a Shiny app serving multiple
+requests at the same time, you can manage the lifetime and actication of the
+OpenTelemetry spans manually. We recommend the following practices for
+in-process concurrency:
 
-* Create a new session span with `otel::start_session()`.
+* Create a new long lasting span with `otel::start_span(scope = NULL)`.
 * Assign the returned span into the corresponding object of the concurrent
-  and/or asynchronous computation. The session span has a finalizer that
-  closes the span and deletes the session.
-* When running code that belongs to the session, activate the session with
-  its `activate_session()` method. By default the session is automatically
-  deactivated when the context that activated it ends.
-* Alternatively, if you want to create a new span inside the session, then
-  use the `session` argument of `otel::start_span()`. This activates the
-  session before creating the new span.
-* When logging use the `session` argument of `otel::log()` or the other
-  logging functions.
-* For metrics, use the `session` argument of `otel::counter_add()` or the
-  other instrument functions.
-* When the concurrent computation ends, close the session span manually
+  and/or asynchronous computation. Every span has a finalizer that closes
+  the span.
+* When running code that belongs concurrent computation represented by the
+  span, activate it for a specific R scope by calling `with_active_span()`
+  or `local_active_span()`.
+* When logging use `with_active_span()` or `local_active_span()`
+  to activate the span that belongs to the log messages.
+* Similarly, for metrics, call `with_active_span()` or `local_active_span()`.
+  to link instruments to the correct span.
+* When the concurrent computation ends, close the span manually
   with its `$end()` method. (Otherwise it would be only closed at the
-  next garbage collection, assuming there are no references to the
-  session span.)
+  next garbage collection, assuming there are no references to it.)
 
 ## Shiny apps
 

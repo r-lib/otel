@@ -39,31 +39,24 @@ start_span_dev <- function(
   name = NULL,
   tracer_name = NULL,
   ...,
-  scope = parent.frame()
+  scope = parent.frame(),
+  activation_scope = parent.frame()
 ) {
     trc <- get_tracer(tracer_name)
-    invisible(trc$start_span(name = name, ..., scope = scope))
+    invisible(trc$start_span(
+      name = name, ...,
+      scope = scope,
+      activation_scope = activation_scope
+    ))
 }
 
-start_session_dev <- function(
-  name = NULL,
-  tracer_name = NULL,
-  ...,
-  session_scope = parent.frame()
-) {
-    trc <- get_tracer(tracer_name)
-    invisible(
-      trc$start_session(name = name, ..., session_scope = session_scope)
-    )
+local_active_span_dev <- function(span, activation_scope = parent.frame()) {
+    invisible(span$activate(activation_scope))
 }
 
-local_session_dev <- function(session, session_scope = parent.frame()) {
-    invisible(session$activate(session_scope))
-}
-
-with_session_dev <- function(session, expr) {
+with_active_span_dev <- function(span, expr) {
   local({
-      invisible(session$activate())
+      invisible(span$activate())
     expr
   })
 }
@@ -214,7 +207,7 @@ start_shiny_session_dev <- function(
     options[["parent"]] <- options[["parent"]] %||% NA
 
     assign(
-      "otel_session",
+      "otel_span",
       trc$start_span(
         "session",
         attributes = attributes,
@@ -225,8 +218,8 @@ start_shiny_session_dev <- function(
       envir = session$userData
     )
     session$onSessionEnded(function(...) {
-      session$userData$otel_session$end()
+      session$userData$otel_span$end()
     })
 
-    invisible(session$userData$otel_session)
+    invisible(session$userData$otel_span)
 }

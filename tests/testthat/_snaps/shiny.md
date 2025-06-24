@@ -23,8 +23,8 @@
     Code
       spn <- start_shiny_session(session = ssn, attributes = attr, options = opts)
     Message
-      start_session
-      end_session
+      start session
+      end session
 
 ---
 
@@ -67,8 +67,8 @@
     Code
       spn <- start_shiny_session_dev(session = ssn, attributes = attr, options = opts)
     Message
-      start_session
-      end_session
+      start session
+      end session
 
 ---
 
