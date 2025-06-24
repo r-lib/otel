@@ -16,7 +16,7 @@ default.
 }
 \details{
 The default tracer provider is created based on the
-R_OTEL_TRACES_EXPORTER environment variable. This
+OTEL_R_TRACES_EXPORTER environment variable. This
 environment variable is specifically for R applications with
 OpenTelemetry support.
 

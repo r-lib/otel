@@ -182,46 +182,46 @@ test_that("start_span", {
   })
 })
 
-test_that("start_session", {
+test_that("start_span(scope = NULL)", {
   local_otel_off()
-  sess <- start_session()
+  sess <- start_span(scope = NULL)
   expect_s3_class(sess, "otel_span_noop")
-  sessd <- start_session_dev()
+  sessd <- start_span_dev(scope = NULL)
   expect_s3_class(sessd, "otel_span_noop")
 
-  fake(start_session, "get_tracer", function(...) stop("no session"))
-  expect_snapshot(sessx <- start_session())
+  fake(start_span, "get_tracer", function(...) stop("no session"))
+  expect_snapshot(sessx <- start_span(scope = NULL))
   expect_s3_class(sessx, "otel_span_noop")
 
-  fake(start_session_dev, "get_tracer", function(...) stop("no session"))
-  expect_snapshot(error = TRUE, start_session_dev())
+  fake(start_span_dev, "get_tracer", function(...) stop("no session"))
+  expect_snapshot(error = TRUE, start_span_dev(scope = NULL))
 })
 
-test_that("local_session", {
+test_that("local_active_span", {
   local_otel_off()
-  sess <- start_session()
-  expect_silent(local_session(sess))
-  expect_silent(local_session_dev(sess))
+  sess <- start_span(scope = NULL)
+  expect_silent(local_active_span(sess))
+  expect_silent(local_active_span_dev(sess))
 
   sess$activate <- function(...) stop("no!")
-  expect_snapshot(local_session(sess))
+  expect_snapshot(local_active_span(sess))
 
-  expect_snapshot(error = TRUE, local_session_dev(sess))
+  expect_snapshot(error = TRUE, local_active_span_dev(sess))
 })
 
-test_that("with_session", {
+test_that("with_active_span", {
   local_otel_off()
-  sess <- start_session()
-  expect_silent(ret <- with_session(sess, 1 + 1))
+  sess <- start_span(scope = NULL)
+  expect_silent(ret <- with_active_span(sess, 1 + 1))
   expect_equal(ret, 2)
-  expect_silent(ret <- with_session_dev(sess, 1 + 1))
+  expect_silent(ret <- with_active_span_dev(sess, 1 + 1))
   expect_equal(ret, 2)
 
   sess$activate <- function(...) stop("no!")
-  expect_snapshot(ret <- with_session(sess, 1 + 1))
+  expect_snapshot(ret <- with_active_span(sess, 1 + 1))
   expect_equal(ret, 2)
 
-  expect_snapshot(error = TRUE, with_session_dev(sess, 1 + 1))
+  expect_snapshot(error = TRUE, with_active_span_dev(sess, 1 + 1))
 })
 
 test_that("get_current_span_context", {

@@ -77,9 +77,8 @@ setup_dev_env <- function(envir = asNamespace(.packageName)) {
       envir = envir
     )
     assign("start_span", start_span_dev, envir = envir)
-    assign("start_session", start_session_dev, envir = envir)
-    assign("local_session", local_session_dev, envir = envir)
-    assign("with_session", with_session_dev, envir = envir)
+    assign("local_active_span", local_active_span_dev, envir = envir)
+    assign("with_active_span", with_active_span_dev, envir = envir)
     assign("log", log_dev, envir = envir)
     assign("log_trace", log_trace_dev, envir = envir)
     assign("log_debug", log_debug_dev, envir = envir)

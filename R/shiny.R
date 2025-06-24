@@ -64,7 +64,7 @@ start_shiny_session <- function(
     options[["parent"]] <- options[["parent"]] %||% NA
 
     assign(
-      "otel_session",
+      "otel_span",
       trc$start_span(
         "session",
         attributes = attributes,
@@ -75,10 +75,10 @@ start_shiny_session <- function(
       envir = session$userData
     )
     session$onSessionEnded(function(...) {
-      session$userData$otel_session$end()
+      session$userData$otel_span$end()
     })
 
-    invisible(session$userData$otel_session)
+    invisible(session$userData$otel_span)
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     invisible(span_noop$new())                                       # safe

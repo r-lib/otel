@@ -109,49 +109,49 @@
       Error in `get_tracer()`:
       ! nope
 
-# start_session
+# start_span(scope = NULL)
 
     Code
-      sessx <- start_session()
+      sessx <- start_span(scope = NULL)
     Message
       OpenTelemetry error: no session
 
 ---
 
     Code
-      start_session_dev()
+      start_span_dev(scope = NULL)
     Condition
       Error in `get_tracer()`:
       ! no session
 
-# local_session
+# local_active_span
 
     Code
-      local_session(sess)
+      local_active_span(sess)
     Message
       OpenTelemetry error: no!
 
 ---
 
     Code
-      local_session_dev(sess)
+      local_active_span_dev(sess)
     Condition
-      Error in `session$activate()`:
+      Error in `span$activate()`:
       ! no!
 
-# with_session
+# with_active_span
 
     Code
-      ret <- with_session(sess, 1 + 1)
+      ret <- with_active_span(sess, 1 + 1)
     Message
       OpenTelemetry error: no!
 
 ---
 
     Code
-      with_session_dev(sess, 1 + 1)
+      with_active_span_dev(sess, 1 + 1)
     Condition
-      Error in `session$activate()`:
+      Error in `span$activate()`:
       ! no!
 
 # get_current_span_context
