@@ -45,12 +45,15 @@ pak::pak("r-lib/otel")
 
 ## Usage
 
+- If you are instrumenting a package, set the internal
+  `otel_tracer_name` variable to your preferred tracer (and logger,
+  meter) name. See `?otel_tracer_name` for details.
 - Call `otel::start_span()` to create a span. By default the span ends
-  when the called function returns.
+  when the function that called it terminates.
 - Use the `$set_attribute()`, `$add_event()`, `$add_link()` and
   `$set_status()` methods of a span to manipulate it.
 - See the [otelsdk](https://github.com/r-lib/otelsdk) package for
-  producing output from an instrumented R package or project.
+  producing telemetry data from an instrumented R package or project.
 
 ## Zero-code instrumentation
 
