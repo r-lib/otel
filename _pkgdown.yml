@@ -99,3 +99,9 @@ reference:
   contents:
   - as_attributes
   - get_active_span_context
+
+- title: internal
+  contents:
+  - logger_provider_noop
+  - meter_provider_noop
+  - tracer_provider_noop

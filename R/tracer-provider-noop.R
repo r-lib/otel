@@ -1,3 +1,7 @@
+#' No-op logger provider
+#' @keywords internal
+#' @export
+
 tracer_provider_noop <- list(
   new = function() {
     structure(
