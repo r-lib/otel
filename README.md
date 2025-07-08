@@ -77,7 +77,7 @@ glob expressions. `<PKG>` is the package name in all capital letters.
 Functions that match to at least one glob expression will not be
 instrumented. Inclusion globs are applied before exclusion globs.
 
-## Production and development sessions
+## Production and development R sessions
 
 Bye default otel and otelsdk run in production mode. In production mode
 otel (and otelsdk) functions never error. This behavior does not help
@@ -109,12 +109,12 @@ following practices for in-process concurrency:
 
 ## Shiny apps
 
-otel has convenience functions to tie otel sessions to Shiny sessions:
+otel has convenience functions to tie otel spans to Shiny sessions:
 
 - Call `start_shiny_app()` from the `global.R` file, before the app
   starts up.
 - Call `start_shiny_session()` from the server function, at the start of
-  a new session, and pass the Shiny session object to it.
+  a new Shiny session, and pass the Shiny session object to it.
   `start_shiny_session()` creates a long lasting OpenTelemetry span in
   `session$userData$otel_span`. This span represents the Shiny session,
   see ‘Concurrency’ above.
