@@ -19,6 +19,7 @@ Suggests:
     callr,
     cli,
     otelsdk,
+    processx,
     shiny,
     spelling,
     testthat (>= 3.0.0),
