@@ -26,5 +26,7 @@ Suggests:
     withr
 Remotes:
     r-lib/otelsdk
+Config/Needs/website:
+    tidyverse/tidytemplate
 Config/testthat/edition: 3
 URL: https://r-lib.github.io/otel/
