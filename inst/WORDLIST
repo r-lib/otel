@@ -8,8 +8,10 @@ SDKs
 dplyr
 finalizer
 globbing
+http
 lifecycle
 natively
 observability
 otelsdk
+stdstream
 subprocesses
