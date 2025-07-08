@@ -30,9 +30,280 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="about-opentelemetry-in-r">About OpenTelemetry in R<a class="anchor" aria-label="anchor" href="#about-opentelemetry-in-r"></a></h2>
+
+      <div class="section-desc"><p>The otel package is an implementation of the <a href="https://opentelemetry.io/docs/specs/otel/" class="external-link">OpenTelemetry API</a>. Use the otel package to instrument your R package of project for OpenTelemetry data collection. See the <a href="https://github.com/r-lib/otelsdk" class="external-link">otelsdk</a> package for collecting OpenTelemetry data for an instrumented package or project.</p></div>
 
 
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="default_tracer_name.html">default_tracer_name()</a></code>
+
+        </dt>
+        <dd>Default tracer (and meter and logger) name for an R package</dd>
+      </dl></div><div class="section level2">
+      <h2 id="traces">Traces<a class="anchor" aria-label="anchor" href="#traces"></a></h2>
+
+      <div class="section-desc"><p>TODO</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="get_default_tracer_provider.html">get_default_tracer_provider()</a></code>
+
+        </dt>
+        <dd>Get the default tracer provider</dd>
+      </dl><dl><dt>
+
+          <code><a href="get_tracer.html">get_tracer()</a></code>
+
+        </dt>
+        <dd>Get a tracer from the default tracer provider</dd>
+      </dl><dl><dt>
+
+          <code><a href="is_tracing.html">is_tracing()</a></code>
+
+        </dt>
+        <dd>Check whether OpenTelemetry tracing is active</dd>
+      </dl><dl><dt>
+
+          <code><a href="start_span.html">start_span()</a></code>
+
+        </dt>
+        <dd>Start a new OpenTelemetry span, using the default tracer</dd>
+      </dl><dl><dt>
+
+          <code><a href="tracing.html">invalid_trace_id</a></code> <code><a href="tracing.html">invalid_span_id</a></code> <code><a href="tracing.html">span_kinds</a></code> <code><a href="tracing.html">span_status_codes</a></code>
+
+        </dt>
+        <dd>OpenTelemetry tracing constants</dd>
+      </dl></div><div class="section level2">
+
+      <h3 id="concurrency">Concurrency<a class="anchor" aria-label="anchor" href="#concurrency"></a></h3>
+      <div class="section-desc"><p>TODO</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="local_active_span.html">local_active_span()</a></code>
+
+        </dt>
+        <dd>Activate an OpenTelemetry span for an R scope</dd>
+      </dl><dl><dt>
+
+          <code><a href="with_active_span.html">with_active_span()</a></code>
+
+        </dt>
+        <dd>Evaluate R code with an active OpenTelemetry span</dd>
+      </dl></div><div class="section level2">
+
+      <h3 id="zero-code-instrumentation">Zero code instrumentation<a class="anchor" aria-label="anchor" href="#zero-code-instrumentation"></a></h3>
+      <div class="section-desc"><p>TODO</p></div>
+
+
+    </div><div class="section level2">
+      <h2 id="logs">Logs<a class="anchor" aria-label="anchor" href="#logs"></a></h2>
+
+      <div class="section-desc"><p>TODO</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="get_default_logger_provider.html">get_default_logger_provider()</a></code>
+
+        </dt>
+        <dd>Get the default tracer provider TODO</dd>
+      </dl><dl><dt>
+
+          <code><a href="get_logger.html">get_logger()</a></code>
+
+        </dt>
+        <dd>Get a logger from the default logger provider</dd>
+      </dl><dl><dt>
+
+          <code><a href="is_logging.html">is_logging()</a></code>
+
+        </dt>
+        <dd>Check whether OpenTelemetry logging is active</dd>
+      </dl><dl><dt>
+
+          <code><a href="log.html">log()</a></code> <code><a href="log.html">log_trace()</a></code> <code><a href="log.html">log_debug()</a></code> <code><a href="log.html">log_info()</a></code> <code><a href="log.html">log_warn()</a></code> <code><a href="log.html">log_error()</a></code> <code><a href="log.html">log_fatal()</a></code>
+
+        </dt>
+        <dd>Log an OpenTelemetry log message, using the default logger</dd>
+      </dl><dl><dt>
+
+          <code><a href="log_severity_levels.html">log_severity_levels</a></code>
+
+        </dt>
+        <dd>OpenTelemetry log severity levels</dd>
+      </dl></div><div class="section level2">
+      <h2 id="metrics">Metrics<a class="anchor" aria-label="anchor" href="#metrics"></a></h2>
+
+      <div class="section-desc"><p>TODO</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="get_default_meter_provider.html">get_default_meter_provider()</a></code>
+
+        </dt>
+        <dd>Get the default metrics provider TODO</dd>
+      </dl><dl><dt>
+
+          <code><a href="get_meter.html">get_meter()</a></code>
+
+        </dt>
+        <dd>Get a meter from the default meter provider</dd>
+      </dl><dl><dt>
+
+          <code><a href="is_measuring.html">is_measuring()</a></code>
+
+        </dt>
+        <dd>Check whether OpenTelemetry metrics collection is active</dd>
+      </dl></div><div class="section level2">
+
+      <h3 id="counters">Counters<a class="anchor" aria-label="anchor" href="#counters"></a></h3>
+      <div class="section-desc"><p>TODO</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="counter_add.html">counter_add()</a></code>
+
+        </dt>
+        <dd>Increase an OpenTelemetry counter using the default meter</dd>
+      </dl></div><div class="section level2">
+
+      <h3 id="up-down-counters">Up-down Counters<a class="anchor" aria-label="anchor" href="#up-down-counters"></a></h3>
+      <div class="section-desc"><p>TODO</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="up_down_counter_add.html">up_down_counter_add()</a></code>
+
+        </dt>
+        <dd>Increase or decrease an OpenTelemetry up-down counter using the default meter</dd>
+      </dl></div><div class="section level2">
+
+      <h3 id="histograms">Histograms<a class="anchor" aria-label="anchor" href="#histograms"></a></h3>
+      <div class="section-desc"><p>TODO</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="histogram_record.html">histogram_record()</a></code>
+
+        </dt>
+        <dd>Record a value of an OpenTelemetry histogram using the default meter</dd>
+      </dl></div><div class="section level2">
+
+      <h3 id="gauges">Gauges<a class="anchor" aria-label="anchor" href="#gauges"></a></h3>
+      <div class="section-desc"><p>TODO</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="gauge_record.html">gauge_record()</a></code>
+
+        </dt>
+        <dd>Record a value of an OpenTelemetry gauge using the default meter</dd>
+      </dl></div><div class="section level2">
+      <h2 id="context-propagation">Context propagation<a class="anchor" aria-label="anchor" href="#context-propagation"></a></h2>
+
+      <div class="section-desc"><p>TODO</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="extract_http_context.html">extract_http_context()</a></code>
+
+        </dt>
+        <dd>Extract a span context from HTTP headers received from a client</dd>
+      </dl><dl><dt>
+
+          <code><a href="pack_http_context.html">pack_http_context()</a></code>
+
+        </dt>
+        <dd>Pack the currently active span context into standard HTTP OpenTelemetry headers</dd>
+      </dl></div><div class="section level2">
+      <h2 id="shiny-apps">Shiny apps<a class="anchor" aria-label="anchor" href="#shiny-apps"></a></h2>
+
+      <div class="section-desc"><p>TODO</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="start_shiny_app.html">start_shiny_app()</a></code>
+
+        </dt>
+        <dd>Start tracing a Shiny app</dd>
+      </dl><dl><dt>
+
+          <code><a href="start_shiny_session.html">start_shiny_session()</a></code>
+
+        </dt>
+        <dd>Start tracing a Shiny session</dd>
+      </dl></div><div class="section level2">
+      <h2 id="utility-functions">Utility functions<a class="anchor" aria-label="anchor" href="#utility-functions"></a></h2>
+
+      <div class="section-desc"><p>TODO</p></div>
 
 
     </div><div class="section level2">
@@ -48,156 +319,13 @@
         <dd>R objects as OpenTelemetry attributes</dd>
       </dl><dl><dt>
 
-          <code><a href="counter_add.html">counter_add()</a></code>
-
-        </dt>
-        <dd>Increase an OpenTelemetry counter using the default meter</dd>
-      </dl><dl><dt>
-
-          <code><a href="default_tracer_name.html">default_tracer_name()</a></code>
-
-        </dt>
-        <dd>Default tracer (and meter and logger) name for an R package</dd>
-      </dl><dl><dt>
-
-          <code><a href="extract_http_context.html">extract_http_context()</a></code>
-
-        </dt>
-        <dd>Extract a span context from HTTP headers received from a client</dd>
-      </dl><dl><dt>
-
-          <code><a href="gauge_record.html">gauge_record()</a></code>
-
-        </dt>
-        <dd>Record a value of an OpenTelemetry gauge using the default meter</dd>
-      </dl><dl><dt>
-
           <code><a href="get_active_span_context.html">get_active_span_context()</a></code>
 
         </dt>
         <dd>Returns the active span context</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_default_logger_provider.html">get_default_logger_provider()</a></code>
-
-        </dt>
-        <dd>Get the default tracer provider TODO</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_default_meter_provider.html">get_default_meter_provider()</a></code>
-
-        </dt>
-        <dd>Get the default metrics provider TODO</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_default_tracer_provider.html">get_default_tracer_provider()</a></code>
-
-        </dt>
-        <dd>Get the default tracer provider</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_logger.html">get_logger()</a></code>
-
-        </dt>
-        <dd>Get a logger from the default logger provider</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_meter.html">get_meter()</a></code>
-
-        </dt>
-        <dd>Get a meter from the default meter provider</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_tracer.html">get_tracer()</a></code>
-
-        </dt>
-        <dd>Get a tracer from the default tracer provider</dd>
-      </dl><dl><dt>
-
-          <code><a href="histogram_record.html">histogram_record()</a></code>
-
-        </dt>
-        <dd>Record a value of an OpenTelemetry histogram using the default meter</dd>
-      </dl><dl><dt>
-
-          <code><a href="is_logging.html">is_logging()</a></code>
-
-        </dt>
-        <dd>Check whether OpenTelemetry logging is active</dd>
-      </dl><dl><dt>
-
-          <code><a href="is_measuring.html">is_measuring()</a></code>
-
-        </dt>
-        <dd>Check whether OpenTelemetry metrics collection is active</dd>
-      </dl><dl><dt>
-
-          <code><a href="is_tracing.html">is_tracing()</a></code>
-
-        </dt>
-        <dd>Check whether OpenTelemetry tracing is active</dd>
-      </dl><dl><dt>
-
-          <code><a href="local_active_span.html">local_active_span()</a></code>
-
-        </dt>
-        <dd>Activate an OpenTelemetry span for an R scope</dd>
-      </dl><dl><dt>
-
-          <code><a href="log.html">log()</a></code> <code><a href="log.html">log_trace()</a></code> <code><a href="log.html">log_debug()</a></code> <code><a href="log.html">log_info()</a></code> <code><a href="log.html">log_warn()</a></code> <code><a href="log.html">log_error()</a></code> <code><a href="log.html">log_fatal()</a></code>
-
-        </dt>
-        <dd>Log an OpenTelemetry log message, using the default logger</dd>
-      </dl><dl><dt>
-
-          <code><a href="log_severity_levels.html">log_severity_levels</a></code>
-
-        </dt>
-        <dd>OpenTelemetry log severity levels</dd>
-      </dl><dl><dt>
-
-          <code><a href="pack_http_context.html">pack_http_context()</a></code>
-
-        </dt>
-        <dd>Pack the currently active span context into standard HTTP OpenTelemetry headers</dd>
-      </dl><dl><dt>
-
-          <code><a href="start_shiny_app.html">start_shiny_app()</a></code>
-
-        </dt>
-        <dd>Start tracing a Shiny app</dd>
-      </dl><dl><dt>
-
-          <code><a href="start_shiny_session.html">start_shiny_session()</a></code>
-
-        </dt>
-        <dd>Start tracing a Shiny session</dd>
-      </dl><dl><dt>
-
-          <code><a href="start_span.html">start_span()</a></code>
-
-        </dt>
-        <dd>Start a new OpenTelemetry span, using the default tracer</dd>
-      </dl><dl><dt>
-
-          <code><a href="tracing.html">invalid_trace_id</a></code> <code><a href="tracing.html">invalid_span_id</a></code> <code><a href="tracing.html">span_kinds</a></code> <code><a href="tracing.html">span_status_codes</a></code>
-
-        </dt>
-        <dd>OpenTelemetry tracing constants</dd>
-      </dl><dl><dt>
-
-          <code><a href="up_down_counter_add.html">up_down_counter_add()</a></code>
-
-        </dt>
-        <dd>Increase or decrease an OpenTelemetry up-down counter using the default meter</dd>
-      </dl><dl><dt>
-
-          <code><a href="with_active_span.html">with_active_span()</a></code>
-
-        </dt>
-        <dd>Evaluate R code with an active OpenTelemetry span</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
    </div>
