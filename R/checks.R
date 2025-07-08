@@ -3,8 +3,12 @@ is_string <- function(x) {
 }
 
 as_string <- function(x, null = TRUE, call = NULL) {
-  if (null & is.null(x)) return(x)
-  if (is_string(x)) return(x)
+  if (null & is.null(x)) {
+    return(x)
+  }
+  if (is_string(x)) {
+    return(x)
+  }
 
   call <- call %||% match.call()
   stop(

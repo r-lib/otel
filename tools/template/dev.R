@@ -4,7 +4,9 @@ r_files <- dir("R")
 all_lines <- character()
 for (r_file in r_files) {
   lns <- readLines(file.path("R", r_file), warn = FALSE)
-  if (!any(grepl("^# safe start", lns))) next
+  if (!any(grepl("^# safe start", lns))) {
+    next
+  }
   cli::cli_alert_info("Processing {.file {r_file}}.")
   stts <- grep("^# safe start", lns)
   ends <- grep("^# safe end", lns)
