@@ -27,9 +27,9 @@ OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT environment variable. The default is
 
 The length of the each attribute (vector) can be limited with the
 OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT environment variable. The default is
-∞. Note that this is applied to the
-length of each attribute as an R vector. E.g. it does \emph{not} currently
-limit the number of characters in individual strings.
+\code{Inf}. Note that this is applied to
+the length of each attribute as an R vector. E.g. it does \emph{not}
+currently limit the number of characters in individual strings.
 }
 }
 \description{

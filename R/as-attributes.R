@@ -22,9 +22,9 @@
 #'
 #' The length of the each attribute (vector) can be limited with the
 #' `r otel_attr_val_lth_limit_var` environment variable. The default is
-#' `r otel_attr_val_lth_limit_dflt`. Note that this is applied to the
-#' length of each attribute as an R vector. E.g. it does _not_ currently
-#' limit the number of characters in individual strings.
+#' ``r format(otel_attr_val_lth_limit_dflt)``. Note that this is applied to
+#' the length of each attribute as an R vector. E.g. it does _not_
+#' currently limit the number of characters in individual strings.
 #'
 #' @export
 

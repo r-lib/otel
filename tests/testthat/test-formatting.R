@@ -9,6 +9,8 @@ test_that("code formatting", {
   pkg <- test_path("../../")
   if (!file.exists(file.path(pkg, "DESCRIPTION"))) {
     pkg <- file.path(pkg, "00_pkg_src", .packageName)
+    file.copy(file.path(pkg, "inst", "air.toml"), pkg)
+    on.exit(unlink(file.path(pkg, "air.toml")), add = TRUE)
   }
 
   if (Sys.which("air") == "") {
