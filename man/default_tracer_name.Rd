@@ -2,10 +2,11 @@
 % Please edit documentation in R/defaults.R
 \name{default_tracer_name}
 \alias{default_tracer_name}
+\alias{otel_tracer_name}
 \title{Default tracer (and meter and logger) name for an R package}
 \usage{
 default_tracer_name()
 }
 \description{
-Default tracer (and meter and logger) name for an R package
+TODO
 }

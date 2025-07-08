@@ -62,8 +62,8 @@ pak::pak("r-lib/otel")
 ## Usage
 
 * When instrumenting a package, set the `otel_tracer_name` variable
-  to your desired default tracer (and logger and meter) name. See
-  `?otelsdk::otel_tracer_name`.
+  to your desired default tracer name (also default logger and meter
+  name). See `?otel_tracer_name`.
 * Call `otel::start_span()` to create a span. By default the span ends
   when the caller function exits.
 * Use the `$set_attribute()`, `$add_event()`, `$add_link()` and

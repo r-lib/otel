@@ -327,6 +327,10 @@ setup_default_meter_provider <- function() {
 }
 
 #' Default tracer (and meter and logger) name for an R package
+#'
+#' TODO
+#'
+#' @aliases otel_tracer_name
 #' @export
 
 default_tracer_name <- function() {

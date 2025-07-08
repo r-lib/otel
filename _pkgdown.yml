@@ -10,3 +10,92 @@ template:
 
 development:
   mode: auto
+
+reference:
+- title: About OpenTelemetry in R
+  desc: >
+    The otel package is an implementation of the [OpenTelemetry API](
+    https://opentelemetry.io/docs/specs/otel/). Use the otel package to
+    instrument your R package of project for OpenTelemetry data collection.
+
+    See the [otelsdk](https://github.com/r-lib/otelsdk) package for
+    collecting OpenTelemetry data for an instrumented package or project.
+  contents:
+  - default_tracer_name
+- title: Traces
+  desc: >
+    TODO
+  contents:
+  - get_default_tracer_provider
+  - get_tracer
+  - is_tracing
+  - start_span
+  - invalid_trace_id
+- subtitle: Concurrency
+  desc: >
+    TODO
+  contents:
+  - local_active_span
+  - with_active_span
+- subtitle: Zero code instrumentation
+  desc: >
+    TODO
+
+- title: Logs
+  desc: >
+    TODO
+  contents:
+  - get_default_logger_provider
+  - get_logger
+  - is_logging
+  - log
+  - log_severity_levels
+
+- title: Metrics
+  desc: >
+    TODO
+  contents:
+  - get_default_meter_provider
+  - get_meter
+  - is_measuring
+- subtitle: Counters
+  desc: >
+    TODO
+  contents:
+  - counter_add
+- subtitle: Up-down Counters
+  desc: >
+    TODO
+  contents:
+  - up_down_counter_add
+- subtitle: Histograms
+  desc: >
+    TODO
+  contents:
+  - histogram_record
+- subtitle: Gauges
+  desc: >
+    TODO
+  contents:
+  - gauge_record
+
+- title: Context propagation
+  desc: >
+    TODO
+  contents:
+  - extract_http_context
+  - pack_http_context
+
+- title: Shiny apps
+  desc: >
+    TODO
+  contents:
+  - start_shiny_app
+  - start_shiny_session
+
+- title: Utility functions
+  desc: >
+    TODO
+  contents:
+  - as_attributes
+  - get_active_span_context
