@@ -129,7 +129,7 @@ otel has convenience functions to tie otel spans to Shiny sessions:
   new Shiny session, and pass the Shiny session object to it.
   `start_shiny_session()` creates a long lasting OpenTelemetry span in
   `session$userData$otel_span`. This span represents the Shiny session, see
-  'Concurrency' above.
+  "Concurrency" above.
 * Call `otel::local_active_span(session$userData$otel_span)` at the
   beginning of each reactive expression to switch to the span that
   represents the current Shiny session.
