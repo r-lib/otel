@@ -6,6 +6,7 @@
 <url><loc>https://r-lib.github.io/otel/index.html</loc></url>
 <url><loc>https://r-lib.github.io/otel/reference/as_attributes.html</loc></url>
 <url><loc>https://r-lib.github.io/otel/reference/counter_add.html</loc></url>
+<url><loc>https://r-lib.github.io/otel/reference/default_tracer_name.html</loc></url>
 <url><loc>https://r-lib.github.io/otel/reference/extract_http_context.html</loc></url>
 <url><loc>https://r-lib.github.io/otel/reference/gauge_record.html</loc></url>
 <url><loc>https://r-lib.github.io/otel/reference/get_active_span_context.html</loc></url>

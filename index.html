@@ -55,7 +55,7 @@
 </blockquote>
 <!-- badges: start -->
 
-<p>High-quality, ubiquitous, and portable telemetry to enable effective observability. <a href="https://opentelemetry.io/docs/" class="external-link">OpenTelemetry</a> is a collection of tools, APIs, and SDKs used to instrument, generate, collect, and export telemetry data (metrics, logs, and traces) for analysis in order to understand your software’s performance and behavior.</p>
+<p>High-quality, ubiquitous, and portable telemetry to enable effective observability. <a href="https://opentelemetry.io/" class="external-link">OpenTelemetry</a> is a collection of tools, APIs, and SDKs used to instrument, generate, collect, and export telemetry data (metrics, logs, and traces) for analysis in order to understand your software’s performance and behavior.</p>
 <div class="section level2">
 <h2 id="the-otel-and-otelsdk-r-packages">The otel and otelsdk R packages<a class="anchor" aria-label="anchor" href="#the-otel-and-otelsdk-r-packages"></a>
 </h2>
@@ -78,6 +78,7 @@
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <ul>
+<li>When instrumenting a package, set the <code>otel_tracer_name</code> variable to your desired default tracer (and logger and meter) name. See <code>?otelsdk::otel_tracer_name</code>.</li>
 <li>Call <code><a href="reference/start_span.html">otel::start_span()</a></code> to create a span. By default the span ends when the caller function exits.</li>
 <li>Use the <code>$set_attribute()</code>, <code>$add_event()</code>, <code>$add_link()</code> and <code>$set_status()</code> methods of a span to manipulate it.</li>
 <li>See the <a href="https://github.com/r-lib/otelsdk" class="external-link">otelsdk</a> package for producing output from an instrumented R package or project.</li>
