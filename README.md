@@ -15,7 +15,7 @@ coverage](https://codecov.io/gh/r-lib/otel/graph/badge.svg)](https://app.codecov
 <!-- badges: end -->
 
 High-quality, ubiquitous, and portable telemetry to enable effective
-observability. [OpenTelemetry](https://opentelemetry.io/docs/) is a
+observability. [OpenTelemetry](https://opentelemetry.io/) is a
 collection of tools, APIs, and SDKs used to instrument, generate,
 collect, and export telemetry data (metrics, logs, and traces) for
 analysis in order to understand your software’s performance and
@@ -49,6 +49,9 @@ pak::pak("r-lib/otel")
 
 ## Usage
 
+- When instrumenting a package, set the `otel_tracer_name` variable to
+  your desired default tracer (and logger and meter) name. See
+  `?otelsdk::otel_tracer_name`.
 - Call `otel::start_span()` to create a span. By default the span ends
   when the caller function exits.
 - Use the `$set_attribute()`, `$add_event()`, `$add_link()` and

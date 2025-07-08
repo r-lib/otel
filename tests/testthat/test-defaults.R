@@ -391,3 +391,31 @@ test_that("setup_default_meter_provider", {
     setup_default_meter_provider()
   })
 })
+
+test_that("default_tracer_name", {
+  # otel is ignored
+  fake(default_tracer_name, "topenv", asNamespace("otel"))
+  expect_equal(default_tracer_name(), "org.r-project.R")
+
+  # otelsdk is ignored
+  fake(default_tracer_name, "topenv", asNamespace("otelsdk"))
+  expect_equal(default_tracer_name(), "org.r-project.R")
+
+  # base env -> R
+  fake(default_tracer_name, "topenv", baseenv())
+  expect_equal(default_tracer_name(), "org.r-project.R")
+
+  # global env -> R
+  fake(default_tracer_name, "topenv", globalenv())
+  expect_equal(default_tracer_name(), "org.r-project.R")
+
+  # package with 'otel_tracer_name'
+  fake(default_tracer_name, "topenv", asNamespace("testthat"))
+  fake(default_tracer_name, "get0", "custom-name")
+  expect_equal(default_tracer_name(), "custom-name")
+
+  # pakage without 'otel_tracer_name'
+  fake(default_tracer_name, "topenv", asNamespace("testthat"))
+  fake(default_tracer_name, "get0", NULL)
+  expect_equal(default_tracer_name(), "r.package.testthat")
+})

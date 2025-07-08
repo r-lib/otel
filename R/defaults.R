@@ -325,3 +325,25 @@ setup_default_meter_provider <- function() {
   the$meter_provider <- tp
   invisible(tp)
 }
+
+#' Default tracer (and meter and logger) name for an R package
+#' @export
+
+default_tracer_name <- function() {
+  for (n in 1:sys.nframe()) {
+    top <- topenv(parent.frame(n), NULL)
+    topname <- environmentName(top)
+    if (topname == "" || topname == "otel" || topname == "otelsdk") {
+      # keep going
+    } else if (topname == "base") {
+      return("org.r-project.R")
+    } else if (topname == "R_GlobalEnv") {
+      return("org.r-project.R")
+    } else {
+      nm <- get0("otel_tracer_name", top, inherits = FALSE) %||%
+        paste0("r.package.", topname)
+      return(nm)
+    }
+  }
+  "org.r-project.R"
+}
