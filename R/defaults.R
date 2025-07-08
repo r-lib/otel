@@ -115,10 +115,10 @@ setup_default_tracer_provider <- function() {
       },
       "console" = ,
       "stdout" = {
-        otelsdk::tracer_provider_stdstream$new("stdout")
+        otelsdk::tracer_provider_stdstream$new(list(output = "stdout"))
       },
       "stderr" = {
-        otelsdk::tracer_provider_stdstream$new("stderr")
+        otelsdk::tracer_provider_stdstream$new(list(output = "stderr"))
       },
       "otlp" = ,
       "http" = {
@@ -211,10 +211,10 @@ setup_default_logger_provider <- function() {
       },
       "console" = ,
       "stdout" = {
-        otelsdk::logger_provider_stdstream$new("stdout")
+        otelsdk::logger_provider_stdstream$new(list(output = "stdout"))
       },
       "stderr" = {
-        otelsdk::logger_provider_stdstream$new("stderr")
+        otelsdk::logger_provider_stdstream$new(list(output = "stderr"))
       },
       "otlp" = ,
       "http" = {
@@ -299,10 +299,10 @@ setup_default_meter_provider <- function() {
       },
       "console" = ,
       "stdout" = {
-        otelsdk::meter_provider_stdstream$new("stdout")
+        otelsdk::meter_provider_stdstream$new(list(output = "stdout"))
       },
       "stderr" = {
-        otelsdk::meter_provider_stdstream$new("stderr")
+        otelsdk::meter_provider_stdstream$new(list(output = "stderr"))
       },
       "otlp" = ,
       "http" = {
