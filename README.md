@@ -21,19 +21,23 @@ collect, and export telemetry data (metrics, logs, and traces) for
 analysis in order to understand your software’s performance and
 behavior.
 
-Use this package as a dependency if you want to instrument your R
+## The otel and otelsdk R packages
+
+Use the otel package as a dependency if you want to instrument your R
 package or project for OpenTelemetry.
 
-Use the [otelsdk](https://github.com/r-lib/otelsdk) to produce
+Use the [otelsdk](https://github.com/r-lib/otelsdk) package to produce
 OpenTelemetry output from an R package or project that was instrumented
 with the otel package.
 
 ## Installation
 
-> [!WARNING]
-> This package is experimental and may introduce breaking
-> changes any time. It probably works best with the latest commit of the
-> [otelsdk](https://github.com/r-lib/otelsdk) package.
+Install otel from CRAN:
+
+``` r
+# install.packages("pak")
+pak::pak("otel")
+```
 
 You can install the development version of otel from
 [GitHub](https://github.com/) with:
@@ -46,7 +50,7 @@ pak::pak("r-lib/otel")
 ## Usage
 
 - Call `otel::start_span()` to create a span. By default the span ends
-  when the called function returns.
+  when the caller function exits.
 - Use the `$set_attribute()`, `$add_event()`, `$add_link()` and
   `$set_status()` methods of a span to manipulate it.
 - See the [otelsdk](https://github.com/r-lib/otelsdk) package for
@@ -98,7 +102,7 @@ following practices for in-process concurrency:
 - When logging use `with_active_span()` or `local_active_span()` to
   activate the span that belongs to the log messages.
 - Similarly, for metrics, call `with_active_span()` or
-  `local_active_span()`. to link instruments to the correct span.
+  `local_active_span()` to link instruments to the correct span.
 - When the concurrent computation ends, close the span manually with its
   `$end()` method. (Otherwise it would be only closed at the next
   garbage collection, assuming there are no references to it.)
@@ -107,13 +111,16 @@ following practices for in-process concurrency:
 
 otel has convenience functions to tie otel sessions to Shiny sessions:
 
-- Use `start_shiny_app()` from the `global.R` file, before the app start
-  up.
-- Use `start_shiny_session()` from the server function, at the start of
+- Call `start_shiny_app()` from the `global.R` file, before the app
+  starts up.
+- Call `start_shiny_session()` from the server function, at the start of
   a new session, and pass the Shiny session object to it.
-- Pass the OpenTelemetry session span to all `otel::start_span()` calls
-  from reactive expressions, to make sure that they are logged to the
-  correct session.
+  `start_shiny_session()` creates a long lasting OpenTelemetry span in
+  `session$userData$otel_span`. This span represents the Shiny session,
+  see ‘Concurrency’ above.
+- Call `otel::local_active_span(session$userData$otel_span)` at the
+  beginning of each reactive expression to switch to the span that
+  represents the current Shiny session.
 
 See the examples included in the otel package.
 
