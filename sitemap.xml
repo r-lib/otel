@@ -24,10 +24,13 @@
 <url><loc>https://r-lib.github.io/otel/reference/local_active_span.html</loc></url>
 <url><loc>https://r-lib.github.io/otel/reference/log.html</loc></url>
 <url><loc>https://r-lib.github.io/otel/reference/log_severity_levels.html</loc></url>
+<url><loc>https://r-lib.github.io/otel/reference/logger_provider_noop.html</loc></url>
+<url><loc>https://r-lib.github.io/otel/reference/meter_provider_noop.html</loc></url>
 <url><loc>https://r-lib.github.io/otel/reference/pack_http_context.html</loc></url>
 <url><loc>https://r-lib.github.io/otel/reference/start_shiny_app.html</loc></url>
 <url><loc>https://r-lib.github.io/otel/reference/start_shiny_session.html</loc></url>
 <url><loc>https://r-lib.github.io/otel/reference/start_span.html</loc></url>
+<url><loc>https://r-lib.github.io/otel/reference/tracer_provider_noop.html</loc></url>
 <url><loc>https://r-lib.github.io/otel/reference/tracing.html</loc></url>
 <url><loc>https://r-lib.github.io/otel/reference/up_down_counter_add.html</loc></url>
 <url><loc>https://r-lib.github.io/otel/reference/with_active_span.html</loc></url>
