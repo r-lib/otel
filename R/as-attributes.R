@@ -68,8 +68,8 @@ as_attributes <- function(x) {
 }
 
 otel_attr_cnt_limit_var <- "OTEL_ATTRIBUTE_COUNT_LIMIT"
-otel_attr_cnt_limit_dflt <- 100L
+otel_attr_cnt_limit_dflt <- 128L
 otel_attr_val_lth_limit_var <- "OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT"
-otel_attr_val_lth_limit_dflt <- 100L
+otel_attr_val_lth_limit_dflt <- Inf
 
 otel_attr_types <- c(typeof(""), typeof(TRUE), typeof(1), typeof(1L))

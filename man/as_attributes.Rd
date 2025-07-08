@@ -23,11 +23,11 @@ their printed form is captured using \code{\link[utils:capture.output]{utils::ca
 
 The number of attributes can be limited with the
 OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT environment variable. The default is
-100.
+128.
 
 The length of the each attribute (vector) can be limited with the
 OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT environment variable. The default is
-100. Note that this is applied to the
+∞. Note that this is applied to the
 length of each attribute as an R vector. E.g. it does \emph{not} currently
 limit the number of characters in individual strings.
 }

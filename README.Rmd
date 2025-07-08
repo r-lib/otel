@@ -94,7 +94,7 @@ instrumented. Inclusion globs are applied before exclusion globs.
 
 ## Production and development R sessions
 
-Bye default otel and otelsdk run in production mode. In production mode
+By default otel and otelsdk run in production mode. In production mode
 otel (and otelsdk) functions never error. This behavior does not help
 catching errors early during the development of the instrumented project.
 Set the `OTEL_ENV` environment variable to `dev` to switch to development

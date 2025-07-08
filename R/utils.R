@@ -40,9 +40,15 @@ glob_filter <- function(x, include = NULL, exclude = NULL) {
 
 get_env_count <- function(var, default) {
   strval <- Sys.getenv(var)
+  if (tolower(strval) == "inf") {
+    return(Inf)
+  }
   intval <- suppressWarnings(as.integer(strval))
   if (!is.na(intval) && intval >= 0) {
     return(intval)
+  }
+  if (default == Inf) {
+    return(Inf)
   }
   intval <- suppressWarnings(as.integer(default))
   if (!is.na(intval) && intval >= 0) {

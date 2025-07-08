@@ -1,4 +1,4 @@
-url: https://r-lib.github.io/otel/
+url: https://otel.r-lib.org
 
 template:
   package: tidytemplate
@@ -20,8 +20,14 @@ reference:
 
     See the [otelsdk](https://github.com/r-lib/otelsdk) package for
     collecting OpenTelemetry data for an instrumented package or project.
+
+- title: Configuration
+  desc: >
+    TODO
   contents:
+  - "Environment variables"
   - default_tracer_name
+
 - title: Traces
   desc: >
     TODO
