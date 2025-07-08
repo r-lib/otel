@@ -21,7 +21,7 @@ start_span(
 the default tracer's \code{start_span()} method.}
 }
 \value{
-The new Opentelemetry span object, invisibly.
+The new OpenTelemetry span object, invisibly.
 }
 \description{
 Start a new OpenTelemetry span, using the default tracer

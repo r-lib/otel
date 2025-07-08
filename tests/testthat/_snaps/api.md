@@ -159,7 +159,7 @@
     Code
       spc2 <- get_active_span_context()
     Message
-      Opentelemetry error: nope!
+      OpenTelemetry error: nope!
 
 ---
 
@@ -182,7 +182,7 @@
     Code
       lgr2 <- log("another nothing")
     Message
-      Opentelemetry error: denied!
+      OpenTelemetry error: denied!
 
 ---
 
@@ -197,7 +197,7 @@
     Code
       lgr2 <- log_trace("another nothing")
     Message
-      Opentelemetry error: denied!
+      OpenTelemetry error: denied!
 
 ---
 
@@ -212,7 +212,7 @@
     Code
       lgr2 <- log_debug("another nothing")
     Message
-      Opentelemetry error: denied!
+      OpenTelemetry error: denied!
 
 ---
 
@@ -227,7 +227,7 @@
     Code
       lgr2 <- log_info("another nothing")
     Message
-      Opentelemetry error: denied!
+      OpenTelemetry error: denied!
 
 ---
 
@@ -242,7 +242,7 @@
     Code
       lgr2 <- log_warn("another nothing")
     Message
-      Opentelemetry error: denied!
+      OpenTelemetry error: denied!
 
 ---
 
@@ -257,7 +257,7 @@
     Code
       lgr2 <- log_error("another nothing")
     Message
-      Opentelemetry error: denied!
+      OpenTelemetry error: denied!
 
 ---
 
@@ -272,7 +272,7 @@
     Code
       lgr2 <- log_fatal("another nothing")
     Message
-      Opentelemetry error: denied!
+      OpenTelemetry error: denied!
 
 ---
 
@@ -287,7 +287,7 @@
     Code
       mtr2 <- counter_add("cx")
     Message
-      Opentelemetry error: not today
+      OpenTelemetry error: not today
 
 ---
 
@@ -302,7 +302,7 @@
     Code
       mtr2 <- up_down_counter_add("cx")
     Message
-      Opentelemetry error: not today
+      OpenTelemetry error: not today
 
 ---
 
@@ -317,7 +317,7 @@
     Code
       mtr2 <- histogram_record("cx")
     Message
-      Opentelemetry error: not today
+      OpenTelemetry error: not today
 
 ---
 
@@ -332,7 +332,7 @@
     Code
       mtr2 <- gauge_record("cx")
     Message
-      Opentelemetry error: not today
+      OpenTelemetry error: not today
 
 ---
 
@@ -347,7 +347,7 @@
     Code
       pack_http_context()
     Message
-      Opentelemetry error: sorry
+      OpenTelemetry error: sorry
     Output
       named character(0)
 
@@ -364,7 +364,7 @@
     Code
       spc2 <- extract_http_context(c("does not matter"))
     Message
-      Opentelemetry error: out of context
+      OpenTelemetry error: out of context
 
 ---
 

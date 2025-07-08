@@ -142,7 +142,7 @@ get_meter_safe <- get_meter
 #' @param tracer_name The name of the tracer to use, see [get_tracer()].
 #' @param ...,scope,activation_scope Additional arguments are passed to
 #'   the default tracer's `start_span()` method.
-#' @return The new Opentelemetry span object, invisibly.
+#' @return The new OpenTelemetry span object, invisibly.
 #'
 #' @export
 #' @family OpenTelemetry tracing
@@ -237,7 +237,7 @@ log <- function(msg, ..., severity = "info", .envir = parent.frame()) {
     lgr$log(msg, severity, ..., .envir = .envir)
     invisible(lgr)
   }, error = function(err) {                                         # safe
-    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     logger_noop$new()                                                # safe
   })                                                                 # safe
 }
@@ -255,7 +255,7 @@ log_trace <- function(msg, ..., .envir = parent.frame()) {
     lgr$log(msg, "trace", ..., .envir = .envir)
     invisible(lgr)
   }, error = function(err) {                                         # safe
-    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     logger_noop$new()                                                # safe
   })                                                                 # safe
 }
@@ -275,7 +275,7 @@ log_debug <- function(msg, ..., .envir = parent.frame()) {
     lgr$log(msg, "debug", ..., .envir = .envir)
     invisible(lgr)
   }, error = function(err) {                                         # safe
-    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     logger_noop$new()                                                # safe
   })                                                                 # safe
 }
@@ -295,7 +295,7 @@ log_info <- function(msg, ..., .envir = parent.frame()) {
     lgr$log(msg, "info", ..., .envir = .envir)
     invisible(lgr)
   }, error = function(err) {                                         # safe
-    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     logger_noop$new()                                                # safe
   })                                                                 # safe
 }
@@ -315,7 +315,7 @@ log_warn <- function(msg, ..., .envir = parent.frame()) {
     lgr$log(msg, "warn", ..., .envir = .envir)
     invisible(lgr)
   }, error = function(err) {                                         # safe
-    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     logger_noop$new()                                                # safe
   })                                                                 # safe
 }
@@ -335,7 +335,7 @@ log_error <- function(msg, ..., .envir = parent.frame()) {
     lgr$log(msg, "error", ..., .envir = .envir)
     invisible(lgr)
   }, error = function(err) {                                         # safe
-    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     logger_noop$new()                                                # safe
   })                                                                 # safe
 }
@@ -355,7 +355,7 @@ log_fatal <- function(msg, ..., .envir = parent.frame()) {
     lgr$log(msg, "fatal", ..., .envir = .envir)
     invisible(lgr)
   }, error = function(err) {                                         # safe
-    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     logger_noop$new()                                                # safe
   })                                                                 # safe
 }
@@ -430,7 +430,7 @@ counter_add <- function(name, value = 1L, attributes = NULL, context = NULL) {
     ctr$add(value, attributes, context)
     invisible(ctr)
   }, error = function(err) {                                         # safe
-    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     counter_noop$new()                                               # safe
   })                                                                 # safe
 }
@@ -467,7 +467,7 @@ up_down_counter_add <- function(
     ctr$add(value, attributes, context)
     invisible(ctr)
   }, error = function(err) {                                         # safe
-    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     up_down_counter_noop$new()                                       # safe
   })                                                                 # safe
 }
@@ -498,7 +498,7 @@ histogram_record <- function(name, value, attributes = NULL, context = NULL) {
     ctr$record(value, attributes, context)
     invisible(ctr)
   }, error = function(err) {                                         # safe
-    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     histogram_noop$new()                                             # safe
   })                                                                 # safe
 }
@@ -529,7 +529,7 @@ gauge_record <- function(name, value, attributes = NULL, context = NULL) {
     ctr$record(value, attributes, context)
     invisible(ctr)
   }, error = function(err) {                                         # safe
-    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     gauge_noop$new()                                                 # safe
   })                                                                 # safe
 }
@@ -555,7 +555,7 @@ get_active_span_context <- function() {
     trc <- get_tracer()
     trc$get_active_span_context()
   }, error = function(err) {                                         # safe
-    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     span_context_noop$new(NA_character_)                             # safe
   })                                                                 # safe
 }
@@ -579,7 +579,7 @@ pack_http_context <- function() {
     trc <- get_tracer()
     trc$get_active_span_context()$to_http_headers()
   }, error = function(err) {                                         # safe
-    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     structure(character(), names = character())                      # safe
   })                                                                 # safe
 }
@@ -604,7 +604,7 @@ extract_http_context <- function(headers) {
     trc <- get_tracer()
     trc$extract_http_context(headers)
   }, error = function(err) {                                         # safe
-    errmsg("Opentelemetry error: ", conditionMessage(err))           # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     span_context_noop$new(NA_character_)                             # safe
   })                                                                 # safe
 }
