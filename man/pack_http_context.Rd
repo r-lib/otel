@@ -8,7 +8,7 @@ headers}
 pack_http_context()
 }
 \value{
-A named character vector, with lovercase names.
+A named character vector, with lowercase names.
 }
 \description{
 The returned headers can be sent over HTTP, or set as environment

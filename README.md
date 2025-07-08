@@ -81,15 +81,15 @@ instrumented. Inclusion globs are applied before exclusion globs.
 
 Bye default otel and otelsdk run in production mode. In production mode
 otel (and otelsdk) functions never error. This behavior does not help
-catching errors early during the developent of the instrumented project.
-Set the `OTEL_ENV` environment variable to `dev` to switch to
+catching errors early during the development of the instrumented
+project. Set the `OTEL_ENV` environment variable to `dev` to switch to
 development mode, where otel and otelsdk functions fail on errors.
 
 ## Concurrency
 
 To support concurrency on a single thread, e.g. a Shiny app serving
 multiple requests at the same time, you can manage the lifetime and
-actication of the OpenTelemetry spans manually. We recommend the
+activation of the OpenTelemetry spans manually. We recommend the
 following practices for in-process concurrency:
 
 - Create a new long lasting span with `otel::start_span(scope = NULL)`.

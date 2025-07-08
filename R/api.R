@@ -569,7 +569,7 @@ get_active_span_context_safe <- get_active_span_context
 #' The returned headers can be sent over HTTP, or set as environment
 #' variables for subprocesses.
 #'
-#' @return A named character vector, with lovercase names.
+#' @return A named character vector, with lowercase names.
 #'
 #' @export
 

@@ -35,7 +35,7 @@ to the standard error.
 traces through HTTP, using the OpenTelemetry Protocol (OTLP).
 \item \verb{<package>::<provider>}: will select the \verb{<provider>} object from
 the \verb{<package>} package to use as a trace exporter. It calls
-\verb{<package>::<provider>$new()} to create the new traver provider.
+\verb{<package>::<provider>$new()} to create the new tracer provider.
 If this fails for some reason, e.g. the package is not installed,
 then it throws an error.
 }

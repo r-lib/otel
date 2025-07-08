@@ -39,7 +39,7 @@ default_metrics_exporter_envvar_r <- "OTEL_R_METRICS_EXPORTER"
 #'   traces through HTTP, using the OpenTelemetry Protocol (OTLP).
 #' - `<package>::<provider>`: will select the `<provider>` object from
 #'   the `<package>` package to use as a trace exporter. It calls
-#'   `<package>::<provider>$new()` to create the new traver provider.
+#'   `<package>::<provider>$new()` to create the new tracer provider.
 #'   If this fails for some reason, e.g. the package is not installed,
 #'   then it throws an error.
 #'
