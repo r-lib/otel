@@ -58,11 +58,11 @@ OpenTelemetry support.</p>
 environment variable is used. This applies to all applications that
 support OpenTelemetry and use the OpenTelemetry SDK.</p>
 <p>The following values are allowed:</p><ul><li><p><code>none</code>: no traces are exported.</p></li>
-<li><p><code>stdout</code> or <code>console</code>: uses <a href="https://rdrr.io/pkg/otelsdk/man/tracer_provider_stdstream.html" class="external-link">otelsdk::tracer_provider_stdstream</a>,
+<li><p><code>stdout</code> or <code>console</code>: uses <a href="https://otelsdk.r-lib.org/reference/tracer_provider_stdstream.html" class="external-link">otelsdk::tracer_provider_stdstream</a>,
 to write traces to the standard output.</p></li>
-<li><p><code>stderr</code>: uses <a href="https://rdrr.io/pkg/otelsdk/man/tracer_provider_stdstream.html" class="external-link">otelsdk::tracer_provider_stdstream</a>, to write traces
+<li><p><code>stderr</code>: uses <a href="https://otelsdk.r-lib.org/reference/tracer_provider_stdstream.html" class="external-link">otelsdk::tracer_provider_stdstream</a>, to write traces
 to the standard error.</p></li>
-<li><p><code>http</code> or <code>otlp</code>: uses <a href="https://rdrr.io/pkg/otelsdk/man/tracer_provider_http.html" class="external-link">otelsdk::tracer_provider_http</a>, to send
+<li><p><code>http</code> or <code>otlp</code>: uses <a href="https://otelsdk.r-lib.org/reference/tracer_provider_http.html" class="external-link">otelsdk::tracer_provider_http</a>, to send
 traces through HTTP, using the OpenTelemetry Protocol (OTLP).</p></li>
 <li><p><code>&lt;package&gt;::&lt;provider&gt;</code>: will select the <code>&lt;provider&gt;</code> object from
 the <code>&lt;package&gt;</code> package to use as a trace exporter. It calls
