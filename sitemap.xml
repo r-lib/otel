@@ -27,12 +27,14 @@
 <url><loc>https://otel.r-lib.org/reference/log_severity_levels.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/logger_provider_noop.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/meter_provider_noop.html</loc></url>
+<url><loc>https://otel.r-lib.org/reference/otel_span.html</loc></url>
+<url><loc>https://otel.r-lib.org/reference/otel_tracer_provider.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/pack_http_context.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/start_shiny_app.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/start_shiny_session.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/start_span.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/tracer_provider_noop.html</loc></url>
-<url><loc>https://otel.r-lib.org/reference/tracing.html</loc></url>
+<url><loc>https://otel.r-lib.org/reference/tracing-constants.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/up_down_counter_add.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/with_active_span.html</loc></url>
 </urlset>

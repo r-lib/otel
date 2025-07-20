@@ -40,6 +40,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/r-lib/otel/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -85,6 +86,14 @@
 </ul>
 </div>
 <div class="section level2">
+<h2 id="performance-impact">Performance impact<a class="anchor" aria-label="anchor" href="#performance-impact"></a>
+</h2>
+<p>Instrumenting your R package with otel will have a minimal performance impact. <code><a href="reference/start_span.html">otel::start_span()</a></code> calls do nothing if no telemetry data is collected, and they do not evaluate their arguments, either. This allows writing</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">otel</span><span class="fu">::</span><span class="fu"><a href="reference/start_span.html">start_span</a></span><span class="op">(</span><span class="st">"myfunction"</span>, attributes <span class="op">=</span> <span class="fu">otel</span><span class="fu">::</span><span class="fu"><a href="reference/as_attributes.html">as_attributes</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<p>without worrying about the performance hit of evaluating the <code>attributes</code> and other arguments.</p>
+</div>
+<div class="section level2">
 <h2 id="zero-code-instrumentation">Zero-code instrumentation<a class="anchor" aria-label="anchor" href="#zero-code-instrumentation"></a>
 </h2>
 <p>otel supports zero-code instrumentation via the <code>OTEL_INSTRUMENT_R_PKGS</code> environment variable. Set this to a comma separated list of package names, the packages that you want to instrument. Then otel will hook up <code><a href="https://rdrr.io/r/base/trace.html" class="external-link">base::trace()</a></code> to produce OpenTelemetry output from every function of these packages.</p>
@@ -94,7 +103,7 @@
 <div class="section level2">
 <h2 id="production-and-development-r-sessions">Production and development R sessions<a class="anchor" aria-label="anchor" href="#production-and-development-r-sessions"></a>
 </h2>
-<p>Bye default otel and otelsdk run in production mode. In production mode otel (and otelsdk) functions never error. This behavior does not help catching errors early during the development of the instrumented project. Set the <code>OTEL_ENV</code> environment variable to <code>dev</code> to switch to development mode, where otel and otelsdk functions fail on errors.</p>
+<p>By default otel and otelsdk run in production mode. In production mode otel (and otelsdk) functions never error. This behavior does not help catching errors early during the development of the instrumented project. Set the <code>OTEL_ENV</code> environment variable to <code>dev</code> to switch to development mode, where otel and otelsdk functions fail on errors.</p>
 </div>
 <div class="section level2">
 <h2 id="concurrency">Concurrency<a class="anchor" aria-label="anchor" href="#concurrency"></a>
@@ -126,7 +135,14 @@
 <p>MIT © Posit, PBC</p>
 </div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/r-lib/otel/" class="external-link">Browse source code</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>

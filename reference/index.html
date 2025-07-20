@@ -18,6 +18,7 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/r-lib/otel/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -32,13 +33,13 @@
     <div class="section level2">
       <h2 id="about-opentelemetry-in-r">About OpenTelemetry in R<a class="anchor" aria-label="anchor" href="#about-opentelemetry-in-r"></a></h2>
 
-      <div class="section-desc"><p>The otel package is an implementation of the <a href="https://opentelemetry.io/docs/specs/otel/" class="external-link">OpenTelemetry API</a>. Use the otel package to instrument your R package of project for OpenTelemetry data collection. See the <a href="https://github.com/r-lib/otelsdk" class="external-link">otelsdk</a> package for collecting OpenTelemetry data for an instrumented package or project.</p></div>
+      <div class="section-desc"><p>The otel package is an implementation of the <a href="https://opentelemetry.io/docs/specs/otel/" class="external-link">OpenTelemetry API</a>. Use the otel package to instrument your R package or project for OpenTelemetry data collection. See the <a href="https://github.com/r-lib/otelsdk" class="external-link">otelsdk</a> package for collecting OpenTelemetry data for an instrumented package or project.</p></div>
 
 
     </div><div class="section level2">
       <h2 id="configuration">Configuration<a class="anchor" aria-label="anchor" href="#configuration"></a></h2>
 
-      <div class="section-desc"><p>TODO</p></div>
+      <div class="section-desc"><p>The otel package is in charge for selecting the exporters for OpenTelemetry data (traces, metrics, logs), and it can be configured with environment variables.</p><p>If you want to produce telemetry data from an instrumented R package or project, read <a href="environment-variables.html">Environment variables</a>.</p><p>If you are a package author and want to use otel to instrument your package, then read about <code><a href="../reference/default_tracer_name.html">default_tracer_name()</a></code>.</p></div>
 
 
     </div><div class="section level2">
@@ -57,11 +58,17 @@
           <code><a href="default_tracer_name.html">default_tracer_name()</a></code>
 
         </dt>
-        <dd>Default tracer (and meter and logger) name for an R package</dd>
+        <dd>Default tracer name (and meter and logger name) for an R package</dd>
       </dl></div><div class="section level2">
       <h2 id="traces">Traces<a class="anchor" aria-label="anchor" href="#traces"></a></h2>
 
-      <div class="section-desc"><p>TODO</p></div>
+      <div class="section-desc"><p>A trace is a path of a request through your application. For R package or project a trace can be a script run or a top-level function call from a script or from the R console. A trace is a hierarchy of <em>spans</em>, a span is the unit of work or operation.</p></div>
+
+
+    </div><div class="section level2">
+
+      <h3 id="instrumentation">Instrumentation<a class="anchor" aria-label="anchor" href="#instrumentation"></a></h3>
+      <div class="section-desc"><p>The simplest way to instrument your R package is to add <code><a href="../reference/start_span.html">start_span()</a></code> calls at the beginning of the functions that you want telemetry data for. Use <code><a href="../reference/is_tracing.html">is_tracing()</a></code> to avoid unnecessary computation when tracing is off. You occasionally need <code><a href="../reference/get_tracer.html">get_tracer()</a></code> to handle advanced use cases.</p></div>
 
 
     </div><div class="section level2">
@@ -70,12 +77,6 @@
 
 
       <dl><dt>
-
-          <code><a href="get_default_tracer_provider.html">get_default_tracer_provider()</a></code>
-
-        </dt>
-        <dd>Get the default tracer provider</dd>
-      </dl><dl><dt>
 
           <code><a href="get_tracer.html">get_tracer()</a></code>
 
@@ -89,20 +90,20 @@
         <dd>Check whether OpenTelemetry tracing is active</dd>
       </dl><dl><dt>
 
+          <code><a href="otel_span.html">otel_span</a></code>
+
+        </dt>
+        <dd>TODO</dd>
+      </dl><dl><dt>
+
           <code><a href="start_span.html">start_span()</a></code>
 
         </dt>
         <dd>Start a new OpenTelemetry span, using the default tracer</dd>
-      </dl><dl><dt>
-
-          <code><a href="tracing.html">invalid_trace_id</a></code> <code><a href="tracing.html">invalid_span_id</a></code> <code><a href="tracing.html">span_kinds</a></code> <code><a href="tracing.html">span_status_codes</a></code>
-
-        </dt>
-        <dd>OpenTelemetry tracing constants</dd>
       </dl></div><div class="section level2">
 
       <h3 id="concurrency">Concurrency<a class="anchor" aria-label="anchor" href="#concurrency"></a></h3>
-      <div class="section-desc"><p>TODO</p></div>
+      <div class="section-desc"><p>To support concurrency on a single thread, e.g. a Shiny app serving multiple requests at the same time, you can manage the lifetime and activation of the OpenTelemetry spans manually.</p></div>
 
 
     </div><div class="section level2">
@@ -124,11 +125,40 @@
         <dd>Evaluate R code with an active OpenTelemetry span</dd>
       </dl></div><div class="section level2">
 
-      <h3 id="zero-code-instrumentation">Zero code instrumentation<a class="anchor" aria-label="anchor" href="#zero-code-instrumentation"></a></h3>
+      <h3 id="zero-code-instrumentation">Zero Code Instrumentation<a class="anchor" aria-label="anchor" href="#zero-code-instrumentation"></a></h3>
       <div class="section-desc"><p>TODO</p></div>
 
 
     </div><div class="section level2">
+
+      <h3 id="low-level-tracing-utilities">Low Level Tracing Utilities<a class="anchor" aria-label="anchor" href="#low-level-tracing-utilities"></a></h3>
+
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="get_default_tracer_provider.html">get_default_tracer_provider()</a></code>
+
+        </dt>
+        <dd>Get the default tracer provider</dd>
+      </dl><dl><dt>
+
+          <code><a href="otel_tracer_provider.html">otel_tracer_provider</a></code>
+
+        </dt>
+        <dd>OpenTelemetry tracer provider objects</dd>
+      </dl><dl><dt>
+
+          <code><a href="tracing-constants.html">invalid_trace_id</a></code> <code><a href="tracing-constants.html">invalid_span_id</a></code> <code><a href="tracing-constants.html">span_kinds</a></code> <code><a href="tracing-constants.html">span_status_codes</a></code>
+
+        </dt>
+        <dd>OpenTelemetry tracing constants</dd>
+      </dl></div><div class="section level2">
       <h2 id="logs">Logs<a class="anchor" aria-label="anchor" href="#logs"></a></h2>
 
       <div class="section-desc"><p>TODO</p></div>
@@ -144,7 +174,7 @@
           <code><a href="get_default_logger_provider.html">get_default_logger_provider()</a></code>
 
         </dt>
-        <dd>Get the default tracer provider TODO</dd>
+        <dd>Get the default logger provider</dd>
       </dl><dl><dt>
 
           <code><a href="get_logger.html">get_logger()</a></code>
@@ -185,7 +215,7 @@
           <code><a href="get_default_meter_provider.html">get_default_meter_provider()</a></code>
 
         </dt>
-        <dd>Get the default metrics provider TODO</dd>
+        <dd>Get the default meter provider</dd>
       </dl><dl><dt>
 
           <code><a href="get_meter.html">get_meter()</a></code>
@@ -267,7 +297,30 @@
         </dt>
         <dd>Record a value of an OpenTelemetry gauge using the default meter</dd>
       </dl></div><div class="section level2">
-      <h2 id="context-propagation">Context propagation<a class="anchor" aria-label="anchor" href="#context-propagation"></a></h2>
+      <h2 id="utility-functions">Utility Functions<a class="anchor" aria-label="anchor" href="#utility-functions"></a></h2>
+
+      <div class="section-desc"><p>TODO</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="as_attributes.html">as_attributes()</a></code>
+
+        </dt>
+        <dd>R objects as OpenTelemetry attributes</dd>
+      </dl><dl><dt>
+
+          <code><a href="get_active_span_context.html">get_active_span_context()</a></code>
+
+        </dt>
+        <dd>Returns the active span context</dd>
+      </dl></div><div class="section level2">
+      <h2 id="context-propagation">Context Propagation<a class="anchor" aria-label="anchor" href="#context-propagation"></a></h2>
 
       <div class="section-desc"><p>TODO</p></div>
 
@@ -312,29 +365,6 @@
 
         </dt>
         <dd>Start tracing a Shiny session</dd>
-      </dl></div><div class="section level2">
-      <h2 id="utility-functions">Utility functions<a class="anchor" aria-label="anchor" href="#utility-functions"></a></h2>
-
-      <div class="section-desc"><p>TODO</p></div>
-
-
-    </div><div class="section level2">
-
-
-
-
-      <dl><dt>
-
-          <code><a href="as_attributes.html">as_attributes()</a></code>
-
-        </dt>
-        <dd>R objects as OpenTelemetry attributes</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_active_span_context.html">get_active_span_context()</a></code>
-
-        </dt>
-        <dd>Returns the active span context</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
