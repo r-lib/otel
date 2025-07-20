@@ -2,13 +2,13 @@ test_that("is_tracing", {
   fake(is_tracing, "get_tracer", list(is_enabled = function() FALSE))
   expect_false(is_tracing())
 
-  fake(is_tracing, "get_tracer", function() stop("nope"))
+  fake(is_tracing, "get_tracer", function(name) stop("nope"))
   expect_snapshot(is_tracing())
 
   fake(is_tracing_dev, "get_tracer", list(is_enabled = function() FALSE))
   expect_false(is_tracing_dev())
 
-  fake(is_tracing_dev, "get_tracer", function() stop("nope"))
+  fake(is_tracing_dev, "get_tracer", function(name) stop("nope"))
   expect_snapshot(error = TRUE, is_tracing_dev())
 })
 

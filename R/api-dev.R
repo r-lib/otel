@@ -1,6 +1,6 @@
 
-is_tracing_dev <- function() {
-    trc <- get_tracer()
+is_tracing_dev <- function(name = NULL) {
+    trc <- get_tracer(name = name)
     trc$is_enabled()
 }
 
@@ -14,10 +14,15 @@ is_measuring_dev <- function() {
     !inherits(mtr, "otel_meter_noop")
 }
 
-get_tracer_dev <- function(name = NULL) {
+get_tracer_dev <- function(
+  name = NULL,
+  version = NULL,
+  schema_url = NULL,
+  attributes = NULL
+) {
     # does setup if necessary
     tp <- get_default_tracer_provider()
-    trc <- tp$get_tracer(name)
+    trc <- tp$get_tracer(name, version, schema_url, attributes)
     invisible(trc)
 }
 
@@ -38,13 +43,18 @@ get_meter_dev <- function(name = NULL) {
 start_span_dev <- function(
   name = NULL,
   tracer_name = NULL,
-  ...,
+  attributes = NULL,
+  links = NULL,
+  options = NULL,
   scope = parent.frame(),
   activation_scope = parent.frame()
 ) {
     trc <- get_tracer(tracer_name)
     invisible(trc$start_span(
-      name = name, ...,
+      name = name,
+      attributes = attributes,
+      links = links,
+      options = options,
       scope = scope,
       activation_scope = activation_scope
     ))

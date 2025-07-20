@@ -4,10 +4,22 @@
 \alias{get_tracer}
 \title{Get a tracer from the default tracer provider}
 \usage{
-get_tracer(name = NULL)
+get_tracer(name = NULL, version = NULL, schema_url = NULL, attributes = NULL)
 }
 \arguments{
-\item{name}{Name of the new tracer. If missing, then deduced automatically.}
+\item{name}{Name of the new tracer. If missing, then deduced
+automatically using \code{\link[=default_tracer_name]{default_tracer_name()}}. Make sure you read
+the manual page of \code{\link[=default_tracer_name]{default_tracer_name()}} before using this argument.}
+
+\item{version}{Optional. Specifies the version of the instrumentation
+scope if the scope has a version (e.g. R package version).
+Example value: \code{"1.0.0"}.}
+
+\item{schema_url}{Optional. Specifies the Schema URL that should be
+recorded in the emitted telemetry.}
+
+\item{attributes}{Optional. Specifies the instrumentation scope
+attributes to associate with emitted telemetry.}
 }
 \value{
 An OpenTelemetry tracer, an \code{otel_tracer} object.
@@ -15,6 +27,19 @@ An OpenTelemetry tracer, an \code{otel_tracer} object.
 \description{
 Calls \code{\link[=get_default_tracer_provider]{get_default_tracer_provider()}} to get the default tracer
 provider. Then calls its \verb{$get_tracer()} method to create a new tracer.
+}
+\details{
+Usually you do not need to call this function explicitly. It is called
+by \code{\link[=start_span]{start_span()}} as needed. You might need it for more advanced use
+cases, e.g. if you need to use multiple tracer names (=instrumentation
+scopes) within a package.
+
+Calling \code{get_tracer()} multiple times with the same \code{name} (or same
+auto-deduced name) will return the same (internal) tracer object.
+(Even if the R external pointer objects representing them are
+different.)
+
+A tracer is only destroyed if its tracer provider is destroyed.
 }
 \seealso{
 Other OpenTelemetry tracing: 

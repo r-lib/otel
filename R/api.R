@@ -3,15 +3,22 @@
 
 #' Check whether OpenTelemetry tracing is active
 #'
+#' This is useful for avoiding computation when tracing is inactive.
+#'
+#' It calls [get_tracer()] with `name` and then it calls the tracer's
+#' `$is_enabled()` method.
+#'
+#' @param name Tracer name, the instrumentation scope.
+#'   Passed to [get_tracer()].
 #' @return `TRUE` is OpenTelemetry tracing is active, `FALSE` otherwise.
 #'
 #' @export
 #' @family OpenTelemetry tracing
 
 # safe start
-is_tracing <- function() {
+is_tracing <- function(name = NULL) {
   tryCatch({                                                         # safe
-    trc <- get_tracer()
+    trc <- get_tracer(name = name)
     trc$is_enabled()
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
@@ -70,17 +77,43 @@ is_measuring_safe <- is_measuring
 #' Calls [get_default_tracer_provider()] to get the default tracer
 #' provider. Then calls its `$get_tracer()` method to create a new tracer.
 #'
-#' @param name Name of the new tracer. If missing, then deduced automatically.
+#' Usually you do not need to call this function explicitly. It is called
+#' by [start_span()] as needed. You might need it for more advanced use
+#' cases, e.g. if you need to use multiple tracer names (=instrumentation
+#' scopes) within a package.
+#'
+#' Calling `get_tracer()` multiple times with the same `name` (or same
+#' auto-deduced name) will return the same (internal) tracer object.
+#' (Even if the R external pointer objects representing them are
+#' different.)
+#'
+#' A tracer is only destroyed if its tracer provider is destroyed.
+#'
+#' @param name Name of the new tracer. If missing, then deduced
+#'   automatically using [default_tracer_name()]. Make sure you read
+#'   the manual page of [default_tracer_name()] before using this argument.
+#' @param version Optional. Specifies the version of the instrumentation
+#'   scope if the scope has a version (e.g. R package version).
+#'   Example value: `"1.0.0"`.
+#' @param schema_url Optional. Specifies the Schema URL that should be
+#'   recorded in the emitted telemetry.
+#' @param attributes Optional. Specifies the instrumentation scope
+#'   attributes to associate with emitted telemetry.
 #' @return An OpenTelemetry tracer, an `otel_tracer` object.
 #' @export
 #' @family OpenTelemetry tracing
 
 # safe start
-get_tracer <- function(name = NULL) {
+get_tracer <- function(
+  name = NULL,
+  version = NULL,
+  schema_url = NULL,
+  attributes = NULL
+) {
   tryCatch({                                                         # safe
     # does setup if necessary
     tp <- get_default_tracer_provider()
-    trc <- tp$get_tracer(name)
+    trc <- tp$get_tracer(name, version, schema_url, attributes)
     invisible(trc)
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
@@ -138,11 +171,46 @@ get_meter_safe <- get_meter
 
 #' Start a new OpenTelemetry span, using the default tracer
 #'
-#' @param name Name of the span.
+#' A span represents a unit of work or operation. Spans are the building
+#' blocks of traces. `start_span()` is typically called at the beginning
+#' of a function or the beginning of some larger operation, e.g. an HTTP
+#' request.
+#'
+#' Calls [get_tracer()] with `tracer_name` as the tracer name, and then
+#' calls the `$start_span()` method of the tracer with the other arguments.
+#'
+#' ## Lifetime of a span
+#'
+#' TODO
+#'
+#' ## The active span
+#'
+#' TODO
+#'
+#' ## Span attributes
+#'
+#' TODO
+#'
+#' ## Span links
+#'
+#' TODO
+#'
+#' ## Span options
+#'
+#' TODO
+#'
+#' @param name Name of the span. If not specified it will be `"<NA>"`.
 #' @param tracer_name The name of the tracer to use, see [get_tracer()].
-#' @param ...,scope,activation_scope Additional arguments are passed to
-#'   the default tracer's `start_span()` method.
-#' @return The new OpenTelemetry span object, invisibly.
+#' @param attributes Span attributes. You may use [as_attributes()] to
+#'   convert R objects to OpenTelemetry attributes. OpenTelemetry supports
+#'   the following R types as attributes:
+#'   `r paste0(otel_attr_types, collapse = ", ")`.
+#' @param links `r doc_arg("links")`
+#' @param options `r doc_arg("span-options")`
+#' @param scope `r doc_arg("scope")`
+#' @param activation_scope `r doc_arg("activation_scope")`
+#' @return The new OpenTelemetry span object (of class `otel_span`),
+#'   invisibly. See [otel_span] for information about the returned object.
 #'
 #' @export
 #' @family OpenTelemetry tracing
@@ -151,14 +219,19 @@ get_meter_safe <- get_meter
 start_span <- function(
   name = NULL,
   tracer_name = NULL,
-  ...,
+  attributes = NULL,
+  links = NULL,
+  options = NULL,
   scope = parent.frame(),
   activation_scope = parent.frame()
 ) {
   tryCatch({                                                         # safe
     trc <- get_tracer(tracer_name)
     invisible(trc$start_span(
-      name = name, ...,
+      name = name,
+      attributes = attributes,
+      links = links,
+      options = options,
       scope = scope,
       activation_scope = activation_scope
     ))
@@ -189,7 +262,7 @@ local_active_span <- function(span, activation_scope = parent.frame()) {
 }
 # safe end
 
-local_actice_span_safe <- local_active_span
+local_active_span_safe <- local_active_span
 
 #' Evaluate R code with an active OpenTelemetry span
 #'
@@ -242,6 +315,8 @@ log <- function(msg, ..., severity = "info", .envir = parent.frame()) {
   })                                                                 # safe
 }
 # safe end
+
+log_safe <- log
 
 #' @details `log_trace()` is the same as `log()` with `severity_level`
 #'   "trace".
@@ -361,7 +436,7 @@ log_fatal <- function(msg, ..., .envir = parent.frame()) {
 }
 # safe end
 
-log_debug_safe <- log_debug
+log_fatal_safe <- log_fatal
 
 #' OpenTelemetry log severity levels
 #'

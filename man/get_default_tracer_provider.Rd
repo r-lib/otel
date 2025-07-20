@@ -2,19 +2,26 @@
 % Please edit documentation in R/defaults.R
 \name{get_default_tracer_provider}
 \alias{get_default_tracer_provider}
+\alias{setup_default_tracer_provider}
 \title{Get the default tracer provider}
 \usage{
 get_default_tracer_provider()
 }
 \value{
 The default tracer provider, an \code{otel_tracer_provider}
-object.
+object. See \link{otel_tracer_provider} for the methods of an
+\code{otel_tracer_provider} object.
 }
 \description{
-If there is no default set currently, then it creates and sets a
-default.
+The tracer provider defines how traces are exported when collecting
+telemetry data. It is unlikely that you need to call this function
+directly, but read on to learn how to configure which exporter to
+use.
 }
 \details{
+If there is no default set currently, then it creates and sets a
+default.
+
 The default tracer provider is created based on the
 OTEL_R_TRACES_EXPORTER environment variable. This
 environment variable is specifically for R applications with
@@ -33,8 +40,10 @@ to write traces to the standard output.
 to the standard error.
 \item \code{http} or \code{otlp}: uses \link[otelsdk:tracer_provider_http]{otelsdk::tracer_provider_http}, to send
 traces through HTTP, using the OpenTelemetry Protocol (OTLP).
+\item \code{otlp/file} uses \link[otelsdk:tracer_provider_file]{otelsdk::tracer_provider_file} to write traces
+to a JSONL file.
 \item \verb{<package>::<provider>}: will select the \verb{<provider>} object from
-the \verb{<package>} package to use as a trace exporter. It calls
+the \verb{<package>} package to use as a tracer provider. It calls
 \verb{<package>::<provider>$new()} to create the new tracer provider.
 If this fails for some reason, e.g. the package is not installed,
 then it throws an error.

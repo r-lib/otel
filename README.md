@@ -59,6 +59,20 @@ pak::pak("r-lib/otel")
 - See the [otelsdk](https://github.com/r-lib/otelsdk) package for
   producing output from an instrumented R package or project.
 
+## Performance impact
+
+Instrumenting your R package with otel will have a minimal performance
+impact. `otel::start_span()` calls do nothing if no telemetry data is
+collected, and they do not evaluate their arguments, either. This allows
+writing
+
+``` r
+otel::start_span("myfunction", attributes = otel::as_attributes(...), ...)
+```
+
+without worrying about the performance hit of evaluating the
+`attributes` and other arguments.
+
 ## Zero-code instrumentation
 
 otel supports zero-code instrumentation via the `OTEL_INSTRUMENT_R_PKGS`
@@ -82,7 +96,7 @@ instrumented. Inclusion globs are applied before exclusion globs.
 
 ## Production and development R sessions
 
-Bye default otel and otelsdk run in production mode. In production mode
+By default otel and otelsdk run in production mode. In production mode
 otel (and otelsdk) functions never error. This behavior does not help
 catching errors early during the development of the instrumented
 project. Set the `OTEL_ENV` environment variable to `dev` to switch to

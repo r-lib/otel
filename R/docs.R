@@ -4,13 +4,15 @@
 #'
 #' @description
 #' This manual page contains the environment variables you can use to
-#' configure the otel package.
+#' configure the otel package. Start with the 'Selecting exporters' section
+#' below if you want to produce telemetry data for an instrumented R
+#' package.
 #'
 #' @details
 #' You need set these environment variables when configuring the
 #' collection of telemetry data, unless noted otherwise.
 #'
-#' ## Production or development environment
+#' ## Production or Development Environment
 #'
 #' ### `OTEL_ENV`
 #'
@@ -26,7 +28,7 @@
 #' to run otel in development mode, where otel functions fail on error,
 #' make it easier to fix errors.
 #'
-#' ## Selecting exporters
+#' ## Selecting Exporters
 #'
 #' otel is responsible for selecting the providers to use for traces,
 #' logs and metrics. You can use the environment variables below to
@@ -65,7 +67,7 @@
 #'
 #' R specific version of ``r default_metrics_exporter_envvar``.
 #'
-#' ## Suppressing instrumentation scopes (R packages)
+#' ## Suppressing Instrumentation Scopes (R Packages)
 #'
 #' otel has two environment variables to fine tune which instrumentation
 #' scopes (i.e. R packages, typically) emit telemetry data. By default,
@@ -101,7 +103,7 @@
 #' excludes packages with an instrumentation scope that starts with
 #' `org.r-lib.` and also dplyr.
 #'
-#' ## Zero code instrumentation
+#' ## Zero Code Instrumentation
 #'
 #' otel can instrument R packages for OpenTelemetry data collection
 #' without changing their source code. This relies on changing the code
@@ -144,3 +146,12 @@
 #' If unset, there is no limit on the lengths of vectors in attributes.
 #'
 NULL
+
+#' TODO
+#' @name otel_span
+#' @rdname otel_span
+NULL
+
+doc_arg <- function(name) {
+  "TODO"
+}

@@ -16,36 +16,60 @@ reference:
   desc: >
     The otel package is an implementation of the [OpenTelemetry API](
     https://opentelemetry.io/docs/specs/otel/). Use the otel package to
-    instrument your R package of project for OpenTelemetry data collection.
+    instrument your R package or project for OpenTelemetry data collection.
 
     See the [otelsdk](https://github.com/r-lib/otelsdk) package for
     collecting OpenTelemetry data for an instrumented package or project.
 
 - title: Configuration
-  desc: >
-    TODO
+  desc: |
+    The otel package is in charge for selecting the exporters for
+    OpenTelemetry data (traces, metrics, logs), and it can be configured
+    with environment variables.
+
+    If you want to produce telemetry data from an instrumented R package
+    or project, read [Environment variables](environment-variables.html).
+
+    If you are a package author and want to use otel to instrument your
+    package, then read about `default_tracer_name()`.
   contents:
   - "Environment variables"
   - default_tracer_name
 
 - title: Traces
-  desc: >
-    TODO
+  desc: |
+    A trace is a path of a request through your application. For R package
+    or project a trace can be a script run or a top-level function call
+    from a script or from the R console. A trace is a hierarchy of _spans_,
+    a span is the unit of work or operation.
+- subtitle: Instrumentation
+  desc: |
+    The simplest way to instrument your R package is to add `start_span()`
+    calls at the beginning of the functions that you want telemetry data
+    for. Use `is_tracing()` to avoid unnecessary computation when tracing
+    is off. You occasionally need `get_tracer()` to handle advanced use
+    cases.
   contents:
-  - get_default_tracer_provider
   - get_tracer
   - is_tracing
+  - otel_span
   - start_span
-  - invalid_trace_id
 - subtitle: Concurrency
   desc: >
-    TODO
+    To support concurrency on a single thread, e.g. a Shiny app serving
+    multiple requests at the same time, you can manage the lifetime and
+    activation of the OpenTelemetry spans manually.
   contents:
   - local_active_span
   - with_active_span
-- subtitle: Zero code instrumentation
+- subtitle: Zero Code Instrumentation
   desc: >
     TODO
+- subtitle: Low Level Tracing Utilities
+  contents:
+  - get_default_tracer_provider
+  - otel_tracer_provider
+  - tracing-constants
 
 - title: Logs
   desc: >
@@ -85,7 +109,14 @@ reference:
   contents:
   - gauge_record
 
-- title: Context propagation
+- title: Utility Functions
+  desc: >
+    TODO
+  contents:
+  - as_attributes
+  - get_active_span_context
+
+- title: Context Propagation
   desc: >
     TODO
   contents:
@@ -98,13 +129,6 @@ reference:
   contents:
   - start_shiny_app
   - start_shiny_session
-
-- title: Utility functions
-  desc: >
-    TODO
-  contents:
-  - as_attributes
-  - get_active_span_context
 
 - title: internal
   contents:

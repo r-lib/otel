@@ -4,13 +4,21 @@
 \alias{is_tracing}
 \title{Check whether OpenTelemetry tracing is active}
 \usage{
-is_tracing()
+is_tracing(name = NULL)
+}
+\arguments{
+\item{name}{Tracer name, the instrumentation scope.
+Passed to \code{\link[=get_tracer]{get_tracer()}}.}
 }
 \value{
 \code{TRUE} is OpenTelemetry tracing is active, \code{FALSE} otherwise.
 }
 \description{
-Check whether OpenTelemetry tracing is active
+This is useful for avoiding computation when tracing is inactive.
+}
+\details{
+It calls \code{\link[=get_tracer]{get_tracer()}} with \code{name} and then it calls the tracer's
+\verb{$is_enabled()} method.
 }
 \seealso{
 Other OpenTelemetry tracing: 

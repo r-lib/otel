@@ -5,12 +5,14 @@
 \title{Environment variables to configure otel}
 \description{
 This manual page contains the environment variables you can use to
-configure the otel package.
+configure the otel package. Start with the 'Selecting exporters' section
+below if you want to produce telemetry data for an instrumented R
+package.
 }
 \details{
 You need set these environment variables when configuring the
 collection of telemetry data, unless noted otherwise.
-\subsection{Production or development environment}{
+\subsection{Production or Development Environment}{
 \subsection{\code{OTEL_ENV}}{
 
 By default otel runs in production mode. In production mode otel
@@ -29,7 +31,7 @@ make it easier to fix errors.
 
 }
 
-\subsection{Selecting exporters}{
+\subsection{Selecting Exporters}{
 
 otel is responsible for selecting the providers to use for traces,
 logs and metrics. You can use the environment variables below to
@@ -75,7 +77,7 @@ R specific version of \code{OTEL_METRICS_EXPORTER}.
 
 }
 
-\subsection{Suppressing instrumentation scopes (R packages)}{
+\subsection{Suppressing Instrumentation Scopes (R Packages)}{
 
 otel has two environment variables to fine tune which instrumentation
 scopes (i.e. R packages, typically) emit telemetry data. By default,
@@ -114,7 +116,7 @@ excludes packages with an instrumentation scope that starts with
 
 }
 
-\subsection{Zero code instrumentation}{
+\subsection{Zero Code Instrumentation}{
 
 otel can instrument R packages for OpenTelemetry data collection
 without changing their source code. This relies on changing the code

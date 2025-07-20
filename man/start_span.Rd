@@ -7,24 +7,68 @@
 start_span(
   name = NULL,
   tracer_name = NULL,
-  ...,
+  attributes = NULL,
+  links = NULL,
+  options = NULL,
   scope = parent.frame(),
   activation_scope = parent.frame()
 )
 }
 \arguments{
-\item{name}{Name of the span.}
+\item{name}{Name of the span. If not specified it will be \code{"<NA>"}.}
 
 \item{tracer_name}{The name of the tracer to use, see \code{\link[=get_tracer]{get_tracer()}}.}
 
-\item{..., scope, activation_scope}{Additional arguments are passed to
-the default tracer's \code{start_span()} method.}
+\item{attributes}{Span attributes. You may use \code{\link[=as_attributes]{as_attributes()}} to
+convert R objects to OpenTelemetry attributes. OpenTelemetry supports
+the following R types as attributes:
+character, logical, double, integer.}
+
+\item{links}{TODO}
+
+\item{options}{TODO}
+
+\item{scope}{TODO}
+
+\item{activation_scope}{TODO}
 }
 \value{
-The new OpenTelemetry span object, invisibly.
+The new OpenTelemetry span object (of class \code{otel_span}),
+invisibly. See \link{otel_span} for information about the returned object.
 }
 \description{
-Start a new OpenTelemetry span, using the default tracer
+A span represents a unit of work or operation. Spans are the building
+blocks of traces. \code{start_span()} is typically called at the beginning
+of a function or the beginning of some larger operation, e.g. an HTTP
+request.
+}
+\details{
+Calls \code{\link[=get_tracer]{get_tracer()}} with \code{tracer_name} as the tracer name, and then
+calls the \verb{$start_span()} method of the tracer with the other arguments.
+\subsection{Lifetime of a span}{
+
+TODO
+}
+
+\subsection{The active span}{
+
+TODO
+}
+
+\subsection{Span attributes}{
+
+TODO
+}
+
+\subsection{Span links}{
+
+TODO
+}
+
+\subsection{Span options}{
+
+TODO
+}
 }
 \seealso{
 Other OpenTelemetry tracing: 

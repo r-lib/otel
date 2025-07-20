@@ -1,10 +1,12 @@
 CMD
 Codecov
+JSONL
 OTLP
 OpenTelemetry
 PBC
 SDK
 SDKs
+callr
 dplyr
 finalizer
 globbing

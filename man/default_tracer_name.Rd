@@ -3,17 +3,84 @@
 \name{default_tracer_name}
 \alias{default_tracer_name}
 \alias{otel_tracer_name}
-\title{Default tracer (and meter and logger) name for an R package}
+\title{Default tracer name (and meter and logger name) for an R package}
 \usage{
 default_tracer_name(name = NULL)
 }
 \arguments{
 \item{name}{Custom tracer name. If \code{NULL} then otel will construct a
 a tracer (meter, logger) name according to the algorithm detailed
-below.
-
-TODO}
+below.}
 }
 \description{
-Default tracer (and meter and logger) name for an R package
+Exporters, like the ones in the otelsdk package, can use this function
+to determine the default tracer name, if the instrumentation author
+hasn't specified one. If you are an instrumentation author, you probably
+do not need to call this function directly, but do read on to learn
+about choosing and setting the tracer name.
+}
+\details{
+\subsection{About tracer names}{
+
+The name of a tracer identifies an OpenTelemetry instrumentation scope.
+Instrumentation scopes can be used to organize the collected telemetry
+data. otel can also use instrumentation scopes to suppress emitting
+unneeded telemetry data, see '\link{Environment variables}'.
+
+For the otel R package it makes sense to create a separate
+instrumentation scope for each R package that emits telemetry data.
+otel can do this automatically, with some from the package author.
+}
+
+\subsection{Setting the tracer name}{
+
+As a package author, you can define the \code{otel_tracer_name} symbol in
+your package and set it do the desired tracer name. For example, the
+callr package has this in an \code{.R} file:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{otel_tracer_name <- "org.r-lib.callr"
+}\if{html}{\out{</div>}}
+
+See below for tips on choosing a tracer name.
+
+If you don't like the default tracer name, you can call \code{\link[=get_tracer]{get_tracer()}}
+(or \code{\link[=get_logger]{get_logger()}} or \code{\link[=get_meter]{get_meter()}} manually with the desired name.
+}
+
+\subsection{Automatic tracer name detection in otel}{
+
+This is the detailed algorithm that otel uses in \code{default_tracer_name}:
+\itemize{
+\item Using \code{\link[base:ns-topenv]{base::topenv()}} it finds the calling package (or other top
+level environment), recursively.
+\item It ignores the otel and otelsdk packages while searching.
+\item If it finds the base environment or the global environment, then
+it returns \code{org.project.R} as the tracer name.
+\item Otherwise it looks for the \code{otel_tracer_name} symbol inside the top
+level environment it has found. If this symbol exists then it must be
+a string scalar and otel will use it as the tracer name.
+\item If this symbol does not exist, then otel will use
+\verb{r.package.<environment-name>} as the tracer name.
+\verb{<environment-name>} is usually the package name.
+}
+}
+
+\subsection{Choosing a tracer name}{
+
+The \href{https://opentelemetry.io/docs/specs/otel/trace/api/#get-a-tracer}{OpenTelemetry specification} recommends using a tracer name that identifies the instrumentation
+scope, i.e. your package.
+
+Some tips on choosing the tracer name:
+\itemize{
+\item If your R package can be associated with a URL, you can use the
+"reverse" of that URL. E.g. since the callr package's online manual
+is at https://callr.r-lib.org, it can use \code{org.r-lib.callr}.
+\item If your R package belongs to your company, you can use the "reverse"
+of the company URL, possibly with an additional prefix. E.g. for the
+shiny R package by Posit, \code{co.posit.r-package.shiny} seems like a
+good name.
+\item If you don't set \code{otel_tracer_name}, then \code{default_tracer_name} will
+use \verb{r.package.<package-name>} as the tracer name.
+}
+}
 }

@@ -1,3 +1,73 @@
+#' OpenTelemetry tracer provider objects
+#'
+#' The tracer provider defines how traces are exported when collecting
+#' telemetry data. It is unlikely that you'd need to use tracer provider
+#' objects directly.
+#'
+#' ## Implementations
+#'
+#' Note that this list is updated manually and may be incomplete.
+#'
+#' - [tracer_provider_noop]: No-op tracer provider, used when no traces are
+#'   emitted.
+#' - [otelsdk::tracer_provider_file]: Save traces to a JSONL file.
+#' - [otelsdk::tracer_provider_http]: Send traces to a collector over
+#'   HTTP/OTLP.
+#' - [otelsdk::tracer_provider_memory]: Collect emitted traces in memory.
+#'   For testing.
+#' - [otelsdk::tracer_provider_stdstream]: Write traces to standard output
+#'   or error or to a file. Primarily for debugging.
+#'
+#' ## Methods
+#'
+#' ### Method: `get_tracer()`
+#'
+#' #### Description
+#'
+#' Get or create a new tracer object.
+#'
+#' #### Usage
+#'
+#' ```
+#' $get_tracer(
+#'   name = NULL,
+#'   version = NULL,
+#'   schema_url = NULL,
+#'   attributes = NULL
+#' )
+#' ```
+#'
+#' #### Arguments:
+#'
+#' - `name`: Tracer name, see [get_tracer()].
+#' - `version`: Optional. Specifies the version of the instrumentation
+#'   scope if the scope has a version (e.g. R package version).
+#'   Example value: `"1.0.0"`.
+#' - `schema_url`: Optional. Specifies the Schema URL that should be
+#'   recorded in the emitted telemetry.
+#' - `attributes`: Optional. Specifies the instrumentation scope
+#'   attributes to associate with emitted telemetry.
+#'
+#' #### See also
+#'
+#' [get_tracer()].
+#'
+#' ### Method: `flush()`
+#'
+#' #### Description
+#'
+#' Force any buffered spans to flush. Tracer providers might not implement
+#' this method.
+#'
+#' #### Usage
+#'
+#' ```
+#' $flush()
+#' ```
+#'
+#' @name otel_tracer_provider
+NULL
+
 #' No-op logger provider
 #' @keywords internal
 #' @export
@@ -6,8 +76,13 @@ tracer_provider_noop <- list(
   new = function() {
     structure(
       list(
-        get_tracer = function(name = NULL, ...) {
-          tracer_noop$new(name, ...)
+        get_tracer = function(
+          name = NULL,
+          version = NULL,
+          schema_url = NULL,
+          attributes = NULL
+        ) {
+          tracer_noop$new(name, version, schema_url, attributes)
         },
         flush = function() {
           # noop
