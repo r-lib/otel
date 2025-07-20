@@ -13,6 +13,7 @@ globbing
 http
 lifecycle
 natively
+no-op
 observability
 otelsdk
 stdstream
