@@ -5,7 +5,8 @@
 #'
 #' @param x A list of R objects, to be used as OpenTelemetry attributes.
 #' @return A named list that can be used as the `attributes` argument to
-#'   [start_span()], [log()], [counter_add()], etc.
+#'   the `start_span()` method of [otel_tracer], the `log()` method of
+#'   [otel_logger], etc.
 #'
 #' If `x` is not named, or some names are the empty string or `NA`, then
 #' integer numbers as used for the missing or invalid names.

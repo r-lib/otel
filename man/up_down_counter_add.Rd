@@ -2,10 +2,15 @@
 % Please edit documentation in R/api.R
 \name{up_down_counter_add}
 \alias{up_down_counter_add}
-\title{Increase or decrease an OpenTelemetry up-down counter using the default
-meter}
+\title{Increase or decrease an OpenTelemetry up-down counter}
 \usage{
-up_down_counter_add(name, value = 1L, attributes = NULL, context = NULL)
+up_down_counter_add(
+  name,
+  value = 1L,
+  attributes = NULL,
+  context = NULL,
+  meter = NULL
+)
 }
 \arguments{
 \item{name}{Name of the up-down counter.}
@@ -17,13 +22,15 @@ to 1.}
 
 \item{context}{Span context. If missing the active context is used,
 if any.}
+
+\item{meter}{Meter object (\code{otel_meter}). Otherwise it is passed to
+\code{\link[=get_meter]{get_meter()}} to get a meter.}
 }
 \value{
 The up-down counter object, invisibly.
 }
 \description{
-Increase or decrease an OpenTelemetry up-down counter using the default
-meter
+Increase or decrease an OpenTelemetry up-down counter
 }
 \seealso{
 Other OpenTelemetry metrics instruments: 

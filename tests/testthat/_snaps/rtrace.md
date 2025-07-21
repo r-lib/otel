@@ -14,8 +14,8 @@
       {
           on.exit(.doTrace(try(.__span$end())))
           {
-              .doTrace(.__span <- otel::start_span("pkg::f", tracer_name = "org.r-lib.otel", 
-                  scope = NULL))
+              .doTrace(.__span <- otel::get_tracer("org.r-lib.otel")$start_as_active_span("pkg::f", 
+                  tracer_name = "org.r-lib.otel", scope = NULL))
               "dummy"
           }
       }, original = function () 

@@ -4,14 +4,22 @@
 \alias{is_measuring}
 \title{Check whether OpenTelemetry metrics collection is active}
 \usage{
-is_measuring()
+is_measuring(meter = NULL)
+}
+\arguments{
+\item{meter}{Meter object (\code{otel_meter}), or a meter name, the
+instrumentation scope, to pass to \code{\link[=get_meter]{get_meter()}}.}
 }
 \value{
 \code{TRUE} is OpenTelemetry metrics collection  is active,
 \code{FALSE} otherwise.
 }
 \description{
-Check whether OpenTelemetry metrics collection is active
+This is useful for avoiding computation when metrics collection is inactive.
+}
+\details{
+It calls \code{\link[=get_meter]{get_meter()}} with \code{name} and then it calls the meter's
+\verb{$is_enabled()} method.
 }
 \seealso{
 Other OpenTelemetry metrics: 

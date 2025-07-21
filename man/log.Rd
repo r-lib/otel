@@ -8,21 +8,21 @@
 \alias{log_warn}
 \alias{log_error}
 \alias{log_fatal}
-\title{Log an OpenTelemetry log message, using the default logger}
+\title{Log an OpenTelemetry log message}
 \usage{
-log(msg, ..., severity = "info", .envir = parent.frame())
+log(msg, ..., severity = "info", .envir = parent.frame(), logger = NULL)
 
-log_trace(msg, ..., .envir = parent.frame())
+log_trace(msg, ..., .envir = parent.frame(), logger = NULL)
 
-log_debug(msg, ..., .envir = parent.frame())
+log_debug(msg, ..., .envir = parent.frame(), logger = NULL)
 
-log_info(msg, ..., .envir = parent.frame())
+log_info(msg, ..., .envir = parent.frame(), logger = NULL)
 
-log_warn(msg, ..., .envir = parent.frame())
+log_warn(msg, ..., .envir = parent.frame(), logger = NULL)
 
-log_error(msg, ..., .envir = parent.frame())
+log_error(msg, ..., .envir = parent.frame(), logger = NULL)
 
-log_fatal(msg, ..., .envir = parent.frame())
+log_fatal(msg, ..., .envir = parent.frame(), logger = NULL)
 }
 \arguments{
 \item{msg}{Log message, may contain R expressions to evaluate within
@@ -35,14 +35,16 @@ the default logger.}
 "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24".}
 
 \item{.envir}{Environment to evaluate the interpolated  expressions of
-the log message in.
-automatically deactivated after this scope.}
+the log message in.}
+
+\item{logger}{Logger to use. If not an OpenTelemetry logger object
+(\code{otel_logger}), then it passed to \code{\link[=get_logger]{get_logger()}} to get a logger.}
 }
 \value{
 The logger, invisibly.
 }
 \description{
-Log an OpenTelemetry log message, using the default logger
+Log an OpenTelemetry log message
 }
 \details{
 \code{log_trace()} is the same as \code{log()} with \code{severity_level}
@@ -57,7 +59,7 @@ Log an OpenTelemetry log message, using the default logger
 \code{log_warn()} is the same as \code{log()} with \code{severity_level}
 "warn".
 
-\code{log_error()} is the same as \code{log()} with \code{severity_level}
+\verb{log_error)} is the same as \code{log()} with \code{severity_level}
 "error".
 
 \code{log_fatal()} is the same as \code{log()} with \code{severity_level}

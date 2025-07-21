@@ -1,23 +1,23 @@
 function(input, output, session) {
-  otel::start_shiny_session(session)
+  otel_start_shiny_session(session)
 
   # Combine the selected variables into a new data frame
   selectedData <- reactive({
     otel::local_active_span(session$userData$otel_span)
-    otel::start_span("data")
+    otel_tracer$start_as_active_span("select-data")
     iris[, c(input$xcol, input$ycol)]
   })
 
   clusters <- reactive({
     otel::local_active_span(session$userData$otel_span)
-    otel::start_span("kmeans")
+    otel_tracer$start_as_active_span("cluster")
     Sys.sleep(1)
     kmeans(selectedData(), input$clusters)
   })
 
   output$plot1 <- renderPlot({
     otel::local_active_span(session$userData$otel_span)
-    otel::start_span("plot")
+    otel_tracer$get_start_as_active_span("plot")
     palette(c(
       "#E41A1C",
       "#377EB8",

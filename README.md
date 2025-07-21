@@ -124,23 +124,6 @@ following practices for in-process concurrency:
   `$end()` method. (Otherwise it would be only closed at the next
   garbage collection, assuming there are no references to it.)
 
-## Shiny apps
-
-otel has convenience functions to tie otel spans to Shiny sessions:
-
-- Call `start_shiny_app()` from the `global.R` file, before the app
-  starts up.
-- Call `start_shiny_session()` from the server function, at the start of
-  a new Shiny session, and pass the Shiny session object to it.
-  `start_shiny_session()` creates a long lasting OpenTelemetry span in
-  `session$userData$otel_span`. This span represents the Shiny session,
-  see “Concurrency” above.
-- Call `otel::local_active_span(session$userData$otel_span)` at the
-  beginning of each reactive expression to switch to the span that
-  represents the current Shiny session.
-
-See the examples included in the otel package.
-
 ## License
 
 MIT © Posit, PBC

@@ -4,10 +4,33 @@
 \alias{get_meter}
 \title{Get a meter from the default meter provider}
 \usage{
-get_meter(name = NULL)
+get_meter(
+  name = NULL,
+  version = NULL,
+  schema_url = NULL,
+  attributes = NULL,
+  ...,
+  provider = NULL
+)
 }
 \arguments{
 \item{name}{Name of the new tracer. If missing, then deduced automatically.}
+
+\item{version}{Optional. Specifies the version of the instrumentation
+scope if the scope has a version (e.g. R package version).
+Example value: \code{"1.0.0"}.}
+
+\item{schema_url}{Optional. Specifies the Schema URL that should be
+recorded in the emitted telemetry.}
+
+\item{attributes}{Optional. Specifies the instrumentation scope
+attributes to associate with emitted telemetry.}
+
+\item{...}{Additional arguments are passed to the \code{get_meter()}
+method of the provider.}
+
+\item{provider}{Meter provider to use. If \code{NULL}, then it uses
+\code{\link[=get_default_meter_provider]{get_default_meter_provider()}} to get a tracer provider.}
 }
 \description{
 Get a meter from the default meter provider

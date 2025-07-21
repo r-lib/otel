@@ -68,7 +68,7 @@
 #' @name otel_tracer_provider
 NULL
 
-#' No-op logger provider
+#' No-op tracer provider
 #' @keywords internal
 #' @export
 
@@ -161,7 +161,7 @@ span_noop <- list(
           invisible(self)
         },
 
-        activate = function(activation_scope) {
+        activate = function(activation_scope, end_on_exit = FALSE) {
           invisible(self)
         }
       ),

@@ -50,9 +50,11 @@ reference:
     is off. You occasionally need `get_tracer()` to handle advanced use
     cases.
   contents:
+  - end_span
   - get_tracer
   - is_tracing
   - otel_span
+  - start_local_active_span
   - start_span
 - subtitle: Concurrency
   desc: >
@@ -123,15 +125,10 @@ reference:
   - extract_http_context
   - pack_http_context
 
-- title: Shiny apps
-  desc: >
-    TODO
-  contents:
-  - start_shiny_app
-  - start_shiny_session
-
 - title: internal
   contents:
+  - otel_logger
+  - otel_tracer
   - logger_provider_noop
   - meter_provider_noop
   - tracer_provider_noop
