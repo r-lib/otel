@@ -78,6 +78,12 @@
 
       <dl><dt>
 
+          <code><a href="end_span.html">end_span()</a></code>
+
+        </dt>
+        <dd>End an OpenTelemetry span</dd>
+      </dl><dl><dt>
+
           <code><a href="get_tracer.html">get_tracer()</a></code>
 
         </dt>
@@ -96,10 +102,16 @@
         <dd>TODO</dd>
       </dl><dl><dt>
 
+          <code><a href="start_local_active_span.html">start_local_active_span()</a></code>
+
+        </dt>
+        <dd>Start and activate a span</dd>
+      </dl><dl><dt>
+
           <code><a href="start_span.html">start_span()</a></code>
 
         </dt>
-        <dd>Start a new OpenTelemetry span, using the default tracer</dd>
+        <dd>Start an OpenTelemetry span.</dd>
       </dl></div><div class="section level2">
 
       <h3 id="concurrency">Concurrency<a class="anchor" aria-label="anchor" href="#concurrency"></a></h3>
@@ -192,7 +204,7 @@
           <code><a href="log.html">log()</a></code> <code><a href="log.html">log_trace()</a></code> <code><a href="log.html">log_debug()</a></code> <code><a href="log.html">log_info()</a></code> <code><a href="log.html">log_warn()</a></code> <code><a href="log.html">log_error()</a></code> <code><a href="log.html">log_fatal()</a></code>
 
         </dt>
-        <dd>Log an OpenTelemetry log message, using the default logger</dd>
+        <dd>Log an OpenTelemetry log message</dd>
       </dl><dl><dt>
 
           <code><a href="log_severity_levels.html">log_severity_levels</a></code>
@@ -244,7 +256,7 @@
           <code><a href="counter_add.html">counter_add()</a></code>
 
         </dt>
-        <dd>Increase an OpenTelemetry counter using the default meter</dd>
+        <dd>Increase an OpenTelemetry counter</dd>
       </dl></div><div class="section level2">
 
       <h3 id="up-down-counters">Up-down Counters<a class="anchor" aria-label="anchor" href="#up-down-counters"></a></h3>
@@ -261,7 +273,7 @@
           <code><a href="up_down_counter_add.html">up_down_counter_add()</a></code>
 
         </dt>
-        <dd>Increase or decrease an OpenTelemetry up-down counter using the default meter</dd>
+        <dd>Increase or decrease an OpenTelemetry up-down counter</dd>
       </dl></div><div class="section level2">
 
       <h3 id="histograms">Histograms<a class="anchor" aria-label="anchor" href="#histograms"></a></h3>
@@ -278,7 +290,7 @@
           <code><a href="histogram_record.html">histogram_record()</a></code>
 
         </dt>
-        <dd>Record a value of an OpenTelemetry histogram using the default meter</dd>
+        <dd>Record a value of an OpenTelemetry histogram</dd>
       </dl></div><div class="section level2">
 
       <h3 id="gauges">Gauges<a class="anchor" aria-label="anchor" href="#gauges"></a></h3>
@@ -295,7 +307,7 @@
           <code><a href="gauge_record.html">gauge_record()</a></code>
 
         </dt>
-        <dd>Record a value of an OpenTelemetry gauge using the default meter</dd>
+        <dd>Record a value of an OpenTelemetry gauge</dd>
       </dl></div><div class="section level2">
       <h2 id="utility-functions">Utility Functions<a class="anchor" aria-label="anchor" href="#utility-functions"></a></h2>
 
@@ -342,29 +354,6 @@
 
         </dt>
         <dd>Pack the currently active span context into standard HTTP OpenTelemetry headers</dd>
-      </dl></div><div class="section level2">
-      <h2 id="shiny-apps">Shiny apps<a class="anchor" aria-label="anchor" href="#shiny-apps"></a></h2>
-
-      <div class="section-desc"><p>TODO</p></div>
-
-
-    </div><div class="section level2">
-
-
-
-
-      <dl><dt>
-
-          <code><a href="start_shiny_app.html">start_shiny_app()</a></code>
-
-        </dt>
-        <dd>Start tracing a Shiny app</dd>
-      </dl><dl><dt>
-
-          <code><a href="start_shiny_session.html">start_shiny_session()</a></code>
-
-        </dt>
-        <dd>Start tracing a Shiny session</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

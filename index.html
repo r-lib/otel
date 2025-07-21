@@ -119,17 +119,6 @@
 </ul>
 </div>
 <div class="section level2">
-<h2 id="shiny-apps">Shiny apps<a class="anchor" aria-label="anchor" href="#shiny-apps"></a>
-</h2>
-<p>otel has convenience functions to tie otel spans to Shiny sessions:</p>
-<ul>
-<li>Call <code><a href="reference/start_shiny_app.html">start_shiny_app()</a></code> from the <code>global.R</code> file, before the app starts up.</li>
-<li>Call <code><a href="reference/start_shiny_session.html">start_shiny_session()</a></code> from the server function, at the start of a new Shiny session, and pass the Shiny session object to it. <code><a href="reference/start_shiny_session.html">start_shiny_session()</a></code> creates a long lasting OpenTelemetry span in <code>session$userData$otel_span</code>. This span represents the Shiny session, see “Concurrency” above.</li>
-<li>Call <code>otel::local_active_span(session$userData$otel_span)</code> at the beginning of each reactive expression to switch to the span that represents the current Shiny session.</li>
-</ul>
-<p>See the examples included in the otel package.</p>
-</div>
-<div class="section level2">
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
 </h2>
 <p>MIT © Posit, PBC</p>

@@ -38,7 +38,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">local_active_span</span><span class="op">(</span><span class="va">span</span>, activation_scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">local_active_span</span><span class="op">(</span><span class="va">span</span>, end_on_exit <span class="op">=</span> <span class="cn">FALSE</span>, activation_scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -49,9 +49,14 @@
 <dd><p>The OpenTelemetry span to activate.</p></dd>
 
 
+<dt id="arg-end-on-exit">end_on_exit<a class="anchor" aria-label="anchor" href="#arg-end-on-exit"></a></dt>
+<dd><p>Whether to end the span when exiting the activation
+scope.</p></dd>
+
+
 <dt id="arg-activation-scope">activation_scope<a class="anchor" aria-label="anchor" href="#arg-activation-scope"></a></dt>
-<dd><p>The scope to activate it for, defaults to the
-caller frame.</p></dd>
+<dd><p>The scope to activate the span for, defaults to
+the caller frame.</p></dd>
 
 </dl></div>
 

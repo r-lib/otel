@@ -38,7 +38,15 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_logger</span><span class="op">(</span>name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_logger</span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  minimum_severity <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  version <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  schema_url <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  attributes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  provider <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -47,6 +55,37 @@
 
 <dl><dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
 <dd><p>Name of the new tracer. If missing, then deduced automatically.</p></dd>
+
+
+<dt id="arg-minimum-severity">minimum_severity<a class="anchor" aria-label="anchor" href="#arg-minimum-severity"></a></dt>
+<dd><p>A log level, the minimum severity log messages
+to log. See <a href="log_severity_levels.html">log_severity_levels</a>.</p></dd>
+
+
+<dt id="arg-version">version<a class="anchor" aria-label="anchor" href="#arg-version"></a></dt>
+<dd><p>Optional. Specifies the version of the instrumentation
+scope if the scope has a version (e.g. R package version).
+Example value: <code>"1.0.0"</code>.</p></dd>
+
+
+<dt id="arg-schema-url">schema_url<a class="anchor" aria-label="anchor" href="#arg-schema-url"></a></dt>
+<dd><p>Optional. Specifies the Schema URL that should be
+recorded in the emitted telemetry.</p></dd>
+
+
+<dt id="arg-attributes">attributes<a class="anchor" aria-label="anchor" href="#arg-attributes"></a></dt>
+<dd><p>Optional. Specifies the instrumentation scope
+attributes to associate with emitted telemetry.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Additional arguments are passed to the <code>get_logger()</code>
+method of the provider.</p></dd>
+
+
+<dt id="arg-provider">provider<a class="anchor" aria-label="anchor" href="#arg-provider"></a></dt>
+<dd><p>Tracer provider to use. If <code>NULL</code>, then it uses
+<code><a href="get_default_tracer_provider.html">get_default_tracer_provider()</a></code> to get a tracer provider.</p></dd>
 
 </dl></div>
     <div class="section level2">
