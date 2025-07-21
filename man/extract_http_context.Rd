@@ -18,7 +18,7 @@ a span.
 Other OpenTelemetry tracing: 
 \code{\link{get_active_span_context}()},
 \code{\link{get_tracer}()},
-\code{\link{is_tracing}()},
+\code{\link{start_local_active_span}()},
 \code{\link{start_span}()}
 }
 \concept{OpenTelemetry tracing}

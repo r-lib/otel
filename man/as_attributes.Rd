@@ -11,7 +11,8 @@ as_attributes(x)
 }
 \value{
 A named list that can be used as the \code{attributes} argument to
-\code{\link[=start_span]{start_span()}}, \code{\link[=log]{log()}}, \code{\link[=counter_add]{counter_add()}}, etc.
+the \code{start_span()} method of \link{otel_tracer}, the \code{log()} method of
+\link{otel_logger}, etc.
 
 If \code{x} is not named, or some names are the empty string or \code{NA}, then
 integer numbers as used for the missing or invalid names.

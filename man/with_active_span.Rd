@@ -4,12 +4,14 @@
 \alias{with_active_span}
 \title{Evaluate R code with an active OpenTelemetry span}
 \usage{
-with_active_span(span, expr)
+with_active_span(span, expr, end_on_exit = FALSE)
 }
 \arguments{
 \item{span}{The OpenTelemetry span to activate.}
 
 \item{expr}{R expression to evaluate.}
+
+\item{end_on_exit}{Whether to end after evaluating the R expression.}
 }
 \value{
 The return value of \code{expr}.

@@ -20,7 +20,7 @@
     Code
       is_logging()
     Message
-      OpenTelemetry error: nope
+      OpenTelemetry error: unused argument (logger)
     Output
       [1] FALSE
 
@@ -30,14 +30,14 @@
       is_logging_dev()
     Condition
       Error in `get_logger()`:
-      ! nope
+      ! unused argument (logger)
 
 # is_measuring
 
     Code
       is_measuring()
     Message
-      OpenTelemetry error: nope
+      OpenTelemetry error: unused argument (meter)
     Output
       [1] FALSE
 
@@ -47,7 +47,7 @@
       is_measuring_dev()
     Condition
       Error in `get_meter()`:
-      ! nope
+      ! unused argument (meter)
 
 # get_default_tracer
 
@@ -189,7 +189,7 @@
     Code
       log_dev("nothing")
     Condition
-      Error in `lgr$log()`:
+      Error in `logger$log()`:
       ! no
 
 # log_trace
@@ -204,7 +204,7 @@
     Code
       log_trace_dev("nothing")
     Condition
-      Error in `lgr$log()`:
+      Error in `logger$log()`:
       ! no
 
 # log_debug
@@ -219,7 +219,7 @@
     Code
       log_debug_dev("nothing")
     Condition
-      Error in `lgr$log()`:
+      Error in `logger$log()`:
       ! no
 
 # log_info
@@ -234,7 +234,7 @@
     Code
       log_info_dev("nothing")
     Condition
-      Error in `lgr$log()`:
+      Error in `logger$log()`:
       ! no
 
 # log_warn
@@ -249,7 +249,7 @@
     Code
       log_warn_dev("nothing")
     Condition
-      Error in `lgr$log()`:
+      Error in `logger$log()`:
       ! no
 
 # log_error
@@ -264,7 +264,7 @@
     Code
       log_error_dev("nothing")
     Condition
-      Error in `lgr$log()`:
+      Error in `logger$log()`:
       ! no
 
 # log_fatal
@@ -279,7 +279,7 @@
     Code
       log_fatal_dev("nothing")
     Condition
-      Error in `lgr$log()`:
+      Error in `logger$log()`:
       ! no
 
 # counter_add

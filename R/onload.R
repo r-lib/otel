@@ -45,9 +45,21 @@ setup_dev_env <- function(envir = asNamespace(.packageName)) {
   ev <- tolower(Sys.getenv("OTEL_ENV"))
   if (ev %in% c("dev", "devel", "development")) {
     the$mode <- "dev"
-    assign("is_tracing", is_tracing_dev, envir = envir)
-    assign("is_logging", is_logging_dev, envir = envir)
-    assign("is_measuring", is_measuring_dev, envir = envir)
+    assign(
+      "start_local_active_span",
+      start_local_active_span_dev,
+      envir = envir
+    )
+    assign(
+      "start_span",
+      start_span_dev,
+      envir = envir
+    )
+    assign(
+      "end_span",
+      end_span_dev,
+      envir = envir
+    )
     assign(
       "get_default_tracer_provider",
       get_default_tracer_provider_dev,
@@ -66,46 +78,8 @@ setup_dev_env <- function(envir = asNamespace(.packageName)) {
       envir = envir
     )
     assign("get_meter", get_meter_dev, envir = envir)
-    assign(
-      "start_shiny_app",
-      start_shiny_app_dev,
-      envir = envir
-    )
-    assign(
-      "start_shiny_session",
-      start_shiny_session_dev,
-      envir = envir
-    )
-    assign("start_span", start_span_dev, envir = envir)
     assign("local_active_span", local_active_span_dev, envir = envir)
     assign("with_active_span", with_active_span_dev, envir = envir)
-    assign("log", log_dev, envir = envir)
-    assign("log_trace", log_trace_dev, envir = envir)
-    assign("log_debug", log_debug_dev, envir = envir)
-    assign("log_info", log_info_dev, envir = envir)
-    assign("log_warn", log_warn_dev, envir = envir)
-    assign("log_error", log_error_dev, envir = envir)
-    assign("log_fatal", log_fatal_dev, envir = envir)
-    assign(
-      "counter_add",
-      counter_add_dev,
-      envir = envir
-    )
-    assign(
-      "up_down_counter_add",
-      up_down_counter_add_dev,
-      envir = envir
-    )
-    assign(
-      "histogram_record",
-      histogram_record_dev,
-      envir = envir
-    )
-    assign(
-      "gauge_record",
-      gauge_record_dev,
-      envir = envir
-    )
     assign(
       "get_active_span_context",
       get_active_span_context_dev,

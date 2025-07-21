@@ -2,10 +2,9 @@
 % Please edit documentation in R/api.R
 \name{histogram_record}
 \alias{histogram_record}
-\title{Record a value of an OpenTelemetry histogram using the default
-meter}
+\title{Record a value of an OpenTelemetry histogram}
 \usage{
-histogram_record(name, value, attributes = NULL, context = NULL)
+histogram_record(name, value, attributes = NULL, context = NULL, meter = NULL)
 }
 \arguments{
 \item{name}{Name of the histogram.}
@@ -16,13 +15,15 @@ histogram_record(name, value, attributes = NULL, context = NULL)
 
 \item{context}{Span context. If missing the active context is used,
 if any.}
+
+\item{meter}{Meter object (\code{otel_meter}). Otherwise it is passed to
+\code{\link[=get_meter]{get_meter()}} to get a meter.}
 }
 \value{
 The histogram object, invisibly.
 }
 \description{
-Record a value of an OpenTelemetry histogram using the default
-meter
+Record a value of an OpenTelemetry histogram
 }
 \seealso{
 Other OpenTelemetry metrics instruments: 

@@ -4,7 +4,14 @@
 \alias{get_tracer}
 \title{Get a tracer from the default tracer provider}
 \usage{
-get_tracer(name = NULL, version = NULL, schema_url = NULL, attributes = NULL)
+get_tracer(
+  name = NULL,
+  version = NULL,
+  schema_url = NULL,
+  attributes = NULL,
+  ...,
+  provider = NULL
+)
 }
 \arguments{
 \item{name}{Name of the new tracer. If missing, then deduced
@@ -20,6 +27,12 @@ recorded in the emitted telemetry.}
 
 \item{attributes}{Optional. Specifies the instrumentation scope
 attributes to associate with emitted telemetry.}
+
+\item{...}{Additional arguments are passed to the \code{get_tracer()}
+method of the provider.}
+
+\item{provider}{Tracer provider to use. If \code{NULL}, then it uses
+\code{\link[=get_default_tracer_provider]{get_default_tracer_provider()}} to get a tracer provider.}
 }
 \value{
 An OpenTelemetry tracer, an \code{otel_tracer} object.
@@ -29,11 +42,6 @@ Calls \code{\link[=get_default_tracer_provider]{get_default_tracer_provider()}} 
 provider. Then calls its \verb{$get_tracer()} method to create a new tracer.
 }
 \details{
-Usually you do not need to call this function explicitly. It is called
-by \code{\link[=start_span]{start_span()}} as needed. You might need it for more advanced use
-cases, e.g. if you need to use multiple tracer names (=instrumentation
-scopes) within a package.
-
 Calling \code{get_tracer()} multiple times with the same \code{name} (or same
 auto-deduced name) will return the same (internal) tracer object.
 (Even if the R external pointer objects representing them are
@@ -45,7 +53,7 @@ A tracer is only destroyed if its tracer provider is destroyed.
 Other OpenTelemetry tracing: 
 \code{\link{extract_http_context}()},
 \code{\link{get_active_span_context}()},
-\code{\link{is_tracing}()},
+\code{\link{start_local_active_span}()},
 \code{\link{start_span}()}
 }
 \concept{OpenTelemetry tracing}

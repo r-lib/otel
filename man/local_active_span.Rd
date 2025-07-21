@@ -4,13 +4,16 @@
 \alias{local_active_span}
 \title{Activate an OpenTelemetry span for an R scope}
 \usage{
-local_active_span(span, activation_scope = parent.frame())
+local_active_span(span, end_on_exit = FALSE, activation_scope = parent.frame())
 }
 \arguments{
 \item{span}{The OpenTelemetry span to activate.}
 
-\item{activation_scope}{The scope to activate it for, defaults to the
-caller frame.}
+\item{end_on_exit}{Whether to end the span when exiting the activation
+scope.}
+
+\item{activation_scope}{The scope to activate the span for, defaults to
+the caller frame.}
 }
 \description{
 Activate an OpenTelemetry span for an R scope

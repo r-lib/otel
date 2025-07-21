@@ -3,7 +3,7 @@
 \docType{data}
 \name{tracer_provider_noop}
 \alias{tracer_provider_noop}
-\title{No-op logger provider}
+\title{No-op tracer provider}
 \format{
 An object of class \code{list} of length 1.
 }
@@ -11,6 +11,6 @@ An object of class \code{list} of length 1.
 tracer_provider_noop
 }
 \description{
-No-op logger provider
+No-op tracer provider
 }
 \keyword{internal}

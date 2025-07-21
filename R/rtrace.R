@@ -18,7 +18,7 @@ trace_env <- function(
     }
     span_name <- paste0(name, "::", nm)
     tr1 <- substitute(
-      .__span <- otel::start_span(
+      .__span <- otel::get_tracer("org.r-lib.otel")$start_as_active_span(
         sn,
         tracer_name = "org.r-lib.otel",
         scope = NULL

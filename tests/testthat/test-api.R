@@ -13,10 +13,18 @@ test_that("is_tracing", {
 })
 
 test_that("is_logging", {
-  fake(is_logging, "get_logger", structure(list(), class = "otel_logger_noop"))
+  fake(
+    is_logging,
+    "get_logger",
+    structure(list(is_enabled = function() FALSE), class = "otel_logger_noop")
+  )
   expect_false(is_logging())
 
-  fake(is_logging, "get_logger", structure(list(), class = "otel_logger"))
+  fake(
+    is_logging,
+    "get_logger",
+    structure(list(is_enabled = function() TRUE), class = "otel_logger")
+  )
   expect_true(is_logging())
 
   fake(is_logging, "get_logger", function() stop("nope"))
@@ -25,11 +33,15 @@ test_that("is_logging", {
   fake(
     is_logging_dev,
     "get_logger",
-    structure(list(), class = "otel_logger_noop")
+    structure(list(is_enabled = function() FALSE), class = "otel_logger_noop")
   )
   expect_false(is_logging_dev())
 
-  fake(is_logging_dev, "get_logger", structure(list(), class = "otel_logger"))
+  fake(
+    is_logging_dev,
+    "get_logger",
+    structure(list(is_enabled = function() TRUE), class = "otel_logger")
+  )
   expect_true(is_logging_dev())
 
   fake(is_logging_dev, "get_logger", function() stop("nope"))
@@ -37,10 +49,18 @@ test_that("is_logging", {
 })
 
 test_that("is_measuring", {
-  fake(is_measuring, "get_meter", structure(list(), class = "otel_meter_noop"))
+  fake(
+    is_measuring,
+    "get_meter",
+    structure(list(is_enabled = function() FALSE), class = "otel_meter_noop")
+  )
   expect_false(is_measuring())
 
-  fake(is_measuring, "get_meter", structure(list(), class = "otel_meter"))
+  fake(
+    is_measuring,
+    "get_meter",
+    structure(list(is_enabled = function() TRUE), class = "otel_meter")
+  )
   expect_true(is_measuring())
 
   fake(is_measuring, "get_meter", function() stop("nope"))
@@ -49,11 +69,15 @@ test_that("is_measuring", {
   fake(
     is_measuring_dev,
     "get_meter",
-    structure(list(), class = "otel_meter_noop")
+    structure(list(is_enabled = function() FALSE), class = "otel_meter_noop")
   )
   expect_false(is_measuring_dev())
 
-  fake(is_measuring_dev, "get_meter", structure(list(), class = "otel_meter"))
+  fake(
+    is_measuring_dev,
+    "get_meter",
+    structure(list(is_enabled = function() TRUE), class = "otel_meter")
+  )
   expect_true(is_measuring_dev())
 
   fake(is_measuring_dev, "get_meter", function() stop("nope"))
@@ -199,7 +223,7 @@ test_that("start_span(scope = NULL)", {
 
 test_that("local_active_span", {
   local_otel_off()
-  sess <- start_span(scope = NULL)
+  sess <- get_tracer("org.r-lib.otel")$start_span()
   expect_silent(local_active_span(sess))
   expect_silent(local_active_span_dev(sess))
 
@@ -211,7 +235,7 @@ test_that("local_active_span", {
 
 test_that("with_active_span", {
   local_otel_off()
-  sess <- start_span(scope = NULL)
+  sess <- get_tracer("org.r-lib.otel")$start_span()
   expect_silent(ret <- with_active_span(sess, 1 + 1))
   expect_equal(ret, 2)
   expect_silent(ret <- with_active_span_dev(sess, 1 + 1))

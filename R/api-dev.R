@@ -1,149 +1,67 @@
 
-is_tracing_dev <- function(name = NULL) {
-    trc <- get_tracer(name = name)
-    trc$is_enabled()
-}
-
-is_logging_dev <- function() {
-    lgr <- get_logger()
-    !inherits(lgr, "otel_logger_noop")
-}
-
-is_measuring_dev <- function() {
-    mtr <- get_meter()
-    !inherits(mtr, "otel_meter_noop")
-}
-
 get_tracer_dev <- function(
   name = NULL,
   version = NULL,
   schema_url = NULL,
-  attributes = NULL
+  attributes = NULL,
+  ...,
+  provider = NULL
 ) {
     # does setup if necessary
-    tp <- get_default_tracer_provider()
-    trc <- tp$get_tracer(name, version, schema_url, attributes)
+    provider <- provider %||% get_default_tracer_provider()
+    trc <- provider$get_tracer(name, version, schema_url, attributes, ...)
     invisible(trc)
 }
 
-get_logger_dev <- function(name = NULL) {
-    # does setup if necessary
-    tp <- get_default_logger_provider()
-    trc <- tp$get_logger(name)
-    invisible(trc)
-}
-
-get_meter_dev <- function(name = NULL) {
-    # does setup if necessary
-    tp <- get_default_meter_provider()
-    trc <- tp$get_meter(name)
-    invisible(trc)
-}
-
-start_span_dev <- function(
+get_logger_dev <- function(
   name = NULL,
-  tracer_name = NULL,
+  minimum_severity = NULL,
+  version = NULL,
+  schema_url = NULL,
   attributes = NULL,
-  links = NULL,
-  options = NULL,
-  scope = parent.frame(),
+  ...,
+  provider = NULL
+) {
+    # does setup if necessary
+    provider <- provider %||% get_default_logger_provider()
+    lgr <- provider$get_logger(
+      name,
+      minimum_severity,
+      version,
+      schema_url,
+      attributes,
+      ...
+    )
+    invisible(lgr)
+}
+
+get_meter_dev <- function(
+  name = NULL,
+  version = NULL,
+  schema_url = NULL,
+  attributes = NULL,
+  ...,
+  provider = NULL
+) {
+    # does setup if necessary
+    provider <- provider %||% get_default_meter_provider()
+    mtr <- provider$get_meter(name, version, schema_url, attributes, ...)
+    invisible(mtr)
+}
+
+local_active_span_dev <- function(
+  span,
+  end_on_exit = FALSE,
   activation_scope = parent.frame()
 ) {
-    trc <- get_tracer(tracer_name)
-    invisible(trc$start_span(
-      name = name,
-      attributes = attributes,
-      links = links,
-      options = options,
-      scope = scope,
-      activation_scope = activation_scope
-    ))
+    invisible(span$activate(activation_scope, end_on_exit = end_on_exit))
 }
 
-local_active_span_dev <- function(span, activation_scope = parent.frame()) {
-    invisible(span$activate(activation_scope))
-}
-
-with_active_span_dev <- function(span, expr) {
+with_active_span_dev <- function(span, expr, end_on_exit = FALSE) {
   local({
-      invisible(span$activate())
+      invisible(span$activate(end_on_exit = end_on_exit))
     expr
   })
-}
-
-log_dev <- function(msg, ..., severity = "info", .envir = parent.frame()) {
-    lgr <- get_logger()
-    lgr$log(msg, severity, ..., .envir = .envir)
-    invisible(lgr)
-}
-
-log_trace_dev <- function(msg, ..., .envir = parent.frame()) {
-    lgr <- get_logger()
-    lgr$log(msg, "trace", ..., .envir = .envir)
-    invisible(lgr)
-}
-
-log_debug_dev <- function(msg, ..., .envir = parent.frame()) {
-    lgr <- get_logger()
-    lgr$log(msg, "debug", ..., .envir = .envir)
-    invisible(lgr)
-}
-
-log_info_dev <- function(msg, ..., .envir = parent.frame()) {
-    lgr <- get_logger()
-    lgr$log(msg, "info", ..., .envir = .envir)
-    invisible(lgr)
-}
-
-log_warn_dev <- function(msg, ..., .envir = parent.frame()) {
-    lgr <- get_logger()
-    lgr$log(msg, "warn", ..., .envir = .envir)
-    invisible(lgr)
-}
-
-log_error_dev <- function(msg, ..., .envir = parent.frame()) {
-    lgr <- get_logger()
-    lgr$log(msg, "error", ..., .envir = .envir)
-    invisible(lgr)
-}
-
-log_fatal_dev <- function(msg, ..., .envir = parent.frame()) {
-    lgr <- get_logger()
-    lgr$log(msg, "fatal", ..., .envir = .envir)
-    invisible(lgr)
-}
-
-counter_add_dev <- function(name, value = 1L, attributes = NULL, context = NULL) {
-    mtr <- get_meter()
-    ctr <- mtr$create_counter(name)
-    ctr$add(value, attributes, context)
-    invisible(ctr)
-}
-
-up_down_counter_add_dev <- function(
-  name,
-  value = 1L,
-  attributes = NULL,
-  context = NULL
-) {
-    mtr <- get_meter()
-    ctr <- mtr$create_up_down_counter(name)
-    ctr$add(value, attributes, context)
-    invisible(ctr)
-}
-
-histogram_record_dev <- function(name, value, attributes = NULL, context = NULL) {
-    mtr <- get_meter()
-    ctr <- mtr$create_histogram(name)
-    ctr$record(value, attributes, context)
-    invisible(ctr)
-}
-
-gauge_record_dev <- function(name, value, attributes = NULL, context = NULL) {
-    mtr <- get_meter()
-    ctr <- mtr$create_gauge(name)
-    ctr$record(value, attributes, context)
-    invisible(ctr)
 }
 
 get_active_span_context_dev <- function() {
@@ -159,6 +77,216 @@ pack_http_context_dev <- function() {
 extract_http_context_dev <- function(headers) {
     trc <- get_tracer()
     trc$extract_http_context(headers)
+}
+
+start_span_dev <- function(
+  name = NULL,
+  attributes = NULL,
+  links = NULL,
+  options = NULL,
+  ...,
+  tracer = NULL
+) {
+    if (!inherits(tracer, "otel_tracer")) {
+      tracer <- get_tracer(tracer)
+    }
+    invisible(tracer$start_span(name, attributes, links, options, ...))
+}
+
+end_span_dev <- function(span) {
+    span$end()
+}
+
+start_local_active_span_dev <- function(
+  name = NULL,
+  attributes = NULL,
+  links = NULL,
+  options = NULL,
+  ...,
+  tracer = NULL,
+  activation_scope = parent.frame(),
+  end_on_exit = TRUE
+) {
+    if (!inherits(tracer, "otel_tracer")) {
+      tracer <- get_tracer(tracer)
+    }
+    span <- tracer$start_span(name, attributes, links, options, ...)
+    span$activate(
+      activation_scope = activation_scope, end_on_exit = end_on_exit)
+    invisible(span)
+}
+
+is_tracing_dev <- function(tracer = NULL) {
+    if (!inherits(tracer, "otel_tracer")) {
+      tracer <- get_tracer(tracer)
+    }
+    tracer$is_enabled()
+}
+
+is_logging_dev <- function(logger = NULL) {
+    if (!inherits(logger, "otel_tracer")) {
+      logger <- get_logger(logger)
+    }
+    logger$is_enabled()
+}
+
+is_measuring_dev <- function(meter = NULL) {
+    if (!inherits(meter, "otel_meter")) {
+      meter <- get_meter(meter)
+    }
+    meter$is_enabled()
+}
+
+log_dev <- function(
+  msg,
+  ...,
+  severity = "info",
+  .envir = parent.frame(),
+  logger = NULL
+) {
+    if (!inherits(logger, "otel_logger")) {
+      logger <- get_logger()
+    }
+    logger$log(msg, severity, ..., .envir = .envir)
+    invisible(logger)
+}
+
+log_trace_dev <- function(
+  msg,
+  ...,
+  .envir = parent.frame(),
+  logger = NULL
+) {
+    if (!inherits(logger, "otel_logger")) {
+      logger <- get_logger()
+    }
+    logger$log(msg, "trace", ..., .envir = .envir)
+    invisible(logger)
+}
+
+log_debug_dev <- function(
+  msg,
+  ...,
+  .envir = parent.frame(),
+  logger = NULL
+) {
+    if (!inherits(logger, "otel_logger")) {
+      logger <- get_logger()
+    }
+    logger$log(msg, "debug", ..., .envir = .envir)
+    invisible(logger)
+}
+
+log_info_dev <- function(
+  msg,
+  ...,
+  .envir = parent.frame(),
+  logger = NULL
+) {
+    if (!inherits(logger, "otel_logger")) {
+      logger <- get_logger()
+    }
+    logger$log(msg, "info", ..., .envir = .envir)
+    invisible(logger)
+}
+
+log_warn_dev <- function(
+  msg,
+  ...,
+  .envir = parent.frame(),
+  logger = NULL
+) {
+    if (!inherits(logger, "otel_logger")) {
+      logger <- get_logger()
+    }
+    logger$log(msg, "warn", ..., .envir = .envir)
+    invisible(logger)
+}
+
+log_error_dev <- function(
+  msg,
+  ...,
+  .envir = parent.frame(),
+  logger = NULL
+) {
+    if (!inherits(logger, "otel_logger")) {
+      logger <- get_logger()
+    }
+    logger$log(msg, "error", ..., .envir = .envir)
+    invisible(logger)
+}
+
+log_fatal_dev <- function(
+  msg,
+  ...,
+  .envir = parent.frame(),
+  logger = NULL
+) {
+    if (!inherits(logger, "otel_logger")) {
+      logger <- get_logger()
+    }
+    logger$log(msg, "fatal", ..., .envir = .envir)
+    invisible(logger)
+}
+
+counter_add_dev <- function(
+  name,
+  value = 1L,
+  attributes = NULL,
+  context = NULL,
+  meter = NULL
+) {
+    if (!inherits(meter, "otel_meter")) {
+      meter <- get_meter()
+    }
+    ctr <- meter$create_counter(name)
+    ctr$add(value, attributes, context)
+    invisible(ctr)
+}
+
+up_down_counter_add_dev <- function(
+  name,
+  value = 1L,
+  attributes = NULL,
+  context = NULL,
+  meter = NULL
+) {
+    if (!inherits(meter, "otel_meter")) {
+      meter <- get_meter()
+    }
+    ctr <- meter$create_up_down_counter(name)
+    ctr$add(value, attributes, context)
+    invisible(ctr)
+}
+
+histogram_record_dev <- function(
+  name,
+  value,
+  attributes = NULL,
+  context = NULL,
+  meter = NULL
+) {
+    if (!inherits(meter, "otel_meter")) {
+      meter <- get_meter()
+    }
+    ctr <- meter$create_histogram(name)
+    ctr$record(value, attributes, context)
+    invisible(ctr)
+}
+
+gauge_record_dev <- function(
+  name,
+  value,
+  attributes = NULL,
+  context = NULL,
+  meter = NULL
+) {
+    if (!inherits(meter, "otel_meter")) {
+      meter <- get_meter()
+    }
+    ctr <- meter$create_gauge(name)
+    ctr$record(value, attributes, context)
+    invisible(ctr)
 }
 
 get_default_tracer_provider_dev <- function() {
@@ -180,56 +308,4 @@ get_default_meter_provider_dev <- function() {
       setup_default_meter_provider()
     }
     the$meter_provider
-}
-
-start_shiny_app_dev <- function(service_name = NULL) {
-    service_name <- service_name %||%
-      get_env("OTEL_SERVICE_NAME") %||%
-      basename(getwd())
-    service_name <- as_string(service_name, null = FALSE)
-    Sys.setenv(OTEL_SERVICE_NAME = service_name)
-    the$tracer_app <- get_tracer(service_name)
-    invisible(the$tracer_app)
-}
-
-start_shiny_session_dev <- function(
-    session, attributes = NULL, options = NULL, ...) {
-    name <- get_env("OTEL_SERVICE_NAME")
-    trc <- get_tracer(name)
-    # inactive tracer, do nothing, but return a (session) span
-    if (!trc$is_enabled()) {
-      return(invisible(trc$start_span("session", options, ..., scope = NULL)))
-    }
-
-    attributes[["PATH_INFO"]] <- attributes[["PATH_INFO"]] %||%
-      session[["request"]][["PATH_INFO"]] %||% ""
-    attributes[["HTTP_HOST"]] <- attributes[["HTTP_HOST"]] %||%
-      session[["request"]][["HTTP_HOST"]] %||% ""
-    attributes[["HTTP_ORIGIN"]] <- attributes[["HTTP_ORIGIN"]] %||%
-      session[["request"]][["HTTP_ORIGIN"]] %||% ""
-    attributes[["QUERY_STRING"]] <- attributes[["QUERY_STRING"]] %||%
-      session[["request"]][["QUERY_STRING"]] %||% ""
-    attributes[["SERVER_PORT"]] <- attributes[["SERVER_PORT"]] %||%
-      session[["request"]][["SERVER_PORT"]] %||% -1L
-    try(attributes[["SERVER_PORT"]] <-
-      as.integer(attributes[["SERVER_PORT"]]))
-
-    options[["parent"]] <- options[["parent"]] %||% NA
-
-    assign(
-      "otel_span",
-      trc$start_span(
-        "session",
-        attributes = attributes,
-        options = options,
-        scope = NULL,
-        ...
-      ),
-      envir = session$userData
-    )
-    session$onSessionEnded(function(...) {
-      session$userData$otel_span$end()
-    })
-
-    invisible(session$userData$otel_span)
 }

@@ -152,6 +152,27 @@ NULL
 #' @rdname otel_span
 NULL
 
-doc_arg <- function(name) {
-  "TODO"
+#' TODO
+#' @name otel_tracer
+#' @rdname otel_tracer
+NULL
+
+#' TODO
+#' @name otel_logger
+#' @rdname otel_logger
+NULL
+
+# TODO
+doc_arg <- function() {
+  list(
+    links = "A named list of links to other spans. Every link must be an
+     OpenTelemetry span (`otel_span`) object, or a list with a span
+     object as the first element and named span attributes as the rest.",
+    "span-options" = "A named list of span options. May include:
+     * `start_system_time`: Start time in system time.
+     * `start_steady_time`: Start time using a steady clock.
+     * `parent`: A parent span or span context. If it is `NA`, then the
+       span has no parent and it will be a root span. If it is `NULL`, then
+       the current context is used, i.e. the active span, if any."
+  )
 }

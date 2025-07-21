@@ -2,9 +2,9 @@
 % Please edit documentation in R/api.R
 \name{counter_add}
 \alias{counter_add}
-\title{Increase an OpenTelemetry counter using the default meter}
+\title{Increase an OpenTelemetry counter}
 \usage{
-counter_add(name, value = 1L, attributes = NULL, context = NULL)
+counter_add(name, value = 1L, attributes = NULL, context = NULL, meter = NULL)
 }
 \arguments{
 \item{name}{Name of the counter.}
@@ -15,12 +15,15 @@ counter_add(name, value = 1L, attributes = NULL, context = NULL)
 
 \item{context}{Span context. If missing the active context is used,
 if any.}
+
+\item{meter}{Meter object (\code{otel_meter}). Otherwise it is passed to
+\code{\link[=get_meter]{get_meter()}} to get a meter.}
 }
 \value{
 The counter object, invisibly.
 }
 \description{
-Increase an OpenTelemetry counter using the default meter
+Increase an OpenTelemetry counter
 }
 \seealso{
 Other OpenTelemetry metrics instruments: 

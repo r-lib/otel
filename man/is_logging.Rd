@@ -4,13 +4,21 @@
 \alias{is_logging}
 \title{Check whether OpenTelemetry logging is active}
 \usage{
-is_logging()
+is_logging(logger = NULL)
+}
+\arguments{
+\item{logger}{Logger object (\code{otel_logger}), or a logger name, the
+instrumentation scope, to pass to \code{\link[=get_logger]{get_logger()}}.}
 }
 \value{
 \code{TRUE} is OpenTelemetry logging is active, \code{FALSE} otherwise.
 }
 \description{
-Check whether OpenTelemetry logging is active
+This is useful for avoiding computation when logging is inactive.
+}
+\details{
+It calls \code{\link[=get_logger]{get_logger()}} with \code{name} and then it calls the logger's
+\verb{$is_enabled()} method.
 }
 \seealso{
 Other OpenTelemetry logging: 
