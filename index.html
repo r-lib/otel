@@ -79,19 +79,27 @@
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <ul>
-<li>When instrumenting a package, set the <code>otel_tracer_name</code> variable to your desired default tracer name (also default logger and meter name). See <code><a href="reference/default_tracer_name.html">?otel_tracer_name</a></code>.</li>
-<li>Call <code><a href="reference/start_span.html">otel::start_span()</a></code> to create a span. By default the span ends when the caller function exits.</li>
-<li>Use the <code>$set_attribute()</code>, <code>$add_event()</code>, <code>$add_link()</code> and <code>$set_status()</code> methods of a span to manipulate it.</li>
-<li>See the <a href="https://github.com/r-lib/otelsdk" class="external-link">otelsdk</a> package for producing output from an instrumented R package or project.</li>
+<li><p>To instrument a package, first add the otel package to <code>Suggests</code> in <code>DESCRIPTION</code>.</p></li>
+<li><p>Then set the <code>otel_tracer_name</code> variable to your desired default tracer name (also default logger and meter name). See <code><a href="reference/default_tracer_name.html">?otel_tracer_name</a></code>.</p></li>
+<li>
+<p>At the beginning of functions you want to instrument call <code><a href="reference/start_local_active_span.html">otel::start_local_active_span()</a></code> to create a span. By default the span ends when the caller function exits:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">spn</span> <span class="op">&lt;-</span> <span class="fu">otel</span><span class="fu">::</span><span class="fu"><a href="reference/start_local_active_span.html">start_local_active_span</a></span><span class="op">(</span><span class="st">"fn"</span><span class="op">)</span></span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+</li>
+<li><p>Use the <code>$set_attribute()</code>, <code>$add_event()</code>, <code>$add_link()</code> and <code>$set_status()</code> methods of a span to manipulate it.</p></li>
+<li><p>See the <a href="https://github.com/r-lib/otelsdk" class="external-link">otelsdk</a> package for producing output from an instrumented R package or project.</p></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="performance-impact">Performance impact<a class="anchor" aria-label="anchor" href="#performance-impact"></a>
 </h2>
-<p>Instrumenting your R package with otel will have a minimal performance impact. <code><a href="reference/start_span.html">otel::start_span()</a></code> calls do nothing if no telemetry data is collected, and they do not evaluate their arguments, either. This allows writing</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">otel</span><span class="fu">::</span><span class="fu"><a href="reference/start_span.html">start_span</a></span><span class="op">(</span><span class="st">"myfunction"</span>, attributes <span class="op">=</span> <span class="fu">otel</span><span class="fu">::</span><span class="fu"><a href="reference/as_attributes.html">as_attributes</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
-<p>without worrying about the performance hit of evaluating the <code>attributes</code> and other arguments.</p>
+<p>Instrumenting your R package with otel will have a minimal performance impact. <code><a href="reference/start_local_active_span.html">otel::start_local_active_span()</a></code> calls do nothing if no telemetry data is collected, and they do not evaluate their arguments, either. This allows writing</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">otel</span><span class="fu">::</span><span class="fu"><a href="reference/start_local_active_span.html">start_local_active_span</a></span><span class="op">(</span><span class="st">"myfunction"</span>, attributes <span class="op">=</span> <span class="fu">otel</span><span class="fu">::</span><span class="fu"><a href="reference/as_attributes.html">as_attributes</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<p>without worrying about the performance hit of evaluating <code>attributes</code> and other arguments.</p>
 </div>
 <div class="section level2">
 <h2 id="zero-code-instrumentation">Zero-code instrumentation<a class="anchor" aria-label="anchor" href="#zero-code-instrumentation"></a>
@@ -110,12 +118,12 @@
 </h2>
 <p>To support concurrency on a single thread, e.g. a Shiny app serving multiple requests at the same time, you can manage the lifetime and activation of the OpenTelemetry spans manually. We recommend the following practices for in-process concurrency:</p>
 <ul>
-<li>Create a new long lasting span with <code>otel::start_span(scope = NULL)</code>.</li>
+<li>Create a new long lasting span with <code><a href="reference/start_span.html">otel::start_span()</a></code> instead of <code><a href="reference/start_local_active_span.html">otel::start_local_active_span()</a></code>.</li>
 <li>Assign the returned span into the corresponding object of the concurrent and/or asynchronous computation. Every span has a finalizer that closes the span.</li>
 <li>When running code that belongs concurrent computation represented by the span, activate it for a specific R scope by calling <code><a href="reference/with_active_span.html">with_active_span()</a></code> or <code><a href="reference/local_active_span.html">local_active_span()</a></code>.</li>
-<li>When logging use <code><a href="reference/with_active_span.html">with_active_span()</a></code> or <code><a href="reference/local_active_span.html">local_active_span()</a></code> to activate the span that belongs to the log messages.</li>
+<li>When logging, first use <code><a href="reference/with_active_span.html">with_active_span()</a></code> or <code><a href="reference/local_active_span.html">local_active_span()</a></code> to activate the span that belongs to the log messages.</li>
 <li>Similarly, for metrics, call <code><a href="reference/with_active_span.html">with_active_span()</a></code> or <code><a href="reference/local_active_span.html">local_active_span()</a></code> to link instruments to the correct span.</li>
-<li>When the concurrent computation ends, close the span manually with its <code>$end()</code> method. (Otherwise it would be only closed at the next garbage collection, assuming there are no references to it.)</li>
+<li>When the concurrent computation ends, close the span manually with <code><a href="reference/end_span.html">end_span()</a></code>. (Otherwise it would be only closed at the next garbage collection, assuming there are no references to it.)</li>
 </ul>
 </div>
 <div class="section level2">
