@@ -61,11 +61,19 @@ pak::pak("r-lib/otel")
 
 ## Usage
 
-* When instrumenting a package, set the `otel_tracer_name` variable
-  to your desired default tracer name (also default logger and meter
-  name). See `?otel_tracer_name`.
-* Call `otel::start_span()` to create a span. By default the span ends
-  when the caller function exits.
+* To instrument a package, first add the otel package to `Suggests` in
+  `DESCRIPTION`.
+* Then set the `otel_tracer_name` variable to your desired default tracer
+  name (also default logger and meter name). See `?otel_tracer_name`.
+* At the beginning of functions you want to instrument call
+  `otel::start_local_active_span()` to create a span. By default the
+  span ends when the caller function exits:
+  ```r
+  fn <- function(...) {
+    spn <- otel::start_local_active_span("fn")
+    ...
+  }
+  ```
 * Use the `$set_attribute()`, `$add_event()`, `$add_link()` and
   `$set_status()` methods of a span to manipulate it.
 * See the [otelsdk](https://github.com/r-lib/otelsdk) package for
@@ -74,13 +82,13 @@ pak::pak("r-lib/otel")
 ## Performance impact
 
 Instrumenting your R package with otel will have a minimal performance
-impact. `otel::start_span()` calls do nothing if no telemetry data is
-collected, and they do not evaluate their arguments, either. This allows
-writing
+impact. `otel::start_local_active_span()` calls do nothing if no telemetry
+data is collected, and they do not evaluate their arguments, either. This
+allows writing
 ```r
-otel::start_span("myfunction", attributes = otel::as_attributes(...), ...)
+otel::start_local_active_span("myfunction", attributes = otel::as_attributes(...), ...)
 ```
-without worrying about the performance hit of evaluating the `attributes`
+without worrying about the performance hit of evaluating `attributes`
 and other arguments.
 
 ## Zero-code instrumentation
@@ -119,19 +127,20 @@ multiple requests at the same time, you can manage the lifetime and
 activation of the OpenTelemetry spans manually. We recommend the following
 practices for in-process concurrency:
 
-* Create a new long lasting span with `otel::start_span(scope = NULL)`.
+* Create a new long lasting span with `otel::start_span()` instead of
+  `otel::start_local_active_span()`.
 * Assign the returned span into the corresponding object of the concurrent
   and/or asynchronous computation. Every span has a finalizer that closes
   the span.
 * When running code that belongs concurrent computation represented by the
   span, activate it for a specific R scope by calling `with_active_span()`
   or `local_active_span()`.
-* When logging use `with_active_span()` or `local_active_span()`
+* When logging, first use `with_active_span()` or `local_active_span()`
   to activate the span that belongs to the log messages.
 * Similarly, for metrics, call `with_active_span()` or
   `local_active_span()` to link instruments to the correct span.
 * When the concurrent computation ends, close the span manually
-  with its `$end()` method. (Otherwise it would be only closed at the
+  with `end_span()`. (Otherwise it would be only closed at the
   next garbage collection, assuming there are no references to it.)
 
 ## License
