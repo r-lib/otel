@@ -662,7 +662,7 @@ is_measuring_enabled_safe <- is_measuring_enabled
 #' @param severity Log severity, a string, one of
 #'   `r md_log_severity_levels`.
 #' @param ... Additional arguments are passed to the `$log()` method of
-#'   the default logger.
+#'   the logger.
 #' @param .envir Environment to evaluate the interpolated  expressions of
 #'   the log message in.
 #' @param logger Logger to use. If not an OpenTelemetry logger object

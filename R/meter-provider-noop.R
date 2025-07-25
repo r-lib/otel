@@ -10,8 +10,18 @@ meter_provider_noop <- list(
   new = function() {
     self <- structure(
       list(
-        get_meter = function(name = NULL, ...) {
-          meter_noop$new(name, ...)
+        get_meter = function(
+          name = NULL,
+          version = NULL,
+          schema_url = NULL,
+          attributes = NULL
+        ) {
+          meter_noop$new(
+            name = name,
+            version = version,
+            schema_url = schema_url,
+            attributes = attributes
+          )
         },
         flush = function(timeout = NULL, ...) {
           # noop
@@ -35,7 +45,12 @@ meter_provider_noop <- list(
 )
 
 meter_noop <- list(
-  new = function(name = NULL, ...) {
+  new = function(
+    name = NULL,
+    version = NULL,
+    schema_url = NULL,
+    attributes = NULL
+  ) {
     self <- structure(
       list(
         create_counter = function(

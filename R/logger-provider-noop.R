@@ -10,8 +10,20 @@ logger_provider_noop <- list(
   new = function() {
     structure(
       list(
-        get_logger = function(name = NULL, ...) {
-          logger_noop$new(name, ...)
+        get_logger = function(
+          name = NULL,
+          minimum_severity = NULL,
+          version = NULL,
+          schema_url = NULL,
+          attributes = NULL
+        ) {
+          logger_noop$new(
+            name,
+            minimum_severity = minimum_severity,
+            version = version,
+            schema_url = schema_url,
+            attributes = attributes
+          )
         },
         flush = function() {
           # noop
@@ -26,16 +38,15 @@ logger_provider_noop <- list(
 )
 
 logger_noop <- list(
-  new = function(name = NULL, minimum_severity = NULL, ...) {
+  new = function(
+    name = NULL,
+    minimum_severity = NULL,
+    version = NULL,
+    schema_url = NULL,
+    attributes = NULL
+  ) {
     self <- structure(
       list(
-        get_name = function() "default-logger",
-        create_log_record = function() {
-          log_record_noop$new()
-        },
-        emit_log_record = function(log_record, ...) {
-          invisible(self)
-        },
         trace = function(...) {
           invisible(self)
         },

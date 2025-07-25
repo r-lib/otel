@@ -572,6 +572,7 @@ span_noop <- list(
       ),
       class = c("otel_span_noop", "otel_span")
     )
+    self$name <- name %||% "<NA>"
     self
   }
 )
