@@ -3,6 +3,9 @@
 \name{otel_gauge}
 \alias{otel_gauge}
 \title{OpenTelemetry Gauge Object}
+\value{
+Not applicable.
+}
 \description{
 \link{otel_meter_provider} -> \link{otel_meter} -> \link{otel_counter},
 \link{otel_up_down_counter}, \link{otel_histogram}, \link{otel_gauge}

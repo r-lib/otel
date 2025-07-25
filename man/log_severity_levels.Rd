@@ -4,6 +4,9 @@
 \name{log_severity_levels}
 \alias{log_severity_levels}
 \title{OpenTelemetry log severity levels}
+\value{
+Not applicable.
+}
 \description{
 A named integer vector, the severity levels in numeric form.
 The names are the severity levels in text form. otel functions accept
@@ -15,7 +18,8 @@ log_severity_levels
 \seealso{
 Other OpenTelemetry logs API: 
 \code{\link{is_logging_enabled}()},
-\code{\link{log}()}
+\code{\link{log}()},
+\code{\link{otel_logger}}
 }
 \concept{OpenTelemetry logs API}
 \keyword{datasets}

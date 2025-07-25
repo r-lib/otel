@@ -3,6 +3,9 @@
 \name{otel_span_context}
 \alias{otel_span_context}
 \title{An OpenTelemetry Span Context object}
+\value{
+Not applicable.
+}
 \description{
 \link{otel_tracer_provider} -> \link{otel_tracer} -> \link{otel_span} -> \link{otel_span_context}
 }

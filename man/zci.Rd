@@ -3,6 +3,9 @@
 \name{Zero Code Instrumentation}
 \alias{Zero Code Instrumentation}
 \title{Zero Code Instrumentation}
+\value{
+Not applicable.
+}
 \description{
 otel supports zero-code instrumentation (ZCI) via the
 \code{OTEL_INSTRUMENT_R_PKGS} environment variable. Set this to a comma

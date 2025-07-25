@@ -76,6 +76,9 @@ get_tracer_safe <- get_tracer
 #' @param provider Tracer provider to use. If `NULL`, then it uses
 #'   [get_default_tracer_provider()] to get a tracer provider.
 #' @inheritParams get_tracer
+#'
+#' @return An [otel_logger] object.
+#'
 #' @export
 #' @family OpenTelemetry logging
 #' @examples
@@ -123,6 +126,9 @@ get_logger_safe <- get_logger
 #'   method of the provider.
 #' @param provider Meter provider to use. If `NULL`, then it uses
 #'   [get_default_meter_provider()] to get a tracer provider.
+#'
+#' @return An [otel_meter] object.
+#'
 #' @inheritParams get_tracer
 #' @export
 #' @family OpenTelemetry metrics
@@ -275,6 +281,7 @@ with_active_span_safe <- with_active_span
 #' @usage NULL
 #' @format NULL
 #' @family OpenTelemetry logs API
+#' @return Not applicable.
 #' @examples
 #' log_severity_levels
 
@@ -387,6 +394,8 @@ pack_http_context_safe <- pack_http_context
 #'
 #' @param headers A named list with one or two strings: `traceparent` is
 #' mandatory, and `tracestate` is optional.
+#'
+#' @return And [otel_span_context] object.
 #'
 #' @export
 #' @seealso [pack_http_context()]

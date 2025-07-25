@@ -102,6 +102,7 @@
 #'
 #' @name otel_meter_provider
 #' @family low level metrics API
+#' @return Not applicable.
 #' @examples
 #' mp <- otel::get_default_meter_provider()
 #' mtr <- mp$get_meter()
@@ -119,6 +120,7 @@ NULL
 #' @usage NULL
 #' @format NULL
 #' @export
+#' @return Not applicable.
 #' @examples
 #' meter_provider_noop$new()
 
@@ -290,6 +292,7 @@ meter_provider_noop <- list(
 #'
 #' An OpenTelemetry gauge ([otel_gauge]) object.
 #'
+#' @return Not applicable.
 #' @examples
 #' mp <- get_default_meter_provider()
 #' mtr <- mp$get_meter()
@@ -386,6 +389,7 @@ meter_noop <- list(
 #'
 #' The counter object itself, invisibly.
 #'
+#' @return Not applicable.
 #' @examples
 #' mp <- get_default_meter_provider()
 #' mtr <- mp$get_meter()
@@ -450,6 +454,7 @@ counter_noop <- list(
 #'
 #' The up-down counter object itself, invisibly.
 #'
+#' @return Not applicable.
 #' @examples
 #' mp <- get_default_meter_provider()
 #' mtr <- mp$get_meter()
@@ -515,6 +520,7 @@ up_down_counter_noop <- list(
 #'
 #' The histogram object itself, invisibly.
 #'
+#' @return Not applicable.
 #' @examples
 #' mp <- get_default_meter_provider()
 #' mtr <- mp$get_meter()
@@ -579,6 +585,7 @@ histogram_noop <- list(
 #'
 #' The gauge object itself, invisibly.
 #'
+#' @return Not applicable.
 #' @examples
 #' mp <- get_default_meter_provider()
 #' mtr <- mp$get_meter()

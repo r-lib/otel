@@ -84,6 +84,7 @@
 #'
 #' @name otel_logger_provider
 #' @family low level logs API
+#' @return Not applicable.
 #' @examples
 #' lp <- otel::get_default_logger_provider()
 #' lgr <- lp$get_logger()
@@ -102,6 +103,7 @@ NULL
 #' @format NULL
 #' @keywords internal
 #' @export
+#' @return Not applicable.
 #' @examples
 #' logger_provider_noop$new()
 
@@ -290,6 +292,8 @@ logger_provider_noop <- list(
 #'
 #' The same as `logger$log()`, with `severity = "fatal"`.
 #'
+#' @return Not applicable.
+#' @family OpenTelemetry logs API
 #' @examples
 #' lp <- get_default_logger_provider()
 #' lgr <- lp$get_logger()

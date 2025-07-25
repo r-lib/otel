@@ -4,6 +4,9 @@
 \name{meter_provider_noop}
 \alias{meter_provider_noop}
 \title{No-op Meter Provider}
+\value{
+Not applicable.
+}
 \description{
 This is the meter provider (\link{otel_meter_provider}) otel uses when
 metrics collection is disabled.

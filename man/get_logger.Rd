@@ -36,6 +36,9 @@ method of the provider.}
 \item{provider}{Tracer provider to use. If \code{NULL}, then it uses
 \code{\link[=get_default_tracer_provider]{get_default_tracer_provider()}} to get a tracer provider.}
 }
+\value{
+An \link{otel_logger} object.
+}
 \description{
 Get a logger from the default logger provider
 }

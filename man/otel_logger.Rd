@@ -3,6 +3,9 @@
 \name{otel_logger}
 \alias{otel_logger}
 \title{OpenTelemetry Logger Object}
+\value{
+Not applicable.
+}
 \description{
 \link{otel_logger_provider} -> \link{otel_logger}
 }
@@ -181,5 +184,11 @@ lgr$log("This is a log message from {platform}.", severity = "trace")
 Other low level logs API: 
 \code{\link{logger_provider_noop}},
 \code{\link{otel_logger_provider}}
+
+Other OpenTelemetry logs API: 
+\code{\link{is_logging_enabled}()},
+\code{\link{log}()},
+\code{\link{log_severity_levels}}
 }
+\concept{OpenTelemetry logs API}
 \concept{low level logs API}

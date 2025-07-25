@@ -17,6 +17,9 @@ span_kinds
 
 span_status_codes
 }
+\value{
+Not applicable.
+}
 \description{
 Various constants related OpenTelemetry tracing.
 }

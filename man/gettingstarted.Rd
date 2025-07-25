@@ -4,9 +4,15 @@
 \alias{Getting Started}
 \alias{gettingstarted}
 \title{Getting Started}
+\value{
+Not applicable.
+}
 \description{
 Getting Started
 }
 \details{
 
+}
+\examples{
+# See above
 }

@@ -10,6 +10,9 @@ extract_http_context(headers)
 \item{headers}{A named list with one or two strings: \code{traceparent} is
 mandatory, and \code{tracestate} is optional.}
 }
+\value{
+And \link{otel_span_context} object.
+}
 \description{
 The return value can be used as the \code{parent} option when starting
 a span.

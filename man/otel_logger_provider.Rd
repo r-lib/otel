@@ -3,6 +3,9 @@
 \name{otel_logger_provider}
 \alias{otel_logger_provider}
 \title{OpenTelemetry Logger Provider Object}
+\value{
+Not applicable.
+}
 \description{
 \link{otel_logger_provider} -> \link{otel_logger}
 }

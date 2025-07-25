@@ -6,6 +6,10 @@
 #' @details
 #' ```{r child = "vignettes/gettingstarted.Rmd"}
 #' ```
+#'
+#' @return Not applicable.
+#' @examples
+#' # See above
 NULL
 
 #' Environment variables to configure otel
@@ -155,6 +159,7 @@ NULL
 #' attributes for a single span, log record, metric measurement, etc.
 #' If unset, there is no limit on the lengths of vectors in attributes.
 #'
+#' @return Not applicable.
 #' @examples
 #' # To start an R session using the OTLP exporter:
 #' # OTEL_TRACES_EXPORTER=http R -q -f script.R
@@ -191,6 +196,7 @@ NULL
 #' @rdname zci
 #' @family OpenTelemetry trace API
 #' @seealso [Environment Variables]
+#' @return Not applicable.
 #' @examples
 #' # To run an R script with ZCI:
 #' # OTEL_TRACES_EXPORTER=http OTEL_INSTRUMENT_R_PKGS=dplyr,tidyr R -q -f script.R

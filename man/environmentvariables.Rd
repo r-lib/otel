@@ -3,6 +3,9 @@
 \name{Environment Variables}
 \alias{Environment Variables}
 \title{Environment variables to configure otel}
+\value{
+Not applicable.
+}
 \description{
 This manual page contains the environment variables you can use to
 configure the otel package. Start with the 'Selecting exporters' section

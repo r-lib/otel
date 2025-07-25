@@ -4,6 +4,9 @@
 \name{logger_provider_noop}
 \alias{logger_provider_noop}
 \title{No-op logger provider}
+\value{
+Not applicable.
+}
 \description{
 This is the logger provider (\link{otel_logger_provider}) otel uses when
 logging is disabled.

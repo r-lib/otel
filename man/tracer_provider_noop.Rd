@@ -4,6 +4,9 @@
 \name{tracer_provider_noop}
 \alias{tracer_provider_noop}
 \title{No-op tracer provider}
+\value{
+Not applicable.
+}
 \description{
 This is the tracer provider (\link{otel_tracer_provider}) otel uses when
 tracing is disabled.

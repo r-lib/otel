@@ -32,6 +32,9 @@ method of the provider.}
 \item{provider}{Meter provider to use. If \code{NULL}, then it uses
 \code{\link[=get_default_meter_provider]{get_default_meter_provider()}} to get a tracer provider.}
 }
+\value{
+An \link{otel_meter} object.
+}
 \description{
 Get a meter from the default meter provider
 }

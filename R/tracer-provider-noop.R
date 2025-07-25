@@ -84,6 +84,7 @@
 #' Nothing.
 #'
 #' @name otel_tracer_provider
+#' @return Not applicable.
 #' @family low level trace API
 #' @examples
 #' tp <- otel::get_default_tracer_provider()
@@ -102,6 +103,7 @@ NULL
 #' @usage NULL
 #' @format NULL
 #' @export
+#' @return Not applicable.
 #' @examples
 #' tracer_provider_noop$new()
 
@@ -218,6 +220,7 @@ tracer_provider_noop <- list(
 #'
 #' Nothing.
 #'
+#' @return Not applicable.
 #' @examples
 #' tp <- get_default_tracer_provider()
 #' trc <- tp$get_tracer()
@@ -515,6 +518,7 @@ tracer_noop <- list(
 #'
 #' The span object itself, invisibly.
 #'
+#' @return Not applicable.
 #' @examples
 #' fn <- function() {
 #'   trc <- otel::get_tracer("myapp")
@@ -732,6 +736,7 @@ span_noop <- list(
 #'
 #' @name otel_span_context
 #' @family low level trace API
+#' @return Not applicable.
 #' @examples
 #' spc <- get_active_span_context()
 #' spc$get_trace_flags()

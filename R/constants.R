@@ -13,6 +13,7 @@
 #' @name tracing-constants
 #' @export
 #' @family OpenTelemetry trace API
+#' @return Not applicable.
 #' @examples
 #' invalid_trace_id
 

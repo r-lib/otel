@@ -3,6 +3,9 @@
 \name{otel_tracer}
 \alias{otel_tracer}
 \title{OpenTelemetry Tracer Object}
+\value{
+Not applicable.
+}
 \description{
 \link{otel_tracer_provider} -> \link{otel_tracer} -> \link{otel_span} -> \link{otel_span_context}
 }
