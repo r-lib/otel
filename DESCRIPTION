@@ -27,8 +27,6 @@ Suggests:
     testthat (>= 3.0.0),
     utils,
     withr
-Remotes:
-    r-lib/otelsdk
 Config/Needs/website:
     tidyverse/tidytemplate
 Config/testthat/edition: 3
