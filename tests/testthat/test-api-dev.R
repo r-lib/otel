@@ -1,5 +1,6 @@
 test_that("dev API is up to date", {
   testthat::skip_on_covr()
+  skip_on_cran()
   tmp <- tempfile()
   tmp2 <- tempfile()
   on.exit(unlink(c(tmp, tmp2)), add = TRUE)
