@@ -4,9 +4,6 @@
 \alias{Getting Started}
 \alias{gettingstarted}
 \title{Getting Started}
-\value{
-Not applicable.
-}
 \description{
 Getting Started
 }
@@ -272,91 +269,6 @@ package is also available, then we extract the span context from the
 environment variables, and start a new span that is a child span or the
 remote span obtained from the environment variables. We also set up a
 finalizer that closes this span when the R process terminates.
-}
-}
-
-\section{Architecture}{
-\subsection{Instrumented R package with tracing disabled}{
-
-All \verb{otel::} calls are no-operations.
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{              ┌─────────────────┐
-              │    R package    │
-              ├─⇩───────────────┤
-              │   otel package  │
-              └─────────────────┘
-}\if{html}{\out{</div>}}
-}
-
-\subsection{Instrumented R package with tracing enabled}{
-
-Use environment variables to select the OpenTelemetry exporter to switch
-on. Exporters are in the otelsdk package.
-
-Use environment variables to configure the selected exporter(s). E.g. the
-URL to send the data to.
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{              ┌─────────────────┐
-              │    R package    │
-╭────────╮    ├─⇩───────────────┤
-│env vars│───→│   otel package  │
-╰────────╯    ├─⇩───────────────┤
-      └──────→│ otelsdk package │
-              ├─⇩───────────────┤
-              │opentelemetry-cpp│
-              └─────────────────┘
-}\if{html}{\out{</div>}}
-\subsection{Exporting OpenTelemetry data via OTLP/HTTP:}{
-
-The \code{http} exporter sends OpenTelemetry data using OTLP/HTTP to a collector.
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{              ┌─────────────────┐
-              │    R package    │                      ┊
-╭────────╮    ├─⇩───────────────┤                      ┊
-│env vars│───→│   otel package  │                      ┊
-╰────────╯    ├─⇩───────────────┤                      ┊
-      └──────→│ otelsdk package │                      ┊     ╔═══════════════╗
-              ├─⇩───────────────┤                      ┊     ║ opentelemetry ║
-              │opentelemetry-cpp├──────── OTLP ─────────────→║   collector   ║
-              └─────────────────┘                      ┊     ╚═══════════════╝
-}\if{html}{\out{</div>}}
-}
-
-\subsection{Context propagation to subprocess}{
-
-callr sets the \code{TRACEPARENT} environment variable, that contains the
-OpenTelemetry (span) context, in the main process. The subprocess creates
-a child span of this:
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{              ┌─────────────────┐callr┌────────────┐
-              │    R package    │────→│ subprocess │   ┊
-╭────────╮    ├─⇩───────────────┤     └────────────┘   ┊
-│env vars│───→│   otel package  │              │OTLP   ┊
-╰────────╯    ├─⇩───────────────┤              │       ┊
-      └──────→│ otelsdk package │              │       ┊     ╔═══════════════╗
-              ├─⇩───────────────┤              └────────────→║ opentelemetry ║
-              │opentelemetry-cpp├──────── OTLP ─────────────→║   collector   ║
-              └─────────────────┘                      ┊     ╚═══════════════╝
-}\if{html}{\out{</div>}}
-}
-
-\subsection{Context propagation through HTTP}{
-
-httr2 sets the \code{TRACEPARENT} HTTP header, that contains the OpenTelemetry
-(span) context. The web server creates a child span of this.
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{              ┌─────────────────┐callr┌────────────┐   ┊      ┌────────────┐
-              │    R package    │────→│ subprocess │ ┌───────→│ web server │
-╭────────╮    ├─⇩───────────────┤     └────────────┘ │ ┊      └────────────┘
-│env vars│───→│   otel package  │──────────────┼─────┘ ┊┄┄┄┄┄┄┄┄┄┄┄┄┄│┄┄┄┄┄┄┄┄┄
-╰────────╯    ├─⇩───────────────┤httr2         │       ┊             │
-      └──────→│ otelsdk package │              │       ┊     ╔══════ ↓ ══════╗
-              ├─⇩───────────────┤              └────────────→║ opentelemetry ║
-              │opentelemetry-cpp├──────── OTLP ─────────────→║   collector   ║
-              └─────────────────┘                      ┊     ╚═══════════════╝
-}\if{html}{\out{</div>}}
-}
-
 }
 }
 

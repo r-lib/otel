@@ -2,12 +2,10 @@
 #' @title Getting Started
 #' @rdname gettingstarted
 #' @aliases gettingstarted
-#'
 #' @details
 #' ```{r child = "tools/dox/gettingstarted.Rmd"}
 #' ```
 #'
-#' @return Not applicable.
 #' @examples
 #' # See above
 NULL
