@@ -21,7 +21,9 @@ use."><script defer data-domain="all.r-lib.org,all.tidyverse.org" src="https://p
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/gettingstarted.html">Getting started</a></li>
+<li class="nav-item"><a class="nav-link" href="../TODO">Collecting telemetry data</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/r-lib/otel/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -52,9 +54,8 @@ use.</p>
 
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The default tracer provider, an <code>otel_tracer_provider</code>
-object. See <a href="otel_tracer_provider.html">otel_tracer_provider</a> for the methods of an
-<code>otel_tracer_provider</code> object.</p>
+    <p>The default tracer provider, an <a href="otel_tracer_provider.html">otel_tracer_provider</a>
+object. See <a href="otel_tracer_provider.html">otel_tracer_provider</a> for its methods.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -82,7 +83,47 @@ the <code>&lt;package&gt;</code> package to use as a tracer provider. It calls
 If this fails for some reason, e.g. the package is not installed,
 then it throws an error.</p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other low level trace API:
+<code><a href="get_active_span_context.html">get_active_span_context</a>()</code>,
+<code><a href="otel_span.html">otel_span</a></code>,
+<code><a href="otel_span_context.html">otel_span_context</a></code>,
+<code><a href="otel_tracer.html">otel_tracer</a></code>,
+<code><a href="otel_tracer_provider.html">otel_tracer_provider</a></code>,
+<code><a href="tracer_provider_noop.html">tracer_provider_noop</a></code></p></div>
+    </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_default_tracer_provider</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $get_tracer</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (name = NULL, version = NULL, schema_url = NULL, attributes = NULL) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     tracer_noop$new(name, version, schema_url, attributes)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x55a96c17f1b0&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55a96c183b88&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $flush</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x55a96c17ed18&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55a96c183b88&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $get_spans</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x55a96c17ec70&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55a96c183b88&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "otel_tracer_provider_noop" "otel_tracer_provider"     </span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

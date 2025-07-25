@@ -34,6 +34,8 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="articles/gettingstarted.html">Getting started</a></li>
+<li class="nav-item"><a class="nav-link" href="TODO">Collecting telemetry data</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -56,74 +58,97 @@
 </blockquote>
 <!-- badges: start -->
 
-<p>High-quality, ubiquitous, and portable telemetry to enable effective observability. <a href="https://opentelemetry.io/" class="external-link">OpenTelemetry</a> is a collection of tools, APIs, and SDKs used to instrument, generate, collect, and export telemetry data (metrics, logs, and traces) for analysis in order to understand your software’s performance and behavior.</p>
+<p>OpenTelemetry is an observability framework. <a href="https://opentelemetry.io/" class="external-link">OpenTelemetry</a> is a collection of tools, APIs, and SDKs used to instrument, generate, collect, and export telemetry data such as metrics, logs, and traces, for analysis in order to understand your software’s performance and behavior.</p>
+<p>For an introduction to OpenTelemetry, see the <a href="https://opentelemetry.io/docs/" class="external-link">OpenTelemetry website docs</a>.</p>
+<p>To learn how to instrument your R code, see <a href="articles/gettingstarted.html">Getting Started</a>. For project status, installation instructions and more, read on.</p>
+<div class="section level2">
+<h2 id="features">Features<a class="anchor" aria-label="anchor" href="#features"></a>
+</h2>
+<ul>
+<li>Lightweight packages. otel is a small R package without dependencies and compiled code. otelsdk needs a C++11 compiler and otel.</li>
+<li>Minimal performance impact when tracing is disabled. otel functions do not evaluate their arguments in this case.</li>
+<li>Zero-code instrumentation support. Add tracing to (some) functions of selected packages automatically.</li>
+<li>Configuration via environment variables.</li>
+<li>Minimal extra code. Add tracing to a function with a single extra function call.</li>
+<li>Production mode: otel functions do not crash your production app in production mode.</li>
+<li>Development mode: otel functions error early in development mode.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
+</h2>
+<p>Set <code>otel_tracer_name</code> to the desired tracer name. (See <code><a href="reference/default_tracer_name.html">?otel_tracer_name</a></code>.) Then add <code><a href="reference/start_local_active_span.html">otel::start_local_active_span()</a></code> calls to the functions you want to trace:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">otel_tracer_name</span> <span class="op">&lt;-</span> <span class="st">"&lt;package-id&gt;"</span></span>
+<span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">spn</span> <span class="op">&lt;-</span> <span class="fu">otel</span><span class="fu">::</span><span class="fu"><a href="reference/start_local_active_span.html">start_local_active_span</a></span><span class="op">(</span><span class="st">"fn"</span><span class="op">)</span></span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>See <a href="TODO">Getting Started</a> for details.</p>
+</div>
 <div class="section level2">
 <h2 id="the-otel-and-otelsdk-r-packages">The otel and otelsdk R packages<a class="anchor" aria-label="anchor" href="#the-otel-and-otelsdk-r-packages"></a>
 </h2>
-<p>Use the otel package as a dependency if you want to instrument your R package or project for OpenTelemetry.</p>
+<p>Use the <a href="https://github.com/r-lib/otel" class="external-link">otel</a> package as a dependency if you want to instrument your R package or project for OpenTelemetry.</p>
 <p>Use the <a href="https://github.com/r-lib/otelsdk" class="external-link">otelsdk</a> package to produce OpenTelemetry output from an R package or project that was instrumented with the otel package.</p>
+</div>
+<div class="section level2">
+<h2 id="reference-documentation">Reference Documentation<a class="anchor" aria-label="anchor" href="#reference-documentation"></a>
+</h2>
+<ul>
+<li>otel: <a href="https://otel.r-lib.org/reference" class="uri">https://otel.r-lib.org/reference</a>
+</li>
+<li>otelsdk: <a href="https://otelsdk.r-lib.org/reference" class="external-link uri">https://otelsdk.r-lib.org/reference</a>
+</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="status">Status<a class="anchor" aria-label="anchor" href="#status"></a>
+</h2>
+<p>The current status of the major functional components for OpenTelemetry R is as follows:</p>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr class="header">
+<th><em>Traces</em></th>
+<th><em>Metrics</em></th>
+<th><em>Logs</em></th>
+</tr></thead>
+<tbody><tr class="odd">
+<td><a href="https://opentelemetry.io/docs/specs/otel/versioning-and-stability/#development" class="external-link">Development</a></td>
+<td><a href="https://opentelemetry.io/docs/specs/otel/versioning-and-stability/#development" class="external-link">Development</a></td>
+<td><a href="https://opentelemetry.io/docs/specs/otel/versioning-and-stability/#development" class="external-link">Development</a></td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level2">
+<h2 id="version-support">Version support<a class="anchor" aria-label="anchor" href="#version-support"></a>
+</h2>
+<p>otel and otelsdk support R 3.6.0 and higher on Unix and R 4.3.0 or higher on Windows.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>Install otel from CRAN:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"otel"</span><span class="op">)</span></span></code></pre></div>
 <p>You can install the development version of otel from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"r-lib/otel"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+<h2 id="repositories">Repositories<a class="anchor" aria-label="anchor" href="#repositories"></a>
 </h2>
 <ul>
-<li><p>To instrument a package, first add the otel package to <code>Suggests</code> in <code>DESCRIPTION</code>.</p></li>
-<li><p>Then set the <code>otel_tracer_name</code> variable to your desired default tracer name (also default logger and meter name). See <code><a href="reference/default_tracer_name.html">?otel_tracer_name</a></code>.</p></li>
-<li>
-<p>At the beginning of functions you want to instrument call <code><a href="reference/start_local_active_span.html">otel::start_local_active_span()</a></code> to create a span. By default the span ends when the caller function exits:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">spn</span> <span class="op">&lt;-</span> <span class="fu">otel</span><span class="fu">::</span><span class="fu"><a href="reference/start_local_active_span.html">start_local_active_span</a></span><span class="op">(</span><span class="st">"fn"</span><span class="op">)</span></span>
-<span>  <span class="va">...</span></span>
-<span><span class="op">}</span></span></code></pre></div>
+<li>otel: <a href="https://github.com/r-lib/otel" class="external-link uri">https://github.com/r-lib/otel</a>
 </li>
-<li><p>Use the <code>$set_attribute()</code>, <code>$add_event()</code>, <code>$add_link()</code> and <code>$set_status()</code> methods of a span to manipulate it.</p></li>
-<li><p>See the <a href="https://github.com/r-lib/otelsdk" class="external-link">otelsdk</a> package for producing output from an instrumented R package or project.</p></li>
-</ul>
-</div>
-<div class="section level2">
-<h2 id="performance-impact">Performance impact<a class="anchor" aria-label="anchor" href="#performance-impact"></a>
-</h2>
-<p>Instrumenting your R package with otel will have a minimal performance impact. <code><a href="reference/start_local_active_span.html">otel::start_local_active_span()</a></code> calls do nothing if no telemetry data is collected, and they do not evaluate their arguments, either. This allows writing</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">otel</span><span class="fu">::</span><span class="fu"><a href="reference/start_local_active_span.html">start_local_active_span</a></span><span class="op">(</span><span class="st">"myfunction"</span>, attributes <span class="op">=</span> <span class="fu">otel</span><span class="fu">::</span><span class="fu"><a href="reference/as_attributes.html">as_attributes</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
-<p>without worrying about the performance hit of evaluating <code>attributes</code> and other arguments.</p>
-</div>
-<div class="section level2">
-<h2 id="zero-code-instrumentation">Zero-code instrumentation<a class="anchor" aria-label="anchor" href="#zero-code-instrumentation"></a>
-</h2>
-<p>otel supports zero-code instrumentation via the <code>OTEL_INSTRUMENT_R_PKGS</code> environment variable. Set this to a comma separated list of package names, the packages that you want to instrument. Then otel will hook up <code><a href="https://rdrr.io/r/base/trace.html" class="external-link">base::trace()</a></code> to produce OpenTelemetry output from every function of these packages.</p>
-<p>By default all functions of the listed packages are instrumented. To instrument a subset of all functions set the <code>OTEL_INSTRUMENT_R_PKGS_&lt;PKG&gt;_INCLUDE</code> environment variable to a list of glob expressions. <code>&lt;PKG&gt;</code> is the package name in all capital letters. Only functions that match to at least one glob expression will be instrumented.</p>
-<p>To exclude functions from instrumentation, set the <code>OTEL_INSTRUMENT_R_PKGS_&lt;PKG&gt;_EXCLUDE</code> environment variable to a list of glob expressions. <code>&lt;PKG&gt;</code> is the package name in all capital letters. Functions that match to at least one glob expression will not be instrumented. Inclusion globs are applied before exclusion globs.</p>
-</div>
-<div class="section level2">
-<h2 id="production-and-development-r-sessions">Production and development R sessions<a class="anchor" aria-label="anchor" href="#production-and-development-r-sessions"></a>
-</h2>
-<p>By default otel and otelsdk run in production mode. In production mode otel (and otelsdk) functions never error. This behavior does not help catching errors early during the development of the instrumented project. Set the <code>OTEL_ENV</code> environment variable to <code>dev</code> to switch to development mode, where otel and otelsdk functions fail on errors.</p>
-</div>
-<div class="section level2">
-<h2 id="concurrency">Concurrency<a class="anchor" aria-label="anchor" href="#concurrency"></a>
-</h2>
-<p>To support concurrency on a single thread, e.g. a Shiny app serving multiple requests at the same time, you can manage the lifetime and activation of the OpenTelemetry spans manually. We recommend the following practices for in-process concurrency:</p>
-<ul>
-<li>Create a new long lasting span with <code><a href="reference/start_span.html">otel::start_span()</a></code> instead of <code><a href="reference/start_local_active_span.html">otel::start_local_active_span()</a></code>.</li>
-<li>Assign the returned span into the corresponding object of the concurrent and/or asynchronous computation. Every span has a finalizer that closes the span.</li>
-<li>When running code that belongs concurrent computation represented by the span, activate it for a specific R scope by calling <code><a href="reference/with_active_span.html">with_active_span()</a></code> or <code><a href="reference/local_active_span.html">local_active_span()</a></code>.</li>
-<li>When logging, first use <code><a href="reference/with_active_span.html">with_active_span()</a></code> or <code><a href="reference/local_active_span.html">local_active_span()</a></code> to activate the span that belongs to the log messages.</li>
-<li>Similarly, for metrics, call <code><a href="reference/with_active_span.html">with_active_span()</a></code> or <code><a href="reference/local_active_span.html">local_active_span()</a></code> to link instruments to the correct span.</li>
-<li>When the concurrent computation ends, close the span manually with <code><a href="reference/end_span.html">end_span()</a></code>. (Otherwise it would be only closed at the next garbage collection, assuming there are no references to it.)</li>
+<li>otelsdk: <a href="https://github.com/r-lib/otelsdk" class="external-link uri">https://github.com/r-lib/otelsdk</a>
+</li>
 </ul>
 </div>
 <div class="section level2">

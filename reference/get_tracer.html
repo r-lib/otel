@@ -17,7 +17,9 @@ provider. Then calls its $get_tracer() method to create a new tracer."><script d
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/gettingstarted.html">Getting started</a></li>
+<li class="nav-item"><a class="nav-link" href="../TODO">Collecting telemetry data</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/r-lib/otel/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -89,25 +91,31 @@ method of the provider.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An OpenTelemetry tracer, an <code>otel_tracer</code> object.</p>
+    <p>An OpenTelemetry tracer, an <a href="otel_tracer.html">otel_tracer</a> object.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Calling <code>get_tracer()</code> multiple times with the same <code>name</code> (or same
+    <p>Usually you do not need to call this function directly, because
+<code><a href="start_local_active_span.html">start_local_active_span()</a></code> calls it for you.</p>
+<p>Calling <code>get_tracer()</code> multiple times with the same <code>name</code> (or same
 auto-deduced name) will return the same (internal) tracer object.
 (Even if the R external pointer objects representing them are
 different.)</p>
-<p>A tracer is only destroyed if its tracer provider is destroyed.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other OpenTelemetry tracing:
-<code><a href="extract_http_context.html">extract_http_context</a>()</code>,
-<code><a href="get_active_span_context.html">get_active_span_context</a>()</code>,
-<code><a href="start_local_active_span.html">start_local_active_span</a>()</code>,
-<code><a href="start_span.html">start_span</a>()</code></p></div>
+<p>A tracer is only deleted if its tracer provider is deleted and garbage
+collected.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">myfun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">trc</span> <span class="op">&lt;-</span> <span class="fu">otel</span><span class="fu">::</span><span class="fu">get_tracer</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">spn</span> <span class="op">&lt;-</span> <span class="va">trc</span><span class="op">$</span><span class="fu">start_span</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu">otel</span><span class="fu">::</span><span class="fu"><a href="end_span.html">end_span</a></span><span class="op">(</span><span class="va">spn</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">otel</span><span class="fu">::</span><span class="fu"><a href="local_active_span.html">local_active_span</a></span><span class="op">(</span><span class="va">spn</span>, end_on_exit <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="fu">myfun</span><span class="op">(</span><span class="op">)</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

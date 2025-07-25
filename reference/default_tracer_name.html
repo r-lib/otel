@@ -23,7 +23,9 @@ about choosing and setting the tracer name."><script defer data-domain="all.r-li
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/gettingstarted.html">Getting started</a></li>
+<li class="nav-item"><a class="nav-link" href="../TODO">Collecting telemetry data</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/r-lib/otel/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -64,6 +66,12 @@ below.</p></dd>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A list with entries:</p><ul><li><p><code>name</code>: The supplied or auto-detected tracer name.</p></li>
+<li><p><code>package</code>: Auto-detected package name or <code>NA</code>.</p></li>
+<li><p><code>on</code>: Whether tracing is enabled for this package.</p></li>
+</ul></div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
 
 <div class="section">
@@ -73,7 +81,7 @@ below.</p></dd>
 <p>The name of a tracer identifies an OpenTelemetry instrumentation scope.
 Instrumentation scopes can be used to organize the collected telemetry
 data. otel can also use instrumentation scopes to suppress emitting
-unneeded telemetry data, see '<a href="environment-variables.html">Environment variables</a>'.</p>
+unneeded telemetry data, see '<a href="environmentvariables.html">Environment Variables</a>'.</p>
 <p>For the otel R package it makes sense to create a separate
 instrumentation scope for each R package that emits telemetry data.
 otel can do this automatically, with some from the package author.</p>
@@ -128,6 +136,20 @@ use <code>r.package.&lt;package-name&gt;</code> as the tracer name.</p></li>
 
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">default_tracer_name</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "org.r-project.R"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $package</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "R"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $on</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
