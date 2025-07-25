@@ -1,7 +1,7 @@
-# is_tracing
+# is_tracing_enabled
 
     Code
-      is_tracing()
+      is_tracing_enabled()
     Message
       OpenTelemetry error: nope
     Output
@@ -10,44 +10,44 @@
 ---
 
     Code
-      is_tracing_dev()
+      is_tracing_enabled_dev()
     Condition
       Error in `get_tracer()`:
       ! nope
 
-# is_logging
+# is_logging_enabled
 
     Code
-      is_logging()
+      is_logging_enabled()
     Message
-      OpenTelemetry error: unused argument (logger)
+      OpenTelemetry error: nope
     Output
       [1] FALSE
 
 ---
 
     Code
-      is_logging_dev()
+      is_logging_enabled_dev()
     Condition
       Error in `get_logger()`:
       ! unused argument (logger)
 
-# is_measuring
+# is_measuring_enabled
 
     Code
-      is_measuring()
+      is_measuring_enabled()
     Message
-      OpenTelemetry error: unused argument (meter)
+      OpenTelemetry error: nope
     Output
       [1] FALSE
 
 ---
 
     Code
-      is_measuring_dev()
+      is_measuring_enabled_dev()
     Condition
       Error in `get_meter()`:
-      ! unused argument (meter)
+      ! nope
 
 # get_default_tracer
 
@@ -109,17 +109,17 @@
       Error in `get_tracer()`:
       ! nope
 
-# start_span(scope = NULL)
+# start_span()
 
     Code
-      sessx <- start_span(scope = NULL)
+      sessx <- start_span()
     Message
       OpenTelemetry error: no session
 
 ---
 
     Code
-      start_span_dev(scope = NULL)
+      start_span_dev()
     Condition
       Error in `get_tracer()`:
       ! no session

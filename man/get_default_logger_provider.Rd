@@ -8,7 +8,7 @@
 get_default_logger_provider()
 }
 \value{
-The default logger provider, an \code{otel_logger_provider}
+The default logger provider, an \link{otel_logger_provider}
 object.
 }
 \description{
@@ -47,4 +47,7 @@ the \verb{<package>} package to use as a logger provider. It calls
 If this fails for some reason, e.g. the package is not installed,
 then it throws an error.
 }
+}
+\examples{
+get_default_logger_provider()
 }

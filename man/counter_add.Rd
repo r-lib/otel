@@ -16,7 +16,7 @@ counter_add(name, value = 1L, attributes = NULL, context = NULL, meter = NULL)
 \item{context}{Span context. If missing the active context is used,
 if any.}
 
-\item{meter}{Meter object (\code{otel_meter}). Otherwise it is passed to
+\item{meter}{Meter object (\link{otel_meter}). Otherwise it is passed to
 \code{\link[=get_meter]{get_meter()}} to get a meter.}
 }
 \value{
@@ -35,7 +35,8 @@ Other OpenTelemetry metrics:
 \code{\link{gauge_record}()},
 \code{\link{get_meter}()},
 \code{\link{histogram_record}()},
-\code{\link{is_measuring}()},
+\code{\link{is_measuring_enabled}()},
+\code{\link{otel_meter}},
 \code{\link{up_down_counter_add}()}
 }
 \concept{OpenTelemetry metrics}

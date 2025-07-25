@@ -8,7 +8,7 @@
 get_default_meter_provider()
 }
 \value{
-The default meter provider, an \code{otel_meter_provider}
+The default meter provider, an \link{otel_meter_provider}
 object.
 }
 \description{

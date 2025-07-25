@@ -1,6 +1,16 @@
+#' @name Getting Started
+#' @title Getting Started
+#' @rdname gettingstarted
+#' @aliases gettingstarted
+#'
+#' @details
+#' ```{r child = "vignettes/gettingstarted.Rmd"}
+#' ```
+NULL
+
 #' Environment variables to configure otel
-#' @name Environment variables
-#' @rdname environment-variables
+#' @name Environment Variables
+#' @rdname environmentvariables
 #'
 #' @description
 #' This manual page contains the environment variables you can use to
@@ -103,7 +113,7 @@
 #' excludes packages with an instrumentation scope that starts with
 #' `org.r-lib.` and also dplyr.
 #'
-#' ## Zero Code Instrumentation
+#' ## [Zero Code Instrumentation]
 #'
 #' otel can instrument R packages for OpenTelemetry data collection
 #' without changing their source code. This relies on changing the code
@@ -147,32 +157,79 @@
 #'
 NULL
 
-#' TODO
-#' @name otel_span
-#' @rdname otel_span
-NULL
-
-#' TODO
-#' @name otel_tracer
-#' @rdname otel_tracer
+#' Zero Code Instrumentation
+#'
+#' otel supports zero-code instrumentation (ZCI) via the
+#' `OTEL_INSTRUMENT_R_PKGS` environment variable. Set this to a comma
+#' separated list of package names, the packages that you want to
+#' instrument. Then otel will hook up [base::trace()] to produce
+#' OpenTelemetry output from every function of these packages.
+#'
+#' By default all functions of the listed packages are instrumented. To
+#' instrument a subset of all functions set the
+#' `OTEL_INSTRUMENT_R_PKGS_<PKG>_INCLUDE` environment variable to a list of
+#' glob expressions. `<PKG>` is the package name in all capital letters.
+#' Only functions that match to at least one glob expression will be
+#' instrumented.
+#'
+#' To exclude functions from instrumentation, set the
+#' `OTEL_INSTRUMENT_R_PKGS_<PKG>_EXCLUDE` environment variable to a list of
+#' glob expressions. `<PKG>` is the package name in all capital letters.
+#' Functions that match to at least one glob expression will not be
+#' instrumented. Inclusion globs are applied before exclusion globs.
+#'
+#' ## Caveats
+#'
+#' If the user calls [base::trace()] on an instrumented function, that
+#' deletes the instrumentation, since the second [base::trace()] call
+#' overwrites the first.
+#'
+#' @name Zero Code Instrumentation
+#' @rdname zci
+#' @family OpenTelemetry trace API
+#' @seealso [Environment Variables]
 NULL
 
 #' TODO
 #' @name otel_logger
 #' @rdname otel_logger
+#' @family OpenTelemetry logging
 NULL
 
-# TODO
+#' TODO
+#' @name otel_meter
+#' @rdname otel_meter
+#' @family OpenTelemetry metrics
+NULL
+
 doc_arg <- function() {
   list(
+    "span-name" = "Name of the span. If not specified it will be `\"<NA>\"`.",
+
     links = "A named list of links to other spans. Every link must be an
-     OpenTelemetry span (`otel_span`) object, or a list with a span
+     OpenTelemetry span ([otel_span]) object, or a list with a span
      object as the first element and named span attributes as the rest.",
-    "span-options" = "A named list of span options. May include:
-     * `start_system_time`: Start time in system time.
-     * `start_steady_time`: Start time using a steady clock.
-     * `parent`: A parent span or span context. If it is `NA`, then the
+
+    attributes = glue::glue(
+      trim = FALSE,
+      "Span attributes. OpenTelemetry supports the following
+     R types as attributes: `{paste0(otel_attr_types, collapse = \", \")}.
+     You may use [as_attributes()] to convert other R types to
+     OpenTelemetry attributes."
+    ),
+
+    # need to use \itemize, markdown does not put this list under the other
+    # one for otel_tracer method arguments
+    "span-options" = glue::glue(
+      trim = FALSE,
+      "A named list of span options. May include: \\itemize{{
+       \\item `start_system_time`: Start time in system time.
+       \\item `start_steady_time`: Start time using a steady clock.
+       \\item `parent`: A parent span or span context. If it is `NA`, then the
        span has no parent and it will be a root span. If it is `NULL`, then
-       the current context is used, i.e. the active span, if any."
+       the current context is used, i.e. the active span, if any.
+       \\item `kind`: Span kind, one of [span_kinds]:
+       {paste(dQuote(span_kinds, q = FALSE), collapse = ', ')}.}}"
+    )
   )
 }

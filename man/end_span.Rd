@@ -10,9 +10,47 @@ end_span(span)
 \item{span}{The span to end.}
 }
 \value{
-\code{NULL}.
+Nothing.
 }
 \description{
-You must end every span, by calling \code{end_span}, or using the \code{end_on_exit}
-argument of \code{\link[=local_active_span]{local_active_span()}} or \code{\link[=with_active_span]{with_active_span()}}.
+Spans created with \code{\link[=start_local_active_span]{start_local_active_span()}} end automatically by
+default. You must end every other span manually, by calling \code{end_span},
+or using the \code{end_on_exit} argument of \code{\link[=local_active_span]{local_active_span()}} or
+\code{\link[=with_active_span]{with_active_span()}}.
 }
+\examples{
+fun <- function() {
+  # start span, do not activate
+  spn <- otel::start_span("myfun")
+  # do not leak resources
+  on.exit(otel::end_span(spn), add = TRUE)
+  myfun <- function() {
+     # activate span for this function
+     otel::local_active_span(spn)
+     # create child span
+     spn2 <- otel::start_local_active_span("myfun/2")
+  }
+
+  myfun2 <- function() {
+    # activate span for this function
+    otel::local_active_span(spn)
+    # create child span
+    spn3 <- otel::start_local_active_span("myfun/3")
+  }
+  myfun()
+  myfun2()
+  end_span(spn)
+}
+fun()
+}
+\seealso{
+Other OpenTelemetry trace API: 
+\code{\link{Zero Code Instrumentation}},
+\code{\link{is_tracing_enabled}()},
+\code{\link{local_active_span}()},
+\code{\link{start_local_active_span}()},
+\code{\link{start_span}()},
+\code{\link{tracing-constants}},
+\code{\link{with_active_span}()}
+}
+\concept{OpenTelemetry trace API}

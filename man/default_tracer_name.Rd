@@ -12,6 +12,14 @@ default_tracer_name(name = NULL)
 a tracer (meter, logger) name according to the algorithm detailed
 below.}
 }
+\value{
+A list with entries:
+\itemize{
+\item \code{name}: The supplied or auto-detected tracer name.
+\item \code{package}: Auto-detected package name or \code{NA}.
+\item \code{on}: Whether tracing is enabled for this package.
+}
+}
 \description{
 Exporters, like the ones in the otelsdk package, can use this function
 to determine the default tracer name, if the instrumentation author
@@ -25,7 +33,7 @@ about choosing and setting the tracer name.
 The name of a tracer identifies an OpenTelemetry instrumentation scope.
 Instrumentation scopes can be used to organize the collected telemetry
 data. otel can also use instrumentation scopes to suppress emitting
-unneeded telemetry data, see '\link{Environment variables}'.
+unneeded telemetry data, see '\link{Environment Variables}'.
 
 For the otel R package it makes sense to create a separate
 instrumentation scope for each R package that emits telemetry data.
@@ -83,4 +91,7 @@ good name.
 use \verb{r.package.<package-name>} as the tracer name.
 }
 }
+}
+\examples{
+default_tracer_name()
 }

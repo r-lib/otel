@@ -35,25 +35,31 @@ method of the provider.}
 \code{\link[=get_default_tracer_provider]{get_default_tracer_provider()}} to get a tracer provider.}
 }
 \value{
-An OpenTelemetry tracer, an \code{otel_tracer} object.
+An OpenTelemetry tracer, an \link{otel_tracer} object.
 }
 \description{
 Calls \code{\link[=get_default_tracer_provider]{get_default_tracer_provider()}} to get the default tracer
 provider. Then calls its \verb{$get_tracer()} method to create a new tracer.
 }
 \details{
+Usually you do not need to call this function directly, because
+\code{\link[=start_local_active_span]{start_local_active_span()}} calls it for you.
+
 Calling \code{get_tracer()} multiple times with the same \code{name} (or same
 auto-deduced name) will return the same (internal) tracer object.
 (Even if the R external pointer objects representing them are
 different.)
 
-A tracer is only destroyed if its tracer provider is destroyed.
+A tracer is only deleted if its tracer provider is deleted and garbage
+collected.
 }
-\seealso{
-Other OpenTelemetry tracing: 
-\code{\link{extract_http_context}()},
-\code{\link{get_active_span_context}()},
-\code{\link{start_local_active_span}()},
-\code{\link{start_span}()}
+\examples{
+myfun <- function() {
+  trc <- otel::get_tracer()
+  spn <- trc$start_span()
+  on.exit(otel::end_span(spn), add = TRUE)
+  otel::local_active_span(spn, end_on_exit = TRUE)
 }
-\concept{OpenTelemetry tracing}
+myfun()
+}
+\concept{low level tracing API}

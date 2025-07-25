@@ -1,4 +1,5 @@
 test_that("default_tracer_name", {
+  skip_on_cran()
   withr::local_envvar(structure(
     NA_character_,
     names = otel_emit_scopes_envvar

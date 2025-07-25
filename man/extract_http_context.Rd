@@ -14,11 +14,4 @@ mandatory, and \code{tracestate} is optional.}
 The return value can be used as the \code{parent} option when starting
 a span.
 }
-\seealso{
-Other OpenTelemetry tracing: 
-\code{\link{get_active_span_context}()},
-\code{\link{get_tracer}()},
-\code{\link{start_local_active_span}()},
-\code{\link{start_span}()}
-}
 \concept{OpenTelemetry tracing}

@@ -8,9 +8,8 @@
 get_default_tracer_provider()
 }
 \value{
-The default tracer provider, an \code{otel_tracer_provider}
-object. See \link{otel_tracer_provider} for the methods of an
-\code{otel_tracer_provider} object.
+The default tracer provider, an \link{otel_tracer_provider}
+object. See \link{otel_tracer_provider} for its methods.
 }
 \description{
 The tracer provider defines how traces are exported when collecting
@@ -49,3 +48,16 @@ If this fails for some reason, e.g. the package is not installed,
 then it throws an error.
 }
 }
+\examples{
+get_default_tracer_provider()
+}
+\seealso{
+Other low level trace API: 
+\code{\link{get_active_span_context}()},
+\code{\link{otel_span}},
+\code{\link{otel_span_context}},
+\code{\link{otel_tracer}},
+\code{\link{otel_tracer_provider}},
+\code{\link{tracer_provider_noop}}
+}
+\concept{low level trace API}

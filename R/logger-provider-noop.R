@@ -1,3 +1,7 @@
+#' OpenTelemetry logger provider objects
+#' @name otel_logger_provider
+NULL
+
 #' No-op logger provider
 #' @keywords internal
 #' @export

@@ -2,15 +2,22 @@
 % Please edit documentation in R/tracer-provider-noop.R
 \name{otel_tracer_provider}
 \alias{otel_tracer_provider}
-\title{OpenTelemetry tracer provider objects}
+\title{OpenTelemetry Tracer Provider Object}
 \description{
+\link{otel_tracer_provider} -> \link{otel_tracer} -> \link{otel_span} -> \link{otel_span_context}
+}
+\details{
 The tracer provider defines how traces are exported when collecting
 telemetry data. It is unlikely that you'd need to use tracer provider
 objects directly.
-}
-\details{
-\subsection{Implementations}{
 
+Usually there is a single tracer provider for an R app or script.
+
+Typically the tracer provider is created automatically, at the first
+\code{\link[=start_local_active_span]{start_local_active_span()}} or \code{\link[=start_span]{start_span()}} call. otel decides which
+tracer provider class to use based on \link{Environment Variables}.
+}
+\section{Implementations}{
 Note that this list is updated manually and may be incomplete.
 \itemize{
 \item \link{tracer_provider_noop}: No-op tracer provider, used when no traces are
@@ -25,16 +32,13 @@ or error or to a file. Primarily for debugging.
 }
 }
 
-\subsection{Methods}{
-\subsection{Method: \code{get_tracer()}}{
-\subsection{Description}{
+\section{Methods}{
+\subsection{\code{tracer_provider$get_tracer()}}{
 
 Get or create a new tracer object.
-}
-
 \subsection{Usage}{
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{$get_tracer(
+\if{html}{\out{<div class="sourceCode">}}\preformatted{tracer_provider$get_tracer(
   name = NULL,
   version = NULL,
   schema_url = NULL,
@@ -56,6 +60,11 @@ attributes to associate with emitted telemetry.
 }
 }
 
+\subsection{Value}{
+
+Returns an OpenTelemetry tracer (\link{otel_tracer}) object.
+}
+
 \subsection{See also}{
 
 \code{\link[=get_tracer]{get_tracer()}}.
@@ -63,20 +72,36 @@ attributes to associate with emitted telemetry.
 
 }
 
-\subsection{Method: \code{flush()}}{
-\subsection{Description}{
+\subsection{\code{tracer_provider$flush()}}{
 
 Force any buffered spans to flush. Tracer providers might not implement
 this method.
-}
-
 \subsection{Usage}{
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{$flush()
+\if{html}{\out{<div class="sourceCode">}}\preformatted{tracer_provider$flush()
 }\if{html}{\out{</div>}}
 }
 
+\subsection{Value}{
+
+Nothing.
 }
 
 }
 }
+
+\examples{
+tp <- otel::get_default_tracer_provider()
+trc <- tp$get_tracer()
+trc$is_enabled()
+}
+\seealso{
+Other low level trace API: 
+\code{\link{get_active_span_context}()},
+\code{\link{get_default_tracer_provider}()},
+\code{\link{otel_span}},
+\code{\link{otel_span_context}},
+\code{\link{otel_tracer}},
+\code{\link{tracer_provider_noop}}
+}
+\concept{low level trace API}

@@ -11,7 +11,7 @@
 #' The name of a tracer identifies an OpenTelemetry instrumentation scope.
 #' Instrumentation scopes can be used to organize the collected telemetry
 #' data. otel can also use instrumentation scopes to suppress emitting
-#' unneeded telemetry data, see '[Environment variables]'.
+#' unneeded telemetry data, see '[Environment Variables]'.
 #'
 #' For the otel R package it makes sense to create a separate
 #' instrumentation scope for each R package that emits telemetry data.
@@ -68,8 +68,16 @@
 #'   a tracer (meter, logger) name according to the algorithm detailed
 #'   below.
 #'
+#' @return A list with entries:
+#'
+#'   * `name`: The supplied or auto-detected tracer name.
+#'   * `package`: Auto-detected package name or `NA`.
+#'   * `on`: Whether tracing is enabled for this package.
+#'
 #' @aliases otel_tracer_name
 #' @export
+#' @examples
+#' default_tracer_name()
 
 default_tracer_name <- function(name = NULL) {
   if (!is.null(name)) {

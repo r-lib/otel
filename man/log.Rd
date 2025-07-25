@@ -32,13 +32,13 @@ braces.}
 the default logger.}
 
 \item{severity}{Log severity, a string, one of
-"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24".}
+"trace", "trace2", "trace3", "trace4", "debug", "debug2", "debug3", "debug4", "info", "info2", "info3", "info4", "warn", "warn2", "warn3", "warn4", "error", "error2", "error3", "error4", "fatal", "fatal2", "fatal3", "fatal4".}
 
 \item{.envir}{Environment to evaluate the interpolated  expressions of
 the log message in.}
 
 \item{logger}{Logger to use. If not an OpenTelemetry logger object
-(\code{otel_logger}), then it passed to \code{\link[=get_logger]{get_logger()}} to get a logger.}
+(\link{otel_logger}), then it passed to \code{\link[=get_logger]{get_logger()}} to get a logger.}
 }
 \value{
 The logger, invisibly.
@@ -65,10 +65,14 @@ Log an OpenTelemetry log message
 \code{log_fatal()} is the same as \code{log()} with \code{severity_level}
 "fatal".
 }
+\examples{
+host <- "my.db.host"
+port <- 6667
+otel::log("Connecting to database at {host}:{port}")
+}
 \seealso{
-Other OpenTelemetry logging: 
-\code{\link{get_logger}()},
-\code{\link{is_logging}()},
+Other OpenTelemetry logs API: 
+\code{\link{is_logging_enabled}()},
 \code{\link{log_severity_levels}}
 }
-\concept{OpenTelemetry logging}
+\concept{OpenTelemetry logs API}

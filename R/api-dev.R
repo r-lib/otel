@@ -116,21 +116,21 @@ start_local_active_span_dev <- function(
     invisible(span)
 }
 
-is_tracing_dev <- function(tracer = NULL) {
+is_tracing_enabled_dev <- function(tracer = NULL) {
     if (!inherits(tracer, "otel_tracer")) {
       tracer <- get_tracer(tracer)
     }
     tracer$is_enabled()
 }
 
-is_logging_dev <- function(logger = NULL) {
+is_logging_enabled_dev <- function(logger = NULL) {
     if (!inherits(logger, "otel_tracer")) {
       logger <- get_logger(logger)
     }
     logger$is_enabled()
 }
 
-is_measuring_dev <- function(meter = NULL) {
+is_measuring_enabled_dev <- function(meter = NULL) {
     if (!inherits(meter, "otel_meter")) {
       meter <- get_meter(meter)
     }

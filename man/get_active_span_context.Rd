@@ -16,10 +16,12 @@ This is sometimes useful when writing loggers or meters, to associate
 logging and metrics reporting with traces.
 }
 \seealso{
-Other OpenTelemetry tracing: 
-\code{\link{extract_http_context}()},
-\code{\link{get_tracer}()},
-\code{\link{start_local_active_span}()},
-\code{\link{start_span}()}
+Other low level trace API: 
+\code{\link{get_default_tracer_provider}()},
+\code{\link{otel_span}},
+\code{\link{otel_span_context}},
+\code{\link{otel_tracer}},
+\code{\link{otel_tracer_provider}},
+\code{\link{tracer_provider_noop}}
 }
-\concept{OpenTelemetry tracing}
+\concept{low level trace API}

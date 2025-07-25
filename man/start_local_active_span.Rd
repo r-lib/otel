@@ -18,55 +18,68 @@ start_local_active_span(
 \arguments{
 \item{name}{Name of the span. If not specified it will be \code{"<NA>"}.}
 
-\item{attributes}{Span attributes. You may use \code{\link[=as_attributes]{as_attributes()}} to
-convert R objects to OpenTelemetry attributes. OpenTelemetry supports
-the following R types as attributes:
-character, logical, double, integer.}
+\item{attributes}{Span attributes. OpenTelemetry supports the following
+R types as attributes: `character, logical, double, integer.
+You may use \code{\link[=as_attributes]{as_attributes()}} to convert other R types to
+OpenTelemetry attributes.}
 
 \item{links}{A named list of links to other spans. Every link must be an
-OpenTelemetry span (\code{otel_span}) object, or a list with a span
+OpenTelemetry span (\link{otel_span}) object, or a list with a span
 object as the first element and named span attributes as the rest.}
 
-\item{options}{A named list of span options. May include:
-* \code{start_system_time}: Start time in system time.
-* \code{start_steady_time}: Start time using a steady clock.
-* \code{parent}: A parent span or span context. If it is \code{NA}, then the
+\item{options}{A named list of span options. May include: \itemize{
+\item \code{start_system_time}: Start time in system time.
+\item \code{start_steady_time}: Start time using a steady clock.
+\item \code{parent}: A parent span or span context. If it is \code{NA}, then the
 span has no parent and it will be a root span. If it is \code{NULL}, then
-the current context is used, i.e. the active span, if any.}
+the current context is used, i.e. the active span, if any.
+\item \code{kind}: Span kind, one of \link{span_kinds}:
+"internal", "server", "client", "producer", "consumer".}}
 
-\item{...}{Additional arguments are passed to the \code{get_tracer()} method
+\item{...}{Additional arguments are passed to the \code{start_span()} method
 of the tracer.}
 
 \item{tracer}{A tracer object or the name of the tracer to use, see
-\code{\link[=get_tracer]{get_tracer()}}.}
+\code{\link[=get_tracer]{get_tracer()}}. If \code{NULL} then \code{\link[=default_tracer_name]{default_tracer_name()}} is used.}
 
 \item{activation_scope}{The R scope to activate the span for. Defaults
-to the called frame.}
+to the caller frame.}
 
 \item{end_on_exit}{Whether to also end the span when the activation scope
 exits.}
 }
 \value{
-The new OpenTelemetry span object (of class \code{otel_span}),
+The new OpenTelemetry span object (of class \link{otel_span}),
 invisibly. See \link{otel_span} for information about the returned object.
 }
 \description{
 Creates, starts and activates an OpenTelemetry span.
+
+Usually you want this functions instead of \code{\link[=start_span]{start_span()}}, which does
+not activate the new span.
 }
 \details{
-Usually you want this functions instead of [start_local())], which
-does not activate the new span.
-
 If \code{end_on_exit} is \code{TRUE} (the default), then it also ends the span
 when the activation scope finishes.
-
-[start_local())]: R:start_local())
+}
+\examples{
+fn1 <- function() {
+  otel::start_local_active_span("fn1")
+  fn2()
+}
+fn2 <- function() {
+  otel::start_local_active_span("fn2")
+}
+fn1()
 }
 \seealso{
-Other OpenTelemetry tracing: 
-\code{\link{extract_http_context}()},
-\code{\link{get_active_span_context}()},
-\code{\link{get_tracer}()},
-\code{\link{start_span}()}
+Other OpenTelemetry trace API: 
+\code{\link{Zero Code Instrumentation}},
+\code{\link{end_span}()},
+\code{\link{is_tracing_enabled}()},
+\code{\link{local_active_span}()},
+\code{\link{start_span}()},
+\code{\link{tracing-constants}},
+\code{\link{with_active_span}()}
 }
-\concept{OpenTelemetry tracing}
+\concept{OpenTelemetry trace API}

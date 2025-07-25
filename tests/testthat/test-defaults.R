@@ -54,6 +54,7 @@ test_that("get_default_tracer_provider", {
 })
 
 test_that("setup_default_tracer_provider", {
+  skip_on_cran()
   local_otel_cache()
   set_ev <- function(x, wh = c("r", "generic", "both")) {
     wh <- match.arg(wh)
@@ -186,6 +187,7 @@ test_that("get_default_logger_provider", {
 })
 
 test_that("setup_default_logger_provider", {
+  skip_on_cran()
   local_otel_cache()
   set_ev <- function(x, wh = c("r", "generic", "both")) {
     wh <- match.arg(wh)
@@ -310,6 +312,7 @@ test_that("get_default_meter_provider", {
 })
 
 test_that("setup_default_meter_provider", {
+  skip_on_cran()
   local_otel_cache()
   set_ev <- function(x, wh = c("r", "generic", "both")) {
     wh <- match.arg(wh)

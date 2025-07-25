@@ -4,12 +4,16 @@
 #' Calls [get_default_tracer_provider()] to get the default tracer
 #' provider. Then calls its `$get_tracer()` method to create a new tracer.
 #'
+#' Usually you do not need to call this function directly, because
+#' [start_local_active_span()] calls it for you.
+#'
 #' Calling `get_tracer()` multiple times with the same `name` (or same
 #' auto-deduced name) will return the same (internal) tracer object.
 #' (Even if the R external pointer objects representing them are
 #' different.)
 #'
-#' A tracer is only destroyed if its tracer provider is destroyed.
+#' A tracer is only deleted if its tracer provider is deleted and garbage
+#' collected.
 #'
 #' @param name Name of the new tracer. If missing, then deduced
 #'   automatically using [default_tracer_name()]. Make sure you read
@@ -26,9 +30,18 @@
 #' @param provider Tracer provider to use. If `NULL`, then it uses
 #'   [get_default_tracer_provider()] to get a tracer provider.
 #'
-#' @return An OpenTelemetry tracer, an `otel_tracer` object.
+#' @return An OpenTelemetry tracer, an [otel_tracer] object.
+#'
 #' @export
-#' @family OpenTelemetry tracing
+#' @family low level tracing API
+#' @examples
+#' myfun <- function() {
+#'   trc <- otel::get_tracer()
+#'   spn <- trc$start_span()
+#'   on.exit(otel::end_span(spn), add = TRUE)
+#'   otel::local_active_span(spn, end_on_exit = TRUE)
+#' }
+#' myfun()
 
 # safe start
 get_tracer <- function(
@@ -133,13 +146,31 @@ get_meter_safe <- get_meter
 
 #' Activate an OpenTelemetry span for an R scope
 #'
+#' @description
+#' Activates the span for the caller (or other) frame.
+#'
+#' Usually you need this function for spans created with [start_span()],
+#' which does not activate the new span. Usually you don't need it for
+#' spans created with [start_local_active_span()], because it activates
+#' the new span automatically.
+#'
+#' @details
+#' When the frame ends, the span is deactivated and the previously active
+#' span will be active again, if there was any.
+#'
+#' It is possible to activate the same span for multiple R frames.
+#'
 #' @param span The OpenTelemetry span to activate.
 #' @param end_on_exit Whether to end the span when exiting the activation
 #'   scope.
 #' @param activation_scope The scope to activate the span for, defaults to
 #'   the caller frame.
+#' @return Nothing.
 #'
 #' @export
+#' @family OpenTelemetry trace API
+#' @family tracing for concurrent code
+#' @inherit start_span examples
 
 # safe start
 local_active_span <- function(
@@ -159,11 +190,52 @@ local_active_span_safe <- local_active_span
 
 #' Evaluate R code with an active OpenTelemetry span
 #'
+#' @description
+#' Activates the span for evaluating an R expression.
+#'
+#' Usually you need this function for spans created with [start_span()],
+#' which does not activate the new span. Usually you don't need it for
+#' spans created with [start_local_active_span()], because it activates
+#' the new span automatically.
+#'
+#' @details
+#' After `expr` is evaluated (or an error occurs), the span is deactivated
+#' and the previously active span will be active again, if there was any.
+#'
+#' It is possible to activate the same span for multiple R frames.
+#'
 #' @param span The OpenTelemetry span to activate.
 #' @param expr R expression to evaluate.
 #' @param end_on_exit Whether to end after evaluating the R expression.
 #' @return The return value of `expr`.
+#'
 #' @export
+#' @family OpenTelemetry trace API
+#' @family tracing for concurrent code
+#' @examples
+#' fun <- function() {
+#'   # start span, do not activate
+#'   spn <- otel::start_span("myfun")
+#'   # do not leak resources
+#'   on.exit(otel::end_span(spn), add = TRUE)
+#'   myfun <- function() {
+#'      otel::with_active_span(spn, {
+#'        # create child span
+#'        spn2 <- otel::start_local_active_span("myfun/2")
+#'      })
+#'   }
+#'
+#'   myfun2 <- function() {
+#'     otel::with_active_span(spn, {
+#'       # create child span
+#'       spn3 <- otel::start_local_active_span("myfun/3")
+#'     })
+#'   }
+#'   myfun()
+#'   myfun2()
+#'   end_span(spn)
+#' }
+#' fun()
 
 # safe start
 with_active_span <- function(span, expr, end_on_exit = FALSE) {
@@ -186,9 +258,12 @@ with_active_span_safe <- with_active_span
 #' The names are the severity levels in text form. otel functions accept
 #' both forms as severity levels, but the text form is more readable.
 #'
-#' @family OpenTelemetry constants
 #' @export
-#' @family OpenTelemetry logging
+#' @usage NULL
+#' @format NULL
+#' @family OpenTelemetry logs API
+#' @examples
+#' log_severity_levels
 
 log_severity_levels <- c(
   "trace" = 1L,
@@ -220,7 +295,7 @@ log_severity_levels <- c(
 
 md_log_severity_levels <- paste0(
   "\"",
-  log_severity_levels,
+  names(log_severity_levels),
   "\"",
   collapse = ", "
 )
@@ -235,7 +310,7 @@ md_log_severity_levels <- paste0(
 #' `FALSE` for the returned `spc`.
 #'
 #' @export
-#' @family OpenTelemetry tracing
+#' @family low level trace API
 
 # safe start
 get_active_span_context <- function() {
@@ -302,31 +377,61 @@ extract_http_context_safe <- extract_http_context
 
 #' Start an OpenTelemetry span.
 #'
+#' @description
 #' Creates a new OpenTelemetry span and starts it, without activating it.
 #'
 #' Usually you want [start_local_active_span()] instead of `start_span`.
-#' [start_local_active_span() also activates the span for the caller frame,
-#' and ends the span when the called frame exits.
+#' [start_local_active_span()] also activates the span for the caller frame,
+#' and ends the span when the caller frame exits.
+#'
+#' @details
+#' Only use `start_span()` is you need to manage the span's activation
+#' manually. Otherwise use [start_local_active_span()].
 #'
 #' You must end the span by calling [end_span()]. Alternatively you
 #' can also end it with [local_active_span()] or [with_active_span()] by
 #' setting `end_on_exit = TRUE`.
 #'
-#' @param name Name of the span. If not specified it will be `"<NA>"`.
-#' @param attributes Span attributes. You may use [as_attributes()] to
-#'   convert R objects to OpenTelemetry attributes. OpenTelemetry supports
-#'   the following R types as attributes:
-#'   `r paste0(otel_attr_types, collapse = ", ")`.
+#' It is a good idea to end spans created with `start_span()` in an
+#' [base::on.exit()] call.
+#'
+#' @param name `r doc_arg()[["span-name"]]`
+#' @param attributes `r doc_arg()[["attributes"]]`
 #' @param links `r doc_arg()[["links"]]`
 #' @param options `r doc_arg()[["span-options"]]`
-#' @param ... Additional arguments are passed to the `get_tracer()` method
+#' @param ... Additional arguments are passed to the `start_span()` method
 #'   of the tracer.
 #' @param tracer A tracer object or the name of the tracer to use, see
-#'   [get_tracer()].
-#' @return An OpenTelemetry span (`otel_span`).
+#'   [get_tracer()]. If `NULL` then [default_tracer_name()] is used.
 #'
-#' @family OpenTelemetry tracing
+#' @return An OpenTelemetry span ([otel_span]).
+#'
+#' @family OpenTelemetry trace API
 #' @export
+#' @examples
+#' fun <- function() {
+#'   # start span, do not activate
+#'   spn <- otel::start_span("myfun")
+#'   # do not leak resources
+#'   on.exit(otel::end_span(spn), add = TRUE)
+#'   myfun <- function() {
+#'      # activate span for this function
+#'      otel::local_active_span(spn)
+#'      # create child span
+#'      spn2 <- otel::start_local_active_span("myfun/2")
+#'   }
+#'
+#'   myfun2 <- function() {
+#'     # activate span for this function
+#'     otel::local_active_span(spn)
+#'     # create child span
+#'     spn3 <- otel::start_local_active_span("myfun/3")
+#'   }
+#'   myfun()
+#'   myfun2()
+#'   end_span(spn)
+#' }
+#' fun()
 
 # safe start
 start_span <- function(
@@ -353,11 +458,17 @@ start_span_safe <- start_span
 
 #' End an OpenTelemetry span
 #'
-#' You must end every span, by calling `end_span`, or using the `end_on_exit`
-#' argument of [local_active_span()] or [with_active_span()].
+#' Spans created with [start_local_active_span()] end automatically by
+#' default. You must end every other span manually, by calling `end_span`,
+#' or using the `end_on_exit` argument of [local_active_span()] or
+#' [with_active_span()].
+#'
 #'
 #' @param span The span to end.
-#' @return `NULL`.
+#' @return Nothing.
+#'
+#' @inherit start_span examples
+#' @family OpenTelemetry trace API
 #'
 #' @export
 
@@ -376,23 +487,36 @@ end_span_safe <- end_span
 
 #' Start and activate a span
 #'
+#' @description
 #' Creates, starts and activates an OpenTelemetry span.
 #'
-#' Usually you want this functions instead of [start_local())], which
-#' does not activate the new span.
+#' Usually you want this functions instead of [start_span()], which does
+#' not activate the new span.
 #'
+#' @details
 #' If `end_on_exit` is `TRUE` (the default), then it also ends the span
 #' when the activation scope finishes.
 #'
 #' @param activation_scope The R scope to activate the span for. Defaults
-#'   to the called frame.
+#'   to the caller frame.
 #' @param end_on_exit Whether to also end the span when the activation scope
 #'   exits.
 #' @inheritParams start_span
-#' @return The new OpenTelemetry span object (of class `otel_span`),
+#'
+#' @return The new OpenTelemetry span object (of class [otel_span]),
 #'   invisibly. See [otel_span] for information about the returned object.
-#' @family OpenTelemetry tracing
+#'
+#' @family OpenTelemetry trace API
 #' @export
+#' @examples
+#' fn1 <- function() {
+#'   otel::start_local_active_span("fn1")
+#'   fn2()
+#' }
+#' fn2 <- function() {
+#'   otel::start_local_active_span("fn2")
+#' }
+#' fn1()
 
 # safe start
 start_local_active_span <- function(
@@ -422,23 +546,32 @@ start_local_active_span <- function(
 
 start_local_active_span_safe <- start_local_active_span
 
-#' Check whether OpenTelemetry tracing is active
+#' Check if tracing is active
 #'
-#' This is useful for avoiding computation when tracing is inactive.
+#' Checks whether OpenTelemetry tracing is active. This can be useful
+#' to avoid unnecessary computation when tracing is inactive.
 #'
 #' It calls [get_tracer()] with `name` and then it calls the tracer's
 #' `$is_enabled()` method.
 #'
-#' @param tracer Tracer object (`otel_tracer`), or a tracer name, the
-#'   instrumentation scope, to pass to [get_tracer()].
+#' @param tracer Tracer object ([otel_tracer]). It can also be a tracer
+#'   name, the instrumentation scope, or `NULL` for determining the tracer
+#'   name automatically. Passed to [get_tracer()] if not a tracer object.
 #' @return `TRUE` is OpenTelemetry tracing is active, `FALSE` otherwise.
 #'
 #' @export
-#' @family OpenTelemetry tracing
-#' TODO
+#' @family OpenTelemetry trace API
+#' @examples
+#' fun <- function() {
+#'   if (otel::is_tracing_enabled()) {
+#'     xattr <- calculate_some_extra_attributes()
+#'     otel::start_local_active_span("fun", attributes = xattr)
+#'   }
+#'   # ...
+#' }
 
 # safe start
-is_tracing <- function(tracer = NULL) {
+is_tracing_enabled <- function(tracer = NULL) {
   tryCatch({                                                         # safe
     if (!inherits(tracer, "otel_tracer")) {
       tracer <- get_tracer(tracer)
@@ -451,7 +584,7 @@ is_tracing <- function(tracer = NULL) {
 }
 # safe end
 
-is_tracing_safe <- is_tracing
+is_tracing_enabled_safe <- is_tracing_enabled
 
 #' Check whether OpenTelemetry logging is active
 #'
@@ -460,15 +593,23 @@ is_tracing_safe <- is_tracing
 #' It calls [get_logger()] with `name` and then it calls the logger's
 #' `$is_enabled()` method.
 #'
-#' @param logger Logger object (`otel_logger`), or a logger name, the
+#' @param logger Logger object ([otel_logger]), or a logger name, the
 #'   instrumentation scope, to pass to [get_logger()].
 #' @return `TRUE` is OpenTelemetry logging is active, `FALSE` otherwise.
 #'
 #' @export
-#' @family OpenTelemetry logging
+#' @family OpenTelemetry logs API
+#' @examples
+#' fun <- function() {
+#'   if (otel::is_logging_enabled()) {
+#'     xattr <- calculate_some_extra_attributes()
+#'     otel::log("Starting fun", attributes = xattr)
+#'   }
+#'   # ...
+#' }
 
 # safe start
-is_logging <- function(logger = NULL) {
+is_logging_enabled <- function(logger = NULL) {
   tryCatch({                                                         # safe
     if (!inherits(logger, "otel_tracer")) {
       logger <- get_logger(logger)
@@ -481,7 +622,7 @@ is_logging <- function(logger = NULL) {
 }
 # safe end
 
-is_logging_safe <- is_logging
+is_logging_enabled_safe <- is_logging_enabled
 
 #' Check whether OpenTelemetry metrics collection is active
 #'
@@ -490,7 +631,7 @@ is_logging_safe <- is_logging
 #' It calls [get_meter()] with `name` and then it calls the meter's
 #' `$is_enabled()` method.
 #'
-#' @param meter Meter object (`otel_meter`), or a meter name, the
+#' @param meter Meter object ([otel_meter]), or a meter name, the
 #'   instrumentation scope, to pass to [get_meter()].
 #' @return `TRUE` is OpenTelemetry metrics collection  is active,
 #' `FALSE` otherwise.
@@ -499,7 +640,7 @@ is_logging_safe <- is_logging
 #' @family OpenTelemetry metrics
 
 # safe start
-is_measuring <- function(meter = NULL) {
+is_measuring_enabled <- function(meter = NULL) {
   tryCatch({                                                         # safe
     if (!inherits(meter, "otel_meter")) {
       meter <- get_meter(meter)
@@ -512,7 +653,7 @@ is_measuring <- function(meter = NULL) {
 }
 # safe end
 
-is_measuring_safe <- is_measuring
+is_measuring_enabled_safe <- is_measuring_enabled
 
 #' Log an OpenTelemetry log message
 #'
@@ -525,11 +666,15 @@ is_measuring_safe <- is_measuring
 #' @param .envir Environment to evaluate the interpolated  expressions of
 #'   the log message in.
 #' @param logger Logger to use. If not an OpenTelemetry logger object
-#'   (`otel_logger`), then it passed to [get_logger()] to get a logger.
+#'   ([otel_logger]), then it passed to [get_logger()] to get a logger.
 #' @return The logger, invisibly.
 #'
 #' @export
-#' @family OpenTelemetry logging
+#' @family OpenTelemetry logs API
+#' @examples
+#' host <- "my.db.host"
+#' port <- 6667
+#' otel::log("Connecting to database at {host}:{port}")
 
 # safe start
 log <- function(
@@ -723,7 +868,7 @@ log_fatal_safe <- log_fatal
 #' @param attributes Additional attributes to add.
 #' @param context Span context. If missing the active context is used,
 #'   if any.
-#' @param meter Meter object (`otel_meter`). Otherwise it is passed to
+#' @param meter Meter object ([otel_meter]). Otherwise it is passed to
 #'   [get_meter()] to get a meter.
 #'
 #' @return The counter object, invisibly.
@@ -764,7 +909,7 @@ counter_add_safe <- counter_add
 #' @param attributes Additional attributes to add.
 #' @param context Span context. If missing the active context is used,
 #'   if any.
-#' @param meter Meter object (`otel_meter`). Otherwise it is passed to
+#' @param meter Meter object ([otel_meter]). Otherwise it is passed to
 #'   [get_meter()] to get a meter.
 #'
 #' @return The up-down counter object, invisibly.
@@ -804,7 +949,7 @@ up_down_counter_add_safe <- up_down_counter_add
 #' @param attributes Additional attributes to add.
 #' @param context Span context. If missing the active context is used,
 #'   if any.
-#' @param meter Meter object (`otel_meter`). Otherwise it is passed to
+#' @param meter Meter object ([otel_meter]). Otherwise it is passed to
 #'   [get_meter()] to get a meter.
 #'
 #' @return The histogram object, invisibly.
@@ -844,7 +989,7 @@ histogram_record_safe <- histogram_record
 #' @param attributes Additional attributes to add.
 #' @param context Span context. If missing the active context is used,
 #'   if any.
-#' @param meter Meter object (`otel_meter`). Otherwise it is passed to
+#' @param meter Meter object ([otel_meter]). Otherwise it is passed to
 #'   [get_meter()] to get a meter.
 #'
 #' @return The gauge object, invisibly.

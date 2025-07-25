@@ -11,124 +11,98 @@ template:
 development:
   mode: auto
 
-reference:
-- title: About OpenTelemetry in R
-  desc: >
-    The otel package is an implementation of the [OpenTelemetry API](
-    https://opentelemetry.io/docs/specs/otel/). Use the otel package to
-    instrument your R package or project for OpenTelemetry data collection.
+navbar:
+  structure:
+    left: [gettingstarted, collectingdata, reference, news]
+  components:
+    gettingstarted:
+      text: Getting started
+      href: articles/gettingstarted.html
+    collectingdata:
+      text: Collecting telemetry data
+      href: TODO
 
-    See the [otelsdk](https://github.com/r-lib/otelsdk) package for
-    collecting OpenTelemetry data for an instrumented package or project.
+reference:
+- desc: >
+    Testing
+
+- title: Other documentation
+  desc: |
+    This is the reference manual. Other forms of documentation:
+
+    * [Getting Started](../articles/gettingstarted.html), a tutorial and
+      cookbook for instrumentation.
+    * [Collecting telemetry data](TODO), a tutorial and cookbok on data
+      collection.
 
 - title: Configuration
-  desc: |
-    The otel package is in charge for selecting the exporters for
-    OpenTelemetry data (traces, metrics, logs), and it can be configured
-    with environment variables.
-
-    If you want to produce telemetry data from an instrumented R package
-    or project, read [Environment variables](environment-variables.html).
-
-    If you are a package author and want to use otel to instrument your
-    package, then read about `default_tracer_name()`.
-  contents:
-  - "Environment variables"
+- contents:
   - default_tracer_name
+  - "Environment Variables"
 
 - title: Traces
-  desc: |
-    A trace is a path of a request through your application. For R package
-    or project a trace can be a script run or a top-level function call
-    from a script or from the R console. A trace is a hierarchy of _spans_,
-    a span is the unit of work or operation.
-- subtitle: Instrumentation
-  desc: |
-    The simplest way to instrument your R package is to add `start_span()`
-    calls at the beginning of the functions that you want telemetry data
-    for. Use `is_tracing()` to avoid unnecessary computation when tracing
-    is off. You occasionally need `get_tracer()` to handle advanced use
-    cases.
-  contents:
+- subtitle: Trace API
+- contents:
   - end_span
-  - get_tracer
-  - is_tracing
-  - otel_span
+  - is_tracing_enabled
   - start_local_active_span
   - start_span
+  - tracing-constants
+  - "Zero Code Instrumentation"
 - subtitle: Concurrency
-  desc: >
-    To support concurrency on a single thread, e.g. a Shiny app serving
-    multiple requests at the same time, you can manage the lifetime and
-    activation of the OpenTelemetry spans manually.
-  contents:
+- contents:
   - local_active_span
   - with_active_span
-- subtitle: Zero Code Instrumentation
-  desc: >
-    TODO
-- subtitle: Low Level Tracing Utilities
-  contents:
+- subtitle: Low Level Trace API
+- contents:
   - get_default_tracer_provider
+  - get_tracer
+  - otel_span
+  - otel_span_context
+  - otel_tracer
   - otel_tracer_provider
-  - tracing-constants
+  - tracer_provider_noop
 
 - title: Logs
-  desc: >
-    TODO
-  contents:
-  - get_default_logger_provider
-  - get_logger
-  - is_logging
+- subtitle: Logs API
+- contents:
+  - is_logging_enabled
   - log
   - log_severity_levels
+- subtitle: Low Level Logs API
+- contents:
+  - get_default_logger_provider
+  - get_logger
+  - logger_provider_noop
+  - otel_logger
+  - otel_logger_provider
 
 - title: Metrics
-  desc: >
-    TODO
-  contents:
+- subtitle: Metrics API
+- contents:
+  - counter_add
+  - gauge_record
+  - histogram_record
+  - is_measuring_enabled
+  - up_down_counter_add
+- subtitle: Low Level Metrics API
+- contents:
   - get_default_meter_provider
   - get_meter
-  - is_measuring
-- subtitle: Counters
-  desc: >
-    TODO
-  contents:
-  - counter_add
-- subtitle: Up-down Counters
-  desc: >
-    TODO
-  contents:
-  - up_down_counter_add
-- subtitle: Histograms
-  desc: >
-    TODO
-  contents:
-  - histogram_record
-- subtitle: Gauges
-  desc: >
-    TODO
-  contents:
-  - gauge_record
+  - meter_provider_noop
+  - otel_meter
+  - otel_meter_provider
 
 - title: Utility Functions
-  desc: >
-    TODO
-  contents:
+- contents:
   - as_attributes
   - get_active_span_context
 
 - title: Context Propagation
-  desc: >
-    TODO
-  contents:
+- contents:
   - extract_http_context
   - pack_http_context
 
 - title: internal
   contents:
-  - otel_logger
-  - otel_tracer
-  - logger_provider_noop
-  - meter_provider_noop
-  - tracer_provider_noop
+  - gettingstarted

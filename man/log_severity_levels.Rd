@@ -4,23 +4,18 @@
 \name{log_severity_levels}
 \alias{log_severity_levels}
 \title{OpenTelemetry log severity levels}
-\format{
-An object of class \code{integer} of length 24.
-}
-\usage{
-log_severity_levels
-}
 \description{
 A named integer vector, the severity levels in numeric form.
 The names are the severity levels in text form. otel functions accept
 both forms as severity levels, but the text form is more readable.
 }
+\examples{
+log_severity_levels
+}
 \seealso{
-Other OpenTelemetry logging: 
-\code{\link{get_logger}()},
-\code{\link{is_logging}()},
+Other OpenTelemetry logs API: 
+\code{\link{is_logging_enabled}()},
 \code{\link{log}()}
 }
-\concept{OpenTelemetry constants}
-\concept{OpenTelemetry logging}
+\concept{OpenTelemetry logs API}
 \keyword{datasets}

@@ -6,3 +6,8 @@
 \description{
 TODO
 }
+\seealso{
+Other OpenTelemetry logging: 
+\code{\link{get_logger}()}
+}
+\concept{OpenTelemetry logging}

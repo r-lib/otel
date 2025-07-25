@@ -34,9 +34,12 @@ default_metrics_exporter_envvar_r <- "OTEL_R_METRICS_EXPORTER"
 #' environment variable is used. This applies to all applications that
 #' support OpenTelemetry and use the OpenTelemetry SDK.
 #'
-#' @return The default tracer provider, an `otel_tracer_provider`
-#'   object. See [otel_tracer_provider] for the methods of an
-#'   `otel_tracer_provider` object.
+#' @return The default tracer provider, an [otel_tracer_provider]
+#'   object. See [otel_tracer_provider] for its methods.
+#'
+#' @family low level trace API
+#' @examples
+#' get_default_tracer_provider()
 #' @export
 
 # safe start
@@ -175,8 +178,10 @@ setup_default_tracer_provider <- function() {
 #' environment variable is used. This applies to all applications that
 #' support OpenTelemetry and use the OpenTelemetry SDK.
 #'
-#' @return The default logger provider, an `otel_logger_provider`
+#' @return The default logger provider, an [otel_logger_provider]
 #'   object.
+#' @examples
+#' get_default_logger_provider()
 #' @export
 
 # safe start
@@ -301,7 +306,7 @@ setup_default_logger_provider <- function() {
 #' environment variable is used. This applies to all applications that
 #' support OpenTelemetry and use the OpenTelemetry SDK.
 #'
-#' @return The default meter provider, an `otel_meter_provider`
+#' @return The default meter provider, an [otel_meter_provider]
 #'   object.
 #' @export
 

@@ -40,7 +40,8 @@ Other OpenTelemetry metrics:
 \code{\link{counter_add}()},
 \code{\link{gauge_record}()},
 \code{\link{histogram_record}()},
-\code{\link{is_measuring}()},
+\code{\link{is_measuring_enabled}()},
+\code{\link{otel_meter}},
 \code{\link{up_down_counter_add}()}
 }
 \concept{OpenTelemetry metrics}

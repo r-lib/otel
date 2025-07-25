@@ -1,87 +1,91 @@
-test_that("is_tracing", {
-  fake(is_tracing, "get_tracer", list(is_enabled = function() FALSE))
-  expect_false(is_tracing())
+test_that("is_tracing_enabled", {
+  fake(is_tracing_enabled, "get_tracer", list(is_enabled = function() FALSE))
+  expect_false(is_tracing_enabled())
 
-  fake(is_tracing, "get_tracer", function(name) stop("nope"))
-  expect_snapshot(is_tracing())
+  fake(is_tracing_enabled, "get_tracer", function(name) stop("nope"))
+  expect_snapshot(is_tracing_enabled())
 
-  fake(is_tracing_dev, "get_tracer", list(is_enabled = function() FALSE))
-  expect_false(is_tracing_dev())
+  fake(
+    is_tracing_enabled_dev,
+    "get_tracer",
+    list(is_enabled = function() FALSE)
+  )
+  expect_false(is_tracing_enabled_dev())
 
-  fake(is_tracing_dev, "get_tracer", function(name) stop("nope"))
-  expect_snapshot(error = TRUE, is_tracing_dev())
+  fake(is_tracing_enabled_dev, "get_tracer", function(name) stop("nope"))
+  expect_snapshot(error = TRUE, is_tracing_enabled_dev())
 })
 
-test_that("is_logging", {
+test_that("is_logging_enabled", {
   fake(
-    is_logging,
+    is_logging_enabled,
     "get_logger",
     structure(list(is_enabled = function() FALSE), class = "otel_logger_noop")
   )
-  expect_false(is_logging())
+  expect_false(is_logging_enabled())
 
   fake(
-    is_logging,
+    is_logging_enabled,
     "get_logger",
     structure(list(is_enabled = function() TRUE), class = "otel_logger")
   )
-  expect_true(is_logging())
+  expect_true(is_logging_enabled())
 
-  fake(is_logging, "get_logger", function() stop("nope"))
-  expect_snapshot(is_logging())
+  fake(is_logging_enabled, "get_logger", function(...) stop("nope"))
+  expect_snapshot(is_logging_enabled())
 
   fake(
-    is_logging_dev,
+    is_logging_enabled_dev,
     "get_logger",
     structure(list(is_enabled = function() FALSE), class = "otel_logger_noop")
   )
-  expect_false(is_logging_dev())
+  expect_false(is_logging_enabled_dev())
 
   fake(
-    is_logging_dev,
+    is_logging_enabled_dev,
     "get_logger",
     structure(list(is_enabled = function() TRUE), class = "otel_logger")
   )
-  expect_true(is_logging_dev())
+  expect_true(is_logging_enabled_dev())
 
-  fake(is_logging_dev, "get_logger", function() stop("nope"))
-  expect_snapshot(error = TRUE, is_logging_dev())
+  fake(is_logging_enabled_dev, "get_logger", function() stop("nope"))
+  expect_snapshot(error = TRUE, is_logging_enabled_dev())
 })
 
-test_that("is_measuring", {
+test_that("is_measuring_enabled", {
   fake(
-    is_measuring,
+    is_measuring_enabled,
     "get_meter",
     structure(list(is_enabled = function() FALSE), class = "otel_meter_noop")
   )
-  expect_false(is_measuring())
+  expect_false(is_measuring_enabled())
 
   fake(
-    is_measuring,
+    is_measuring_enabled,
     "get_meter",
     structure(list(is_enabled = function() TRUE), class = "otel_meter")
   )
-  expect_true(is_measuring())
+  expect_true(is_measuring_enabled())
 
-  fake(is_measuring, "get_meter", function() stop("nope"))
-  expect_snapshot(is_measuring())
+  fake(is_measuring_enabled, "get_meter", function(...) stop("nope"))
+  expect_snapshot(is_measuring_enabled())
 
   fake(
-    is_measuring_dev,
+    is_measuring_enabled_dev,
     "get_meter",
     structure(list(is_enabled = function() FALSE), class = "otel_meter_noop")
   )
-  expect_false(is_measuring_dev())
+  expect_false(is_measuring_enabled_dev())
 
   fake(
-    is_measuring_dev,
+    is_measuring_enabled_dev,
     "get_meter",
     structure(list(is_enabled = function() TRUE), class = "otel_meter")
   )
-  expect_true(is_measuring_dev())
+  expect_true(is_measuring_enabled_dev())
 
-  fake(is_measuring_dev, "get_meter", function() stop("nope"))
-  expect_snapshot(error = TRUE, is_measuring_dev())
+  fake(is_measuring_enabled_dev, "get_meter", function(...) stop("nope"))
+  expect_snapshot(error = TRUE, is_measuring_enabled_dev())
 })
 
 test_that("get_default_tracer", {
@@ -206,19 +210,19 @@ test_that("start_span", {
   })
 })
 
-test_that("start_span(scope = NULL)", {
+test_that("start_span()", {
   local_otel_off()
-  sess <- start_span(scope = NULL)
+  sess <- start_span()
   expect_s3_class(sess, "otel_span_noop")
-  sessd <- start_span_dev(scope = NULL)
+  sessd <- start_span_dev()
   expect_s3_class(sessd, "otel_span_noop")
 
   fake(start_span, "get_tracer", function(...) stop("no session"))
-  expect_snapshot(sessx <- start_span(scope = NULL))
+  expect_snapshot(sessx <- start_span())
   expect_s3_class(sessx, "otel_span_noop")
 
   fake(start_span_dev, "get_tracer", function(...) stop("no session"))
-  expect_snapshot(error = TRUE, start_span_dev(scope = NULL))
+  expect_snapshot(error = TRUE, start_span_dev())
 })
 
 test_that("local_active_span", {

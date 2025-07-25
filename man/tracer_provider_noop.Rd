@@ -4,13 +4,20 @@
 \name{tracer_provider_noop}
 \alias{tracer_provider_noop}
 \title{No-op tracer provider}
-\format{
-An object of class \code{list} of length 1.
-}
-\usage{
-tracer_provider_noop
-}
 \description{
-No-op tracer provider
+This is the tracer provider otel uses when tracing is disabled.
 }
-\keyword{internal}
+\details{
+All methods are no-ops or return objects that are also no-ops.
+}
+\seealso{
+Other low level trace API: 
+\code{\link{get_active_span_context}()},
+\code{\link{get_default_tracer_provider}()},
+\code{\link{otel_span}},
+\code{\link{otel_span_context}},
+\code{\link{otel_tracer}},
+\code{\link{otel_tracer_provider}}
+}
+\concept{low level trace API}
+\keyword{datasets}

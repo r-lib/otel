@@ -1,0 +1,19 @@
+```{r}
+#| include: FALSE
+gslink <- if (Sys.getenv("IN_PKGDOWN") == "true") {
+  "articles/gettingstarted.html"
+} else {
+  "https://otel.r-lib.org/articles/gettingstarted.html"
+}
+```
+OpenTelemetry is an observability framework. [OpenTelemetry](
+  https://opentelemetry.io/) is a collection of tools, APIs, and SDKs
+used to instrument, generate, collect, and export telemetry data such
+as metrics, logs, and traces, for analysis in order to understand
+your software's performance and behavior.
+
+For an introduction to OpenTelemetry, see the [OpenTelemetry website
+  docs](https://opentelemetry.io/docs/).
+
+To learn how to instrument your R code, see [Getting Started](`r gslink`).
+For project status, installation instructions and more, read on.
