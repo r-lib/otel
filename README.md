@@ -24,7 +24,7 @@ For an introduction to OpenTelemetry, see the [OpenTelemetry website
 docs](https://opentelemetry.io/docs/).
 
 To learn how to instrument your R code, see [Getting
-Started](https://otel.r-lib.org/articles/gettingstarted.html). For
+Started](https://otel.r-lib.org/reference/gettingstarted.html). For
 project status, installation instructions and more, read on.
 
 ## Features
@@ -57,7 +57,7 @@ fn <- function(...) {
 ```
 
 See [Getting
-Started](https://otel.r-lib.org/articles/gettingstarted.html) for
+Started](https://otel.r-lib.org/reference/gettingstarted.html) for
 details.
 
 ## The otel and otelsdk R packages

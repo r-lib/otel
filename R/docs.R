@@ -4,7 +4,7 @@
 #' @aliases gettingstarted
 #'
 #' @details
-#' ```{r child = "vignettes/gettingstarted.Rmd"}
+#' ```{r child = "tools/dox/gettingstarted.Rmd"}
 #' ```
 #'
 #' @return Not applicable.

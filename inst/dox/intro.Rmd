@@ -1,9 +1,9 @@
 ```{r}
 #| include: FALSE
 gslink <- if (Sys.getenv("IN_PKGDOWN") == "true") {
-  "articles/gettingstarted.html"
+  "reference/gettingstarted.html"
 } else {
-  "https://otel.r-lib.org/articles/gettingstarted.html"
+  "https://otel.r-lib.org/reference/gettingstarted.html"
 }
 ```
 OpenTelemetry is an observability framework. [OpenTelemetry](
