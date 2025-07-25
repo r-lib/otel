@@ -293,7 +293,6 @@ logger_provider_noop <- list(
 #' The same as `logger$log()`, with `severity = "fatal"`.
 #'
 #' @return Not applicable.
-#' @family OpenTelemetry logs API
 #' @examples
 #' lp <- get_default_logger_provider()
 #' lgr <- lp$get_logger()

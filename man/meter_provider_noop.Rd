@@ -18,13 +18,15 @@ All methods are no-ops or return objects that are also no-ops.
 meter_provider_noop$new()
 }
 \seealso{
-Other low level trace API: 
-\code{\link{get_default_tracer_provider}()},
-\code{\link{otel_span}},
-\code{\link{otel_span_context}},
-\code{\link{otel_tracer}},
-\code{\link{otel_tracer_provider}},
-\code{\link{tracer_provider_noop}}
+Other low level metrics API: 
+\code{\link{get_default_meter_provider}()},
+\code{\link{get_meter}()},
+\code{\link{otel_counter}},
+\code{\link{otel_gauge}},
+\code{\link{otel_histogram}},
+\code{\link{otel_meter}},
+\code{\link{otel_meter_provider}},
+\code{\link{otel_up_down_counter}}
 }
-\concept{low level trace API}
+\concept{low level metrics API}
 \keyword{datasets}

@@ -73,7 +73,6 @@ otel::log("Connecting to database at {host}:{port}")
 \seealso{
 Other OpenTelemetry logs API: 
 \code{\link{is_logging_enabled}()},
-\code{\link{log_severity_levels}},
-\code{\link{otel_logger}}
+\code{\link{log_severity_levels}}
 }
 \concept{OpenTelemetry logs API}

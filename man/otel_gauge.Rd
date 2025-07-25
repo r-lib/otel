@@ -57,6 +57,9 @@ gge$record(1.123)
 }
 \seealso{
 Other low level metrics API: 
+\code{\link{get_default_meter_provider}()},
+\code{\link{get_meter}()},
+\code{\link{meter_provider_noop}},
 \code{\link{otel_counter}},
 \code{\link{otel_histogram}},
 \code{\link{otel_meter}},

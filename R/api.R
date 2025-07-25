@@ -33,7 +33,7 @@
 #' @return An OpenTelemetry tracer, an [otel_tracer] object.
 #'
 #' @export
-#' @family low level tracing API
+#' @family low level trace API
 #' @examples
 #' myfun <- function() {
 #'   trc <- otel::get_tracer()
@@ -80,7 +80,7 @@ get_tracer_safe <- get_tracer
 #' @return An [otel_logger] object.
 #'
 #' @export
-#' @family OpenTelemetry logging
+#' @family low level logs API
 #' @examples
 #' myfun <- function() {
 #'   lgr <- otel::get_logger()
@@ -131,7 +131,7 @@ get_logger_safe <- get_logger
 #'
 #' @inheritParams get_tracer
 #' @export
-#' @family OpenTelemetry metrics
+#' @family low level metrics API
 #' @examples
 #' myfun <- function() {
 #'   mtr <- otel::get_meter()
@@ -678,7 +678,7 @@ is_logging_enabled_safe <- is_logging_enabled
 #' `FALSE` otherwise.
 #'
 #' @export
-#' @family OpenTelemetry metrics
+#' @family OpenTelemetry metrics API
 #' @examples
 #' fun <- function() {
 #'   if (otel::is_measuring_enabled()) {
@@ -923,7 +923,7 @@ log_fatal_safe <- log_fatal
 #' @return The counter object ([otel_counter]), invisibly.
 #'
 #' @family OpenTelemetry metrics instruments
-#' @family OpenTelemetry metrics
+#' @family OpenTelemetry metrics API
 #' @export
 #' @examples
 #' otel::counter_add("total-session-count", 1)
@@ -966,7 +966,7 @@ counter_add_safe <- counter_add
 #' @return The up-down counter object ([otel_up_down_counter]), invisibly.
 #'
 #' @family OpenTelemetry metrics instruments
-#' @family OpenTelemetry metrics
+#' @family OpenTelemetry metrics API
 #' @export
 #' @examples
 #' otel::up_down_counter_add("session-count", 1)
@@ -1009,7 +1009,7 @@ up_down_counter_add_safe <- up_down_counter_add
 #'
 #' @export
 #' @family OpenTelemetry metrics instruments
-#' @family OpenTelemetry metrics
+#' @family OpenTelemetry metrics API
 #' @examples
 #' otel::histogram_record("response-time", 0.2)
 
@@ -1051,7 +1051,7 @@ histogram_record_safe <- histogram_record
 #'
 #' @export
 #' @family OpenTelemetry metrics instruments
-#' @family OpenTelemetry metrics
+#' @family OpenTelemetry metrics API
 #' @examples
 #' otel::gauge_record("temperature", 27)
 

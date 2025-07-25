@@ -51,3 +51,15 @@ then it throws an error.
 \examples{
 get_default_meter_provider()
 }
+\seealso{
+Other low level metrics API: 
+\code{\link{get_meter}()},
+\code{\link{meter_provider_noop}},
+\code{\link{otel_counter}},
+\code{\link{otel_gauge}},
+\code{\link{otel_histogram}},
+\code{\link{otel_meter}},
+\code{\link{otel_meter_provider}},
+\code{\link{otel_up_down_counter}}
+}
+\concept{low level metrics API}

@@ -120,6 +120,9 @@ mtr$is_enabled()
 }
 \seealso{
 Other low level metrics API: 
+\code{\link{get_default_meter_provider}()},
+\code{\link{get_meter}()},
+\code{\link{meter_provider_noop}},
 \code{\link{otel_counter}},
 \code{\link{otel_gauge}},
 \code{\link{otel_histogram}},

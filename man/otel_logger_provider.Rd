@@ -101,6 +101,8 @@ lgr$is_enabled()
 }
 \seealso{
 Other low level logs API: 
+\code{\link{get_default_logger_provider}()},
+\code{\link{get_logger}()},
 \code{\link{logger_provider_noop}},
 \code{\link{otel_logger}}
 }

@@ -19,6 +19,8 @@ logger_provider_noop$new()
 }
 \seealso{
 Other low level logs API: 
+\code{\link{get_default_logger_provider}()},
+\code{\link{get_logger}()},
 \code{\link{otel_logger}},
 \code{\link{otel_logger_provider}}
 }

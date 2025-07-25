@@ -51,3 +51,11 @@ then it throws an error.
 \examples{
 get_default_logger_provider()
 }
+\seealso{
+Other low level logs API: 
+\code{\link{get_logger}()},
+\code{\link{logger_provider_noop}},
+\code{\link{otel_logger}},
+\code{\link{otel_logger_provider}}
+}
+\concept{low level logs API}

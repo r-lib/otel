@@ -62,4 +62,13 @@ myfun <- function() {
 }
 myfun()
 }
-\concept{low level tracing API}
+\seealso{
+Other low level trace API: 
+\code{\link{get_default_tracer_provider}()},
+\code{\link{otel_span}},
+\code{\link{otel_span_context}},
+\code{\link{otel_tracer}},
+\code{\link{otel_tracer_provider}},
+\code{\link{tracer_provider_noop}}
+}
+\concept{low level trace API}

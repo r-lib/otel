@@ -116,7 +116,7 @@ NULL
 #'
 #' All methods are no-ops or return objects that are also no-ops.
 #'
-#' @family low level trace API
+#' @family low level metrics API
 #' @usage NULL
 #' @format NULL
 #' @export

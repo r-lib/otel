@@ -180,6 +180,7 @@ setup_default_tracer_provider <- function() {
 #'
 #' @return The default logger provider, an [otel_logger_provider]
 #'   object.
+#' @family low level logs API
 #' @examples
 #' get_default_logger_provider()
 #' @export
@@ -308,6 +309,7 @@ setup_default_logger_provider <- function() {
 #'
 #' @return The default meter provider, an [otel_meter_provider]
 #'   object.
+#' @family low level metrics API
 #' @export
 #' @examples
 #' get_default_meter_provider()

@@ -34,12 +34,11 @@ Other OpenTelemetry metrics instruments:
 \code{\link{histogram_record}()},
 \code{\link{up_down_counter_add}()}
 
-Other OpenTelemetry metrics: 
+Other OpenTelemetry metrics API: 
 \code{\link{counter_add}()},
-\code{\link{get_meter}()},
 \code{\link{histogram_record}()},
 \code{\link{is_measuring_enabled}()},
 \code{\link{up_down_counter_add}()}
 }
-\concept{OpenTelemetry metrics}
+\concept{OpenTelemetry metrics API}
 \concept{OpenTelemetry metrics instruments}

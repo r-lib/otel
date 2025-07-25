@@ -20,7 +20,7 @@ tracer_provider_noop$new()
 \seealso{
 Other low level trace API: 
 \code{\link{get_default_tracer_provider}()},
-\code{\link{meter_provider_noop}},
+\code{\link{get_tracer}()},
 \code{\link{otel_span}},
 \code{\link{otel_span_context}},
 \code{\link{otel_tracer}},

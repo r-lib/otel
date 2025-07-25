@@ -47,11 +47,14 @@ myfun <- function() {
 myfun()
 }
 \seealso{
-Other OpenTelemetry metrics: 
-\code{\link{counter_add}()},
-\code{\link{gauge_record}()},
-\code{\link{histogram_record}()},
-\code{\link{is_measuring_enabled}()},
-\code{\link{up_down_counter_add}()}
+Other low level metrics API: 
+\code{\link{get_default_meter_provider}()},
+\code{\link{meter_provider_noop}},
+\code{\link{otel_counter}},
+\code{\link{otel_gauge}},
+\code{\link{otel_histogram}},
+\code{\link{otel_meter}},
+\code{\link{otel_meter_provider}},
+\code{\link{otel_up_down_counter}}
 }
-\concept{OpenTelemetry metrics}
+\concept{low level metrics API}

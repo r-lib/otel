@@ -18,8 +18,7 @@ log_severity_levels
 \seealso{
 Other OpenTelemetry logs API: 
 \code{\link{is_logging_enabled}()},
-\code{\link{log}()},
-\code{\link{otel_logger}}
+\code{\link{log}()}
 }
 \concept{OpenTelemetry logs API}
 \keyword{datasets}

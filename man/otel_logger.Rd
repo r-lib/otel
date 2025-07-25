@@ -182,13 +182,9 @@ lgr$log("This is a log message from {platform}.", severity = "trace")
 }
 \seealso{
 Other low level logs API: 
+\code{\link{get_default_logger_provider}()},
+\code{\link{get_logger}()},
 \code{\link{logger_provider_noop}},
 \code{\link{otel_logger_provider}}
-
-Other OpenTelemetry logs API: 
-\code{\link{is_logging_enabled}()},
-\code{\link{log}()},
-\code{\link{log_severity_levels}}
 }
-\concept{OpenTelemetry logs API}
 \concept{low level logs API}
