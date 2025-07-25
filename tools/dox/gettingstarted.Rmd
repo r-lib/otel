@@ -98,7 +98,7 @@ We add to `callr::r()` in `eval.R`:
   It also sets up an exit handler that ends the span when the caller
   function (`callr::r()`) exits.
 * `options` contain a long list of user-provided and other option, we
-  add these to the span as attriubutes.
+  add these to the span as attributes.
 
 We add essentially the same code to `callr::rcmd()`:
 

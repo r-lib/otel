@@ -103,7 +103,7 @@ We add to \code{callr::r()} in \code{eval.R}:
 It also sets up an exit handler that ends the span when the caller
 function (\code{callr::r()}) exits.
 \item \code{options} contain a long list of user-provided and other option, we
-add these to the span as attriubutes.
+add these to the span as attributes.
 }
 
 We add essentially the same code to \code{callr::rcmd()}:

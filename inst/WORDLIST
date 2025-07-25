@@ -19,4 +19,5 @@ noop
 observability
 otelsdk
 stdstream
+subprocess
 subprocesses
