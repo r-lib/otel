@@ -40,6 +40,10 @@
 
 
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>Not applicable.</p>
+    </div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This is a representation of a span that can be serialized, copied to
 other processes, and it can be used to create new child spans.</p>
@@ -59,7 +63,7 @@ other processes, and it can be used to create new child spans.</p>
 </div>
 
 <div class="section">
-<h4 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h4>
+<h4 id="value-1">Value<a class="anchor" aria-label="anchor" href="#value-1"></a></h4>
 
 
 <p>String scalar, a span id. For invalid spans it is <a href="tracing-constants.html">invalid_span_id</a>.</p>
@@ -82,7 +86,7 @@ for more details on trace flags.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="value-1">Value<a class="anchor" aria-label="anchor" href="#value-1"></a></h4>
+<h4 id="value-2">Value<a class="anchor" aria-label="anchor" href="#value-2"></a></h4>
 
 
 <p>A list with entries:</p><ul><li><p><code>is_sampled</code>: logical flag, whether the trace of the span is sampled.
@@ -107,7 +111,7 @@ See details in the <a href="https://w3c.github.io/trace-context/#random-trace-id
 </div>
 
 <div class="section">
-<h4 id="value-2">Value<a class="anchor" aria-label="anchor" href="#value-2"></a></h4>
+<h4 id="value-3">Value<a class="anchor" aria-label="anchor" href="#value-3"></a></h4>
 
 
 <p>A string scalar, a trace id. For invalid spans it is <a href="tracing-constants.html">invalid_trace_id</a>.</p>
@@ -128,7 +132,7 @@ See details in the <a href="https://w3c.github.io/trace-context/#random-trace-id
 </div>
 
 <div class="section">
-<h4 id="value-3">Value<a class="anchor" aria-label="anchor" href="#value-3"></a></h4>
+<h4 id="value-4">Value<a class="anchor" aria-label="anchor" href="#value-4"></a></h4>
 
 
 <p>A logical scalar.</p>
@@ -150,7 +154,7 @@ trace flags, see <code>get_trace_flags()</code> above.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="value-4">Value<a class="anchor" aria-label="anchor" href="#value-4"></a></h4>
+<h4 id="value-5">Value<a class="anchor" aria-label="anchor" href="#value-5"></a></h4>
 
 
 <p>Logical scalar.</p>
@@ -175,7 +179,7 @@ invalid span or a span context referring to an invalid span. E.g.
 </div>
 
 <div class="section">
-<h4 id="value-5">Value<a class="anchor" aria-label="anchor" href="#value-5"></a></h4>
+<h4 id="value-6">Value<a class="anchor" aria-label="anchor" href="#value-6"></a></h4>
 
 
 <p>A logical scalar.</p>
@@ -200,7 +204,7 @@ can be used to create new remote spans.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="value-6">Value<a class="anchor" aria-label="anchor" href="#value-6"></a></h4>
+<h4 id="value-7">Value<a class="anchor" aria-label="anchor" href="#value-7"></a></h4>
 
 
 <p>A named character vector, the HTTP header representation of the span
@@ -216,7 +220,7 @@ headers.</p>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other low level trace API:
 <code><a href="get_default_tracer_provider.html">get_default_tracer_provider</a>()</code>,
-<code><a href="meter_provider_noop.html">meter_provider_noop</a></code>,
+<code><a href="get_tracer.html">get_tracer</a>()</code>,
 <code><a href="otel_span.html">otel_span</a></code>,
 <code><a href="otel_tracer.html">otel_tracer</a></code>,
 <code><a href="otel_tracer_provider.html">otel_tracer_provider</a></code>,
