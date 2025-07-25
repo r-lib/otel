@@ -90,8 +90,12 @@ reference:
   - get_default_meter_provider
   - get_meter
   - meter_provider_noop
+  - otel_counter
+  - otel_gauge
+  - otel_histogram
   - otel_meter
   - otel_meter_provider
+  - otel_up_down_counter
 
 - title: Utility Functions
 - contents:

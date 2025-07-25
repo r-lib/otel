@@ -190,18 +190,6 @@ NULL
 #' @seealso [Environment Variables]
 NULL
 
-#' TODO
-#' @name otel_logger
-#' @rdname otel_logger
-#' @family OpenTelemetry logging
-NULL
-
-#' TODO
-#' @name otel_meter
-#' @rdname otel_meter
-#' @family OpenTelemetry metrics
-NULL
-
 doc_arg <- function() {
   list(
     "span-name" = "Name of the span. If not specified it will be `\"<NA>\"`.",
@@ -230,6 +218,11 @@ doc_arg <- function() {
        the current context is used, i.e. the active span, if any.
        \\item `kind`: Span kind, one of [span_kinds]:
        {paste(dQuote(span_kinds, q = FALSE), collapse = ', ')}.}}"
-    )
+    ),
+
+    "unit" = "Optional measurement unit. If specified, it should use
+      units from [Unified Code for Units of Measure](https://ucum.org/),
+      according to the [OpenTelemetry semantic conventions](
+      https://opentelemetry.io/docs/specs/semconv/general/metrics/#instrument-units)."
   )
 }

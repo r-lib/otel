@@ -7,21 +7,25 @@
 get_active_span_context()
 }
 \value{
-The active span context. If these is no active span context,
-then an invalid span context is returned, i.e. \code{spc$is_valid()} will be
-\code{FALSE} for the returned \code{spc}.
+The active span context, an \link{otel_span_context} object.
+If there is no active span context, then an invalid span context is
+returned, i.e. \code{spc$is_valid()} will be \code{FALSE} for the returned \code{spc}.
 }
 \description{
-This is sometimes useful when writing loggers or meters, to associate
+This is sometimes useful for logs or metrics, to associate
 logging and metrics reporting with traces.
 }
-\seealso{
-Other low level trace API: 
-\code{\link{get_default_tracer_provider}()},
-\code{\link{otel_span}},
-\code{\link{otel_span_context}},
-\code{\link{otel_tracer}},
-\code{\link{otel_tracer_provider}},
-\code{\link{tracer_provider_noop}}
+\details{
+Note that logs and metrics instruments automatically use the current
+span context, so often you don't need to call this function explicitly.
 }
-\concept{low level trace API}
+\examples{
+fun <- function() {
+  otel::start_local_active_span("fun")
+  fun2()
+}
+fun2 <- function() {
+  otel::log("Log message", span_context = otel::get_active_span_context())
+}
+fun()
+}

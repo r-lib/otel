@@ -302,15 +302,26 @@ md_log_severity_levels <- paste0(
 
 #' Returns the active span context
 #'
-#' This is sometimes useful when writing loggers or meters, to associate
+#' This is sometimes useful for logs or metrics, to associate
 #' logging and metrics reporting with traces.
 #'
-#' @return The active span context. If these is no active span context,
-#' then an invalid span context is returned, i.e. `spc$is_valid()` will be
-#' `FALSE` for the returned `spc`.
+#' Note that logs and metrics instruments automatically use the current
+#' span context, so often you don't need to call this function explicitly.
+#'
+#' @return The active span context, an [otel_span_context] object.
+#' If there is no active span context, then an invalid span context is
+#' returned, i.e. `spc$is_valid()` will be `FALSE` for the returned `spc`.
 #'
 #' @export
-#' @family low level trace API
+#' @examples
+#' fun <- function() {
+#'   otel::start_local_active_span("fun")
+#'   fun2()
+#' }
+#' fun2 <- function() {
+#'   otel::log("Log message", span_context = otel::get_active_span_context())
+#' }
+#' fun()
 
 # safe start
 get_active_span_context <- function() {
@@ -332,9 +343,15 @@ get_active_span_context_safe <- get_active_span_context
 #' The returned headers can be sent over HTTP, or set as environment
 #' variables for subprocesses.
 #'
-#' @return A named character vector, with lowercase names.
+#' @return A named character vector, with lowercase names. It might be an
+#' empty vector, e.g. if tracing is disabled.
 #'
 #' @export
+#' @seealso [extract_http_context()]
+#' @examples
+#' hdr <- otel::pack_http_context()
+#' ctx <- otel::extract_http_context()
+#' ctx$is_valid()
 
 # safe start
 pack_http_context <- function() {
@@ -359,7 +376,8 @@ pack_http_context_safe <- pack_http_context
 #' mandatory, and `tracestate` is optional.
 #'
 #' @export
-#' @family OpenTelemetry tracing
+#' @seealso [pack_http_context()]
+#' @inherit pack_http_context examples
 
 # safe start
 extract_http_context <- function(headers) {
@@ -593,6 +611,7 @@ is_tracing_enabled_safe <- is_tracing_enabled
 #' It calls [get_logger()] with `name` and then it calls the logger's
 #' `$is_enabled()` method.
 #'
+#' @param severity Check if logs are emitted at this severity level.
 #' @param logger Logger object ([otel_logger]), or a logger name, the
 #'   instrumentation scope, to pass to [get_logger()].
 #' @return `TRUE` is OpenTelemetry logging is active, `FALSE` otherwise.
@@ -609,12 +628,12 @@ is_tracing_enabled_safe <- is_tracing_enabled
 #' }
 
 # safe start
-is_logging_enabled <- function(logger = NULL) {
+is_logging_enabled <- function(severity = "info", logger = NULL) {
   tryCatch({                                                         # safe
     if (!inherits(logger, "otel_tracer")) {
       logger <- get_logger(logger)
     }
-    logger$is_enabled()
+    logger$is_enabled(severity)
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     FALSE                                                            # safe
@@ -663,7 +682,7 @@ is_measuring_enabled_safe <- is_measuring_enabled
 #'   `r md_log_severity_levels`.
 #' @param ... Additional arguments are passed to the `$log()` method of
 #'   the logger.
-#' @param .envir Environment to evaluate the interpolated  expressions of
+#' @param .envir Environment to evaluate the interpolated expressions of
 #'   the log message in.
 #' @param logger Logger to use. If not an OpenTelemetry logger object
 #'   ([otel_logger]), then it passed to [get_logger()] to get a logger.
@@ -871,7 +890,7 @@ log_fatal_safe <- log_fatal
 #' @param meter Meter object ([otel_meter]). Otherwise it is passed to
 #'   [get_meter()] to get a meter.
 #'
-#' @return The counter object, invisibly.
+#' @return The counter object ([otel_counter]), invisibly.
 #'
 #' @family OpenTelemetry metrics instruments
 #' @family OpenTelemetry metrics
@@ -912,7 +931,7 @@ counter_add_safe <- counter_add
 #' @param meter Meter object ([otel_meter]). Otherwise it is passed to
 #'   [get_meter()] to get a meter.
 #'
-#' @return The up-down counter object, invisibly.
+#' @return The up-down counter object ([otel_up_down_counter]), invisibly.
 #'
 #' @family OpenTelemetry metrics instruments
 #' @family OpenTelemetry metrics
@@ -952,7 +971,7 @@ up_down_counter_add_safe <- up_down_counter_add
 #' @param meter Meter object ([otel_meter]). Otherwise it is passed to
 #'   [get_meter()] to get a meter.
 #'
-#' @return The histogram object, invisibly.
+#' @return The histogram object ([otel_histogram]), invisibly.
 #'
 #' @export
 #' @family OpenTelemetry metrics instruments
@@ -992,7 +1011,7 @@ histogram_record_safe <- histogram_record
 #' @param meter Meter object ([otel_meter]). Otherwise it is passed to
 #'   [get_meter()] to get a meter.
 #'
-#' @return The gauge object, invisibly.
+#' @return The gauge object ([otel_gauge]), invisibly.
 #'
 #' @export
 #' @family OpenTelemetry metrics instruments

@@ -3,14 +3,22 @@
 \docType{data}
 \name{meter_provider_noop}
 \alias{meter_provider_noop}
-\title{No-op logger provider}
-\format{
-An object of class \code{list} of length 1.
-}
-\usage{
-meter_provider_noop
-}
+\title{No-op Meter Provider}
 \description{
-No-op logger provider
+This is the meter provider (\link{otel_meter_provider}) otel uses when
+metrics collection is disabled.
 }
-\keyword{internal}
+\details{
+All methods are no-ops or return objects that are also no-ops.
+}
+\seealso{
+Other low level trace API: 
+\code{\link{get_default_tracer_provider}()},
+\code{\link{otel_span}},
+\code{\link{otel_span_context}},
+\code{\link{otel_tracer}},
+\code{\link{otel_tracer_provider}},
+\code{\link{tracer_provider_noop}}
+}
+\concept{low level trace API}
+\keyword{datasets}

@@ -5,15 +5,16 @@
 \alias{tracer_provider_noop}
 \title{No-op tracer provider}
 \description{
-This is the tracer provider otel uses when tracing is disabled.
+This is the tracer provider (\link{otel_tracer_provider}) otel uses when
+tracing is disabled.
 }
 \details{
 All methods are no-ops or return objects that are also no-ops.
 }
 \seealso{
 Other low level trace API: 
-\code{\link{get_active_span_context}()},
 \code{\link{get_default_tracer_provider}()},
+\code{\link{meter_provider_noop}},
 \code{\link{otel_span}},
 \code{\link{otel_span_context}},
 \code{\link{otel_tracer}},

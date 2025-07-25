@@ -17,7 +17,7 @@ A tracer object is created by calling the \code{get_tracer()} method of an
 You can use the \code{start_span()} method of the  tracer object to create a
 span.
 
-Typically there is a separate tracer object for each instrumented
+Typically there is a separate tracer object for each instrumented R
 package.
 }
 \section{Methods}{
@@ -105,8 +105,8 @@ Nothing.
 
 \seealso{
 Other low level trace API: 
-\code{\link{get_active_span_context}()},
 \code{\link{get_default_tracer_provider}()},
+\code{\link{meter_provider_noop}},
 \code{\link{otel_span}},
 \code{\link{otel_span_context}},
 \code{\link{otel_tracer_provider}},

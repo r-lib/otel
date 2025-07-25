@@ -4,9 +4,11 @@
 \alias{is_logging_enabled}
 \title{Check whether OpenTelemetry logging is active}
 \usage{
-is_logging_enabled(logger = NULL)
+is_logging_enabled(severity = "info", logger = NULL)
 }
 \arguments{
+\item{severity}{Check if logs are emitted at this severity level.}
+
 \item{logger}{Logger object (\link{otel_logger}), or a logger name, the
 instrumentation scope, to pass to \code{\link[=get_logger]{get_logger()}}.}
 }

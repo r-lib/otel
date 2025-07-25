@@ -14,4 +14,11 @@ mandatory, and \code{tracestate} is optional.}
 The return value can be used as the \code{parent} option when starting
 a span.
 }
-\concept{OpenTelemetry tracing}
+\examples{
+hdr <- otel::pack_http_context()
+ctx <- otel::extract_http_context()
+ctx$is_valid()
+}
+\seealso{
+\code{\link[=pack_http_context]{pack_http_context()}}
+}

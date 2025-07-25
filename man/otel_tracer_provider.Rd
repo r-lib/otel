@@ -38,7 +38,7 @@ or error or to a file. Primarily for debugging.
 Get or create a new tracer object.
 \subsection{Usage}{
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{tracer_provider$get_tracer(
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{tracer_provider$get_tracer(
   name = NULL,
   version = NULL,
   schema_url = NULL,
@@ -47,7 +47,7 @@ Get or create a new tracer object.
 }\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments:}{
+\subsection{Arguments}{
 \itemize{
 \item \code{name}: Tracer name, see \code{\link[=get_tracer]{get_tracer()}}.
 \item \code{version}: Optional. Specifies the version of the instrumentation
@@ -56,7 +56,9 @@ Example value: \code{"1.0.0"}.
 \item \code{schema_url}: Optional. Specifies the Schema URL that should be
 recorded in the emitted telemetry.
 \item \code{attributes}: Optional. Specifies the instrumentation scope
-attributes to associate with emitted telemetry.
+attributes to associate with emitted telemetry. See \code{\link[=as_attributes]{as_attributes()}}
+for allowed values. You can also use \code{\link[=as_attributes]{as_attributes()}} to convert R
+objects to OpenTelemetry attributes.
 }
 }
 
@@ -67,7 +69,7 @@ Returns an OpenTelemetry tracer (\link{otel_tracer}) object.
 
 \subsection{See also}{
 
-\code{\link[=get_tracer]{get_tracer()}}.
+\code{\link[=get_default_tracer_provider]{get_default_tracer_provider()}}, \code{\link[=get_tracer]{get_tracer()}}.
 }
 
 }
@@ -97,8 +99,8 @@ trc$is_enabled()
 }
 \seealso{
 Other low level trace API: 
-\code{\link{get_active_span_context}()},
 \code{\link{get_default_tracer_provider}()},
+\code{\link{meter_provider_noop}},
 \code{\link{otel_span}},
 \code{\link{otel_span_context}},
 \code{\link{otel_tracer}},

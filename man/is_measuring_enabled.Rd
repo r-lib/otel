@@ -27,7 +27,6 @@ Other OpenTelemetry metrics:
 \code{\link{gauge_record}()},
 \code{\link{get_meter}()},
 \code{\link{histogram_record}()},
-\code{\link{otel_meter}},
 \code{\link{up_down_counter_add}()}
 }
 \concept{OpenTelemetry metrics}

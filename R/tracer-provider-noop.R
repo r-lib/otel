@@ -30,13 +30,14 @@
 #'
 #' # Methods
 #'
+# -------------------------------------------------------------------------
 #' ## `tracer_provider$get_tracer()`
 #'
 #' Get or create a new tracer object.
 #'
 #' ### Usage
 #'
-#' ```
+#' ```r
 #' tracer_provider$get_tracer(
 #'   name = NULL,
 #'   version = NULL,
@@ -45,7 +46,7 @@
 #' )
 #' ```
 #'
-#' ### Arguments:
+#' ### Arguments
 #'
 #' - `name`: Tracer name, see [get_tracer()].
 #' - `version`: Optional. Specifies the version of the instrumentation
@@ -54,7 +55,9 @@
 #' - `schema_url`: Optional. Specifies the Schema URL that should be
 #'   recorded in the emitted telemetry.
 #' - `attributes`: Optional. Specifies the instrumentation scope
-#'   attributes to associate with emitted telemetry.
+#'   attributes to associate with emitted telemetry. See [as_attributes()]
+#'   for allowed values. You can also use [as_attributes()] to convert R
+#'   objects to OpenTelemetry attributes.
 #'
 #' ### Value
 #'
@@ -62,8 +65,9 @@
 #'
 #' ### See also
 #'
-#' [get_tracer()].
+#' [get_default_tracer_provider()], [get_tracer()].
 #'
+# -------------------------------------------------------------------------
 #' ## `tracer_provider$flush()`
 #'
 #' Force any buffered spans to flush. Tracer providers might not implement
@@ -89,7 +93,8 @@ NULL
 
 #' No-op tracer provider
 #'
-#' This is the tracer provider otel uses when tracing is disabled.
+#' This is the tracer provider ([otel_tracer_provider]) otel uses when
+#' tracing is disabled.
 #'
 #' All methods are no-ops or return objects that are also no-ops.
 #'
@@ -142,11 +147,12 @@ tracer_provider_noop <- list(
 #' You can use the `start_span()` method of the  tracer object to create a
 #' span.
 #'
-#' Typically there is a separate tracer object for each instrumented
+#' Typically there is a separate tracer object for each instrumented R
 #' package.
 #'
 #' # Methods
 #'
+# -------------------------------------------------------------------------
 #' ## `tracer$start_span()`
 #'
 #' Creates and starts a new span.
@@ -177,6 +183,7 @@ tracer_provider_noop <- list(
 #'
 #' A new [otel_span] object.
 #'
+# -------------------------------------------------------------------------
 #' ## `tracer$is_enabled()`
 #'
 #' Whether the tracer is active and recording traces.
@@ -193,6 +200,7 @@ tracer_provider_noop <- list(
 #'
 #' Logical scalar.
 #'
+# -------------------------------------------------------------------------
 #' ## `tracer$flush()`
 #'
 #' Flush the tracer provider: force any buffered spans to flush. Tracer

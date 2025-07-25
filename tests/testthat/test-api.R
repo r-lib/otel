@@ -20,14 +20,17 @@ test_that("is_logging_enabled", {
   fake(
     is_logging_enabled,
     "get_logger",
-    structure(list(is_enabled = function() FALSE), class = "otel_logger_noop")
+    structure(
+      list(is_enabled = function(...) FALSE),
+      class = "otel_logger_noop"
+    )
   )
   expect_false(is_logging_enabled())
 
   fake(
     is_logging_enabled,
     "get_logger",
-    structure(list(is_enabled = function() TRUE), class = "otel_logger")
+    structure(list(is_enabled = function(...) TRUE), class = "otel_logger")
   )
   expect_true(is_logging_enabled())
 
@@ -37,14 +40,17 @@ test_that("is_logging_enabled", {
   fake(
     is_logging_enabled_dev,
     "get_logger",
-    structure(list(is_enabled = function() FALSE), class = "otel_logger_noop")
+    structure(
+      list(is_enabled = function(...) FALSE),
+      class = "otel_logger_noop"
+    )
   )
   expect_false(is_logging_enabled_dev())
 
   fake(
     is_logging_enabled_dev,
     "get_logger",
-    structure(list(is_enabled = function() TRUE), class = "otel_logger")
+    structure(list(is_enabled = function(...) TRUE), class = "otel_logger")
   )
   expect_true(is_logging_enabled_dev())
 

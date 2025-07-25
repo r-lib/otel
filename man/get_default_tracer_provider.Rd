@@ -53,7 +53,7 @@ get_default_tracer_provider()
 }
 \seealso{
 Other low level trace API: 
-\code{\link{get_active_span_context}()},
+\code{\link{meter_provider_noop}},
 \code{\link{otel_span}},
 \code{\link{otel_span_context}},
 \code{\link{otel_tracer}},

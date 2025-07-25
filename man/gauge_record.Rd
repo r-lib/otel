@@ -20,7 +20,7 @@ if any.}
 \code{\link[=get_meter]{get_meter()}} to get a meter.}
 }
 \value{
-The gauge object, invisibly.
+The gauge object (\link{otel_gauge}), invisibly.
 }
 \description{
 Record a value of an OpenTelemetry gauge
@@ -36,7 +36,6 @@ Other OpenTelemetry metrics:
 \code{\link{get_meter}()},
 \code{\link{histogram_record}()},
 \code{\link{is_measuring_enabled}()},
-\code{\link{otel_meter}},
 \code{\link{up_down_counter_add}()}
 }
 \concept{OpenTelemetry metrics}

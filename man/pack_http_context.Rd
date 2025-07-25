@@ -8,9 +8,18 @@ headers}
 pack_http_context()
 }
 \value{
-A named character vector, with lowercase names.
+A named character vector, with lowercase names. It might be an
+empty vector, e.g. if tracing is disabled.
 }
 \description{
 The returned headers can be sent over HTTP, or set as environment
 variables for subprocesses.
+}
+\examples{
+hdr <- otel::pack_http_context()
+ctx <- otel::extract_http_context()
+ctx$is_valid()
+}
+\seealso{
+\code{\link[=extract_http_context]{extract_http_context()}}
 }

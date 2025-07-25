@@ -123,11 +123,11 @@ is_tracing_enabled_dev <- function(tracer = NULL) {
     tracer$is_enabled()
 }
 
-is_logging_enabled_dev <- function(logger = NULL) {
+is_logging_enabled_dev <- function(severity = "info", logger = NULL) {
     if (!inherits(logger, "otel_tracer")) {
       logger <- get_logger(logger)
     }
-    logger$is_enabled()
+    logger$is_enabled(severity)
 }
 
 is_measuring_enabled_dev <- function(meter = NULL) {

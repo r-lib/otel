@@ -4,13 +4,17 @@
 \name{logger_provider_noop}
 \alias{logger_provider_noop}
 \title{No-op logger provider}
-\format{
-An object of class \code{list} of length 1.
-}
-\usage{
-logger_provider_noop
-}
 \description{
-No-op logger provider
+This is the logger provider (\link{otel_logger_provider}) otel uses when
+logging is disabled.
 }
+\details{
+All methods are no-ops or return objects that are also no-ops.
+}
+\seealso{
+Other low level logs API: 
+\code{\link{otel_logger}},
+\code{\link{otel_logger_provider}}
+}
+\concept{low level logs API}
 \keyword{internal}

@@ -39,8 +39,4 @@ method of the provider.}
 \description{
 Get a logger from the default logger provider
 }
-\seealso{
-Other OpenTelemetry logging: 
-\code{\link{otel_logger}}
-}
 \concept{OpenTelemetry logging}

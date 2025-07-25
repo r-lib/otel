@@ -20,7 +20,7 @@ if any.}
 \code{\link[=get_meter]{get_meter()}} to get a meter.}
 }
 \value{
-The counter object, invisibly.
+The counter object (\link{otel_counter}), invisibly.
 }
 \description{
 Increase an OpenTelemetry counter
@@ -36,7 +36,6 @@ Other OpenTelemetry metrics:
 \code{\link{get_meter}()},
 \code{\link{histogram_record}()},
 \code{\link{is_measuring_enabled}()},
-\code{\link{otel_meter}},
 \code{\link{up_down_counter_add}()}
 }
 \concept{OpenTelemetry metrics}

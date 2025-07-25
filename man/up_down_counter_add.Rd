@@ -27,7 +27,7 @@ if any.}
 \code{\link[=get_meter]{get_meter()}} to get a meter.}
 }
 \value{
-The up-down counter object, invisibly.
+The up-down counter object (\link{otel_up_down_counter}), invisibly.
 }
 \description{
 Increase or decrease an OpenTelemetry up-down counter
@@ -43,8 +43,7 @@ Other OpenTelemetry metrics:
 \code{\link{gauge_record}()},
 \code{\link{get_meter}()},
 \code{\link{histogram_record}()},
-\code{\link{is_measuring_enabled}()},
-\code{\link{otel_meter}}
+\code{\link{is_measuring_enabled}()}
 }
 \concept{OpenTelemetry metrics}
 \concept{OpenTelemetry metrics instruments}
