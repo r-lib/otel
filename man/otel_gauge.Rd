@@ -46,6 +46,12 @@ The gauge object itself, invisibly.
 }
 }
 
+\examples{
+mp <- get_default_meter_provider()
+mtr <- mp$get_meter()
+gge <- mtr$create_gauge("response-time")
+gge$record(1.123)
+}
 \seealso{
 Other low level metrics API: 
 \code{\link{otel_counter}},

@@ -11,6 +11,9 @@ logging is disabled.
 \details{
 All methods are no-ops or return objects that are also no-ops.
 }
+\examples{
+logger_provider_noop$new()
+}
 \seealso{
 Other low level logs API: 
 \code{\link{otel_logger}},

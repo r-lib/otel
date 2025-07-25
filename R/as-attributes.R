@@ -28,6 +28,14 @@
 #' currently limit the number of characters in individual strings.
 #'
 #' @export
+#' @examples
+#' as_attributes(list(
+#'   number = 1.0,
+#'   vector = 1:10,
+#'   string = "otel",
+#'   string_vector = letters,
+#'   object = mtcars
+#' ))
 
 as_attributes <- function(x) {
   if (!is.list(x)) {

@@ -103,6 +103,11 @@ Nothing.
 }
 }
 
+\examples{
+tp <- get_default_tracer_provider()
+trc <- tp$get_tracer()
+trc$is_enabled()
+}
 \seealso{
 Other low level trace API: 
 \code{\link{get_default_tracer_provider}()},

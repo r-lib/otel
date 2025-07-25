@@ -30,6 +30,10 @@ deletes the instrumentation, since the second \code{\link[base:trace]{base::trac
 overwrites the first.
 }
 }
+\examples{
+# To run an R script with ZCI:
+# OTEL_TRACES_EXPORTER=http OTEL_INSTRUMENT_R_PKGS=dplyr,tidyr R -q -f script.R
+}
 \seealso{
 \link{Environment Variables}
 

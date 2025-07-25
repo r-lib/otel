@@ -25,6 +25,9 @@ The counter object (\link{otel_counter}), invisibly.
 \description{
 Increase an OpenTelemetry counter
 }
+\examples{
+otel::counter_add("total-session-count", 1)
+}
 \seealso{
 Other OpenTelemetry metrics instruments: 
 \code{\link{gauge_record}()},

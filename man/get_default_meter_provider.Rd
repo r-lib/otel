@@ -48,3 +48,6 @@ If this fails for some reason, e.g. the package is not installed,
 then it throws an error.
 }
 }
+\examples{
+get_default_meter_provider()
+}

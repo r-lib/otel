@@ -102,6 +102,8 @@ NULL
 #' @format NULL
 #' @keywords internal
 #' @export
+#' @examples
+#' logger_provider_noop$new()
 
 logger_provider_noop <- list(
   new = function() {

@@ -39,4 +39,11 @@ method of the provider.}
 \description{
 Get a logger from the default logger provider
 }
+\examples{
+myfun <- function() {
+  lgr <- otel::get_logger()
+  otel::log("Log message", logger = lgr)
+}
+myfun()
+}
 \concept{OpenTelemetry logging}

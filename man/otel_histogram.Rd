@@ -47,6 +47,12 @@ The histogram object itself, invisibly.
 }
 }
 
+\examples{
+mp <- get_default_meter_provider()
+mtr <- mp$get_meter()
+hst <- mtr$create_histogram("response-time")
+hst$record(1.123)
+}
 \seealso{
 Other low level metrics API: 
 \code{\link{otel_counter}},

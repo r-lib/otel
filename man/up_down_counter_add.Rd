@@ -32,6 +32,9 @@ The up-down counter object (\link{otel_up_down_counter}), invisibly.
 \description{
 Increase or decrease an OpenTelemetry up-down counter
 }
+\examples{
+otel::up_down_counter_add("session-count", 1)
+}
 \seealso{
 Other OpenTelemetry metrics instruments: 
 \code{\link{counter_add}()},

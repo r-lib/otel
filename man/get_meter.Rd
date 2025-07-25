@@ -35,6 +35,14 @@ method of the provider.}
 \description{
 Get a meter from the default meter provider
 }
+\examples{
+myfun <- function() {
+  mtr <- otel::get_meter()
+  ctr <- mtr$create_counter("session-count")
+  ctr$add(1)
+}
+myfun()
+}
 \seealso{
 Other OpenTelemetry metrics: 
 \code{\link{counter_add}()},

@@ -165,3 +165,7 @@ If unset, there is no limit on the lengths of vectors in attributes.
 
 }
 }
+\examples{
+# To start an R session using the OTLP exporter:
+# OTEL_TRACES_EXPORTER=http R -q -f script.R
+}

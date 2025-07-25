@@ -11,6 +11,9 @@ tracing is disabled.
 \details{
 All methods are no-ops or return objects that are also no-ops.
 }
+\examples{
+tracer_provider_noop$new()
+}
 \seealso{
 Other low level trace API: 
 \code{\link{get_default_tracer_provider}()},

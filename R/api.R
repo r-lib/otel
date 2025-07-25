@@ -78,6 +78,12 @@ get_tracer_safe <- get_tracer
 #' @inheritParams get_tracer
 #' @export
 #' @family OpenTelemetry logging
+#' @examples
+#' myfun <- function() {
+#'   lgr <- otel::get_logger()
+#'   otel::log("Log message", logger = lgr)
+#' }
+#' myfun()
 
 # safe start
 get_logger <- function(
@@ -120,6 +126,13 @@ get_logger_safe <- get_logger
 #' @inheritParams get_tracer
 #' @export
 #' @family OpenTelemetry metrics
+#' @examples
+#' myfun <- function() {
+#'   mtr <- otel::get_meter()
+#'   ctr <- mtr$create_counter("session-count")
+#'   ctr$add(1)
+#' }
+#' myfun()
 
 # safe start
 get_meter <- function(
@@ -657,6 +670,14 @@ is_logging_enabled_safe <- is_logging_enabled
 #'
 #' @export
 #' @family OpenTelemetry metrics
+#' @examples
+#' fun <- function() {
+#'   if (otel::is_measuring_enabled()) {
+#'     xattr <- calculate_some_extra_attributes()
+#'     otel::counter_add("sessions", 1, attributes = xattr)
+#'   }
+#'   # ...
+#' }
 
 # safe start
 is_measuring_enabled <- function(meter = NULL) {
@@ -895,6 +916,8 @@ log_fatal_safe <- log_fatal
 #' @family OpenTelemetry metrics instruments
 #' @family OpenTelemetry metrics
 #' @export
+#' @examples
+#' otel::counter_add("total-session-count", 1)
 
 # safe start
 counter_add <- function(
@@ -936,6 +959,8 @@ counter_add_safe <- counter_add
 #' @family OpenTelemetry metrics instruments
 #' @family OpenTelemetry metrics
 #' @export
+#' @examples
+#' otel::up_down_counter_add("session-count", 1)
 
 # safe start
 up_down_counter_add <- function(
@@ -976,6 +1001,8 @@ up_down_counter_add_safe <- up_down_counter_add
 #' @export
 #' @family OpenTelemetry metrics instruments
 #' @family OpenTelemetry metrics
+#' @examples
+#' otel::histogram_record("response-time", 0.2)
 
 # safe start
 histogram_record <- function(
@@ -1016,6 +1043,8 @@ histogram_record_safe <- histogram_record
 #' @export
 #' @family OpenTelemetry metrics instruments
 #' @family OpenTelemetry metrics
+#' @examples
+#' otel::gauge_record("temperature", 27)
 
 # safe start
 gauge_record <- function(

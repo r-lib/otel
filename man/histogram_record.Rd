@@ -25,6 +25,9 @@ The histogram object (\link{otel_histogram}), invisibly.
 \description{
 Record a value of an OpenTelemetry histogram
 }
+\examples{
+otel::histogram_record("response-time", 0.2)
+}
 \seealso{
 Other OpenTelemetry metrics instruments: 
 \code{\link{counter_add}()},

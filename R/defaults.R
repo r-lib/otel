@@ -309,6 +309,8 @@ setup_default_logger_provider <- function() {
 #' @return The default meter provider, an [otel_meter_provider]
 #'   object.
 #' @export
+#' @examples
+#' get_default_meter_provider()
 
 # safe start
 get_default_meter_provider <- function() {

@@ -25,6 +25,9 @@ The gauge object (\link{otel_gauge}), invisibly.
 \description{
 Record a value of an OpenTelemetry gauge
 }
+\examples{
+otel::gauge_record("temperature", 27)
+}
 \seealso{
 Other OpenTelemetry metrics instruments: 
 \code{\link{counter_add}()},

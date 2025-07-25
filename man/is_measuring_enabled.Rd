@@ -21,6 +21,15 @@ This is useful for avoiding computation when metrics collection is inactive.
 It calls \code{\link[=get_meter]{get_meter()}} with \code{name} and then it calls the meter's
 \verb{$is_enabled()} method.
 }
+\examples{
+fun <- function() {
+  if (otel::is_measuring_enabled()) {
+    xattr <- calculate_some_extra_attributes()
+    otel::counter_add("sessions", 1, attributes = xattr)
+  }
+  # ...
+}
+}
 \seealso{
 Other OpenTelemetry metrics: 
 \code{\link{counter_add}()},

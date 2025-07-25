@@ -155,6 +155,9 @@ NULL
 #' attributes for a single span, log record, metric measurement, etc.
 #' If unset, there is no limit on the lengths of vectors in attributes.
 #'
+#' @examples
+#' # To start an R session using the OTLP exporter:
+#' # OTEL_TRACES_EXPORTER=http R -q -f script.R
 NULL
 
 #' Zero Code Instrumentation
@@ -188,6 +191,9 @@ NULL
 #' @rdname zci
 #' @family OpenTelemetry trace API
 #' @seealso [Environment Variables]
+#' @examples
+#' # To run an R script with ZCI:
+#' # OTEL_TRACES_EXPORTER=http OTEL_INSTRUMENT_R_PKGS=dplyr,tidyr R -q -f script.R
 NULL
 
 doc_arg <- function() {

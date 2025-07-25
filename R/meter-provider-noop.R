@@ -119,6 +119,8 @@ NULL
 #' @usage NULL
 #' @format NULL
 #' @export
+#' @examples
+#' meter_provider_noop$new()
 
 meter_provider_noop <- list(
   new = function() {
@@ -288,7 +290,11 @@ meter_provider_noop <- list(
 #'
 #' An OpenTelemetry gauge ([otel_gauge]) object.
 #'
-#'
+#' @examples
+#' mp <- get_default_meter_provider()
+#' mtr <- mp$get_meter()
+#' ctr <- mtr$create_counter("session")
+#' ctr$add(1)
 NULL
 
 meter_noop <- list(
@@ -380,6 +386,11 @@ meter_noop <- list(
 #'
 #' The counter object itself, invisibly.
 #'
+#' @examples
+#' mp <- get_default_meter_provider()
+#' mtr <- mp$get_meter()
+#' ctr <- mtr$create_counter("session")
+#' ctr$add(1)
 NULL
 
 counter_noop <- list(
@@ -439,6 +450,11 @@ counter_noop <- list(
 #'
 #' The up-down counter object itself, invisibly.
 #'
+#' @examples
+#' mp <- get_default_meter_provider()
+#' mtr <- mp$get_meter()
+#' ctr <- mtr$create_up_down_counter("session")
+#' ctr$add(1)
 NULL
 
 up_down_counter_noop <- list(
@@ -499,6 +515,11 @@ up_down_counter_noop <- list(
 #'
 #' The histogram object itself, invisibly.
 #'
+#' @examples
+#' mp <- get_default_meter_provider()
+#' mtr <- mp$get_meter()
+#' hst <- mtr$create_histogram("response-time")
+#' hst$record(1.123)
 NULL
 
 histogram_noop <- list(
@@ -558,6 +579,11 @@ histogram_noop <- list(
 #'
 #' The gauge object itself, invisibly.
 #'
+#' @examples
+#' mp <- get_default_meter_provider()
+#' mtr <- mp$get_meter()
+#' gge <- mtr$create_gauge("response-time")
+#' gge$record(1.123)
 NULL
 
 gauge_noop <- list(

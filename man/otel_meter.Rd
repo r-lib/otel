@@ -147,6 +147,12 @@ An OpenTelemetry gauge (\link{otel_gauge}) object.
 }
 }
 
+\examples{
+mp <- get_default_meter_provider()
+mtr <- mp$get_meter()
+ctr <- mtr$create_counter("session")
+ctr$add(1)
+}
 \seealso{
 Other low level metrics API: 
 \code{\link{otel_counter}},

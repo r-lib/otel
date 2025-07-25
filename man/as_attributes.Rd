@@ -37,3 +37,12 @@ currently limit the number of characters in individual strings.
 Convert a list of R objects to a form that is suitable as OpenTelemetry
 attributes.
 }
+\examples{
+as_attributes(list(
+  number = 1.0,
+  vector = 1:10,
+  string = "otel",
+  string_vector = letters,
+  object = mtcars
+))
+}

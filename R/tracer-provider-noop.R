@@ -102,6 +102,8 @@ NULL
 #' @usage NULL
 #' @format NULL
 #' @export
+#' @examples
+#' tracer_provider_noop$new()
 
 tracer_provider_noop <- list(
   new = function() {
@@ -216,6 +218,10 @@ tracer_provider_noop <- list(
 #'
 #' Nothing.
 #'
+#' @examples
+#' tp <- get_default_tracer_provider()
+#' trc <- tp$get_tracer()
+#' trc$is_enabled()
 NULL
 
 tracer_noop <- list(
