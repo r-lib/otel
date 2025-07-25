@@ -69,8 +69,8 @@ with the otel package.
 
 ## Reference Documentation
 
-- otel: <https://otel.r-lib.org/reference>
-- otelsdk: <https://otelsdk.r-lib.org/reference>
+- otel: <https://otel.r-lib.org/reference/>
+- otelsdk: <https://otelsdk.r-lib.org/reference/>
 
 ## Status
 
