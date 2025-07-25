@@ -97,6 +97,14 @@ if any.</p></li>
 <code><a href="otel_up_down_counter.html">otel_up_down_counter</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">mp</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_default_meter_provider.html">get_default_meter_provider</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mtr</span> <span class="op">&lt;-</span> <span class="va">mp</span><span class="op">$</span><span class="fu">get_meter</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ctr</span> <span class="op">&lt;-</span> <span class="va">mtr</span><span class="op">$</span><span class="fu">create_counter</span><span class="op">(</span><span class="st">"session"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ctr</span><span class="op">$</span><span class="fu">add</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
