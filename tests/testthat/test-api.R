@@ -193,42 +193,61 @@ test_that("get_default_meter", {
   })
 })
 
-test_that("start_span", {
+test_that("start_local_active_span", {
   local_otel_cache()
   withr::local_envvar(
     structure("none", names = default_traces_exporter_envvar_r)
   )
 
-  span <- start_span()
+  span <- start_local_active_span()
   expect_s3_class(span, "otel_span_noop")
-  spand <- start_span_dev()
+  spand <- start_local_active_span_dev()
   expect_s3_class(spand, "otel_span_noop")
 
-  fake(start_span, "get_tracer", function(...) stop("nope"))
+  fake(start_local_active_span, "get_tracer", function(...) stop("nope"))
   expect_snapshot({
-    span4 <- start_span()
+    span4 <- start_local_active_span()
   })
-  expect_s3_class(span, "otel_span_noop")
+  expect_s3_class(span4, "otel_span_noop")
 
-  fake(start_span_dev, "get_tracer", function(...) stop("nope"))
+  fake(start_local_active_span_dev, "get_tracer", function(...) stop("nope"))
   expect_snapshot(error = TRUE, {
-    span4 <- start_span_dev()
+    span4 <- start_local_active_span_dev()
   })
 })
 
-test_that("start_span()", {
+test_that("start_span", {
   local_otel_off()
   sess <- start_span()
   expect_s3_class(sess, "otel_span_noop")
   sessd <- start_span_dev()
   expect_s3_class(sessd, "otel_span_noop")
 
-  fake(start_span, "get_tracer", function(...) stop("no session"))
+  fake(start_span, "get_tracer", function(...) stop("nope"))
   expect_snapshot(sessx <- start_span())
   expect_s3_class(sessx, "otel_span_noop")
 
-  fake(start_span_dev, "get_tracer", function(...) stop("no session"))
+  fake(start_span_dev, "get_tracer", function(...) stop("nope"))
   expect_snapshot(error = TRUE, start_span_dev())
+})
+
+test_that("end_span", {
+  local_otel_off()
+  span <- start_local_active_span()
+  expect_s3_class(span, "otel_span")
+  end_span(span)
+  end_span(span)
+
+  span <- start_local_active_span()
+  expect_s3_class(span, "otel_span")
+  end_span_dev(span)
+  end_span_dev(span)
+
+  fake(end_span, "identity", function(...) stop("not yet"))
+  expect_snapshot(end_span(span))
+
+  fake(end_span_dev, "identity", function(...) stop("not yet"))
+  expect_snapshot(error = TRUE, end_span_dev(span))
 })
 
 test_that("local_active_span", {

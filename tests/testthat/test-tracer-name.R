@@ -9,6 +9,11 @@ test_that("default_tracer_name", {
     names = otel_suppress_scopes_envvar
   ))
 
+  expect_equal(
+    default_tracer_name("me-me-me"),
+    list(name = "me-me-me", package = NA_character_, on = TRUE)
+  )
+
   r <- list(name = "org.r-project.R", package = "R", on = TRUE)
   # otel is ignored
   fake(default_tracer_name, "topenv", asNamespace("otel"))

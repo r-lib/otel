@@ -515,6 +515,7 @@ start_span_safe <- start_span
 # safe start
 end_span <- function(span) {
   tryCatch({                                                         # safe
+    identity(NULL)
     span$end()
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe

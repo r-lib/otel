@@ -94,6 +94,7 @@ start_span_dev <- function(
 }
 
 end_span_dev <- function(span) {
+    identity(NULL)
     span$end()
 }
 

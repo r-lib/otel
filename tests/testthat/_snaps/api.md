@@ -94,27 +94,27 @@
       Error in `get_default_meter_provider()`:
       ! x
 
-# start_span
+# start_local_active_span
 
     Code
-      span4 <- start_span()
+      span4 <- start_local_active_span()
     Message
       OpenTelemetry error: nope
 
 ---
 
     Code
-      span4 <- start_span_dev()
+      span4 <- start_local_active_span_dev()
     Condition
       Error in `get_tracer()`:
       ! nope
 
-# start_span()
+# start_span
 
     Code
       sessx <- start_span()
     Message
-      OpenTelemetry error: no session
+      OpenTelemetry error: nope
 
 ---
 
@@ -122,7 +122,22 @@
       start_span_dev()
     Condition
       Error in `get_tracer()`:
-      ! no session
+      ! nope
+
+# end_span
+
+    Code
+      end_span(span)
+    Message
+      OpenTelemetry error: not yet
+
+---
+
+    Code
+      end_span_dev(span)
+    Condition
+      Error in `identity()`:
+      ! not yet
 
 # local_active_span
 
