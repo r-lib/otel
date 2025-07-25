@@ -1,6 +1,7 @@
 ^LICENSE\.md$
 ^\.covrignore$
 ^README\.Rmd$
+^README\.html$
 ^[\.]?air\.toml$
 ^\.vscode$
 ^\.github$
