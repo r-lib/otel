@@ -55,7 +55,19 @@ a span.</p>
 mandatory, and <code>tracestate</code> is optional.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="pack_http_context.html">pack_http_context()</a></code></p></div>
+    </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">hdr</span> <span class="op">&lt;-</span> <span class="fu">otel</span><span class="fu">::</span><span class="fu"><a href="pack_http_context.html">pack_http_context</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ctx</span> <span class="op">&lt;-</span> <span class="fu">otel</span><span class="fu">::</span><span class="fu">extract_http_context</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ctx</span><span class="op">$</span><span class="fu">is_valid</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

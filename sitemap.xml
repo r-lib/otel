@@ -31,6 +31,9 @@
 <url><loc>https://otel.r-lib.org/reference/log_severity_levels.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/logger_provider_noop.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/meter_provider_noop.html</loc></url>
+<url><loc>https://otel.r-lib.org/reference/otel_counter.html</loc></url>
+<url><loc>https://otel.r-lib.org/reference/otel_gauge.html</loc></url>
+<url><loc>https://otel.r-lib.org/reference/otel_histogram.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/otel_logger.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/otel_logger_provider.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/otel_meter.html</loc></url>
@@ -39,6 +42,7 @@
 <url><loc>https://otel.r-lib.org/reference/otel_span_context.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/otel_tracer.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/otel_tracer_provider.html</loc></url>
+<url><loc>https://otel.r-lib.org/reference/otel_up_down_counter.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/pack_http_context.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/start_local_active_span.html</loc></url>
 <url><loc>https://otel.r-lib.org/reference/start_span.html</loc></url>

@@ -72,16 +72,16 @@ or error or to a file. Primarily for debugging.</p></li>
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 
 
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>tracer_provider<span class="sc">$</span><span class="fu">get_tracer</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="at">name =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">version =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">schema_url =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="at">attributes =</span> <span class="cn">NULL</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>)</span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">tracer_provider</span><span class="op">$</span><span class="fu">get_tracer</span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  version <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  schema_url <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  attributes <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-"></a></h4>
+<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 
 <ul><li><p><code>name</code>: Tracer name, see <code><a href="get_tracer.html">get_tracer()</a></code>.</p></li>
 <li><p><code>version</code>: Optional. Specifies the version of the instrumentation
@@ -90,7 +90,9 @@ Example value: <code>"1.0.0"</code>.</p></li>
 <li><p><code>schema_url</code>: Optional. Specifies the Schema URL that should be
 recorded in the emitted telemetry.</p></li>
 <li><p><code>attributes</code>: Optional. Specifies the instrumentation scope
-attributes to associate with emitted telemetry.</p></li>
+attributes to associate with emitted telemetry. See <code><a href="as_attributes.html">as_attributes()</a></code>
+for allowed values. You can also use <code><a href="as_attributes.html">as_attributes()</a></code> to convert R
+objects to OpenTelemetry attributes.</p></li>
 </ul></div>
 
 <div class="section">
@@ -104,7 +106,7 @@ attributes to associate with emitted telemetry.</p></li>
 <h4 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h4>
 
 
-<p><code><a href="get_tracer.html">get_tracer()</a></code>.</p>
+<p><code><a href="get_default_tracer_provider.html">get_default_tracer_provider()</a></code>, <code><a href="get_tracer.html">get_tracer()</a></code>.</p>
 </div>
 
 
@@ -136,8 +138,8 @@ this method.</p><div class="section">
     <div class="section level2">
     <h2 id="see-also-1">See also<a class="anchor" aria-label="anchor" href="#see-also-1"></a></h2>
     <div class="dont-index"><p>Other low level trace API:
-<code><a href="get_active_span_context.html">get_active_span_context</a>()</code>,
 <code><a href="get_default_tracer_provider.html">get_default_tracer_provider</a>()</code>,
+<code><a href="meter_provider_noop.html">meter_provider_noop</a></code>,
 <code><a href="otel_span.html">otel_span</a></code>,
 <code><a href="otel_span_context.html">otel_span_context</a></code>,
 <code><a href="otel_tracer.html">otel_tracer</a></code>,
