@@ -14,6 +14,3 @@ your software's performance and behavior.
 
 For an introduction to OpenTelemetry, see the [OpenTelemetry website
   docs](https://opentelemetry.io/docs/).
-
-To learn how to instrument your R code, see [Getting Started](`r gslink`).
-For project status, installation instructions and more, read on.

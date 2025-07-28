@@ -2,6 +2,12 @@
 #' @title Getting Started
 #' @rdname gettingstarted
 #' @aliases gettingstarted
+#' @description
+#' This page is about instrumenting you R package or project for
+#' OpenTelemetry. If you want to start collecting OpenTelemetry data
+#' for instrumented packages, see \link[otelsdk:Collecting Telemetry Data]{
+#' Collecting Telemetry Data} in the otelsdk package.
+#'
 #' @details
 #' ```{r child = "tools/dox/gettingstarted.Rmd"}
 #' ```
@@ -19,6 +25,10 @@ NULL
 #' configure the otel package. Start with the 'Selecting exporters' section
 #' below if you want to produce telemetry data for an instrumented R
 #' package.
+#'
+#' See also the \link[otelsdk:Environment Variables]{Environment Variables}
+#' in the otelsdk package, which is charge of the data collection
+#' configuration.
 #'
 #' @details
 #' You need set these environment variables when configuring the
@@ -158,6 +168,8 @@ NULL
 #' If unset, there is no limit on the lengths of vectors in attributes.
 #'
 #' @return Not applicable.
+#' @seealso \link[otelsdk:Environment Variables]{Environment Variables} in
+#' otelsdk
 #' @examples
 #' # To start an R session using the OTLP exporter:
 #' # OTEL_TRACES_EXPORTER=http R -q -f script.R

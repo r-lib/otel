@@ -11,6 +11,10 @@ This manual page contains the environment variables you can use to
 configure the otel package. Start with the 'Selecting exporters' section
 below if you want to produce telemetry data for an instrumented R
 package.
+
+See also the \link[otelsdk:Environment Variables]{Environment Variables}
+in the otelsdk package, which is charge of the data collection
+configuration.
 }
 \details{
 You need set these environment variables when configuring the
@@ -171,4 +175,8 @@ If unset, there is no limit on the lengths of vectors in attributes.
 \examples{
 # To start an R session using the OTLP exporter:
 # OTEL_TRACES_EXPORTER=http R -q -f script.R
+}
+\seealso{
+\link[otelsdk:Environment Variables]{Environment Variables} in
+otelsdk
 }

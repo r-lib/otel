@@ -5,7 +5,10 @@
 \alias{gettingstarted}
 \title{Getting Started}
 \description{
-Getting Started
+This page is about instrumenting you R package or project for
+OpenTelemetry. If you want to start collecting OpenTelemetry data
+for instrumented packages, see \link[otelsdk:Collecting Telemetry Data]{
+Collecting Telemetry Data} in the otelsdk package.
 }
 \section{About OpenTelemetry}{
 OpenTelemetry is an observability framework.

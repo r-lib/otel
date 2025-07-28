@@ -30,6 +30,9 @@ knitr::opts_chunk$set(
 ```{r child = system.file(package = "otel", "dox", "intro.Rmd")}
 ```
 
+To learn how to instrument your R code, see [Getting Started](`r gslink`).
+For project status, installation instructions and more, read on.
+
 ```{r child = system.file(package = "otel", "dox", "features.Rmd")}
 ```
 

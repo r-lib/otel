@@ -13,27 +13,27 @@ development:
 
 navbar:
   structure:
-    left: [gettingstarted, collectingdata, reference, news]
+    left: [gettingstarted, collectingdata, reference]
+    right: [news]
   components:
     gettingstarted:
-      text: Getting started
+      text: Getting Started
       href: reference/gettingstarted.html
     collectingdata:
-      text: Collecting telemetry data
-      href: TODO
+      text: Collecting Telemetry Data (otelsdk package)
+      href: https://otelsdk.r-lib.org/reference/collecting.html
 
 reference:
-- desc: >
-    Testing
-
-- title: Other documentation
+- title: Other Documentation
   desc: |
-    This is the reference manual. Other forms of documentation:
+    This is the reference manual of the otel package. Other forms of
+    documentation:
 
-    * [Getting Started](../articles/gettingstarted.html), a tutorial and
+    * [Getting Started](../reference/gettingstarted.html), a tutorial and
       cookbook for instrumentation.
-    * [Collecting telemetry data](TODO), a tutorial and cookbok on data
-      collection.
+    * [Collecting telemetry data](
+      https://otelsdk.r-lib.org/reference/collecting.html), a tutorial and
+      cookbok on telemetry data collection.
 
 - title: Configuration
 - contents:
