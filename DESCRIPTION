@@ -1,5 +1,5 @@
 Package: otel
-Title: 'OpenTelemetry' R 'API'
+Title: 'OpenTelemetry' 'R' 'API'
 Version: 0.1.0
 Authors@R:
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = c("aut", "cre"))
