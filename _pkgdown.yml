@@ -13,15 +13,16 @@ development:
 
 navbar:
   structure:
-    left: [gettingstarted, collectingdata, reference]
+    left: [gettingstarted, reference]
     right: [news]
   components:
     gettingstarted:
       text: Getting Started
-      href: reference/gettingstarted.html
-    collectingdata:
-      text: Collecting Telemetry Data (otelsdk package)
-      href: https://otelsdk.r-lib.org/reference/collecting.html
+      menu:
+        - text: Instrumenting R Packages
+          href: reference/gettingstarted.html
+        - text: Collecting Telemetry Data (otelsdk package)
+          href: https://otelsdk.r-lib.org/reference/collecting.html
 
 reference:
 - title: Other Documentation
