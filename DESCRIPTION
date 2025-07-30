@@ -9,7 +9,7 @@ Description: 'OpenTelemetry' is a collection of tools,
     understand your software's performance and behavior.
     This package implements the 'OpenTelemetry' 'API':
     <https://opentelemetry.io/docs/specs/otel/>
-    Use this package as a dependency if you want to instrument your R
+    Use this package as a dependency if you want to instrument your 'R'
     package for 'OpenTelemetry'.
 License: MIT + file LICENSE
 Encoding: UTF-8
