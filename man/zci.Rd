@@ -2,6 +2,7 @@
 % Please edit documentation in R/docs.R
 \name{Zero Code Instrumentation}
 \alias{Zero Code Instrumentation}
+\alias{OTEL_R_INSTRUMENT_PKGS}
 \title{Zero Code Instrumentation}
 \value{
 Not applicable.

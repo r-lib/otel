@@ -34,7 +34,7 @@ reference:
       cookbook for instrumentation.
     * [Collecting telemetry data](
       https://otelsdk.r-lib.org/reference/collecting.html), a tutorial and
-      cookbok on telemetry data collection.
+      cookbook on telemetry data collection.
 
 - title: Configuration
 - contents:

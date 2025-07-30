@@ -16,9 +16,38 @@
 #' # See above
 NULL
 
+doc_evs_exporter <- function() {
+  c(
+    default_traces_exporter_envvar,
+    default_traces_exporter_envvar_r,
+    default_logs_exporter_envvar,
+    default_logs_exporter_envvar_r,
+    default_metrics_exporter_envvar,
+    default_metrics_exporter_envvar_r
+  )
+}
+
+doc_evs_suppress <- function() {
+  c(
+    otel_emit_scopes_envvar,
+    otel_suppress_scopes_envvar
+  )
+}
+
+doc_evs <- function() {
+  paste(
+    collapse = " ",
+    c(
+      doc_evs_exporter(),
+      doc_evs_suppress()
+    )
+  )
+}
+
 #' Environment variables to configure otel
 #' @name Environment Variables
 #' @rdname environmentvariables
+#' @eval paste("@aliases", "OTEL_ENV", doc_evs())
 #'
 #' @description
 #' This manual page contains the environment variables you can use to
@@ -33,19 +62,19 @@ NULL
 #'
 #' # Production or Development Environment
 #'
-#' ## `OTEL_ENV`
+#' * `OTEL_ENV`
 #'
-#' By default otel runs in production mode. In production mode otel
-#' functions never error. Errors in the telemetry code will not stop
-#' the monitored application.
+#'   By default otel runs in production mode. In production mode otel
+#'   functions never error. Errors in the telemetry code will not stop
+#'   the monitored application.
 #'
-#' This behavior is not ideal for development, where one would prefer
-#' to catch errors early. Set
-#' ```
-#' OTEL_ENV=dev
-#' ```
-#' to run otel in development mode, where otel functions fail on error,
-#' make it easier to fix errors.
+#'   This behavior is not ideal for development, where one would prefer
+#'   to catch errors early. Set
+#'   ```
+#'   OTEL_ENV=dev
+#'   ```
+#'   to run otel in development mode, where otel functions fail on error,
+#'   make it easier to fix errors.
 #'
 #' ```{r child = system.file(package = "otel", "dox/ev-exporters.Rmd")}
 #' ```
@@ -99,6 +128,7 @@ NULL
 #' @family OpenTelemetry trace API
 #' @seealso [Environment Variables]
 #' @return Not applicable.
+#' @aliases OTEL_R_INSTRUMENT_PKGS
 #' @examples
 #' # To run an R script with ZCI:
 #' # OTEL_TRACES_EXPORTER=http OTEL_INSTRUMENT_R_PKGS=dplyr,tidyr R -q -f script.R

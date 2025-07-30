@@ -2,6 +2,15 @@
 % Please edit documentation in R/docs.R
 \name{Environment Variables}
 \alias{Environment Variables}
+\alias{OTEL_ENV}
+\alias{OTEL_TRACES_EXPORTER}
+\alias{OTEL_R_TRACES_EXPORTER}
+\alias{OTEL_LOGS_EXPORTER}
+\alias{OTEL_R_LOGS_EXPORTER}
+\alias{OTEL_METRICS_EXPORTER}
+\alias{OTEL_R_METRICS_EXPORTER}
+\alias{OTEL_R_EMIT_SCOPES}
+\alias{OTEL_R_SUPPRESS_SCOPES}
 \title{Environment variables to configure otel}
 \value{
 Not applicable.
@@ -18,7 +27,8 @@ You need set these environment variables when configuring the
 collection of telemetry data, unless noted otherwise.
 }
 \section{Production or Development Environment}{
-\subsection{\code{OTEL_ENV}}{
+\itemize{
+\item \code{OTEL_ENV}
 
 By default otel runs in production mode. In production mode otel
 functions never error. Errors in the telemetry code will not stop
@@ -42,35 +52,26 @@ point the otel functions to the desired providers.
 
 If none of these environment variables are set, then otel will not
 emit any telemetry data.
-\subsection{\code{OTEL_TRACES_EXPORTER}}{
+\itemize{
+\item \code{OTEL_TRACES_EXPORTER}
 
 The name of the selected tracer provider. See
 \code{\link[=get_default_tracer_provider]{get_default_tracer_provider()}} for the possible values.
-}
-
-\subsection{\code{OTEL_R_TRACES_EXPORTER}}{
+\item \code{OTEL_R_TRACES_EXPORTER}
 
 R specific version of \code{OTEL_TRACES_EXPORTER}.
-}
-
-\subsection{\code{OTEL_LOGS_EXPORTER}}{
+\item \code{OTEL_LOGS_EXPORTER}
 
 The name of the selected logger provider. See
 \code{\link[=get_default_logger_provider]{get_default_logger_provider()}} for the possible values.
-}
-
-\subsection{\code{OTEL_R_LOGS_EXPORTER}}{
+\item \code{OTEL_R_LOGS_EXPORTER}
 
 R specific version of \code{OTEL_LOGS_EXPORTER}.
-}
-
-\subsection{\code{OTEL_METRICS_EXPORTER}}{
+\item \code{OTEL_METRICS_EXPORTER}
 
 The name of the selected meter provider. See
 \code{\link[=get_default_meter_provider]{get_default_meter_provider()}} for the possible values.
-}
-
-\subsection{\code{OTEL_R_METRICS_EXPORTER}}{
+\item \code{OTEL_R_METRICS_EXPORTER}
 
 R specific version of \code{OTEL_METRICS_EXPORTER}.
 }
@@ -80,7 +81,8 @@ R specific version of \code{OTEL_METRICS_EXPORTER}.
 otel has two environment variables to fine tune which instrumentation
 scopes (i.e. R packages, typically) emit telemetry data. By default,
 i.e. if neither of these are set, all packages emit telemetry data.
-\subsection{\code{OTEL_R_EMIT_SCOPES}}{
+\itemize{
+\item \code{OTEL_R_EMIT_SCOPES}
 
 Set this environment variable to a comma separated string of
 instrumentation scope names or R package names to restrict telemetry to
@@ -94,9 +96,7 @@ OTEL_R_EMIT_SCOPES="org.r-lib.*,dplyr"
 
 selects all packages with an instrumentation scope that starts with
 \code{org.r-lib.} and also dplyr.
-}
-
-\subsection{\code{OTEL_R_SUPPRESS_SCOPES}}{
+\item \code{OTEL_R_SUPPRESS_SCOPES}
 
 Set this environment variable to a comma separated string of
 instrumentation scope names or R package names to suppress telemetry
@@ -118,23 +118,20 @@ otel can instrument R packages for OpenTelemetry data collection
 without changing their source code. This relies on changing the code
 of the R functions manually using \code{base::trace()} and can be configured
 using environment variables.
-\subsection{\code{OTEL_R_INSTRUMENT_PKGS}}{
+\itemize{
+\item \code{OTEL_R_INSTRUMENT_PKGS}
 
 Set \code{OTEL_R_INSTRUMENT_PKGS} to a comma separated list of packages to
 instrument. The automatic instrumentation happens when the otel package
 is loaded, so in general it is best to set this environment variable
 before loading R.
-}
-
-\subsection{\verb{OTEL_R_INSTRUMENT_PKGS_<pkg>_INCLUDE}}{
+\item \verb{OTEL_R_INSTRUMENT_PKGS_<pkg>_INCLUDE}
 
 For an automatically instrumented package, set this environment variable
 to only instrument a subset of its functions. It is parsed as a comma
 separated string of function names, which may also include \verb{?} and \code{*}
 wildcards (globbing).
-}
-
-\subsection{\verb{OTEL_R_INSTRUMENT_PKGS_<pkg>_EXCLUDE}}{
+\item \verb{OTEL_R_INSTRUMENT_PKGS_<pkg>_EXCLUDE}
 
 For an automatically instrumented package, set this environment variable
 to exclude some functions from instrumentation. It has the same syntax
@@ -144,18 +141,21 @@ and the exclusion.
 }
 
 \section{Attribute Limits}{
-\subsection{\code{OTEL_ATTRIBUTE_COUNT_LIMIT}}{
+\itemize{
+\item \code{OTEL_ATTRIBUTE_COUNT_LIMIT}
 
 Set this environment variable to limit the number of attributes for a
 single span, log record, metric measurement, etc. If unset, the default
 limit is 128 attributes.
-}
-
-\subsection{\code{OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT}}{
+Note that only attributes specified with \code{\link[=as_attributes]{as_attributes()}} are
+subject to this environment variable.
+\item \code{OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT}
 
 Set this environment variable to limit the length of vectors in
 attributes for a single span, log record, metric measurement, etc.
 If unset, there is no limit on the lengths of vectors in attributes.
+Note that only attributes specified with \code{\link[=as_attributes]{as_attributes()}} are
+subject to this environment variable.
 }
 }
 

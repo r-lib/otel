@@ -2,6 +2,8 @@
 % Please edit documentation in R/as-attributes.R
 \name{as_attributes}
 \alias{as_attributes}
+\alias{OTEL_ATTRIBUTE_COUNT_LIMIT}
+\alias{OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT}
 \title{R objects as OpenTelemetry attributes}
 \usage{
 as_attributes(x)
@@ -23,7 +25,7 @@ their printed form is captured using \code{\link[utils:capture.output]{utils::ca
 \subsection{Limits}{
 
 The number of attributes can be limited with the
-OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT environment variable. The default is
+OTEL_ATTRIBUTE_COUNT_LIMIT environment variable. The default is
 128.
 
 The length of the each attribute (vector) can be limited with the

@@ -18,7 +18,7 @@
 #' ## Limits
 #'
 #' The number of attributes can be limited with the
-#' `r otel_attr_val_lth_limit_var` environment variable. The default is
+#' `r otel_attr_cnt_limit_var` environment variable. The default is
 #' `r otel_attr_cnt_limit_dflt`.
 #'
 #' The length of the each attribute (vector) can be limited with the
@@ -28,6 +28,7 @@
 #' currently limit the number of characters in individual strings.
 #'
 #' @export
+#' @eval paste("@aliases", otel_attr_cnt_limit_var, otel_attr_val_lth_limit_var)
 #' @examples
 #' as_attributes(list(
 #'   number = 1.0,
