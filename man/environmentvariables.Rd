@@ -15,11 +15,11 @@ package.
 See also the \link[otelsdk:Environment Variables]{Environment Variables}
 in the otelsdk package, which is charge of the data collection
 configuration.
-}
-\details{
+
 You need set these environment variables when configuring the
 collection of telemetry data, unless noted otherwise.
-\subsection{Production or Development Environment}{
+}
+\section{Production or Development Environment}{
 \subsection{\code{OTEL_ENV}}{
 
 By default otel runs in production mode. In production mode otel
@@ -35,11 +35,9 @@ to catch errors early. Set
 to run otel in development mode, where otel functions fail on error,
 make it easier to fix errors.
 }
-
 }
 
-\subsection{Selecting Exporters}{
-
+\section{Selecting Exporters}{
 otel is responsible for selecting the providers to use for traces,
 logs and metrics. You can use the environment variables below to
 point the otel functions to the desired providers.
@@ -81,11 +79,9 @@ The name of the selected meter provider. See
 
 R specific version of \code{OTEL_METRICS_EXPORTER}.
 }
-
 }
 
-\subsection{Suppressing Instrumentation Scopes (R Packages)}{
-
+\section{Suppressing Instrumentation Scopes (R Packages)}{
 otel has two environment variables to fine tune which instrumentation
 scopes (i.e. R packages, typically) emit telemetry data. By default,
 i.e. if neither of these are set, all packages emit telemetry data.
@@ -120,11 +116,9 @@ OTEL_R_SUPPRESS_SCOPES="org.r-lib.*,dplyr"
 excludes packages with an instrumentation scope that starts with
 \code{org.r-lib.} and also dplyr.
 }
-
 }
 
-\subsection{\link{Zero Code Instrumentation}}{
-
+\section{\link{Zero Code Instrumentation}}{
 otel can instrument R packages for OpenTelemetry data collection
 without changing their source code. This relies on changing the code
 of the R functions manually using \code{base::trace()} and can be configured
@@ -152,10 +146,9 @@ to exclude some functions from instrumentation. It has the same syntax
 as its \verb{*_INCLUDE} pair. If both are set, then inclusion is applied
 and the exclusion.
 }
-
 }
 
-\subsection{Others}{
+\section{Others}{
 \subsection{\code{OTEL_ATTRIBUTE_COUNT_LIMIT}}{
 
 Set this environment variable to limit the number of attributes for a
@@ -169,9 +162,8 @@ Set this environment variable to limit the length of vectors in
 attributes for a single span, log record, metric measurement, etc.
 If unset, there is no limit on the lengths of vectors in attributes.
 }
+}
 
-}
-}
 \examples{
 # To start an R session using the OTLP exporter:
 # OTEL_TRACES_EXPORTER=http R -q -f script.R
