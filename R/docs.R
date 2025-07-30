@@ -22,9 +22,7 @@ NULL
 #'
 #' @description
 #' This manual page contains the environment variables you can use to
-#' configure the otel package. Start with the 'Selecting exporters' section
-#' below if you want to produce telemetry data for an instrumented R
-#' package.
+#' configure the otel package.
 #'
 #' See also the \link[otelsdk:Environment Variables]{Environment Variables}
 #' in the otelsdk package, which is charge of the data collection
@@ -52,83 +50,14 @@ NULL
 #' ```{r child = system.file(package = "otel", "dox/ev-exporters.Rmd")}
 #' ```
 #'
-#' # Suppressing Instrumentation Scopes (R Packages)
+#' ```{r child = system.file(package = "otel", "dox/ev-suppress.Rmd")}
+#' ```
 #'
-#' otel has two environment variables to fine tune which instrumentation
-#' scopes (i.e. R packages, typically) emit telemetry data. By default,
-#' i.e. if neither of these are set, all packages emit telemetry data.
+#' ```{r child = system.file(package = "otel", "dox/ev-zci.Rmd")}
+#' ```
 #'
-#' ## ``r otel_emit_scopes_envvar``
-#'
-#' Set this environment variable to a comma separated string of
-#' instrumentation scope names or R package names to restrict telemetry to
-#' these packages only. The name of the instrumentation scope is the same
-#' as the name of the tracer, logger or meter, see [default_tracer_name()].
-#'
-#' You can mix package names and instrumentation scope names and you can
-#' also use wildcards (globbing). For example the value
-#'
-#' `r paste0(otel_emit_scopes_envvar, '="org.r-lib.*,dplyr"')`
-#'
-#' selects all packages with an instrumentation scope that starts with
-#' `org.r-lib.` and also dplyr.
-#'
-#' ## ``r otel_suppress_scopes_envvar``
-#'
-#' Set this environment variable to a comma separated string of
-#' instrumentation scope names or R package names to suppress telemetry
-#' data from these packages. The name of the instrumentation scope is the same
-#' as the name of the tracer, logger or meter, see [default_tracer_name()].
-#'
-#' You can mix package names and instrumentation scope names and you can
-#' also use wildcards (globbing). For example the value
-#'
-#' `r paste0(otel_suppress_scopes_envvar, '="org.r-lib.*,dplyr"')`
-#'
-#' excludes packages with an instrumentation scope that starts with
-#' `org.r-lib.` and also dplyr.
-#'
-#' # [Zero Code Instrumentation]
-#'
-#' otel can instrument R packages for OpenTelemetry data collection
-#' without changing their source code. This relies on changing the code
-#' of the R functions manually using `base::trace()` and can be configured
-#' using environment variables.
-#'
-#' ## `OTEL_R_INSTRUMENT_PKGS`
-#'
-#' Set `OTEL_R_INSTRUMENT_PKGS` to a comma separated list of packages to
-#' instrument. The automatic instrumentation happens when the otel package
-#' is loaded, so in general it is best to set this environment variable
-#' before loading R.
-#'
-#' ## `OTEL_R_INSTRUMENT_PKGS_<pkg>_INCLUDE`
-#'
-#' For an automatically instrumented package, set this environment variable
-#' to only instrument a subset of its functions. It is parsed as a comma
-#' separated string of function names, which may also include `?` and `*`
-#' wildcards (globbing).
-#'
-#' ## `OTEL_R_INSTRUMENT_PKGS_<pkg>_EXCLUDE`
-#'
-#' For an automatically instrumented package, set this environment variable
-#' to exclude some functions from instrumentation. It has the same syntax
-#' as its `*_INCLUDE` pair. If both are set, then inclusion is applied
-#' and the exclusion.
-#'
-#' # Others
-#'
-#' ## ``r otel_attr_cnt_limit_var``
-#'
-#' Set this environment variable to limit the number of attributes for a
-#' single span, log record, metric measurement, etc. If unset, the default
-#' limit is `r otel_attr_cnt_limit_dflt` attributes.
-#'
-#' ## ``r otel_attr_val_lth_limit_var``
-#'
-#' Set this environment variable to limit the length of vectors in
-#' attributes for a single span, log record, metric measurement, etc.
-#' If unset, there is no limit on the lengths of vectors in attributes.
+#' ```{r child = system.file(package = "otel", "dox/ev-others.Rmd")}
+#' ```
 #'
 #' @return Not applicable.
 #' @seealso \link[otelsdk:Environment Variables]{Environment Variables} in

@@ -8,9 +8,7 @@ Not applicable.
 }
 \description{
 This manual page contains the environment variables you can use to
-configure the otel package. Start with the 'Selecting exporters' section
-below if you want to produce telemetry data for an instrumented R
-package.
+configure the otel package.
 
 See also the \link[otelsdk:Environment Variables]{Environment Variables}
 in the otelsdk package, which is charge of the data collection
@@ -44,9 +42,6 @@ point the otel functions to the desired providers.
 
 If none of these environment variables are set, then otel will not
 emit any telemetry data.
-
-See the \href{https://github.com/r-lib/otelsdk}{otelsdk} package for
-configuring the selected providers.
 \subsection{\code{OTEL_TRACES_EXPORTER}}{
 
 The name of the selected tracer provider. See
@@ -118,7 +113,7 @@ excludes packages with an instrumentation scope that starts with
 }
 }
 
-\section{\link{Zero Code Instrumentation}}{
+\section{\link[=Zero Code Instrumentation]{Zero Code Instrumentation}}{
 otel can instrument R packages for OpenTelemetry data collection
 without changing their source code. This relies on changing the code
 of the R functions manually using \code{base::trace()} and can be configured
@@ -148,7 +143,7 @@ and the exclusion.
 }
 }
 
-\section{Others}{
+\section{Attribute Limits}{
 \subsection{\code{OTEL_ATTRIBUTE_COUNT_LIMIT}}{
 
 Set this environment variable to limit the number of attributes for a
