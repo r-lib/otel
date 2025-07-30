@@ -2,7 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.1.3
 pkgdown_sha: ~
 articles: {}
-last_built: 2025-07-30T18:40Z
+last_built: 2025-07-30T20:44Z
 urls:
   reference: https://otel.r-lib.org/reference
   article: https://otel.r-lib.org/articles
