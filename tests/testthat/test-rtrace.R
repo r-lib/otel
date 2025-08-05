@@ -11,6 +11,7 @@ test_that("trace_env", {
   env$obj <- "not-a-function"
   trace_env(env, "pkg")
 
+  skip_on_covr()
   expect_snapshot(
     {
       print(env$f, useSource = FALSE)

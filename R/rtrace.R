@@ -21,14 +21,18 @@ trace_env <- function(
       nm,
       tracer = substitute(
         {
+          # nocov start
           .__span <- otel::start_span(sn, tracer = "org.r-lib.otel")
           .__scope <- .__span$activate(NULL)
+          # nocov end
         },
         list(sn = span_name)
       ),
       exit = quote({
+        # nocov start
         try(.__span$deactivate(.__scope))
         try(.__span$end())
+        # nocov end
       }),
       print = FALSE,
       where = env
