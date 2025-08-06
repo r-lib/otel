@@ -21,6 +21,7 @@ Suggests:
     callr,
     cli,
     glue,
+    jsonlite,
     otelsdk,
     processx,
     shiny,
