@@ -586,6 +586,10 @@ span_noop <- list(
 
         activate = function(activation_scope, end_on_exit = FALSE) {
           invisible(self)
+        },
+
+        deactivate = function(activation_scope) {
+          invisible(self)
         }
       ),
       class = c("otel_span_noop", "otel_span")

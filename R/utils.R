@@ -59,3 +59,16 @@ get_env_count <- function(var, default) {
     "integer scalar."
   )
 }
+
+map_lgl <- function(.x, .f, ...) {
+  vapply(.x, .f, logical(1), ...)
+}
+
+map_chr <- function(.x, .f, ...) {
+  vapply(.x, .f, character(1), ...)
+}
+
+mkdirp <- function(dir) {
+  s <- map_lgl(dir, dir.create, recursive = TRUE, showWarnings = FALSE)
+  invisible(s)
+}
