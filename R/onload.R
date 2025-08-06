@@ -104,10 +104,6 @@ setup_r_trace <- function() {
     return()
   }
 
-  if (!get_tracer()$is_enabled()) {
-    return()
-  }
-
   pkgs <- strsplit(ev, ",", fixed = TRUE)[[1]]
   for (pkg in pkgs) {
     PKG <- gsub(".", "_", toupper(pkg), fixed = TRUE)
