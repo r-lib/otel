@@ -109,7 +109,10 @@ callr package has this in an <code>.R</code> file:</p>
 level environment), recursively.</p></li>
 <li><p>It ignores the otel and otelsdk packages while searching.</p></li>
 <li><p>If it finds the base environment or the global environment, then
-it returns <code>org.project.R</code> as the tracer name.</p></li>
+it checks for the <code>otel_tracer_name</code> global variable (in the global
+environment). If that exists, then it must be a scalar string and it
+is used as the tracer name. Otherwise <code>org.project.R</code> is used as the
+tracer name.</p></li>
 <li><p>Otherwise it looks for the <code>otel_tracer_name</code> symbol inside the top
 level environment it has found. If this symbol exists then it must be
 a string scalar and otel will use it as the tracer name.</p></li>
