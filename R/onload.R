@@ -39,7 +39,7 @@ the$mode <- "prod"
   setup_dev_env()
   setup_r_trace()
 }
-#nocov end
+# nocov end
 
 setup_dev_env <- function(envir = asNamespace(.packageName)) {
   ev <- tolower(Sys.getenv("OTEL_ENV"))
