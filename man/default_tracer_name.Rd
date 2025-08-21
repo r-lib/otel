@@ -63,7 +63,10 @@ This is the detailed algorithm that otel uses in \code{default_tracer_name}:
 level environment), recursively.
 \item It ignores the otel and otelsdk packages while searching.
 \item If it finds the base environment or the global environment, then
-it returns \code{org.project.R} as the tracer name.
+it checks for the \code{otel_tracer_name} global variable (in the global
+environment). If that exists, then it must be a scalar string and it
+is used as the tracer name. Otherwise \code{org.project.R} is used as the
+tracer name.
 \item Otherwise it looks for the \code{otel_tracer_name} symbol inside the top
 level environment it has found. If this symbol exists then it must be
 a string scalar and otel will use it as the tracer name.

@@ -37,7 +37,10 @@
 #'   level environment), recursively.
 #' - It ignores the otel and otelsdk packages while searching.
 #' - If it finds the base environment or the global environment, then
-#'   it returns `org.project.R` as the tracer name.
+#'   it checks for the `otel_tracer_name` global variable (in the global
+#'   environment). If that exists, then it must be a scalar string and it
+#'   is used as the tracer name. Otherwise `org.project.R` is used as the
+#'   tracer name.
 #' - Otherwise it looks for the `otel_tracer_name` symbol inside the top
 #'   level environment it has found. If this symbol exists then it must be
 #'   a string scalar and otel will use it as the tracer name.
@@ -92,7 +95,9 @@ default_tracer_name <- function(name = NULL) {
     if (topname == "" || topname == "otel" || topname == "otelsdk") {
       # keep going
     } else if (topname == "base" || topname == "R_GlobalEnv") {
-      ret <- list(name = "org.r-project.R", package = "R")
+      nm <- get0("otel_tracer_name", .GlobalEnv, inherits = FALSE) %||%
+        "org.r-project.R"
+      ret <- list(name = nm, package = "R")
       ret[["on"]] <- is_scope_on(ret)
       return(ret)
     } else {
