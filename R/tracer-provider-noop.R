@@ -561,8 +561,7 @@ span_noop <- list(
           invisible(self)
         },
 
-        # TODO: this is not implemented in otelsdk
-        add_link = function(link) {
+        add_link = function(target, attributes = NULL) {
           invisible(self)
         },
 
