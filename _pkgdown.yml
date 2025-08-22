@@ -101,6 +101,7 @@ reference:
 - title: Utility Functions
 - contents:
   - as_attributes
+  - get_active_span
   - get_active_span_context
 
 - title: Context Propagation
