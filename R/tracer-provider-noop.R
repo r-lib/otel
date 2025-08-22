@@ -245,6 +245,7 @@ tracer_noop <- list(
           )
         },
         get_active_span_context = function() span_context_noop$new(),
+        get_active_span = function() span_noop$new(),
         is_enabled = function() FALSE,
         flush = function() {},
         extract_http_context = function(headers) {

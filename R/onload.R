@@ -86,6 +86,11 @@ setup_dev_env <- function(envir = asNamespace(.packageName)) {
       envir = envir
     )
     assign(
+      "get_active_span",
+      get_active_span_dev,
+      envir = envir
+    )
+    assign(
       "extract_http_context",
       extract_http_context_dev,
       envir = envir

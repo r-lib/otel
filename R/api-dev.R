@@ -64,6 +64,11 @@ with_active_span_dev <- function(span, expr, end_on_exit = FALSE) {
   })
 }
 
+get_active_span_dev <- function() {
+    trc <- get_tracer()
+    trc$get_active_span()
+}
+
 get_active_span_context_dev <- function() {
     trc <- get_tracer()
     trc$get_active_span_context()

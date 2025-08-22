@@ -320,6 +320,34 @@ md_log_severity_levels <- paste0(
   collapse = ", "
 )
 
+#' Returns the active span, if any
+#'
+#' This is sometimes useful, to add additional attributes or links to the
+#' currently active span.
+#'
+#' @return The active span, an [otel_span] object, if any, or an invalid
+#'   span if there is no active span.
+#' @export
+#' @examples
+#' fun <- function() {
+#'   otel::start_local_active_span("fun")
+#'   spn <- otel::get_active_span()
+#'   spn$set_attribute("key", "attribute-value")
+#' }
+#' fun()
+
+# safe start
+get_active_span <- function() {
+  tryCatch({                                                         # safe
+    trc <- get_tracer()
+    trc$get_active_span()
+  }, error = function(err) {                                         # safe
+    errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
+    span_noop$new(NA_character_)                                     # safe
+  })                                                                 # safe
+}
+# safe end
+
 #' Returns the active span context
 #'
 #' This is sometimes useful for logs or metrics, to associate
