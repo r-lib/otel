@@ -11,6 +11,7 @@
 <url><loc>https://otel.r-lib.org/dev/reference/environmentvariables.html</loc></url>
 <url><loc>https://otel.r-lib.org/dev/reference/extract_http_context.html</loc></url>
 <url><loc>https://otel.r-lib.org/dev/reference/gauge_record.html</loc></url>
+<url><loc>https://otel.r-lib.org/dev/reference/get_active_span.html</loc></url>
 <url><loc>https://otel.r-lib.org/dev/reference/get_active_span_context.html</loc></url>
 <url><loc>https://otel.r-lib.org/dev/reference/get_default_logger_provider.html</loc></url>
 <url><loc>https://otel.r-lib.org/dev/reference/get_default_meter_provider.html</loc></url>
