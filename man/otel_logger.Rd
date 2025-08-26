@@ -130,9 +130,6 @@ time the logged event occurred.
 event was observed.
 \item \code{attributes}: Optional attributes, see \code{\link[=as_attributes]{as_attributes()}} for the
 possible values.
-\item \code{.envir}: Environment to evaluate the interpolated expressions of
-the log message in.
-`
 }
 }
 

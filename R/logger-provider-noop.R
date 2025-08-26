@@ -261,9 +261,7 @@ logger_provider_noop <- list(
 #'   event was observed.
 #' - `attributes`: Optional attributes, see [as_attributes()] for the
 #'   possible values.
-#' - `.envir`: Environment to evaluate the interpolated expressions of
-#'   the log message in.
-#' `
+#'
 #' ### Value
 #'
 #' The logger object, invisibly.
@@ -341,8 +339,7 @@ logger_noop <- list(
           msg = "",
           severity = "info",
           span_context = NULL,
-          ...,
-          .envir = parent.frame()
+          ...
         ) {
           invisible(self)
         }

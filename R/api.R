@@ -735,14 +735,11 @@ is_measuring_enabled_safe <- is_measuring_enabled
 
 #' Log an OpenTelemetry log message
 #'
-#' @param msg Log message, may contain R expressions to evaluate within
-#'   braces.
+#' @param msg Log message.
 #' @param severity Log severity, a string, one of
 #'   `r md_log_severity_levels`.
 #' @param ... Additional arguments are passed to the `$log()` method of
 #'   the logger.
-#' @param .envir Environment to evaluate the interpolated expressions of
-#'   the log message in.
 #' @param logger Logger to use. If not an OpenTelemetry logger object
 #'   ([otel_logger]), then it passed to [get_logger()] to get a logger.
 #' @return The logger, invisibly.
@@ -759,14 +756,13 @@ log <- function(
   msg,
   ...,
   severity = "info",
-  .envir = parent.frame(),
   logger = NULL
 ) {
   tryCatch({                                                         # safe
     if (!inherits(logger, "otel_logger")) {
       logger <- get_logger()
     }
-    logger$log(msg, severity, ..., .envir = .envir)
+    logger$log(msg, severity, ...)
     invisible(logger)
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
@@ -786,14 +782,13 @@ log_safe <- log
 log_trace <- function(
   msg,
   ...,
-  .envir = parent.frame(),
   logger = NULL
 ) {
   tryCatch({                                                         # safe
     if (!inherits(logger, "otel_logger")) {
       logger <- get_logger()
     }
-    logger$log(msg, "trace", ..., .envir = .envir)
+    logger$log(msg, "trace", ...)
     invisible(logger)
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
@@ -813,14 +808,13 @@ log_trace_safe <- log_trace
 log_debug <- function(
   msg,
   ...,
-  .envir = parent.frame(),
   logger = NULL
 ) {
   tryCatch({                                                         # safe
     if (!inherits(logger, "otel_logger")) {
       logger <- get_logger()
     }
-    logger$log(msg, "debug", ..., .envir = .envir)
+    logger$log(msg, "debug", ...)
     invisible(logger)
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
@@ -840,14 +834,13 @@ log_debug_safe <- log_debug
 log_info <- function(
   msg,
   ...,
-  .envir = parent.frame(),
   logger = NULL
 ) {
   tryCatch({                                                         # safe
     if (!inherits(logger, "otel_logger")) {
       logger <- get_logger()
     }
-    logger$log(msg, "info", ..., .envir = .envir)
+    logger$log(msg, "info", ...)
     invisible(logger)
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
@@ -867,14 +860,13 @@ log_info_safe <- log_info
 log_warn <- function(
   msg,
   ...,
-  .envir = parent.frame(),
   logger = NULL
 ) {
   tryCatch({                                                         # safe
     if (!inherits(logger, "otel_logger")) {
       logger <- get_logger()
     }
-    logger$log(msg, "warn", ..., .envir = .envir)
+    logger$log(msg, "warn", ...)
     invisible(logger)
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
@@ -894,14 +886,13 @@ log_warn_safe <- log_warn
 log_error <- function(
   msg,
   ...,
-  .envir = parent.frame(),
   logger = NULL
 ) {
   tryCatch({                                                         # safe
     if (!inherits(logger, "otel_logger")) {
       logger <- get_logger()
     }
-    logger$log(msg, "error", ..., .envir = .envir)
+    logger$log(msg, "error", ...)
     invisible(logger)
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
@@ -921,14 +912,13 @@ log_error_safe <- log_error
 log_fatal <- function(
   msg,
   ...,
-  .envir = parent.frame(),
   logger = NULL
 ) {
   tryCatch({                                                         # safe
     if (!inherits(logger, "otel_logger")) {
       logger <- get_logger()
     }
-    logger$log(msg, "fatal", ..., .envir = .envir)
+    logger$log(msg, "fatal", ...)
     invisible(logger)
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe

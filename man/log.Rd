@@ -10,32 +10,28 @@
 \alias{log_fatal}
 \title{Log an OpenTelemetry log message}
 \usage{
-log(msg, ..., severity = "info", .envir = parent.frame(), logger = NULL)
+log(msg, ..., severity = "info", logger = NULL)
 
-log_trace(msg, ..., .envir = parent.frame(), logger = NULL)
+log_trace(msg, ..., logger = NULL)
 
-log_debug(msg, ..., .envir = parent.frame(), logger = NULL)
+log_debug(msg, ..., logger = NULL)
 
-log_info(msg, ..., .envir = parent.frame(), logger = NULL)
+log_info(msg, ..., logger = NULL)
 
-log_warn(msg, ..., .envir = parent.frame(), logger = NULL)
+log_warn(msg, ..., logger = NULL)
 
-log_error(msg, ..., .envir = parent.frame(), logger = NULL)
+log_error(msg, ..., logger = NULL)
 
-log_fatal(msg, ..., .envir = parent.frame(), logger = NULL)
+log_fatal(msg, ..., logger = NULL)
 }
 \arguments{
-\item{msg}{Log message, may contain R expressions to evaluate within
-braces.}
+\item{msg}{Log message.}
 
 \item{...}{Additional arguments are passed to the \verb{$log()} method of
 the logger.}
 
 \item{severity}{Log severity, a string, one of
 "trace", "trace2", "trace3", "trace4", "debug", "debug2", "debug3", "debug4", "info", "info2", "info3", "info4", "warn", "warn2", "warn3", "warn4", "error", "error2", "error3", "error4", "fatal", "fatal2", "fatal3", "fatal4".}
-
-\item{.envir}{Environment to evaluate the interpolated expressions of
-the log message in.}
 
 \item{logger}{Logger to use. If not an OpenTelemetry logger object
 (\link{otel_logger}), then it passed to \code{\link[=get_logger]{get_logger()}} to get a logger.}
