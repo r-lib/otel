@@ -34,3 +34,4 @@ Config/Needs/website:
 Config/testthat/edition: 3
 URL: https://otel.r-lib.org, https://github.com/r-lib/otel
 Additional_repositories: https://github.com/r-lib/otelsdk/releases/download/devel
+BugReports: https://github.com/r-lib/otel/issues
