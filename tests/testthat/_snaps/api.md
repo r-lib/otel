@@ -192,6 +192,29 @@
       Error in `trc$get_active_span_context()`:
       ! nope!
 
+# get_active_span
+
+    Code
+      spn2 <- get_active_span()
+    Message
+      OpenTelemetry error: ouch!
+
+---
+
+    Code
+      get_active_span_dev()
+    Condition
+      Error in `get_tracer()`:
+      ! nope!
+
+---
+
+    Code
+      get_active_span_dev()
+    Condition
+      Error in `trc$get_active_span()`:
+      ! nope!
+
 # log
 
     Code

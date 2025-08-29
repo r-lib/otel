@@ -109,7 +109,7 @@ NULL
 
 tracer_provider_noop <- list(
   new = function() {
-    structure(
+    self <- structure(
       list(
         get_tracer = function(
           name = NULL,
@@ -121,6 +121,7 @@ tracer_provider_noop <- list(
         },
         flush = function() {
           # noop
+          invisible(self)
         },
         get_spans = function() {
           list()
@@ -131,6 +132,7 @@ tracer_provider_noop <- list(
         "otel_tracer_provider"
       )
     )
+    self
   }
 )
 
@@ -229,7 +231,7 @@ NULL
 
 tracer_noop <- list(
   new = function(name = NULL, attributes = NULL, links = NULL, options = NULL) {
-    structure(
+    self <- structure(
       list(
         start_span = function(
           name = NULL,
@@ -247,13 +249,16 @@ tracer_noop <- list(
         get_active_span_context = function() span_context_noop$new(),
         get_active_span = function() span_noop$new(),
         is_enabled = function() FALSE,
-        flush = function() {},
+        flush = function() {
+          invisible(self)
+        },
         extract_http_context = function(headers) {
           span_context_noop$new()
         }
       ),
       class = c("otel_tracer_noop", "otel_tracer")
     )
+    self
   }
 )
 

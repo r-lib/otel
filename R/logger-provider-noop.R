@@ -350,6 +350,7 @@ logger_noop <- list(
   }
 )
 
+# nocov start
 log_record_noop <- list(
   new = function() {
     self <- structure(
@@ -387,3 +388,5 @@ log_record_noop <- list(
     self
   }
 )
+
+# nocov end

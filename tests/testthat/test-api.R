@@ -312,6 +312,38 @@ test_that("get_current_span_context", {
   })
 })
 
+test_that("get_active_span", {
+  local_otel_off()
+
+  spn <- get_active_span()
+  expect_s3_class(spn, "otel_span")
+  expect_s3_class(spn, "otel_span_noop")
+  expect_false(spn$get_context()$is_valid())
+
+  # recover from error
+  fake(get_active_span, "get_tracer", function() stop("ouch!"))
+  expect_snapshot({
+    spn2 <- get_active_span()
+  })
+  expect_s3_class(spn2, "otel_span_noop")
+
+  # error
+  fake(get_active_span_dev, "get_tracer", function() stop("nope!"))
+  expect_snapshot(error = TRUE, {
+    get_active_span_dev()
+  })
+
+  # error 2
+  fake(
+    get_active_span_dev,
+    "get_tracer",
+    function() list(get_active_span = function() stop("nope!"))
+  )
+  expect_snapshot(error = TRUE, {
+    get_active_span_dev()
+  })
+})
+
 test_that("log", {
   local_otel_cache()
   withr::local_envvar(
