@@ -14,7 +14,7 @@ development:
 navbar:
   structure:
     left: [gettingstarted, reference]
-    right: [news]
+    right: [news, github]
   components:
     gettingstarted:
       text: Getting Started
