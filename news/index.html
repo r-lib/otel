@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">otel</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,10 +15,14 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../reference/gettingstarted.html">Getting Started</a></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://otelsdk.r-lib.org/reference/collecting.html">Collecting Telemetry Data (otelsdk package)</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-getting-started" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Getting Started</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-getting-started"><li><a class="dropdown-item" href="../reference/gettingstarted.html">Instrumenting R Packages</a></li>
+    <li><a class="external-link dropdown-item" href="https://otelsdk.r-lib.org/reference/collecting.html">Collecting Telemetry Data (otelsdk package)</a></li>
+  </ul></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
       </ul><ul class="navbar-nav"><li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/r-lib/otel/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -28,14 +32,20 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/r-lib/otel/blob/v0.1.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/r-lib/otel/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.0" id="otel-010">otel 0.1.0<a class="anchor" aria-label="anchor" href="#otel-010"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.2.0" id="otel-020">otel 0.2.0<a class="anchor" aria-label="anchor" href="#otel-020"></a></h2><p class="text-muted">CRAN release: 2025-08-29</p>
+<ul><li><p>Zero Code Instrumentation (ZCI) works again (<a href="https://github.com/r-lib/otel/issues/20" class="external-link">#20</a>).</p></li>
+<li><p>The interpolation of R expressions in log messages is not supported any more (<a href="https://github.com/r-lib/otel/issues/21" class="external-link">#21</a>).</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.0" id="otel-010">otel 0.1.0<a class="anchor" aria-label="anchor" href="#otel-010"></a></h2><p class="text-muted">CRAN release: 2025-07-31</p>
 <p>First release on CRAN.</p>
 </div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
    </div>

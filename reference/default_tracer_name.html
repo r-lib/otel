@@ -15,7 +15,7 @@ about choosing and setting the tracer name."><script defer data-domain="all.r-li
 
     <a class="navbar-brand me-2" href="../index.html">otel</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,10 +23,14 @@ about choosing and setting the tracer name."><script defer data-domain="all.r-li
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../reference/gettingstarted.html">Getting Started</a></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://otelsdk.r-lib.org/reference/collecting.html">Collecting Telemetry Data (otelsdk package)</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-getting-started" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Getting Started</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-getting-started"><li><a class="dropdown-item" href="../reference/gettingstarted.html">Instrumenting R Packages</a></li>
+    <li><a class="external-link dropdown-item" href="https://otelsdk.r-lib.org/reference/collecting.html">Collecting Telemetry Data (otelsdk package)</a></li>
+  </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/r-lib/otel/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -36,7 +40,7 @@ about choosing and setting the tracer name."><script defer data-domain="all.r-li
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Default tracer name (and meter and logger name) for an R package</h1>
-      <small class="dont-index">Source: <a href="https://github.com/r-lib/otel/blob/v0.1.0/R/tracer-name.R" class="external-link"><code>R/tracer-name.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-lib/otel/blob/main/R/tracer-name.R" class="external-link"><code>R/tracer-name.R</code></a></small>
       <div class="d-none name"><code>default_tracer_name.Rd</code></div>
     </div>
 
@@ -106,7 +110,10 @@ callr package has this in an <code>.R</code> file:</p>
 level environment), recursively.</p></li>
 <li><p>It ignores the otel and otelsdk packages while searching.</p></li>
 <li><p>If it finds the base environment or the global environment, then
-it returns <code>org.project.R</code> as the tracer name.</p></li>
+it checks for the <code>otel_tracer_name</code> global variable (in the global
+environment). If that exists, then it must be a scalar string and it
+is used as the tracer name. Otherwise <code>org.project.R</code> is used as the
+tracer name.</p></li>
 <li><p>Otherwise it looks for the <code>otel_tracer_name</code> symbol inside the top
 level environment it has found. If this symbol exists then it must be
 a string scalar and otel will use it as the tracer name.</p></li>
