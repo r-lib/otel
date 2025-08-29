@@ -17,7 +17,8 @@ test_that("trace_env", {
       print(env$f, useSource = FALSE)
       env$obj
     },
-    transform = transform_env_address
+    transform = transform_env_address,
+    variant = if (Sys.getenv("TESTTHAT_COVERAGE") == "otel") "cov" else "nocov"
   )
 })
 
