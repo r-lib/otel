@@ -1,4 +1,4 @@
-# otel (development version)
+# otel 0.2.0
 
 * Zero Code Instrumentation (ZCI) works again (#20).
 
