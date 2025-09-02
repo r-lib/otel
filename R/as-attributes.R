@@ -39,6 +39,9 @@
 #' ))
 
 as_attributes <- function(x) {
+  if (is.null(x)) {
+    x <- as.list(x)
+  }
   if (!is.list(x)) {
     stop("Invalid argument: `x` must be a list in `as_attributes()`.")
   }

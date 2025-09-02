@@ -4,6 +4,10 @@ test_that("simple", {
     OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT = NA_character_
   )
 
+  expect_equal(
+    as_attributes(NULL),
+    structure(list(), names = character())
+  )
   ok <- list(a = "", b = FALSE, c = 1:3 / 2, d = 1:4)
   expect_equal(as_attributes(ok), ok)
 })
