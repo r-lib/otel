@@ -85,7 +85,7 @@ R is as follows:
 
 ## Version support
 
-otel and otelsdk support R 3.6.0 and higher on Unix and R 4.3.0 or
+otel and otelsdk support R 3.6.0 and higher on Unix and R 4.2.0 or
 higher on Windows.
 
 ## Installation
