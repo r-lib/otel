@@ -2,6 +2,10 @@
 
 ## otel (development version)
 
+- The `record_exception()` method of no-op spans now accepts the same
+  arguments as the method of real spans: `error_condition`, `attributes`
+  and `...` ([\#36](https://github.com/r-lib/otel/issues/36)).
+
 - [`end_span()`](https://otel.r-lib.org/dev/reference/end_span.md) now
   has a `status_code` argument, to set the status of the span before
   ending it ([\#39](https://github.com/r-lib/otel/issues/39)).

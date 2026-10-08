@@ -55,6 +55,10 @@ a span.</p>
 <p>Call <code><a href="end_span.html">end_span()</a></code> to end a span explicitly. (See
 <code><a href="start_local_active_span.html">start_local_active_span()</a></code> and <code><a href="local_active_span.html">local_active_span()</a></code> to end a span
 automatically.)</p>
+<p>With otelsdk 0.3.0 or later, span methods do not throw errors. If a
+method fails, it emits a message of class <code>otel_error_message</code> and
+returns a default value, usually the span itself. Set the <code>OTEL_ENV</code>
+environment variable to <code>dev</code> to turn these errors into R errors.</p>
     </div>
     <div class="section level2">
     <h2 id="lifetime">Lifetime<a class="anchor" aria-label="anchor" href="#lifetime"></a></h2>
