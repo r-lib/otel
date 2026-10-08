@@ -16,5 +16,6 @@
 ^\.Renviron$
 ^\.rvenv$
 ^\.rvenvlib$
+^\.Renviron$
 ^rproj\.toml$
 ^rproj\.lock$
