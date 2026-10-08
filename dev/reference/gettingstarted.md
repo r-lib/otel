@@ -194,8 +194,8 @@ local or remote OpenTelemetry collector.
 
 I suggest you use [`otel-tui`](https://github.com/ymtdzzz/otel-tui), a
 terminal OpenTelemetry viewer. To configure it, use the `http` exporter,
-see [Environment
-Variables](https://otel.r-lib.org/dev/reference/environmentvariables.md):
+see '[Environment
+Variables](https://otel.r-lib.org/dev/reference/environmentvariables.md)':
 
     OTEL_TRACES_EXPORTER=http R -q
 

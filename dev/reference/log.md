@@ -65,6 +65,10 @@ The logger, invisibly.
 
 ## See also
 
+'[Environment
+Variables](https://otel.r-lib.org/dev/reference/environmentvariables.md)'
+needed to enable OpenTelemetry logging.
+
 Other OpenTelemetry logs API:
 [`is_logging_enabled()`](https://otel.r-lib.org/dev/reference/is_logging_enabled.md),
 [`log_severity_levels`](https://otel.r-lib.org/dev/reference/log_severity_levels.md)

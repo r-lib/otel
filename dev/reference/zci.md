@@ -35,8 +35,9 @@ overwrites the first.
 
 ## See also
 
-[Environment
-Variables](https://otel.r-lib.org/dev/reference/environmentvariables.md)
+'[Environment
+Variables](https://otel.r-lib.org/dev/reference/environmentvariables.md)'
+needed to enable OpenTelemetry recording.
 
 Other OpenTelemetry trace API:
 [`end_span()`](https://otel.r-lib.org/dev/reference/end_span.md),

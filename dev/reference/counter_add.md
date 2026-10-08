@@ -42,6 +42,10 @@ invisibly.
 
 ## See also
 
+'[Environment
+Variables](https://otel.r-lib.org/dev/reference/environmentvariables.md)'
+needed to enable OpenTelemetry recording.
+
 Other OpenTelemetry metrics instruments:
 [`gauge_record()`](https://otel.r-lib.org/dev/reference/gauge_record.md),
 [`histogram_record()`](https://otel.r-lib.org/dev/reference/histogram_record.md),

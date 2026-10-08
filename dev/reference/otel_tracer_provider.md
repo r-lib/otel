@@ -21,8 +21,8 @@ Typically the tracer provider is created automatically, at the first
 [`start_local_active_span()`](https://otel.r-lib.org/dev/reference/start_local_active_span.md)
 or [`start_span()`](https://otel.r-lib.org/dev/reference/start_span.md)
 call. otel decides which tracer provider class to use based on
-[Environment
-Variables](https://otel.r-lib.org/dev/reference/environmentvariables.md).
+'[Environment
+Variables](https://otel.r-lib.org/dev/reference/environmentvariables.md)'.
 
 ## Implementations
 

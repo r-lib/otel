@@ -32,6 +32,10 @@ with `name` and then it calls the tracer's `$is_enabled()` method.
 
 ## See also
 
+'[Environment
+Variables](https://otel.r-lib.org/dev/reference/environmentvariables.md)'
+needed to enable OpenTelemetry tracing.
+
 Other OpenTelemetry trace API:
 [`Zero Code Instrumentation`](https://otel.r-lib.org/dev/reference/zci.md),
 [`end_span()`](https://otel.r-lib.org/dev/reference/end_span.md),

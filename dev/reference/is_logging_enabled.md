@@ -33,6 +33,10 @@ with `name` and then it calls the logger's `$is_enabled()` method.
 
 ## See also
 
+'[Environment
+Variables](https://otel.r-lib.org/dev/reference/environmentvariables.md)'
+needed to enable OpenTelemetry logging.
+
 Other OpenTelemetry logs API:
 [`log()`](https://otel.r-lib.org/dev/reference/log.md),
 [`log_severity_levels`](https://otel.r-lib.org/dev/reference/log_severity_levels.md)

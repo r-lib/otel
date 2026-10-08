@@ -17,8 +17,8 @@ Usually there is a single logger provider for an R app or script.
 
 Typically the logger provider is created automatically, at the first
 [`log()`](https://otel.r-lib.org/dev/reference/log.md) call. otel
-decides which logger provider class to use based on [Environment
-Variables](https://otel.r-lib.org/dev/reference/environmentvariables.md).
+decides which logger provider class to use based on '[Environment
+Variables](https://otel.r-lib.org/dev/reference/environmentvariables.md)'.
 
 ## Implementations
 

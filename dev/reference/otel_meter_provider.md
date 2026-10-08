@@ -26,8 +26,8 @@ Typically the meter provider is created automatically, at the first
 [`gauge_record()`](https://otel.r-lib.org/dev/reference/gauge_record.md)
 or [`get_meter()`](https://otel.r-lib.org/dev/reference/get_meter.md)
 call. otel decides which meter provider class to use based on
-[Environment
-Variables](https://otel.r-lib.org/dev/reference/environmentvariables.md).
+'[Environment
+Variables](https://otel.r-lib.org/dev/reference/environmentvariables.md)'.
 
 ## Implementations
 
