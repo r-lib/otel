@@ -113,7 +113,7 @@ Stop the meter provider. Stops collecting and emitting measurements.
 
 #### Usage
 
-    meter_provider$shurdown()
+    meter_provider$shutdown()
 
 #### Value
 
