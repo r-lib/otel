@@ -35,6 +35,8 @@ test_that("span_noop", {
   expect_equal(spn$set_status("ok"), spn)
   expect_equal(spn$update_name("new"), spn)
   expect_equal(spn$record_exception(), spn)
+  cnd <- simpleError("boo")
+  expect_equal(spn$record_exception(cnd, attributes = list(a = 1)), spn)
   expect_equal(spn$activate(), spn)
   expect_equal(spn$deactivate(), spn)
   expect_equal(spn$end(), spn)

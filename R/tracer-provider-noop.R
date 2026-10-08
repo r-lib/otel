@@ -279,6 +279,11 @@ tracer_noop <- list(
 #' [start_local_active_span()] and [local_active_span()] to end a span
 #' automatically.)
 #'
+#' With otelsdk 0.3.0 or later, span methods do not throw errors. If a
+#' method fails, it emits a message of class `otel_error_message` and
+#' returns a default value, usually the span itself. Set the `OTEL_ENV`
+#' environment variable to `dev` to turn these errors into R errors.
+#'
 #' # Lifetime
 #'
 #' The span starts when it is created in the [start_local_active_span()]
@@ -585,7 +590,11 @@ span_noop <- list(
           invisible(self)
         },
 
-        record_exception = function(attributes = NULL) {
+        record_exception = function(
+          error_condition,
+          attributes = NULL,
+          ...
+        ) {
           invisible(self)
         },
 

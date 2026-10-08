@@ -18,6 +18,11 @@ a span.
 Call \code{\link[=end_span]{end_span()}} to end a span explicitly. (See
 \code{\link[=start_local_active_span]{start_local_active_span()}} and \code{\link[=local_active_span]{local_active_span()}} to end a span
 automatically.)
+
+With otelsdk 0.3.0 or later, span methods do not throw errors. If a
+method fails, it emits a message of class \code{otel_error_message} and
+returns a default value, usually the span itself. Set the \code{OTEL_ENV}
+environment variable to \code{dev} to turn these errors into R errors.
 }
 \section{Lifetime}{
 The span starts when it is created in the \code{\link[=start_local_active_span]{start_local_active_span()}}
