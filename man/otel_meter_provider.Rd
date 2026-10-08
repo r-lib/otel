@@ -101,7 +101,7 @@ Nothing.
 Stop the meter provider. Stops collecting and emitting measurements.
 \subsection{Usage}{
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{meter_provider$shurdown()
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{meter_provider$shutdown()
 }\if{html}{\out{</div>}}
 }
 

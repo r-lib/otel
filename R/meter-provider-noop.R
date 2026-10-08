@@ -93,7 +93,7 @@
 #' ### Usage
 #'
 #' ```r
-#' meter_provider$shurdown()
+#' meter_provider$shutdown()
 #' ```
 #'
 #' ### Value
