@@ -47,9 +47,25 @@ logging and metrics reporting with traces.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_active_span_context</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_active_span_context</span><span class="op">(</span>tracer <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+
+
+<dl><dt id="arg-tracer">tracer<a class="anchor" aria-label="anchor" href="#arg-tracer"></a></dt>
+<dd><p>Tracer object (<a href="otel_tracer.html">otel_tracer</a>) or tracer name to use.
+If <code>NULL</code>, then otel uses an internal tracer. You usually do not
+need to set this, the active span does not depend on the tracer.</p>
+<p>Passing a tracer might give the wrong result. If it is a no-op
+tracer, then the result is an invalid span (context), or no HTTP
+headers, even if there is an active span. This happens if the
+tracer's scope is turned off, e.g. via the <code>OTEL_R_SUPPRESS_SCOPES</code>
+environment variable, or if the tracer was created before tracing
+was turned on. The default <code>NULL</code> does not have this problem.</p></dd>
+
+</dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>The active span context, an <a href="otel_span_context.html">otel_span_context</a> object.

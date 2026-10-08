@@ -6,7 +6,7 @@ span.
 ## Usage
 
 ``` r
-extract_http_context(headers)
+extract_http_context(headers, tracer = NULL)
 ```
 
 ## Arguments
@@ -15,6 +15,21 @@ extract_http_context(headers)
 
   A named list with one or two strings: `traceparent` is mandatory, and
   `tracestate` is optional.
+
+- tracer:
+
+  Tracer object
+  ([otel_tracer](https://otel.r-lib.org/dev/reference/otel_tracer.md))
+  or tracer name to use. If `NULL`, then otel uses an internal tracer.
+  You usually do not need to set this, the active span does not depend
+  on the tracer.
+
+  Passing a tracer might give the wrong result. If it is a no-op tracer,
+  then the result is an invalid span (context), or no HTTP headers, even
+  if there is an active span. This happens if the tracer's scope is
+  turned off, e.g. via the `OTEL_R_SUPPRESS_SCOPES` environment
+  variable, or if the tracer was created before tracing was turned on.
+  The default `NULL` does not have this problem.
 
 ## Value
 

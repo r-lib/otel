@@ -39,7 +39,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="otel-development-version">otel (development version)<a class="anchor" aria-label="anchor" href="#otel-development-version"></a></h2>
-</div>
+<ul><li>
+<code><a href="../reference/get_active_span.html">get_active_span()</a></code>, <code><a href="../reference/get_active_span_context.html">get_active_span_context()</a></code>, <code><a href="../reference/pack_http_context.html">pack_http_context()</a></code> and <code><a href="../reference/extract_http_context.html">extract_http_context()</a></code> are now faster: they use a cached internal tracer, instead of looking up the tracer name from the call stack. They also have a new <code>tracer</code> argument, to use a specific tracer (<a href="https://github.com/r-lib/otel/issues/34" class="external-link">#34</a>).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="otel-020">otel 0.2.0<a class="anchor" aria-label="anchor" href="#otel-020"></a></h2><p class="text-muted">CRAN release: 2025-08-29</p>
 <ul><li><p>Zero Code Instrumentation (ZCI) works again (<a href="https://github.com/r-lib/otel/issues/20" class="external-link">#20</a>).</p></li>
