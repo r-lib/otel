@@ -1,7 +1,7 @@
-# is_tracing
+# is_tracing_enabled
 
     Code
-      is_tracing()
+      is_tracing_enabled()
     Message
       OpenTelemetry error: nope
     Output
@@ -10,15 +10,15 @@
 ---
 
     Code
-      is_tracing_dev()
+      is_tracing_enabled_dev()
     Condition
       Error in `get_tracer()`:
       ! nope
 
-# is_logging
+# is_logging_enabled
 
     Code
-      is_logging()
+      is_logging_enabled()
     Message
       OpenTelemetry error: nope
     Output
@@ -27,15 +27,15 @@
 ---
 
     Code
-      is_logging_dev()
+      is_logging_enabled_dev()
     Condition
       Error in `get_logger()`:
-      ! nope
+      ! unused argument (logger)
 
-# is_measuring
+# is_measuring_enabled
 
     Code
-      is_measuring()
+      is_measuring_enabled()
     Message
       OpenTelemetry error: nope
     Output
@@ -44,7 +44,7 @@
 ---
 
     Code
-      is_measuring_dev()
+      is_measuring_enabled_dev()
     Condition
       Error in `get_meter()`:
       ! nope
@@ -94,35 +94,50 @@
       Error in `get_default_meter_provider()`:
       ! x
 
-# start_span
+# start_local_active_span
 
     Code
-      span4 <- start_span()
+      span4 <- start_local_active_span()
     Message
       OpenTelemetry error: nope
 
 ---
 
     Code
-      span4 <- start_span_dev()
+      span4 <- start_local_active_span_dev()
     Condition
       Error in `get_tracer()`:
       ! nope
 
-# start_span(scope = NULL)
+# start_span
 
     Code
-      sessx <- start_span(scope = NULL)
+      sessx <- start_span()
     Message
-      OpenTelemetry error: no session
+      OpenTelemetry error: nope
 
 ---
 
     Code
-      start_span_dev(scope = NULL)
+      start_span_dev()
     Condition
       Error in `get_tracer()`:
-      ! no session
+      ! nope
+
+# end_span
+
+    Code
+      end_span(span)
+    Message
+      OpenTelemetry error: not yet
+
+---
+
+    Code
+      end_span_dev(span)
+    Condition
+      Error in `identity()`:
+      ! not yet
 
 # local_active_span
 
@@ -159,7 +174,7 @@
     Code
       spc2 <- get_active_span_context()
     Message
-      Opentelemetry error: nope!
+      OpenTelemetry error: nope!
 
 ---
 
@@ -177,19 +192,42 @@
       Error in `trc$get_active_span_context()`:
       ! nope!
 
+# get_active_span
+
+    Code
+      spn2 <- get_active_span()
+    Message
+      OpenTelemetry error: ouch!
+
+---
+
+    Code
+      get_active_span_dev()
+    Condition
+      Error in `get_tracer()`:
+      ! nope!
+
+---
+
+    Code
+      get_active_span_dev()
+    Condition
+      Error in `trc$get_active_span()`:
+      ! nope!
+
 # log
 
     Code
       lgr2 <- log("another nothing")
     Message
-      Opentelemetry error: denied!
+      OpenTelemetry error: denied!
 
 ---
 
     Code
       log_dev("nothing")
     Condition
-      Error in `lgr$log()`:
+      Error in `logger$log()`:
       ! no
 
 # log_trace
@@ -197,14 +235,14 @@
     Code
       lgr2 <- log_trace("another nothing")
     Message
-      Opentelemetry error: denied!
+      OpenTelemetry error: denied!
 
 ---
 
     Code
       log_trace_dev("nothing")
     Condition
-      Error in `lgr$log()`:
+      Error in `logger$log()`:
       ! no
 
 # log_debug
@@ -212,14 +250,14 @@
     Code
       lgr2 <- log_debug("another nothing")
     Message
-      Opentelemetry error: denied!
+      OpenTelemetry error: denied!
 
 ---
 
     Code
       log_debug_dev("nothing")
     Condition
-      Error in `lgr$log()`:
+      Error in `logger$log()`:
       ! no
 
 # log_info
@@ -227,14 +265,14 @@
     Code
       lgr2 <- log_info("another nothing")
     Message
-      Opentelemetry error: denied!
+      OpenTelemetry error: denied!
 
 ---
 
     Code
       log_info_dev("nothing")
     Condition
-      Error in `lgr$log()`:
+      Error in `logger$log()`:
       ! no
 
 # log_warn
@@ -242,14 +280,14 @@
     Code
       lgr2 <- log_warn("another nothing")
     Message
-      Opentelemetry error: denied!
+      OpenTelemetry error: denied!
 
 ---
 
     Code
       log_warn_dev("nothing")
     Condition
-      Error in `lgr$log()`:
+      Error in `logger$log()`:
       ! no
 
 # log_error
@@ -257,14 +295,14 @@
     Code
       lgr2 <- log_error("another nothing")
     Message
-      Opentelemetry error: denied!
+      OpenTelemetry error: denied!
 
 ---
 
     Code
       log_error_dev("nothing")
     Condition
-      Error in `lgr$log()`:
+      Error in `logger$log()`:
       ! no
 
 # log_fatal
@@ -272,14 +310,14 @@
     Code
       lgr2 <- log_fatal("another nothing")
     Message
-      Opentelemetry error: denied!
+      OpenTelemetry error: denied!
 
 ---
 
     Code
       log_fatal_dev("nothing")
     Condition
-      Error in `lgr$log()`:
+      Error in `logger$log()`:
       ! no
 
 # counter_add
@@ -287,7 +325,7 @@
     Code
       mtr2 <- counter_add("cx")
     Message
-      Opentelemetry error: not today
+      OpenTelemetry error: not today
 
 ---
 
@@ -302,7 +340,7 @@
     Code
       mtr2 <- up_down_counter_add("cx")
     Message
-      Opentelemetry error: not today
+      OpenTelemetry error: not today
 
 ---
 
@@ -317,7 +355,7 @@
     Code
       mtr2 <- histogram_record("cx")
     Message
-      Opentelemetry error: not today
+      OpenTelemetry error: not today
 
 ---
 
@@ -332,7 +370,7 @@
     Code
       mtr2 <- gauge_record("cx")
     Message
-      Opentelemetry error: not today
+      OpenTelemetry error: not today
 
 ---
 
@@ -347,7 +385,7 @@
     Code
       pack_http_context()
     Message
-      Opentelemetry error: sorry
+      OpenTelemetry error: sorry
     Output
       named character(0)
 
@@ -364,7 +402,7 @@
     Code
       spc2 <- extract_http_context(c("does not matter"))
     Message
-      Opentelemetry error: out of context
+      OpenTelemetry error: out of context
 
 ---
 

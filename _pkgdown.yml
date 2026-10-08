@@ -1,0 +1,115 @@
+url: https://otel.r-lib.org
+
+template:
+  package: tidytemplate
+  bootstrap: 5
+
+  includes:
+    in_header: |
+      <script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script>
+      <script defer data-domain="all.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
+
+development:
+  mode: auto
+
+navbar:
+  structure:
+    left: [gettingstarted, reference]
+    right: [news, github]
+  components:
+    gettingstarted:
+      text: Getting Started
+      menu:
+        - text: Instrumenting R Packages
+          href: reference/gettingstarted.html
+        - text: Collecting Telemetry Data (otelsdk package)
+          href: https://otelsdk.r-lib.org/reference/collecting.html
+
+reference:
+- title: Other Documentation
+  desc: |
+    This is the reference manual of the otel package. Other forms of
+    documentation:
+
+    * [Getting Started](../reference/gettingstarted.html), a tutorial and
+      cookbook for instrumentation.
+    * [Collecting telemetry data](
+      https://otelsdk.r-lib.org/reference/collecting.html), a tutorial and
+      cookbook on telemetry data collection.
+
+- title: Configuration
+- contents:
+  - default_tracer_name
+  - "Environment Variables"
+
+- title: Traces
+- subtitle: Trace API
+- contents:
+  - end_span
+  - is_tracing_enabled
+  - start_local_active_span
+  - start_span
+  - tracing-constants
+  - "Zero Code Instrumentation"
+- subtitle: Concurrency
+- contents:
+  - local_active_span
+  - with_active_span
+- subtitle: Low Level Trace API
+- contents:
+  - get_default_tracer_provider
+  - get_tracer
+  - otel_span
+  - otel_span_context
+  - otel_tracer
+  - otel_tracer_provider
+  - tracer_provider_noop
+
+- title: Logs
+- subtitle: Logs API
+- contents:
+  - is_logging_enabled
+  - log
+  - log_severity_levels
+- subtitle: Low Level Logs API
+- contents:
+  - get_default_logger_provider
+  - get_logger
+  - logger_provider_noop
+  - otel_logger
+  - otel_logger_provider
+
+- title: Metrics
+- subtitle: Metrics API
+- contents:
+  - counter_add
+  - gauge_record
+  - histogram_record
+  - is_measuring_enabled
+  - up_down_counter_add
+- subtitle: Low Level Metrics API
+- contents:
+  - get_default_meter_provider
+  - get_meter
+  - meter_provider_noop
+  - otel_counter
+  - otel_gauge
+  - otel_histogram
+  - otel_meter
+  - otel_meter_provider
+  - otel_up_down_counter
+
+- title: Utility Functions
+- contents:
+  - as_attributes
+  - get_active_span
+  - get_active_span_context
+
+- title: Context Propagation
+- contents:
+  - extract_http_context
+  - pack_http_context
+
+- title: internal
+  contents:
+  - gettingstarted

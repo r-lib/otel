@@ -5,9 +5,6 @@ test_that("safe functions are used in prod", {
     get_default_tracer_provider_safe
   )
   expect_equal(get_tracer, get_tracer_safe)
-  expect_equal(start_shiny_app, start_shiny_app_safe)
-  expect_equal(start_shiny_session, start_shiny_session_safe)
-  expect_equal(start_span, start_span_safe)
 })
 
 test_that("otel_save_cache, otel_restore_cache", {
@@ -48,9 +45,6 @@ test_that("setup_dev_env", {
       env$get_default_meter_provider,
       get_default_meter_provider_dev
     )
-    expect_equal(env$start_shiny_app, start_shiny_app_dev)
-    expect_equal(env$start_shiny_session, start_shiny_session_dev)
-    expect_equal(env$start_span, start_span_dev)
   }
 
   withr::local_envvar(OTEL_ENV = NA_character_)

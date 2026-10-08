@@ -49,6 +49,9 @@ test_that("get_env_count", {
   withr::local_envvar(FOO = 10)
   expect_equal(get_env_count("FOO", stop("no")), 10L)
 
+  withr::local_envvar(FOO = "inf")
+  expect_equal(get_env_count("FOO", stop("no")), Inf)
+
   withr::local_envvar(FOO = "bad")
   expect_equal(get_env_count("FOO", 1L), 1L)
   expect_equal(get_env_count("FOO", "1"), 1L)

@@ -5,7 +5,8 @@
 #'
 #' @param x A list of R objects, to be used as OpenTelemetry attributes.
 #' @return A named list that can be used as the `attributes` argument to
-#'   [start_span()], [log()], [counter_add()], etc.
+#'   the `start_span()` method of [otel_tracer], the `log()` method of
+#'   [otel_logger], etc.
 #'
 #' If `x` is not named, or some names are the empty string or `NA`, then
 #' integer numbers as used for the missing or invalid names.
@@ -17,18 +18,30 @@
 #' ## Limits
 #'
 #' The number of attributes can be limited with the
-#' `r otel_attr_val_lth_limit_var` environment variable. The default is
+#' `r otel_attr_cnt_limit_var` environment variable. The default is
 #' `r otel_attr_cnt_limit_dflt`.
 #'
 #' The length of the each attribute (vector) can be limited with the
 #' `r otel_attr_val_lth_limit_var` environment variable. The default is
-#' `r otel_attr_val_lth_limit_dflt`. Note that this is applied to the
-#' length of each attribute as an R vector. E.g. it does _not_ currently
-#' limit the number of characters in individual strings.
+#' ``r format(otel_attr_val_lth_limit_dflt)``. Note that this is applied to
+#' the length of each attribute as an R vector. E.g. it does _not_
+#' currently limit the number of characters in individual strings.
 #'
 #' @export
+#' @eval paste("@aliases", otel_attr_cnt_limit_var, otel_attr_val_lth_limit_var)
+#' @examples
+#' as_attributes(list(
+#'   number = 1.0,
+#'   vector = 1:10,
+#'   string = "otel",
+#'   string_vector = letters,
+#'   object = mtcars
+#' ))
 
 as_attributes <- function(x) {
+  if (is.null(x)) {
+    x <- as.list(x)
+  }
   if (!is.list(x)) {
     stop("Invalid argument: `x` must be a list in `as_attributes()`.")
   }
@@ -68,8 +81,8 @@ as_attributes <- function(x) {
 }
 
 otel_attr_cnt_limit_var <- "OTEL_ATTRIBUTE_COUNT_LIMIT"
-otel_attr_cnt_limit_dflt <- 100L
+otel_attr_cnt_limit_dflt <- 128L
 otel_attr_val_lth_limit_var <- "OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT"
-otel_attr_val_lth_limit_dflt <- 100L
+otel_attr_val_lth_limit_dflt <- Inf
 
 otel_attr_types <- c(typeof(""), typeof(TRUE), typeof(1), typeof(1L))

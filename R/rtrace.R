@@ -11,26 +11,33 @@ trace_env <- function(
   exclude = NULL
 ) {
   nms <- glob_filter(ls(env), include, exclude)
-  for (nm in nms) {
+  lapply(nms, function(nm) {
     obj <- get(nm, envir = env)
     if (!is.function(obj)) {
-      next
+      return()
     }
     span_name <- paste0(name, "::", nm)
-    tr1 <- substitute(
-      .__span <- otel::start_span(
-        sn,
-        tracer_name = "org.r-lib.otel",
-        scope = NULL
-      ),
-      list(sn = span_name)
-    )
     suppressMessages(trace(
       nm,
-      tr1,
-      exit = quote(try(.__span$end())),
+      tracer = substitute(
+        {
+          # nocov start
+          .__span <- otel::start_span(sn, tracer = "org.r-lib.otel")
+          .__scope <- .__span$activate(NULL)
+          # nocov end
+        },
+        list(sn = span_name)
+      ),
+      exit = quote({
+        # nocov start
+        try(.__span$deactivate(.__scope))
+        try(.__span$end())
+        # nocov end
+      }),
       print = FALSE,
       where = env
     ))
-  }
+    NULL
+  })
+  invisible()
 }

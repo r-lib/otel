@@ -1,12 +1,27 @@
 test_that("attributes", {
   local_otel_off()
 
-  expect_silent(start_span("sp", attributes = stop("please ignore")))
+  expect_silent(start_span("sp", attributes = stop("oh!")))
 
-  expect_silent(counter_add("ctr", attributes = stop("don't mind me")))
-  expect_silent(gauge_record("gge", attributes = stop("keep on")))
-  expect_silent(histogram_record("hst", attributes = stop("and on")))
-  expect_silent(up_down_counter_add("udc", attributes = stop("...")))
+  expect_silent(start_local_active_span(
+    "sp",
+    attributes = stop("please ignore")
+  ))
+
+  expect_silent(get_meter("org.r-lib.otel")$create_counter("ctr")$add(
+    "ctr",
+    attributes = stop("don't mind me")
+  ))
+  expect_silent(get_meter("org.r-lib.otel")$create_gauge("gge")$record(
+    attributes = stop("keep on")
+  ))
+  expect_silent(get_meter("org.r-lib.otel")$create_histogram("hst")$record(
+    attributes = stop("and on")
+  ))
+  expect_silent(get_meter("org.r-lib.otel")$create_up_down_counter("udc")$add(
+    "udc",
+    attributes = stop("...")
+  ))
 
   trc <- get_tracer()
   expect_silent(trc$start_span("sp", attributes = stop("never mind me")))

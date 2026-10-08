@@ -4,20 +4,57 @@
 \alias{get_meter}
 \title{Get a meter from the default meter provider}
 \usage{
-get_meter(name = NULL)
+get_meter(
+  name = NULL,
+  version = NULL,
+  schema_url = NULL,
+  attributes = NULL,
+  ...,
+  provider = NULL
+)
 }
 \arguments{
 \item{name}{Name of the new tracer. If missing, then deduced automatically.}
+
+\item{version}{Optional. Specifies the version of the instrumentation
+scope if the scope has a version (e.g. R package version).
+Example value: \code{"1.0.0"}.}
+
+\item{schema_url}{Optional. Specifies the Schema URL that should be
+recorded in the emitted telemetry.}
+
+\item{attributes}{Optional. Specifies the instrumentation scope
+attributes to associate with emitted telemetry.}
+
+\item{...}{Additional arguments are passed to the \code{get_meter()}
+method of the provider.}
+
+\item{provider}{Meter provider to use. If \code{NULL}, then it uses
+\code{\link[=get_default_meter_provider]{get_default_meter_provider()}} to get a tracer provider.}
+}
+\value{
+An \link{otel_meter} object.
 }
 \description{
 Get a meter from the default meter provider
 }
-\seealso{
-Other OpenTelemetry metrics: 
-\code{\link{counter_add}()},
-\code{\link{gauge_record}()},
-\code{\link{histogram_record}()},
-\code{\link{is_measuring}()},
-\code{\link{up_down_counter_add}()}
+\examples{
+myfun <- function() {
+  mtr <- otel::get_meter()
+  ctr <- mtr$create_counter("session-count")
+  ctr$add(1)
 }
-\concept{OpenTelemetry metrics}
+myfun()
+}
+\seealso{
+Other low level metrics API: 
+\code{\link{get_default_meter_provider}()},
+\code{\link{meter_provider_noop}},
+\code{\link{otel_counter}},
+\code{\link{otel_gauge}},
+\code{\link{otel_histogram}},
+\code{\link{otel_meter}},
+\code{\link{otel_meter_provider}},
+\code{\link{otel_up_down_counter}}
+}
+\concept{low level metrics API}

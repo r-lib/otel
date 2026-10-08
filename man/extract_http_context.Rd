@@ -10,15 +10,18 @@ extract_http_context(headers)
 \item{headers}{A named list with one or two strings: \code{traceparent} is
 mandatory, and \code{tracestate} is optional.}
 }
+\value{
+And \link{otel_span_context} object.
+}
 \description{
 The return value can be used as the \code{parent} option when starting
 a span.
 }
-\seealso{
-Other OpenTelemetry tracing: 
-\code{\link{get_active_span_context}()},
-\code{\link{get_tracer}()},
-\code{\link{is_tracing}()},
-\code{\link{start_span}()}
+\examples{
+hdr <- otel::pack_http_context()
+ctx <- otel::extract_http_context()
+ctx$is_valid()
 }
-\concept{OpenTelemetry tracing}
+\seealso{
+\code{\link[=pack_http_context]{pack_http_context()}}
+}

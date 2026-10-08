@@ -4,18 +4,56 @@
 \alias{get_logger}
 \title{Get a logger from the default logger provider}
 \usage{
-get_logger(name = NULL)
+get_logger(
+  name = NULL,
+  minimum_severity = NULL,
+  version = NULL,
+  schema_url = NULL,
+  attributes = NULL,
+  ...,
+  provider = NULL
+)
 }
 \arguments{
 \item{name}{Name of the new tracer. If missing, then deduced automatically.}
+
+\item{minimum_severity}{A log level, the minimum severity log messages
+to log. See \link{log_severity_levels}.}
+
+\item{version}{Optional. Specifies the version of the instrumentation
+scope if the scope has a version (e.g. R package version).
+Example value: \code{"1.0.0"}.}
+
+\item{schema_url}{Optional. Specifies the Schema URL that should be
+recorded in the emitted telemetry.}
+
+\item{attributes}{Optional. Specifies the instrumentation scope
+attributes to associate with emitted telemetry.}
+
+\item{...}{Additional arguments are passed to the \code{get_logger()}
+method of the provider.}
+
+\item{provider}{Tracer provider to use. If \code{NULL}, then it uses
+\code{\link[=get_default_tracer_provider]{get_default_tracer_provider()}} to get a tracer provider.}
+}
+\value{
+An \link{otel_logger} object.
 }
 \description{
 Get a logger from the default logger provider
 }
-\seealso{
-Other OpenTelemetry logging: 
-\code{\link{is_logging}()},
-\code{\link{log}()},
-\code{\link{log_severity_levels}}
+\examples{
+myfun <- function() {
+  lgr <- otel::get_logger()
+  otel::log("Log message", logger = lgr)
 }
-\concept{OpenTelemetry logging}
+myfun()
+}
+\seealso{
+Other low level logs API: 
+\code{\link{get_default_logger_provider}()},
+\code{\link{logger_provider_noop}},
+\code{\link{otel_logger}},
+\code{\link{otel_logger_provider}}
+}
+\concept{low level logs API}

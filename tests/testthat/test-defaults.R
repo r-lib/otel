@@ -54,6 +54,7 @@ test_that("get_default_tracer_provider", {
 })
 
 test_that("setup_default_tracer_provider", {
+  skip_on_cran()
   local_otel_cache()
   set_ev <- function(x, wh = c("r", "generic", "both")) {
     wh <- match.arg(wh)
@@ -91,6 +92,10 @@ test_that("setup_default_tracer_provider", {
   set_ev("otlp")
   setup_default_tracer_provider()
   expect_s3_class(the$tracer_provider, "otel_tracer_provider_http")
+
+  set_ev("otlp/file")
+  setup_default_tracer_provider()
+  expect_s3_class(the$tracer_provider, "otel_tracer_provider_file")
 
   set_ev("http")
   setup_default_tracer_provider()
@@ -182,6 +187,7 @@ test_that("get_default_logger_provider", {
 })
 
 test_that("setup_default_logger_provider", {
+  skip_on_cran()
   local_otel_cache()
   set_ev <- function(x, wh = c("r", "generic", "both")) {
     wh <- match.arg(wh)
@@ -215,6 +221,10 @@ test_that("setup_default_logger_provider", {
   set_ev("stderr")
   setup_default_logger_provider()
   expect_s3_class(the$logger_provider, "otel_logger_provider_stdstream")
+
+  set_ev("otlp/file")
+  setup_default_logger_provider()
+  expect_s3_class(the$logger_provider, "otel_logger_provider_file")
 
   set_ev("otlp")
   setup_default_logger_provider()
@@ -302,6 +312,7 @@ test_that("get_default_meter_provider", {
 })
 
 test_that("setup_default_meter_provider", {
+  skip_on_cran()
   local_otel_cache()
   set_ev <- function(x, wh = c("r", "generic", "both")) {
     wh <- match.arg(wh)
@@ -339,6 +350,10 @@ test_that("setup_default_meter_provider", {
   set_ev("otlp")
   setup_default_meter_provider()
   expect_s3_class(the$meter_provider, "otel_meter_provider_http")
+
+  set_ev("otlp/file")
+  setup_default_meter_provider()
+  expect_s3_class(the$meter_provider, "otel_meter_provider_file")
 
   set_ev("http")
   setup_default_meter_provider()

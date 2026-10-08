@@ -40,9 +40,15 @@ glob_filter <- function(x, include = NULL, exclude = NULL) {
 
 get_env_count <- function(var, default) {
   strval <- Sys.getenv(var)
+  if (tolower(strval) == "inf") {
+    return(Inf)
+  }
   intval <- suppressWarnings(as.integer(strval))
   if (!is.na(intval) && intval >= 0) {
     return(intval)
+  }
+  if (default == Inf) {
+    return(Inf)
   }
   intval <- suppressWarnings(as.integer(default))
   if (!is.na(intval) && intval >= 0) {
@@ -52,4 +58,17 @@ get_env_count <- function(var, default) {
     "Invalid `default` in `get_env_count()`, must be a non-negative ",
     "integer scalar."
   )
+}
+
+map_lgl <- function(.x, .f, ...) {
+  vapply(.x, .f, logical(1), ...)
+}
+
+map_chr <- function(.x, .f, ...) {
+  vapply(.x, .f, character(1), ...)
+}
+
+mkdirp <- function(dir) {
+  s <- map_lgl(dir, dir.create, recursive = TRUE, showWarnings = FALSE)
+  invisible(s)
 }

@@ -2,10 +2,9 @@
 % Please edit documentation in R/api.R
 \name{gauge_record}
 \alias{gauge_record}
-\title{Record a value of an OpenTelemetry gauge using the default
-meter}
+\title{Record a value of an OpenTelemetry gauge}
 \usage{
-gauge_record(name, value, attributes = NULL, context = NULL)
+gauge_record(name, value, attributes = NULL, context = NULL, meter = NULL)
 }
 \arguments{
 \item{name}{Name of the gauge}
@@ -16,13 +15,18 @@ gauge_record(name, value, attributes = NULL, context = NULL)
 
 \item{context}{Span context. If missing the active context is used,
 if any.}
+
+\item{meter}{Meter object (\link{otel_meter}). Otherwise it is passed to
+\code{\link[=get_meter]{get_meter()}} to get a meter.}
 }
 \value{
-The gauge object, invisibly.
+The gauge object (\link{otel_gauge}), invisibly.
 }
 \description{
-Record a value of an OpenTelemetry gauge using the default
-meter
+Record a value of an OpenTelemetry gauge
+}
+\examples{
+otel::gauge_record("temperature", 27)
 }
 \seealso{
 Other OpenTelemetry metrics instruments: 
@@ -30,12 +34,11 @@ Other OpenTelemetry metrics instruments:
 \code{\link{histogram_record}()},
 \code{\link{up_down_counter_add}()}
 
-Other OpenTelemetry metrics: 
+Other OpenTelemetry metrics API: 
 \code{\link{counter_add}()},
-\code{\link{get_meter}()},
 \code{\link{histogram_record}()},
-\code{\link{is_measuring}()},
+\code{\link{is_measuring_enabled}()},
 \code{\link{up_down_counter_add}()}
 }
-\concept{OpenTelemetry metrics}
+\concept{OpenTelemetry metrics API}
 \concept{OpenTelemetry metrics instruments}

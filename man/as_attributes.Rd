@@ -2,6 +2,8 @@
 % Please edit documentation in R/as-attributes.R
 \name{as_attributes}
 \alias{as_attributes}
+\alias{OTEL_ATTRIBUTE_COUNT_LIMIT}
+\alias{OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT}
 \title{R objects as OpenTelemetry attributes}
 \usage{
 as_attributes(x)
@@ -11,7 +13,8 @@ as_attributes(x)
 }
 \value{
 A named list that can be used as the \code{attributes} argument to
-\code{\link[=start_span]{start_span()}}, \code{\link[=log]{log()}}, \code{\link[=counter_add]{counter_add()}}, etc.
+the \code{start_span()} method of \link{otel_tracer}, the \code{log()} method of
+\link{otel_logger}, etc.
 
 If \code{x} is not named, or some names are the empty string or \code{NA}, then
 integer numbers as used for the missing or invalid names.
@@ -22,17 +25,26 @@ their printed form is captured using \code{\link[utils:capture.output]{utils::ca
 \subsection{Limits}{
 
 The number of attributes can be limited with the
-OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT environment variable. The default is
-100.
+OTEL_ATTRIBUTE_COUNT_LIMIT environment variable. The default is
+128.
 
 The length of the each attribute (vector) can be limited with the
 OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT environment variable. The default is
-100. Note that this is applied to the
-length of each attribute as an R vector. E.g. it does \emph{not} currently
-limit the number of characters in individual strings.
+\code{Inf}. Note that this is applied to
+the length of each attribute as an R vector. E.g. it does \emph{not}
+currently limit the number of characters in individual strings.
 }
 }
 \description{
 Convert a list of R objects to a form that is suitable as OpenTelemetry
 attributes.
+}
+\examples{
+as_attributes(list(
+  number = 1.0,
+  vector = 1:10,
+  string = "otel",
+  string_vector = letters,
+  object = mtcars
+))
 }
