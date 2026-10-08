@@ -18,7 +18,7 @@ Usually there is a single tracer provider for an R app or script.
 
 Typically the tracer provider is created automatically, at the first
 \code{\link[=start_local_active_span]{start_local_active_span()}} or \code{\link[=start_span]{start_span()}} call. otel decides which
-tracer provider class to use based on \link{Environment Variables}.
+tracer provider class to use based on '\link{Environment Variables}'.
 }
 \section{Implementations}{
 Note that this list is updated manually and may be incomplete.

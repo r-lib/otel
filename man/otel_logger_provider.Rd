@@ -18,7 +18,7 @@ Usually there is a single logger provider for an R app or script.
 
 Typically the logger provider is created automatically, at the first
 \code{\link[=log]{log()}} call. otel decides which logger provider class to use based on
-\link{Environment Variables}.
+'\link{Environment Variables}'.
 }
 \section{Implementations}{
 Note that this list is updated manually and may be incomplete.

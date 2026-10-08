@@ -29,6 +29,8 @@ Record a value of an OpenTelemetry histogram
 otel::histogram_record("response-time", 0.2)
 }
 \seealso{
+'\link{Environment Variables}' needed to enable OpenTelemetry recording.
+
 Other OpenTelemetry metrics instruments: 
 \code{\link{counter_add}()},
 \code{\link{gauge_record}()},

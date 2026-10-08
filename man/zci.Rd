@@ -39,7 +39,7 @@ overwrites the first.
 # OTEL_TRACES_EXPORTER=http OTEL_INSTRUMENT_R_PKGS=dplyr,tidyr R -q -f script.R
 }
 \seealso{
-\link{Environment Variables}
+'\link{Environment Variables}' needed to enable OpenTelemetry recording.
 
 Other OpenTelemetry trace API: 
 \code{\link{end_span}()},

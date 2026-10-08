@@ -36,6 +36,8 @@ Increase or decrease an OpenTelemetry up-down counter
 otel::up_down_counter_add("session-count", 1)
 }
 \seealso{
+'\link{Environment Variables}' needed to enable OpenTelemetry recording.
+
 Other OpenTelemetry metrics instruments: 
 \code{\link{counter_add}()},
 \code{\link{gauge_record}()},

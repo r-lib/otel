@@ -32,6 +32,8 @@ fun <- function() {
 }
 }
 \seealso{
+'\link{Environment Variables}' needed to enable OpenTelemetry tracing.
+
 Other OpenTelemetry trace API: 
 \code{\link{Zero Code Instrumentation}},
 \code{\link{end_span}()},

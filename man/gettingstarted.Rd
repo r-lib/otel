@@ -190,7 +190,7 @@ a local or remote OpenTelemetry collector.
 
 I suggest you use \href{https://github.com/ymtdzzz/otel-tui}{\code{otel-tui}},
 a terminal OpenTelemetry viewer. To configure it, use the \code{http} exporter,
-see \link{Environment Variables}:
+see '\link{Environment Variables}':
 
 \if{html}{\out{<div class="sourceCode sh">}}\preformatted{OTEL_TRACES_EXPORTER=http R -q
 }\if{html}{\out{</div>}}

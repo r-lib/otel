@@ -31,6 +31,8 @@ fun <- function() {
 }
 }
 \seealso{
+'\link{Environment Variables}' needed to enable OpenTelemetry recording.
+
 Other OpenTelemetry metrics API: 
 \code{\link{counter_add}()},
 \code{\link{gauge_record}()},

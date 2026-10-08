@@ -12,7 +12,7 @@
 #'
 #' Typically the logger provider is created automatically, at the first
 #' [log()] call. otel decides which logger provider class to use based on
-#' [Environment Variables].
+#' '[Environment Variables]'.
 #'
 #' # Implementations
 #'

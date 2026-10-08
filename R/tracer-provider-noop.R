@@ -12,7 +12,7 @@
 #'
 #' Typically the tracer provider is created automatically, at the first
 #' [start_local_active_span()] or [start_span()] call. otel decides which
-#' tracer provider class to use based on [Environment Variables].
+#' tracer provider class to use based on '[Environment Variables]'.
 #'
 #' # Implementations
 #'

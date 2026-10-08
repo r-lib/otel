@@ -14,7 +14,7 @@
 #' Typically the meter provider is created automatically, at the first
 #' [counter_add()], [up_down_counter_add()], [histogram_record()],
 #' [gauge_record()] or [get_meter()] call. otel decides which meter
-#' provider class to use based on [Environment Variables].
+#' provider class to use based on '[Environment Variables]'.
 #'
 #' # Implementations
 #'

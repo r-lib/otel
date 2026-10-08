@@ -29,6 +29,8 @@ Increase an OpenTelemetry counter
 otel::counter_add("total-session-count", 1)
 }
 \seealso{
+'\link{Environment Variables}' needed to enable OpenTelemetry recording.
+
 Other OpenTelemetry metrics instruments: 
 \code{\link{gauge_record}()},
 \code{\link{histogram_record}()},

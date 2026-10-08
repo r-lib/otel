@@ -16,6 +16,8 @@ both forms as severity levels, but the text form is more readable.
 log_severity_levels
 }
 \seealso{
+'\link{Environment Variables}' needed to set OpenTelemetry logging level.
+
 Other OpenTelemetry logs API: 
 \code{\link{is_logging_enabled}()},
 \code{\link{log}()}

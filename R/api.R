@@ -280,6 +280,7 @@ with_active_span_safe <- with_active_span
 #' @export
 #' @usage NULL
 #' @format NULL
+#' @seealso '[Environment Variables]' needed to set OpenTelemetry logging level.
 #' @family OpenTelemetry logs API
 #' @return Not applicable.
 #' @examples
@@ -629,6 +630,7 @@ start_local_active_span_safe <- start_local_active_span
 #' @return `TRUE` is OpenTelemetry tracing is active, `FALSE` otherwise.
 #'
 #' @export
+#' @seealso '[Environment Variables]' needed to enable OpenTelemetry tracing.
 #' @family OpenTelemetry trace API
 #' @examples
 #' fun <- function() {
@@ -668,6 +670,7 @@ is_tracing_enabled_safe <- is_tracing_enabled
 #' @return `TRUE` is OpenTelemetry logging is active, `FALSE` otherwise.
 #'
 #' @export
+#' @seealso '[Environment Variables]' needed to enable OpenTelemetry logging.
 #' @family OpenTelemetry logs API
 #' @examples
 #' fun <- function() {
@@ -707,6 +710,7 @@ is_logging_enabled_safe <- is_logging_enabled
 #' `FALSE` otherwise.
 #'
 #' @export
+#' @seealso '[Environment Variables]' needed to enable OpenTelemetry recording.
 #' @family OpenTelemetry metrics API
 #' @examples
 #' fun <- function() {
@@ -745,6 +749,7 @@ is_measuring_enabled_safe <- is_measuring_enabled
 #' @return The logger, invisibly.
 #'
 #' @export
+#' @seealso '[Environment Variables]' needed to enable OpenTelemetry logging.
 #' @family OpenTelemetry logs API
 #' @examples
 #' host <- "my.db.host"
@@ -941,6 +946,7 @@ log_fatal_safe <- log_fatal
 #'
 #' @return The counter object ([otel_counter]), invisibly.
 #'
+#' @seealso '[Environment Variables]' needed to enable OpenTelemetry recording.
 #' @family OpenTelemetry metrics instruments
 #' @family OpenTelemetry metrics API
 #' @export
@@ -984,6 +990,7 @@ counter_add_safe <- counter_add
 #'
 #' @return The up-down counter object ([otel_up_down_counter]), invisibly.
 #'
+#' @seealso '[Environment Variables]' needed to enable OpenTelemetry recording.
 #' @family OpenTelemetry metrics instruments
 #' @family OpenTelemetry metrics API
 #' @export
@@ -1027,6 +1034,7 @@ up_down_counter_add_safe <- up_down_counter_add
 #' @return The histogram object ([otel_histogram]), invisibly.
 #'
 #' @export
+#' @seealso '[Environment Variables]' needed to enable OpenTelemetry recording.
 #' @family OpenTelemetry metrics instruments
 #' @family OpenTelemetry metrics API
 #' @examples
@@ -1069,6 +1077,7 @@ histogram_record_safe <- histogram_record
 #' @return The gauge object ([otel_gauge]), invisibly.
 #'
 #' @export
+#' @seealso '[Environment Variables]' needed to enable OpenTelemetry recording.
 #' @family OpenTelemetry metrics instruments
 #' @family OpenTelemetry metrics API
 #' @examples

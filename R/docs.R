@@ -126,7 +126,7 @@ NULL
 #' @name Zero Code Instrumentation
 #' @rdname zci
 #' @family OpenTelemetry trace API
-#' @seealso [Environment Variables]
+#' @seealso '[Environment Variables]' needed to enable OpenTelemetry recording.
 #' @return Not applicable.
 #' @aliases OTEL_R_INSTRUMENT_PKGS
 #' @examples

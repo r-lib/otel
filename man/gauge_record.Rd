@@ -29,6 +29,8 @@ Record a value of an OpenTelemetry gauge
 otel::gauge_record("temperature", 27)
 }
 \seealso{
+'\link{Environment Variables}' needed to enable OpenTelemetry recording.
+
 Other OpenTelemetry metrics instruments: 
 \code{\link{counter_add}()},
 \code{\link{histogram_record}()},
