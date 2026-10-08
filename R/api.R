@@ -574,6 +574,9 @@ start_span_safe <- start_span
 #'
 #'
 #' @param span The span to end.
+#' @param status_code Span status code to set before ending the span.
+#'   Possible values: `r paste(span_status_codes, collapse = ", ")`.
+#'   See [span_status_codes]. If `NULL`, the status is not changed.
 #' @return Nothing.
 #'
 #' @inherit start_span examples
@@ -582,10 +585,10 @@ start_span_safe <- start_span
 #' @export
 
 # safe start
-end_span <- function(span) {
+end_span <- function(span, status_code = NULL) {
   tryCatch({                                                         # safe
     identity(NULL)
-    span$end()
+    span$end(status_code = status_code)
   }, error = function(err) {                                         # safe
     errmsg("OpenTelemetry error: ", conditionMessage(err))           # safe
     invisible(NULL)                                                  # safe

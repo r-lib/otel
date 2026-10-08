@@ -4,10 +4,14 @@
 \alias{end_span}
 \title{End an OpenTelemetry span}
 \usage{
-end_span(span)
+end_span(span, status_code = NULL)
 }
 \arguments{
 \item{span}{The span to end.}
+
+\item{status_code}{Span status code to set before ending the span.
+Possible values: unset, ok, error.
+See \link{span_status_codes}. If \code{NULL}, the status is not changed.}
 }
 \value{
 Nothing.

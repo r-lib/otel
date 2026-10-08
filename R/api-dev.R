@@ -98,9 +98,9 @@ start_span_dev <- function(
     invisible(tracer$start_span(name, attributes, links, options, ...))
 }
 
-end_span_dev <- function(span) {
+end_span_dev <- function(span, status_code = NULL) {
     identity(NULL)
-    span$end()
+    span$end(status_code = status_code)
 }
 
 start_local_active_span_dev <- function(

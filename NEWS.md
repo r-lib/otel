@@ -1,5 +1,8 @@
 # otel (development version)
 
+* `end_span()` now has a `status_code` argument, to set the status of the
+  span before ending it (#39).
+
 * `get_active_span()`, `get_active_span_context()`, `pack_http_context()`
   and `extract_http_context()` are now faster: they use a cached internal
   tracer, instead of looking up the tracer name from the call stack.

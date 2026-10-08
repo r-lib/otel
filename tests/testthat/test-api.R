@@ -243,6 +243,23 @@ test_that("end_span", {
   end_span_dev(span)
   end_span_dev(span)
 
+  span <- start_local_active_span()
+  end_span(span, status_code = "error")
+  span <- start_local_active_span()
+  end_span_dev(span, status_code = "ok")
+
+  # status_code is passed to span$end()
+  got <- NULL
+  fake_span <- list(end = function(options = NULL, status_code = NULL) {
+    got <<- status_code
+  })
+  end_span(fake_span, status_code = "error")
+  expect_equal(got, "error")
+  end_span_dev(fake_span, status_code = "ok")
+  expect_equal(got, "ok")
+  end_span(fake_span)
+  expect_null(got)
+
   fake(end_span, "identity", function(...) stop("not yet"))
   expect_snapshot(end_span(span))
 
