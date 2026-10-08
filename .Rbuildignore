@@ -13,3 +13,8 @@
 ^vignettes$
 ^tools$
 ^\.cache$
+^\.Renviron$
+^\.rvenv$
+^\.rvenvlib$
+^rproj\.toml$
+^rproj\.lock$
