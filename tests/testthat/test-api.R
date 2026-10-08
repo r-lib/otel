@@ -289,14 +289,22 @@ test_that("get_current_span_context", {
   expect_false(spc$is_valid())
 
   # recover from error
-  fake(get_active_span_context, "get_tracer", function() stop("nope!"))
+  fake(
+    get_active_span_context,
+    "get_otel_tracer",
+    function(...) stop("nope!")
+  )
   expect_snapshot({
     spc2 <- get_active_span_context()
   })
   expect_s3_class(spc2, "otel_span_context_noop")
 
   # error
-  fake(get_active_span_context_dev, "get_tracer", function() stop("nope!"))
+  fake(
+    get_active_span_context_dev,
+    "get_otel_tracer",
+    function(...) stop("nope!")
+  )
   expect_snapshot(error = TRUE, {
     get_active_span_context_dev()
   })
@@ -304,12 +312,70 @@ test_that("get_current_span_context", {
   # error 2
   fake(
     get_active_span_context_dev,
-    "get_tracer",
-    function() list(get_active_span_context = function() stop("nope!"))
+    "get_otel_tracer",
+    function(...) list(get_active_span_context = function() stop("nope!"))
   )
   expect_snapshot(error = TRUE, {
     get_active_span_context_dev()
   })
+})
+
+test_that("get_otel_tracer", {
+  local_otel_off()
+
+  calls <- list()
+  fake(get_otel_tracer, "get_tracer", function(name, provider = NULL) {
+    calls[[length(calls) + 1]] <<- list(name = name, provider = provider)
+    list(id = length(calls))
+  })
+
+  # cached
+  trc1 <- get_otel_tracer()
+  trc2 <- get_otel_tracer()
+  expect_equal(trc1$id, 1L)
+  expect_identical(trc1, trc2)
+  expect_equal(length(calls), 1L)
+  expect_equal(calls[[1]]$name, "org.r-lib.otel")
+  expect_identical(calls[[1]]$provider, the$tracer_provider)
+
+  # new tracer if the provider changes
+  the$tracer_provider <- tracer_provider_noop$new()
+  trc3 <- get_otel_tracer()
+  expect_equal(trc3$id, 2L)
+  expect_identical(calls[[2]]$provider, the$tracer_provider)
+
+  # tracer object is used as is
+  trc4 <- tracer_provider_noop$new()$get_tracer("mytracer")
+  expect_identical(get_otel_tracer(trc4), trc4)
+  expect_equal(length(calls), 2L)
+
+  # tracer name is passed to get_tracer(), no caching
+  trc5 <- get_otel_tracer("mytracer")
+  expect_equal(trc5$id, 3L)
+  expect_equal(calls[[3]]$name, "mytracer")
+  expect_null(calls[[3]]$provider)
+  expect_identical(get_otel_tracer(), trc3)
+})
+
+test_that("tracer argument", {
+  local_otel_off()
+  trc <- structure(
+    list(
+      get_active_span = function() "span",
+      get_active_span_context = function() {
+        list(to_http_headers = function() c(traceparent = "tp"))
+      },
+      extract_http_context = function(headers) headers
+    ),
+    class = "otel_tracer"
+  )
+  expect_equal(get_active_span(tracer = trc), "span")
+  expect_equal(
+    get_active_span_context(tracer = trc)$to_http_headers(),
+    c(traceparent = "tp")
+  )
+  expect_equal(pack_http_context(tracer = trc), c(traceparent = "tp"))
+  expect_equal(extract_http_context("hdr", tracer = trc), "hdr")
 })
 
 test_that("get_active_span", {
@@ -321,14 +387,14 @@ test_that("get_active_span", {
   expect_false(spn$get_context()$is_valid())
 
   # recover from error
-  fake(get_active_span, "get_tracer", function() stop("ouch!"))
+  fake(get_active_span, "get_otel_tracer", function(...) stop("ouch!"))
   expect_snapshot({
     spn2 <- get_active_span()
   })
   expect_s3_class(spn2, "otel_span_noop")
 
   # error
-  fake(get_active_span_dev, "get_tracer", function() stop("nope!"))
+  fake(get_active_span_dev, "get_otel_tracer", function(...) stop("nope!"))
   expect_snapshot(error = TRUE, {
     get_active_span_dev()
   })
@@ -336,8 +402,8 @@ test_that("get_active_span", {
   # error 2
   fake(
     get_active_span_dev,
-    "get_tracer",
-    function() list(get_active_span = function() stop("nope!"))
+    "get_otel_tracer",
+    function(...) list(get_active_span = function() stop("nope!"))
   )
   expect_snapshot(error = TRUE, {
     get_active_span_dev()
@@ -622,7 +688,7 @@ test_that("pack_http_context", {
   local_otel_off()
   fake(
     pack_http_context,
-    "get_tracer",
+    "get_otel_tracer",
     list(get_active_span_context = function() {
       list(to_http_headers = function() c(FOO = "bar"))
     })
@@ -631,17 +697,17 @@ test_that("pack_http_context", {
 
   fake(
     pack_http_context_dev,
-    "get_tracer",
+    "get_otel_tracer",
     list(get_active_span_context = function() {
       list(to_http_headers = function() c(FOO = "bar"))
     })
   )
   expect_equal(pack_http_context_dev(), c(FOO = "bar"))
 
-  fake(pack_http_context, "get_tracer", function() stop("sorry"))
+  fake(pack_http_context, "get_otel_tracer", function(...) stop("sorry"))
   expect_snapshot(pack_http_context())
 
-  fake(pack_http_context_dev, "get_tracer", function() stop("sorry"))
+  fake(pack_http_context_dev, "get_otel_tracer", function(...) stop("sorry"))
   expect_snapshot(error = TRUE, pack_http_context_dev())
 })
 
@@ -655,7 +721,11 @@ test_that("extract_http_context", {
   expect_s3_class(spc, "otel_span_context_noop")
 
   # error
-  fake(extract_http_context, "get_tracer", function() stop("out of context"))
+  fake(
+    extract_http_context,
+    "get_otel_tracer",
+    function(...) stop("out of context")
+  )
   expect_snapshot(spc2 <- extract_http_context(c("does not matter")))
   expect_s3_class(spc2, "otel_span_context_noop")
 
@@ -665,8 +735,10 @@ test_that("extract_http_context", {
   # error
   fake(
     extract_http_context_dev,
-    "get_tracer",
-    function() list(extract_http_context = function(...) stop("no context"))
+    "get_otel_tracer",
+    function(...) {
+      list(extract_http_context = function(...) stop("no context"))
+    }
   )
   expect_snapshot(error = TRUE, {
     extract_http_context_dev(c("does not matter"))

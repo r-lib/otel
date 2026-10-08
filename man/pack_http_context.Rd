@@ -5,7 +5,19 @@
 \title{Pack the currently active span context into standard HTTP OpenTelemetry
 headers}
 \usage{
-pack_http_context()
+pack_http_context(tracer = NULL)
+}
+\arguments{
+\item{tracer}{Tracer object (\link{otel_tracer}) or tracer name to use.
+If \code{NULL}, then otel uses an internal tracer. You usually do not
+need to set this, the active span does not depend on the tracer.
+
+Passing a tracer might give the wrong result. If it is a no-op
+tracer, then the result is an invalid span (context), or no HTTP
+headers, even if there is an active span. This happens if the
+tracer's scope is turned off, e.g. via the \code{OTEL_R_SUPPRESS_SCOPES}
+environment variable, or if the tracer was created before tracing
+was turned on. The default \code{NULL} does not have this problem.}
 }
 \value{
 A named character vector, with lowercase names. It might be an

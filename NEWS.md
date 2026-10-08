@@ -1,5 +1,10 @@
 # otel (development version)
 
+* `get_active_span()`, `get_active_span_context()`, `pack_http_context()`
+  and `extract_http_context()` are now faster: they use a cached internal
+  tracer, instead of looking up the tracer name from the call stack.
+  They also have a new `tracer` argument, to use a specific tracer (#34).
+
 # otel 0.2.0
 
 * Zero Code Instrumentation (ZCI) works again (#20).

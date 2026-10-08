@@ -4,7 +4,8 @@ otel_cache_vars <- c(
   "logger_provider",
   "meter_provider",
   "tracer_app",
-  "instruments"
+  "instruments",
+  "otel_tracer"
 )
 
 # used by otelsdk

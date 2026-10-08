@@ -15,6 +15,9 @@
       $logger_provider
       NULL
       
+      $otel_tracer
+      NULL
+      
       $tracer_app
       NULL
       
@@ -34,6 +37,9 @@
       [1] "bar"
       
       $logger_provider
+      NULL
+      
+      $otel_tracer
       NULL
       
       $mode

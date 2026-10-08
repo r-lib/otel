@@ -181,7 +181,7 @@
     Code
       get_active_span_context_dev()
     Condition
-      Error in `get_tracer()`:
+      Error in `get_otel_tracer()`:
       ! nope!
 
 ---
@@ -204,7 +204,7 @@
     Code
       get_active_span_dev()
     Condition
-      Error in `get_tracer()`:
+      Error in `get_otel_tracer()`:
       ! nope!
 
 ---
@@ -394,7 +394,7 @@
     Code
       pack_http_context_dev()
     Condition
-      Error in `get_tracer()`:
+      Error in `get_otel_tracer()`:
       ! sorry
 
 # extract_http_context

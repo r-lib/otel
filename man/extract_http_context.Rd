@@ -4,11 +4,22 @@
 \alias{extract_http_context}
 \title{Extract a span context from HTTP headers received from a client}
 \usage{
-extract_http_context(headers)
+extract_http_context(headers, tracer = NULL)
 }
 \arguments{
 \item{headers}{A named list with one or two strings: \code{traceparent} is
 mandatory, and \code{tracestate} is optional.}
+
+\item{tracer}{Tracer object (\link{otel_tracer}) or tracer name to use.
+If \code{NULL}, then otel uses an internal tracer. You usually do not
+need to set this, the active span does not depend on the tracer.
+
+Passing a tracer might give the wrong result. If it is a no-op
+tracer, then the result is an invalid span (context), or no HTTP
+headers, even if there is an active span. This happens if the
+tracer's scope is turned off, e.g. via the \code{OTEL_R_SUPPRESS_SCOPES}
+environment variable, or if the tracer was created before tracing
+was turned on. The default \code{NULL} does not have this problem.}
 }
 \value{
 And \link{otel_span_context} object.
