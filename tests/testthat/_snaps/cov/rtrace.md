@@ -6,16 +6,12 @@
       new("functionWithTrace", .Data = function () 
       {
           on.exit(.doTrace({
-              .__cov_otel_rtrace[33]
               try(.__span$deactivate(.__scope))
-              .__cov_otel_rtrace[34]
               try(.__span$end())
           }))
           {
               .doTrace({
-                  .__cov_otel_rtrace[25]
                   .__span <- otel::start_span("pkg::f", tracer = "org.r-lib.otel")
-                  .__cov_otel_rtrace[26]
                   .__scope <- .__span$activate(NULL)
               })
               "dummy"
