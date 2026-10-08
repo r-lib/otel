@@ -53,7 +53,7 @@ or using the <code>end_on_exit</code> argument of <code><a href="local_active_sp
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">end_span</span><span class="op">(</span><span class="va">span</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">end_span</span><span class="op">(</span><span class="va">span</span>, status_code <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -62,6 +62,12 @@ or using the <code>end_on_exit</code> argument of <code><a href="local_active_sp
 
 <dl><dt id="arg-span">span<a class="anchor" aria-label="anchor" href="#arg-span"></a></dt>
 <dd><p>The span to end.</p></dd>
+
+
+<dt id="arg-status-code">status_code<a class="anchor" aria-label="anchor" href="#arg-status-code"></a></dt>
+<dd><p>Span status code to set before ending the span.
+Possible values: unset, ok, error.
+See <a href="tracing-constants.html">span_status_codes</a>. If <code>NULL</code>, the status is not changed.</p></dd>
 
 </dl></div>
     <div class="section level2">

@@ -2,6 +2,10 @@
 
 ## otel (development version)
 
+- [`end_span()`](https://otel.r-lib.org/dev/reference/end_span.md) now
+  has a `status_code` argument, to set the status of the span before
+  ending it ([\#39](https://github.com/r-lib/otel/issues/39)).
+
 - [`get_active_span()`](https://otel.r-lib.org/dev/reference/get_active_span.md),
   [`get_active_span_context()`](https://otel.r-lib.org/dev/reference/get_active_span_context.md),
   [`pack_http_context()`](https://otel.r-lib.org/dev/reference/pack_http_context.md)

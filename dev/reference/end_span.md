@@ -11,7 +11,7 @@ or
 ## Usage
 
 ``` r
-end_span(span)
+end_span(span, status_code = NULL)
 ```
 
 ## Arguments
@@ -19,6 +19,13 @@ end_span(span)
 - span:
 
   The span to end.
+
+- status_code:
+
+  Span status code to set before ending the span. Possible values:
+  unset, ok, error. See
+  [span_status_codes](https://otel.r-lib.org/dev/reference/tracing-constants.md).
+  If `NULL`, the status is not changed.
 
 ## Value
 
