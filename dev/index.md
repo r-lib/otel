@@ -39,6 +39,7 @@ Then add
 calls to the functions you want to trace:
 
 ``` r
+
 otel_tracer_name <- "<package-id>"
 fn <- function(...) {
   spn <- otel::start_local_active_span("fn")
@@ -69,8 +70,8 @@ with the otel package.
 The current status of the major functional components for OpenTelemetry
 R is as follows:
 
-| *Traces*                                                                                      | *Metrics*                                                                                     | *Logs*                                                                                        |
-|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| *Traces* | *Metrics* | *Logs* |
+|----|----|----|
 | [Development](https://opentelemetry.io/docs/specs/otel/versioning-and-stability/#development) | [Development](https://opentelemetry.io/docs/specs/otel/versioning-and-stability/#development) | [Development](https://opentelemetry.io/docs/specs/otel/versioning-and-stability/#development) |
 
 ## Version support
@@ -83,6 +84,7 @@ higher on Windows.
 Install otel from CRAN:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("otel")
 ```
@@ -91,6 +93,7 @@ You can install the development version of otel from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("r-lib/otel")
 ```
