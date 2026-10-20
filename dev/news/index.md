@@ -2,6 +2,11 @@
 
 ## otel (development version)
 
+- `OTEL_R_SUPPRESS_SCOPES` now turns off a scope if either its scope
+  name or its package name matches. Previously both had to match, and
+  scopes created with an explicit tracer name could not be turned off at
+  all ([\#50](https://github.com/r-lib/otel/issues/50)).
+
 - The `record_exception()` method of no-op spans now accepts the same
   arguments as the method of real spans: `error_condition`, `attributes`
   and `...` ([\#36](https://github.com/r-lib/otel/issues/36)).
