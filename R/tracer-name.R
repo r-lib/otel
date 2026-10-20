@@ -123,13 +123,23 @@ is_scope_on <- function(scope) {
     return(TRUE)
   }
 
-  if (!is.null(inc)) {
-    inc <- trimws(strsplit(inc, ",")[[1]])
-  }
-  if (!is.null(exc)) {
-    exc <- trimws(strsplit(exc, ",")[[1]])
+  # A scope is on if its name or package matches an include pattern,
+  # and off if its name or package matches an exclude pattern.
+  cands <- c(scope$name, scope$package)
+  cands <- cands[!is.na(cands)]
+  matches <- function(pats) {
+    pats <- trimws(strsplit(pats, ",")[[1]])
+    for (pat in pats) {
+      if (any(grepl(utils::glob2rx(pat), cands))) return(TRUE)
+    }
+    FALSE
   }
 
-  flt <- glob_filter(c(scope$name, scope$package), inc, exc)
-  length(flt) > 0
+  if (!is.null(inc) && !matches(inc)) {
+    return(FALSE)
+  }
+  if (!is.null(exc) && matches(exc)) {
+    return(FALSE)
+  }
+  TRUE
 }
