@@ -9,11 +9,6 @@ test_that("default_tracer_name", {
     names = otel_suppress_scopes_envvar
   ))
 
-  expect_equal(
-    default_tracer_name("me-me-me"),
-    list(name = "me-me-me", package = NA_character_, on = TRUE)
-  )
-
   r <- list(name = "org.r-project.R", package = "R", on = TRUE)
   # otel is ignored
   fake(default_tracer_name, "topenv", asNamespace("otel"))
@@ -46,6 +41,51 @@ test_that("default_tracer_name", {
     default_tracer_name(),
     list(name = "r.package.testthat", package = "testthat", on = TRUE)
   )
+})
+
+test_that("default_tracer_name detects package if name is given (#52)", {
+  withr::local_envvar(structure(
+    NA_character_,
+    names = otel_emit_scopes_envvar
+  ))
+  withr::local_envvar(structure(
+    NA_character_,
+    names = otel_suppress_scopes_envvar
+  ))
+
+  # package
+  fake(default_tracer_name, "topenv", asNamespace("testthat"))
+  fake(default_tracer_name, "get0", "custom-name")
+  expect_equal(
+    default_tracer_name("me-me-me"),
+    list(name = "me-me-me", package = "testthat", on = TRUE)
+  )
+
+  # global env -> R
+  fake(default_tracer_name, "topenv", globalenv())
+  expect_equal(
+    default_tracer_name("me-me-me"),
+    list(name = "me-me-me", package = "R", on = TRUE)
+  )
+
+  # package name matches in OTEL_R_SUPPRESS_SCOPES and OTEL_R_EMIT_SCOPES
+  fake(default_tracer_name, "topenv", asNamespace("testthat"))
+  withr::local_envvar(structure("testthat", names = otel_emit_scopes_envvar))
+  expect_true(default_tracer_name("me-me-me")$on)
+  withr::local_envvar(structure("other", names = otel_emit_scopes_envvar))
+  expect_false(default_tracer_name("me-me-me")$on)
+
+  withr::local_envvar(structure(
+    NA_character_,
+    names = otel_emit_scopes_envvar
+  ))
+  withr::local_envvar(structure(
+    "testthat",
+    names = otel_suppress_scopes_envvar
+  ))
+  expect_false(default_tracer_name("me-me-me")$on)
+  withr::local_envvar(structure("other", names = otel_suppress_scopes_envvar))
+  expect_true(default_tracer_name("me-me-me")$on)
 })
 
 test_that("is_scope_on", {
@@ -140,7 +180,7 @@ test_that("is_scope_on, name or package is enough to suppress (#50)", {
   withr::local_envvar(structure("shiny", names = otel_suppress_scopes_envvar))
   expect_true(is_scope_on(scope))
 
-  # explicit tracer name, package is NA
+  # explicit tracer name
   withr::local_envvar(structure(
     "co.posit.r-package.ellmer",
     names = otel_suppress_scopes_envvar

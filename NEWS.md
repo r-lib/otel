@@ -4,6 +4,11 @@
   or its package name matches. Previously both had to match, and scopes
   created with an explicit tracer name could not be turned off at all (#50).
 
+* `default_tracer_name()` (and so `get_tracer()`, `get_logger()` and
+  `get_meter()`) now detects the calling package even if a tracer name is
+  given. Now `OTEL_R_EMIT_SCOPES` and `OTEL_R_SUPPRESS_SCOPES` can match
+  these scopes by package name (#52).
+
 * The `record_exception()` method of no-op spans now accepts the same
   arguments as the method of real spans: `error_condition`, `attributes`
   and `...` (#36).
