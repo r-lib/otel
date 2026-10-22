@@ -66,13 +66,16 @@ about choosing and setting the tracer name.</p>
 <dl><dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
 <dd><p>Custom tracer name. If <code>NULL</code> then otel will construct a
 a tracer (meter, logger) name according to the algorithm detailed
-below.</p></dd>
+below. The calling package is detected even if <code>name</code> is given, so
+the package name can be used in <code>OTEL_R_EMIT_SCOPES</code> and
+<code>OTEL_R_SUPPRESS_SCOPES</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A list with entries:</p><ul><li><p><code>name</code>: The supplied or auto-detected tracer name.</p></li>
-<li><p><code>package</code>: Auto-detected package name or <code>NA</code>.</p></li>
+<li><p><code>package</code>: Auto-detected package name, or <code>"R"</code> if called from
+the global environment or base R.</p></li>
 <li><p><code>on</code>: Whether tracing is enabled for this package.</p></li>
 </ul></div>
     <div class="section level2">

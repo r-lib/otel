@@ -7,6 +7,17 @@
   scopes created with an explicit tracer name could not be turned off at
   all ([\#50](https://github.com/r-lib/otel/issues/50)).
 
+- [`default_tracer_name()`](https://otel.r-lib.org/dev/reference/default_tracer_name.md)
+  (and so
+  [`get_tracer()`](https://otel.r-lib.org/dev/reference/get_tracer.md),
+  [`get_logger()`](https://otel.r-lib.org/dev/reference/get_logger.md)
+  and
+  [`get_meter()`](https://otel.r-lib.org/dev/reference/get_meter.md))
+  now detects the calling package even if a tracer name is given. Now
+  `OTEL_R_EMIT_SCOPES` and `OTEL_R_SUPPRESS_SCOPES` can match these
+  scopes by package name
+  ([\#52](https://github.com/r-lib/otel/issues/52)).
+
 - The `record_exception()` method of no-op spans now accepts the same
   arguments as the method of real spans: `error_condition`, `attributes`
   and `...` ([\#36](https://github.com/r-lib/otel/issues/36)).

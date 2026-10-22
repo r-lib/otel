@@ -17,7 +17,9 @@ default_tracer_name(name = NULL)
 - name:
 
   Custom tracer name. If `NULL` then otel will construct a a tracer
-  (meter, logger) name according to the algorithm detailed below.
+  (meter, logger) name according to the algorithm detailed below. The
+  calling package is detected even if `name` is given, so the package
+  name can be used in `OTEL_R_EMIT_SCOPES` and `OTEL_R_SUPPRESS_SCOPES`.
 
 ## Value
 
@@ -25,7 +27,8 @@ A list with entries:
 
 - `name`: The supplied or auto-detected tracer name.
 
-- `package`: Auto-detected package name or `NA`.
+- `package`: Auto-detected package name, or `"R"` if called from the
+  global environment or base R.
 
 - `on`: Whether tracing is enabled for this package.
 
