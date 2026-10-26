@@ -2,6 +2,10 @@
 
 ## otel (development version)
 
+- Spans now have a `set_attributes()` method, to set multiple attributes
+  at once. It needs otelsdk 0.2.4.9002 or later
+  ([\#35](https://github.com/r-lib/otel/issues/35)).
+
 - `OTEL_R_SUPPRESS_SCOPES` now turns off a scope if either its scope
   name or its package name matches. Previously both had to match, and
   scopes created with an explicit tracer name could not be turned off at
