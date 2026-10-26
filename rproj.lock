@@ -148,14 +148,14 @@ metadata = { RemoteHash = "7b227f0627709a2073daf960ac612a0b87d03e18f7dd5c1938048
 [[targets.packages]]
 package = "cachem"
 version = "1.1.0"
-binary = false
-platform = "source"
+binary = true
+platform = "aarch64-apple-darwin"
 dependencies = [
     "fastmap",
     "rlang",
 ]
-sources = ["https://p3m.dev/cran/2024-05-17/src/contrib/cachem_1.1.0.tar.gz"]
-target = "src/cachem_1.1.0-c7485274.tar.gz"
+sources = ["https://p3m.dev/cran/2024-05-17/bin/macosx/sonoma-arm64/contrib/4.6/cachem_1.1.0.tgz"]
+target = "bin/macosx/sonoma-arm64/4.6/cachem_1.1.0-c7485274.tgz"
 groups = ["dev"]
 metadata = { RemoteHash = "550839fc2ae5d865db475ba2c1714144f07fa0c052c72135b0e4a70287492e21" }
 
@@ -460,8 +460,8 @@ metadata = { RemoteHash = "47aac79f889a828a5f8b4756cb972d7c2966bb984cbae17a4bd23
 [[targets.packages]]
 package = "bslib"
 version = "0.12.0"
-binary = false
-platform = "source"
+binary = true
+platform = "aarch64-apple-darwin"
 dependencies = [
     "sass",
     "mime",
@@ -475,8 +475,8 @@ dependencies = [
     "memoise",
     "rlang",
 ]
-sources = ["https://p3m.dev/cran/2026-08-04/src/contrib/bslib_0.12.0.tar.gz"]
-target = "src/bslib_0.12.0-d8cbac28.tar.gz"
+sources = ["https://p3m.dev/cran/2026-08-04/bin/macosx/sonoma-arm64/contrib/4.6/bslib_0.12.0.tgz"]
+target = "bin/macosx/sonoma-arm64/4.6/bslib_0.12.0-d8cbac28.tgz"
 groups = ["dev"]
 metadata = { RemoteHash = "26fc11793dc1fdccd6d8d2fc1d638c29c47aa0c2e5cbadc6a35af3819f5446d1" }
 
@@ -617,14 +617,14 @@ metadata = { RemoteHash = "5e539f91ca36b8ed80933101baf2a57462b9342c68556f5d4dcb8
 
 [[targets.packages]]
 package = "xfun"
-version = "0.61"
+version = "0.62"
 binary = true
 platform = "aarch64-apple-darwin"
 dependencies = []
-sources = ["https://p3m.dev/cran/2026-09-17/bin/macosx/sonoma-arm64/contrib/4.6/xfun_0.61.tgz"]
-target = "bin/macosx/sonoma-arm64/4.6/xfun_0.61-50620fe1.tgz"
+sources = ["https://p3m.dev/cran/2026-10-17/bin/macosx/sonoma-arm64/contrib/4.6/xfun_0.62.tgz"]
+target = "bin/macosx/sonoma-arm64/4.6/xfun_0.62-4783e8b7.tgz"
 groups = ["dev"]
-metadata = { RemoteHash = "b0deb0e2aff784e511545193e5583fc2df3a98bc877287280f19341661769530" }
+metadata = { RemoteHash = "56102222347f91ef0446dfb203016ff5935d6d6b0bff3b8776673c5e46a94baf" }
 
 [[targets.packages]]
 package = "magrittr"
@@ -775,7 +775,7 @@ sources = ["."]
 target = ""
 groups = ["main"]
 is_project = true
-metadata = { RemoteSha = "c677c5c3f52e9c1bb8b44b86ca10734513295497742c5fc1c28ca99f8c238d3b", RemoteType = "local", RemoteUrl = "." }
+metadata = { RemoteSha = "9a9c1363806f684e32190ef1b3b5c1d2a5c4310bcece5ab8aa86cdde1da20261", RemoteType = "local", RemoteUrl = "." }
 
 [[targets]]
 r_version = "4.6.1"
@@ -1390,14 +1390,14 @@ metadata = { RemoteHash = "5e539f91ca36b8ed80933101baf2a57462b9342c68556f5d4dcb8
 
 [[targets.packages]]
 package = "xfun"
-version = "0.61"
+version = "0.62"
 binary = false
 platform = "source"
 dependencies = []
-sources = ["https://p3m.dev/cran/2026-09-17/src/contrib/xfun_0.61.tar.gz"]
-target = "src/xfun_0.61-50620fe1.tar.gz"
+sources = ["https://p3m.dev/cran/2026-10-17/src/contrib/xfun_0.62.tar.gz"]
+target = "src/xfun_0.62-4783e8b7.tar.gz"
 groups = ["dev"]
-metadata = { RemoteHash = "b0deb0e2aff784e511545193e5583fc2df3a98bc877287280f19341661769530" }
+metadata = { RemoteHash = "56102222347f91ef0446dfb203016ff5935d6d6b0bff3b8776673c5e46a94baf" }
 
 [[targets.packages]]
 package = "magrittr"
@@ -1550,7 +1550,7 @@ sources = ["."]
 target = ""
 groups = ["main"]
 is_project = true
-metadata = { RemoteSha = "c677c5c3f52e9c1bb8b44b86ca10734513295497742c5fc1c28ca99f8c238d3b", RemoteType = "local", RemoteUrl = "." }
+metadata = { RemoteSha = "9a9c1363806f684e32190ef1b3b5c1d2a5c4310bcece5ab8aa86cdde1da20261", RemoteType = "local", RemoteUrl = "." }
 
 [[targets]]
 r_version = "4.6.1"
@@ -1692,14 +1692,14 @@ metadata = { RemoteHash = "7b227f0627709a2073daf960ac612a0b87d03e18f7dd5c1938048
 [[targets.packages]]
 package = "cachem"
 version = "1.1.0"
-binary = false
-platform = "source"
+binary = true
+platform = "x86_64-unknown-linux-gnu"
 dependencies = [
     "fastmap",
     "rlang",
 ]
-sources = ["https://p3m.dev/cran/2024-05-17/src/contrib/cachem_1.1.0.tar.gz"]
-target = "src/cachem_1.1.0-c7485274.tar.gz"
+sources = ["https://p3m.dev/cran/2024-05-17/bin/linux/manylinux_2_28-x86_64/4.6/src/contrib/cachem_1.1.0.tar.gz"]
+target = "bin/linux/manylinux_2_28-x86_64/4.6/cachem_1.1.0-c7485274.tar.gz"
 groups = ["dev"]
 metadata = { RemoteHash = "550839fc2ae5d865db475ba2c1714144f07fa0c052c72135b0e4a70287492e21" }
 
@@ -2005,8 +2005,8 @@ metadata = { RemoteHash = "47aac79f889a828a5f8b4756cb972d7c2966bb984cbae17a4bd23
 [[targets.packages]]
 package = "bslib"
 version = "0.12.0"
-binary = false
-platform = "source"
+binary = true
+platform = "x86_64-unknown-linux-gnu"
 dependencies = [
     "sass",
     "mime",
@@ -2020,8 +2020,8 @@ dependencies = [
     "memoise",
     "rlang",
 ]
-sources = ["https://p3m.dev/cran/2026-08-04/src/contrib/bslib_0.12.0.tar.gz"]
-target = "src/bslib_0.12.0-d8cbac28.tar.gz"
+sources = ["https://p3m.dev/cran/2026-08-04/bin/linux/manylinux_2_28-x86_64/4.6/src/contrib/bslib_0.12.0.tar.gz"]
+target = "bin/linux/manylinux_2_28-x86_64/4.6/bslib_0.12.0-d8cbac28.tar.gz"
 groups = ["dev"]
 metadata = { RemoteHash = "26fc11793dc1fdccd6d8d2fc1d638c29c47aa0c2e5cbadc6a35af3819f5446d1" }
 
@@ -2162,14 +2162,14 @@ metadata = { RemoteHash = "5e539f91ca36b8ed80933101baf2a57462b9342c68556f5d4dcb8
 
 [[targets.packages]]
 package = "xfun"
-version = "0.61"
+version = "0.62"
 binary = true
 platform = "x86_64-unknown-linux-gnu"
 dependencies = []
-sources = ["https://p3m.dev/cran/2026-09-17/bin/linux/manylinux_2_28-x86_64/4.6/src/contrib/xfun_0.61.tar.gz"]
-target = "bin/linux/manylinux_2_28-x86_64/4.6/xfun_0.61-50620fe1.tar.gz"
+sources = ["https://p3m.dev/cran/2026-10-17/bin/linux/manylinux_2_28-x86_64/4.6/src/contrib/xfun_0.62.tar.gz"]
+target = "bin/linux/manylinux_2_28-x86_64/4.6/xfun_0.62-4783e8b7.tar.gz"
 groups = ["dev"]
-metadata = { RemoteHash = "b0deb0e2aff784e511545193e5583fc2df3a98bc877287280f19341661769530" }
+metadata = { RemoteHash = "56102222347f91ef0446dfb203016ff5935d6d6b0bff3b8776673c5e46a94baf" }
 
 [[targets.packages]]
 package = "magrittr"
@@ -2320,7 +2320,7 @@ sources = ["."]
 target = ""
 groups = ["main"]
 is_project = true
-metadata = { RemoteSha = "c677c5c3f52e9c1bb8b44b86ca10734513295497742c5fc1c28ca99f8c238d3b", RemoteType = "local", RemoteUrl = "." }
+metadata = { RemoteSha = "9a9c1363806f684e32190ef1b3b5c1d2a5c4310bcece5ab8aa86cdde1da20261", RemoteType = "local", RemoteUrl = "." }
 
 [[targets]]
 r_version = "4.6.1"
@@ -2931,14 +2931,14 @@ metadata = { RemoteHash = "5e539f91ca36b8ed80933101baf2a57462b9342c68556f5d4dcb8
 
 [[targets.packages]]
 package = "xfun"
-version = "0.61"
+version = "0.62"
 binary = true
 platform = "x86_64-w64-mingw32"
 dependencies = []
-sources = ["https://p3m.dev/cran/2026-09-17/bin/windows/contrib/4.6/xfun_0.61.zip"]
-target = "bin/windows/4.6/xfun_0.61-50620fe1.zip"
+sources = ["https://p3m.dev/cran/2026-10-17/bin/windows/contrib/4.6/xfun_0.62.zip"]
+target = "bin/windows/4.6/xfun_0.62-4783e8b7.zip"
 groups = ["dev"]
-metadata = { RemoteHash = "b0deb0e2aff784e511545193e5583fc2df3a98bc877287280f19341661769530" }
+metadata = { RemoteHash = "56102222347f91ef0446dfb203016ff5935d6d6b0bff3b8776673c5e46a94baf" }
 
 [[targets.packages]]
 package = "magrittr"
@@ -3089,4 +3089,4 @@ sources = ["."]
 target = ""
 groups = ["main"]
 is_project = true
-metadata = { RemoteSha = "c677c5c3f52e9c1bb8b44b86ca10734513295497742c5fc1c28ca99f8c238d3b", RemoteType = "local", RemoteUrl = "." }
+metadata = { RemoteSha = "9a9c1363806f684e32190ef1b3b5c1d2a5c4310bcece5ab8aa86cdde1da20261", RemoteType = "local", RemoteUrl = "." }
