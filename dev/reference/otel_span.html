@@ -328,13 +328,13 @@ R object to OpenTelemetry attributes.</p></li>
 
 
 <p>Set the status of the span.</p>
-<p>If the span was created with <code><a href="start_local_active_span.html">start_local_active_span()</a></code>, or it was
-ended automatically with <code><a href="local_active_span.html">local_active_span()</a></code> or <code><a href="with_active_span.html">with_active_span()</a></code>,
-then otel sets the status of the span automatically to <code>ok</code> or <code>error</code>,
-depending on whether an error happened in the frame the span was
-activated for.</p>
-<p>Otherwise the default span status is <code>unset</code>, and you need to set it
-manually.</p><div class="section">
+<p>The default span status is <code>unset</code>. If the span was created with
+<code><a href="start_local_active_span.html">start_local_active_span()</a></code>, or it was ended automatically with
+<code><a href="local_active_span.html">local_active_span()</a></code> or <code><a href="with_active_span.html">with_active_span()</a></code>, and an error happened in
+the frame the span was activated for, then otel sets the status of the
+span automatically to <code>error</code>. Otherwise otel leaves the status as
+<code>unset</code>. Set it to <code>ok</code> manually to mark a span as explicitly free of
+errors.</p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 
 

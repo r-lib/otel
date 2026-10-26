@@ -51,9 +51,9 @@ If not set explicitly, and the span is ended automatically (by
 [`start_local_active_span()`](https://otel.r-lib.org/dev/reference/start_local_active_span.md),
 [`local_active_span()`](https://otel.r-lib.org/dev/reference/local_active_span.md)
 or
-[`with_active_span()`](https://otel.r-lib.org/dev/reference/with_active_span.md)),
-then otel sets the status automatically to "ok" or "error", depending on
-whether the span ended during handling an error.
+[`with_active_span()`](https://otel.r-lib.org/dev/reference/with_active_span.md))
+during handling an error, then otel sets the status automatically to
+"error". Otherwise the status stays "unset".
 
 ## See also
 
