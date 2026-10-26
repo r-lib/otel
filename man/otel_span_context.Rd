@@ -162,9 +162,9 @@ spc$is_valid()
 spc$to_http_headers()
 }
 \seealso{
-Other low level trace API: 
-\code{\link{get_default_tracer_provider}()},
-\code{\link{get_tracer}()},
+Other low level trace API:
+\code{\link[=get_default_tracer_provider]{get_default_tracer_provider()}},
+\code{\link[=get_tracer]{get_tracer()}},
 \code{\link{otel_span}},
 \code{\link{otel_tracer}},
 \code{\link{otel_tracer_provider}},

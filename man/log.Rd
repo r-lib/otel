@@ -69,8 +69,8 @@ otel::log("Connecting to database at {host}:{port}")
 \seealso{
 '\link{Environment Variables}' needed to enable OpenTelemetry logging.
 
-Other OpenTelemetry logs API: 
-\code{\link{is_logging_enabled}()},
+Other OpenTelemetry logs API:
+\code{\link[=is_logging_enabled]{is_logging_enabled()}},
 \code{\link{log_severity_levels}}
 }
 \concept{OpenTelemetry logs API}

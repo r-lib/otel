@@ -62,7 +62,7 @@ If you don't like the default tracer name, you can call \code{\link[=get_tracer]
 
 This is the detailed algorithm that otel uses in \code{default_tracer_name}:
 \itemize{
-\item Using \code{\link[base:ns-topenv]{base::topenv()}} it finds the calling package (or other top
+\item Using \code{\link[base:topenv]{base::topenv()}} it finds the calling package (or other top
 level environment), recursively.
 \item It ignores the otel and otelsdk packages while searching.
 \item If it finds the base environment or the global environment, then

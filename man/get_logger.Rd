@@ -50,8 +50,8 @@ myfun <- function() {
 myfun()
 }
 \seealso{
-Other low level logs API: 
-\code{\link{get_default_logger_provider}()},
+Other low level logs API:
+\code{\link[=get_default_logger_provider]{get_default_logger_provider()}},
 \code{\link{logger_provider_noop}},
 \code{\link{otel_logger}},
 \code{\link{otel_logger_provider}}

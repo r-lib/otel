@@ -86,7 +86,7 @@ Add a single event to the span.
 \item \code{attributes}: Attributes to add to the event. See \code{\link[=as_attributes]{as_attributes()}}
 for supported R types. You may also use \code{\link[=as_attributes]{as_attributes()}} to convert
 an R object to an OpenTelemetry attribute value.
-\item \code{timestamp}: A \link[base:DateTimeClasses]{base::POSIXct} object. If missing, the current time is
+\item \code{timestamp}: A \link[base:POSIXct]{base::POSIXct} object. If missing, the current time is
 used.
 }
 }
@@ -121,7 +121,7 @@ nothing.
 \itemize{
 \item \code{options}: Named list of options. Possible entry:
 \itemize{
-\item \code{end_steady_time}: A \link[base:DateTimeClasses]{base::POSIXct} object that will be used as
+\item \code{end_steady_time}: A \link[base:POSIXct]{base::POSIXct} object that will be used as
 a steady timer.
 }
 \item \code{status_code}: Span status code to set before ending the span, see
@@ -303,9 +303,9 @@ fn <- function() {
 fn()
 }
 \seealso{
-Other low level trace API: 
-\code{\link{get_default_tracer_provider}()},
-\code{\link{get_tracer}()},
+Other low level trace API:
+\code{\link[=get_default_tracer_provider]{get_default_tracer_provider()}},
+\code{\link[=get_tracer]{get_tracer()}},
 \code{\link{otel_span_context}},
 \code{\link{otel_tracer}},
 \code{\link{otel_tracer_provider}},

@@ -55,8 +55,8 @@ then it throws an error.
 get_default_logger_provider()
 }
 \seealso{
-Other low level logs API: 
-\code{\link{get_logger}()},
+Other low level logs API:
+\code{\link[=get_logger]{get_logger()}},
 \code{\link{logger_provider_noop}},
 \code{\link{otel_logger}},
 \code{\link{otel_logger_provider}}

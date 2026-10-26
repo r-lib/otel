@@ -178,9 +178,9 @@ platform <- utils::sessionInfo()$platform
 lgr$log("This is a log message from {platform}.", severity = "trace")
 }
 \seealso{
-Other low level logs API: 
-\code{\link{get_default_logger_provider}()},
-\code{\link{get_logger}()},
+Other low level logs API:
+\code{\link[=get_default_logger_provider]{get_default_logger_provider()}},
+\code{\link[=get_logger]{get_logger()}},
 \code{\link{logger_provider_noop}},
 \code{\link{otel_logger_provider}}
 }

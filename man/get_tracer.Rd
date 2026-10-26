@@ -63,8 +63,8 @@ myfun <- function() {
 myfun()
 }
 \seealso{
-Other low level trace API: 
-\code{\link{get_default_tracer_provider}()},
+Other low level trace API:
+\code{\link[=get_default_tracer_provider]{get_default_tracer_provider()}},
 \code{\link{otel_span}},
 \code{\link{otel_span_context}},
 \code{\link{otel_tracer}},

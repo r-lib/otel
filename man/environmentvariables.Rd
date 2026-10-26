@@ -113,7 +113,7 @@ excludes packages with an instrumentation scope that starts with
 }
 }
 
-\section{\link[=Zero Code Instrumentation]{Zero Code Instrumentation}}{
+\section{\link{Zero Code Instrumentation}}{
 otel can instrument R packages for OpenTelemetry data collection
 without changing their source code. This relies on changing the code
 of the R functions manually using \code{base::trace()} and can be configured

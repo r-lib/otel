@@ -47,8 +47,8 @@ myfun <- function() {
 myfun()
 }
 \seealso{
-Other low level metrics API: 
-\code{\link{get_default_meter_provider}()},
+Other low level metrics API:
+\code{\link[=get_default_meter_provider]{get_default_meter_provider()}},
 \code{\link{meter_provider_noop}},
 \code{\link{otel_counter}},
 \code{\link{otel_gauge}},

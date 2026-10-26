@@ -34,8 +34,8 @@ fun <- function() {
 \seealso{
 '\link{Environment Variables}' needed to enable OpenTelemetry logging.
 
-Other OpenTelemetry logs API: 
-\code{\link{log}()},
+Other OpenTelemetry logs API:
+\code{\link[=log]{log()}},
 \code{\link{log_severity_levels}}
 }
 \concept{OpenTelemetry logs API}

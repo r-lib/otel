@@ -33,10 +33,10 @@ fun <- function() {
 \seealso{
 '\link{Environment Variables}' needed to enable OpenTelemetry recording.
 
-Other OpenTelemetry metrics API: 
-\code{\link{counter_add}()},
-\code{\link{gauge_record}()},
-\code{\link{histogram_record}()},
-\code{\link{up_down_counter_add}()}
+Other OpenTelemetry metrics API:
+\code{\link[=counter_add]{counter_add()}},
+\code{\link[=gauge_record]{gauge_record()}},
+\code{\link[=histogram_record]{histogram_record()}},
+\code{\link[=up_down_counter_add]{up_down_counter_add()}}
 }
 \concept{OpenTelemetry metrics API}

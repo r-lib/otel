@@ -58,17 +58,17 @@ fun <- function() {
 fun()
 }
 \seealso{
-Other OpenTelemetry trace API: 
+Other OpenTelemetry trace API:
 \code{\link{Zero Code Instrumentation}},
-\code{\link{end_span}()},
-\code{\link{is_tracing_enabled}()},
-\code{\link{start_local_active_span}()},
-\code{\link{start_span}()},
+\code{\link[=end_span]{end_span()}},
+\code{\link[=is_tracing_enabled]{is_tracing_enabled()}},
+\code{\link[=start_local_active_span]{start_local_active_span()}},
+\code{\link[=start_span]{start_span()}},
 \code{\link{tracing-constants}},
-\code{\link{with_active_span}()}
+\code{\link[=with_active_span]{with_active_span()}}
 
-Other tracing for concurrent code: 
-\code{\link{with_active_span}()}
+Other tracing for concurrent code:
+\code{\link[=with_active_span]{with_active_span()}}
 }
 \concept{OpenTelemetry trace API}
 \concept{tracing for concurrent code}

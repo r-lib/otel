@@ -31,16 +31,16 @@ otel::histogram_record("response-time", 0.2)
 \seealso{
 '\link{Environment Variables}' needed to enable OpenTelemetry recording.
 
-Other OpenTelemetry metrics instruments: 
-\code{\link{counter_add}()},
-\code{\link{gauge_record}()},
-\code{\link{up_down_counter_add}()}
+Other OpenTelemetry metrics instruments:
+\code{\link[=counter_add]{counter_add()}},
+\code{\link[=gauge_record]{gauge_record()}},
+\code{\link[=up_down_counter_add]{up_down_counter_add()}}
 
-Other OpenTelemetry metrics API: 
-\code{\link{counter_add}()},
-\code{\link{gauge_record}()},
-\code{\link{is_measuring_enabled}()},
-\code{\link{up_down_counter_add}()}
+Other OpenTelemetry metrics API:
+\code{\link[=counter_add]{counter_add()}},
+\code{\link[=gauge_record]{gauge_record()}},
+\code{\link[=is_measuring_enabled]{is_measuring_enabled()}},
+\code{\link[=up_down_counter_add]{up_down_counter_add()}}
 }
 \concept{OpenTelemetry metrics API}
 \concept{OpenTelemetry metrics instruments}

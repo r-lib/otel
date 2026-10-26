@@ -31,16 +31,16 @@ otel::counter_add("total-session-count", 1)
 \seealso{
 '\link{Environment Variables}' needed to enable OpenTelemetry recording.
 
-Other OpenTelemetry metrics instruments: 
-\code{\link{gauge_record}()},
-\code{\link{histogram_record}()},
-\code{\link{up_down_counter_add}()}
+Other OpenTelemetry metrics instruments:
+\code{\link[=gauge_record]{gauge_record()}},
+\code{\link[=histogram_record]{histogram_record()}},
+\code{\link[=up_down_counter_add]{up_down_counter_add()}}
 
-Other OpenTelemetry metrics API: 
-\code{\link{gauge_record}()},
-\code{\link{histogram_record}()},
-\code{\link{is_measuring_enabled}()},
-\code{\link{up_down_counter_add}()}
+Other OpenTelemetry metrics API:
+\code{\link[=gauge_record]{gauge_record()}},
+\code{\link[=histogram_record]{histogram_record()}},
+\code{\link[=is_measuring_enabled]{is_measuring_enabled()}},
+\code{\link[=up_down_counter_add]{up_down_counter_add()}}
 }
 \concept{OpenTelemetry metrics API}
 \concept{OpenTelemetry metrics instruments}

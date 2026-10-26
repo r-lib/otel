@@ -57,9 +57,9 @@ ctr <- mtr$create_counter("session")
 ctr$add(1)
 }
 \seealso{
-Other low level metrics API: 
-\code{\link{get_default_meter_provider}()},
-\code{\link{get_meter}()},
+Other low level metrics API:
+\code{\link[=get_default_meter_provider]{get_default_meter_provider()}},
+\code{\link[=get_meter]{get_meter()}},
 \code{\link{meter_provider_noop}},
 \code{\link{otel_gauge}},
 \code{\link{otel_histogram}},
