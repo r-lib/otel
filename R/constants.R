@@ -63,9 +63,9 @@ span_kinds <- c(
 #' status codes. You can set the status code of a a span with the
 #' `set_status()` method of [otel_span] objects. If not set explicitly,
 #' and the span is ended automatically (by [start_local_active_span()],
-#' [local_active_span()] or [with_active_span()]), then otel sets the
-#' status automatically to "ok" or "error", depending on whether the span
-#' ended during handling an error.
+#' [local_active_span()] or [with_active_span()]) during handling an
+#' error, then otel sets the status automatically to "error". Otherwise
+#' the status stays "unset".
 #'
 #' @rdname tracing-constants
 #' @format NULL

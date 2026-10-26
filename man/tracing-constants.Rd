@@ -50,9 +50,9 @@ when to use which.
 status codes. You can set the status code of a a span with the
 \code{set_status()} method of \link{otel_span} objects. If not set explicitly,
 and the span is ended automatically (by \code{\link[=start_local_active_span]{start_local_active_span()}},
-\code{\link[=local_active_span]{local_active_span()}} or \code{\link[=with_active_span]{with_active_span()}}), then otel sets the
-status automatically to "ok" or "error", depending on whether the span
-ended during handling an error.
+\code{\link[=local_active_span]{local_active_span()}} or \code{\link[=with_active_span]{with_active_span()}}) during handling an
+error, then otel sets the status automatically to "error". Otherwise
+the status stays "unset".
 }
 }
 \examples{

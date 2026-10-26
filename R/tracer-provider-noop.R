@@ -505,14 +505,13 @@ tracer_noop <- list(
 #'
 #' Set the status of the span.
 #'
-#' If the span was created with [start_local_active_span()], or it was
-#' ended automatically with [local_active_span()] or [with_active_span()],
-#' then otel sets the status of the span automatically to `ok` or `error`,
-#' depending on whether an error happened in the frame the span was
-#' activated for.
-#'
-#' Otherwise the default span status is `unset`, and you need to set it
-#' manually.
+#' The default span status is `unset`. If the span was created with
+#' [start_local_active_span()], or it was ended automatically with
+#' [local_active_span()] or [with_active_span()], and an error happened in
+#' the frame the span was activated for, then otel sets the status of the
+#' span automatically to `error`. Otherwise otel leaves the status as
+#' `unset`. Set it to `ok` manually to mark a span as explicitly free of
+#' errors.
 #'
 #' ### Usage
 #'

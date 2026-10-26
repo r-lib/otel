@@ -1,5 +1,10 @@
 # otel (development version)
 
+* Spans ended automatically, without an error, now keep the `unset` status,
+  instead of being set to `ok`. Only end users should mark spans as `ok`,
+  see the OpenTelemetry specification. This needs otelsdk 0.2.4.9003 or
+  later (#30).
+
 * Spans now have a `set_attributes()` method, to set multiple attributes
   at once. It needs otelsdk 0.2.4.9002 or later (#35).
 

@@ -260,14 +260,13 @@ The span object itself, invisibly.
 
 Set the status of the span.
 
-If the span was created with \code{\link[=start_local_active_span]{start_local_active_span()}}, or it was
-ended automatically with \code{\link[=local_active_span]{local_active_span()}} or \code{\link[=with_active_span]{with_active_span()}},
-then otel sets the status of the span automatically to \code{ok} or \code{error},
-depending on whether an error happened in the frame the span was
-activated for.
-
-Otherwise the default span status is \code{unset}, and you need to set it
-manually.
+The default span status is \code{unset}. If the span was created with
+\code{\link[=start_local_active_span]{start_local_active_span()}}, or it was ended automatically with
+\code{\link[=local_active_span]{local_active_span()}} or \code{\link[=with_active_span]{with_active_span()}}, and an error happened in
+the frame the span was activated for, then otel sets the status of the
+span automatically to \code{error}. Otherwise otel leaves the status as
+\code{unset}. Set it to \code{ok} manually to mark a span as explicitly free of
+errors.
 \subsection{Usage}{
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{span$set_status(status_code, description = NULL)
