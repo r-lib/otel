@@ -72,3 +72,52 @@ mkdirp <- function(dir) {
   s <- map_lgl(dir, dir.create, recursive = TRUE, showWarnings = FALSE)
   invisible(s)
 }
+
+# Name of the function that is running in the `scope` frame, to use as
+# the default span name. Returns `NULL` if there is no such frame, e.g.
+# at the top level, or for anonymous functions. `qualified` has the
+# package name as well, if the function is in a package namespace.
+caller_function_name <- function(scope) {
+  frames <- sys.frames()
+  for (i in rev(seq_along(frames))) {
+    if (!identical(frames[[i]], scope)) {
+      next
+    }
+    # code evaluated with eval(), e.g. via local() or source(), has an
+    # eval() frame, but not a function of its own
+    if (is.primitive(sys.function(i))) {
+      return(NULL)
+    }
+    fun <- sys.call(i)[[1]]
+    if (is.symbol(fun)) {
+      name <- as.character(fun)
+      top <- topenv(environment(sys.function(i)))
+      qualified <- if (isNamespace(top)) {
+        paste0(getNamespaceName(top), "::", name)
+      } else {
+        name
+      }
+      return(list(name = name, qualified = qualified))
+    }
+    if (is.call(fun) && as.character(fun[[1]]) %in% c("::", ":::", "$", "@")) {
+      name <- paste(deparse(fun), collapse = "")
+      return(list(name = name, qualified = name))
+    }
+    return(NULL)
+  }
+  NULL
+}
+
+# Default span name, from the name of the function running in `scope`.
+# Also sets the `code.function.name` attribute, unless the caller set it.
+# Callers only call this for real tracers, so it costs nothing if tracing
+# is off.
+default_span_name <- function(attributes, scope) {
+  fn <- caller_function_name(scope)
+  if (is.null(fn)) {
+    return(list(name = NULL, attributes = attributes))
+  }
+  attributes[["code.function.name"]] <- attributes[["code.function.name"]] %||%
+    fn$qualified
+  list(name = fn$name, attributes = attributes)
+}

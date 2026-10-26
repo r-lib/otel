@@ -65,3 +65,21 @@ test_that("get_env_count", {
     get_env_count("FOO", "bad-default")
   })
 })
+
+test_that("caller_function_name", {
+  f <- function() caller_function_name(environment())
+  environment(f) <- list2env(
+    list(caller_function_name = caller_function_name),
+    parent = globalenv()
+  )
+  expect_equal(f(), list(name = "f", qualified = "f"))
+
+  f2 <- function() caller_function_name(environment())
+  environment(f2) <- asNamespace("otel")
+  expect_equal(f2(), list(name = "f2", qualified = "otel::f2"))
+
+  expect_null(caller_function_name(new.env()))
+  expect_null((function() caller_function_name(environment()))())
+  expect_null(local(caller_function_name(environment())))
+  expect_null(eval(quote(caller_function_name(environment())), new.env()))
+})

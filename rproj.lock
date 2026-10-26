@@ -415,14 +415,14 @@ metadata = { RemoteHash = "a16b50e41ddbbf2bac236572e3e68c4ef9c76b88faf5cf840c795
 
 [[targets.packages]]
 package = "otelsdk"
-version = "0.2.4.9001"
+version = "0.2.4.9003"
 binary = false
 platform = "source"
 dependencies = ["otel"]
-sources = ["git+https://github.com/r-lib/otelsdk.git#commit=f34e7fb976ddeabfcf57baaba881fac93f4179ac"]
-target = "git/github/r-lib/otelsdk/f34e7fb976ddeabfcf57baaba881fac93f4179ac"
+sources = ["git+https://github.com/r-lib/otelsdk.git#commit=a4cfe0018202fa563d7a77070e5dd7cd0a68273c"]
+target = "git/github/r-lib/otelsdk/a4cfe0018202fa563d7a77070e5dd7cd0a68273c"
 groups = ["dev"]
-metadata = { RemoteHost = "github.com", RemoteRepo = "r-lib/otelsdk", RemoteSha = "f34e7fb976ddeabfcf57baaba881fac93f4179ac", RemoteType = "github", RemoteUrl = "https://github.com/r-lib/otelsdk.git", RemoteUsername = "r-lib" }
+metadata = { RemoteHost = "github.com", RemoteRepo = "r-lib/otelsdk", RemoteSha = "a4cfe0018202fa563d7a77070e5dd7cd0a68273c", RemoteType = "github", RemoteUrl = "https://github.com/r-lib/otelsdk.git", RemoteUsername = "r-lib" }
 
 [[targets.packages]]
 package = "commonmark"
@@ -775,7 +775,7 @@ sources = ["."]
 target = ""
 groups = ["main"]
 is_project = true
-metadata = { RemoteSha = "9a9c1363806f684e32190ef1b3b5c1d2a5c4310bcece5ab8aa86cdde1da20261", RemoteType = "local", RemoteUrl = "." }
+metadata = { RemoteSha = "dcf9a7337740db8f8d1f81c7b311e4c08452f65242f9424befa22986231e3c96", RemoteType = "local", RemoteUrl = "." }
 
 [[targets]]
 r_version = "4.6.1"
@@ -1186,15 +1186,15 @@ metadata = { RemoteHash = "a16b50e41ddbbf2bac236572e3e68c4ef9c76b88faf5cf840c795
 
 [[targets.packages]]
 package = "otelsdk"
-version = "0.2.4.9001"
+version = "0.2.4.9003"
 binary = false
 platform = "source"
 dependencies = ["otel"]
-sources = ["git+https://github.com/r-lib/otelsdk.git#commit=f34e7fb976ddeabfcf57baaba881fac93f4179ac"]
-target = "git/github/r-lib/otelsdk/f34e7fb976ddeabfcf57baaba881fac93f4179ac"
+sources = ["git+https://github.com/r-lib/otelsdk.git#commit=a4cfe0018202fa563d7a77070e5dd7cd0a68273c"]
+target = "git/github/r-lib/otelsdk/a4cfe0018202fa563d7a77070e5dd7cd0a68273c"
 groups = ["dev"]
 system_requirements = "cmake, protobuf-compiler, libprotobuf, libcurl, zlib, GNU make"
-metadata = { RemoteHost = "github.com", RemoteRepo = "r-lib/otelsdk", RemoteSha = "f34e7fb976ddeabfcf57baaba881fac93f4179ac", RemoteType = "github", RemoteUrl = "https://github.com/r-lib/otelsdk.git", RemoteUsername = "r-lib" }
+metadata = { RemoteHost = "github.com", RemoteRepo = "r-lib/otelsdk", RemoteSha = "a4cfe0018202fa563d7a77070e5dd7cd0a68273c", RemoteType = "github", RemoteUrl = "https://github.com/r-lib/otelsdk.git", RemoteUsername = "r-lib" }
 
 [[targets.packages]]
 package = "commonmark"
@@ -1550,7 +1550,7 @@ sources = ["."]
 target = ""
 groups = ["main"]
 is_project = true
-metadata = { RemoteSha = "9a9c1363806f684e32190ef1b3b5c1d2a5c4310bcece5ab8aa86cdde1da20261", RemoteType = "local", RemoteUrl = "." }
+metadata = { RemoteSha = "dcf9a7337740db8f8d1f81c7b311e4c08452f65242f9424befa22986231e3c96", RemoteType = "local", RemoteUrl = "." }
 
 [[targets]]
 r_version = "4.6.1"
@@ -1959,15 +1959,15 @@ metadata = { RemoteHash = "a16b50e41ddbbf2bac236572e3e68c4ef9c76b88faf5cf840c795
 
 [[targets.packages]]
 package = "otelsdk"
-version = "0.2.4.9001"
+version = "0.2.4.9003"
 binary = false
 platform = "source"
 dependencies = ["otel"]
-sources = ["git+https://github.com/r-lib/otelsdk.git#commit=f34e7fb976ddeabfcf57baaba881fac93f4179ac"]
-target = "git/github/r-lib/otelsdk/f34e7fb976ddeabfcf57baaba881fac93f4179ac"
+sources = ["git+https://github.com/r-lib/otelsdk.git#commit=a4cfe0018202fa563d7a77070e5dd7cd0a68273c"]
+target = "git/github/r-lib/otelsdk/a4cfe0018202fa563d7a77070e5dd7cd0a68273c"
 groups = ["dev"]
 system_requirements = "cmake, protobuf-compiler, libprotobuf, libcurl, zlib, GNU make"
-metadata = { RemoteHost = "github.com", RemoteRepo = "r-lib/otelsdk", RemoteSha = "f34e7fb976ddeabfcf57baaba881fac93f4179ac", RemoteType = "github", RemoteUrl = "https://github.com/r-lib/otelsdk.git", RemoteUsername = "r-lib" }
+metadata = { RemoteHost = "github.com", RemoteRepo = "r-lib/otelsdk", RemoteSha = "a4cfe0018202fa563d7a77070e5dd7cd0a68273c", RemoteType = "github", RemoteUrl = "https://github.com/r-lib/otelsdk.git", RemoteUsername = "r-lib" }
 
 [[targets.packages]]
 package = "commonmark"
@@ -2320,7 +2320,7 @@ sources = ["."]
 target = ""
 groups = ["main"]
 is_project = true
-metadata = { RemoteSha = "9a9c1363806f684e32190ef1b3b5c1d2a5c4310bcece5ab8aa86cdde1da20261", RemoteType = "local", RemoteUrl = "." }
+metadata = { RemoteSha = "dcf9a7337740db8f8d1f81c7b311e4c08452f65242f9424befa22986231e3c96", RemoteType = "local", RemoteUrl = "." }
 
 [[targets]]
 r_version = "4.6.1"
@@ -2729,14 +2729,14 @@ metadata = { RemoteHash = "a16b50e41ddbbf2bac236572e3e68c4ef9c76b88faf5cf840c795
 
 [[targets.packages]]
 package = "otelsdk"
-version = "0.2.4.9001"
+version = "0.2.4.9003"
 binary = false
 platform = "source"
 dependencies = ["otel"]
-sources = ["git+https://github.com/r-lib/otelsdk.git#commit=f34e7fb976ddeabfcf57baaba881fac93f4179ac"]
-target = "git/github/r-lib/otelsdk/f34e7fb976ddeabfcf57baaba881fac93f4179ac"
+sources = ["git+https://github.com/r-lib/otelsdk.git#commit=a4cfe0018202fa563d7a77070e5dd7cd0a68273c"]
+target = "git/github/r-lib/otelsdk/a4cfe0018202fa563d7a77070e5dd7cd0a68273c"
 groups = ["dev"]
-metadata = { RemoteHost = "github.com", RemoteRepo = "r-lib/otelsdk", RemoteSha = "f34e7fb976ddeabfcf57baaba881fac93f4179ac", RemoteType = "github", RemoteUrl = "https://github.com/r-lib/otelsdk.git", RemoteUsername = "r-lib" }
+metadata = { RemoteHost = "github.com", RemoteRepo = "r-lib/otelsdk", RemoteSha = "a4cfe0018202fa563d7a77070e5dd7cd0a68273c", RemoteType = "github", RemoteUrl = "https://github.com/r-lib/otelsdk.git", RemoteUsername = "r-lib" }
 
 [[targets.packages]]
 package = "commonmark"
@@ -3089,4 +3089,4 @@ sources = ["."]
 target = ""
 groups = ["main"]
 is_project = true
-metadata = { RemoteSha = "9a9c1363806f684e32190ef1b3b5c1d2a5c4310bcece5ab8aa86cdde1da20261", RemoteType = "local", RemoteUrl = "." }
+metadata = { RemoteSha = "dcf9a7337740db8f8d1f81c7b311e4c08452f65242f9424befa22986231e3c96", RemoteType = "local", RemoteUrl = "." }

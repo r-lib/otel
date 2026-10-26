@@ -16,7 +16,14 @@ start_local_active_span(
 )
 }
 \arguments{
-\item{name}{Name of the span. If not specified it will be \code{"<NA>"}.}
+\item{name}{Name of the span. If not specified, and
+tracing is enabled, then otel uses the name of the calling function
+as the span name, and also sets the \code{code.function.name} attribute
+to the function name, unless it is already set. otel prefixes this
+attribute with the package name, if the function is in a package.
+If otel cannot find the name of the calling function, e.g. at the
+top level, or for anonymous functions, the span name will be
+\code{"<NA>"}.}
 
 \item{attributes}{Span attributes. OpenTelemetry supports the following
 R types as attributes: `character, logical, double, integer.

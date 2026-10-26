@@ -1,5 +1,10 @@
 # otel (development version)
 
+* `start_local_active_span()` and `start_span()` now use the name of the
+  calling function as the span name, if `name` is not given. They also
+  set the `code.function.name` attribute. This only happens if tracing
+  is enabled, so it costs nothing if tracing is off (#45).
+
 * Spans ended automatically, without an error, now keep the `unset` status,
   instead of being set to `ok`. Only end users should mark spans as `ok`,
   see the OpenTelemetry specification. This needs otelsdk 0.2.4.9003 or
