@@ -761,3 +761,89 @@ test_that("extract_http_context", {
     extract_http_context_dev(c("does not matter"))
   })
 })
+
+test_that("default span name is the caller function name", {
+  got <- NULL
+  trc <- structure(
+    list(
+      start_span = function(name = NULL, attributes = NULL, ...) {
+        got <<- list(name = name, attributes = attributes)
+        span_noop$new()
+      }
+    ),
+    class = "otel_tracer"
+  )
+  env <- new.env(parent = globalenv())
+  env$trc <- trc
+
+  # function in the global env, or in a non-package env
+  f <- function() otel::start_local_active_span(tracer = trc)
+  environment(f) <- env
+  f()
+  expect_equal(got$name, "f")
+  expect_equal(got$attributes, list(code.function.name = "f"))
+
+  g <- function() otel::start_span(tracer = trc)
+  environment(g) <- env
+  g()
+  expect_equal(got$name, "g")
+  expect_equal(got$attributes, list(code.function.name = "g"))
+
+  # function in a package
+  f2 <- function() start_local_active_span(tracer = trc)
+  environment(f2) <- list2env(list(trc = trc), parent = asNamespace("otel"))
+  f2()
+  expect_equal(got$name, "f2")
+  expect_equal(got$attributes, list(code.function.name = "otel::f2"))
+
+  # dev versions
+  f3 <- function() start_local_active_span_dev(tracer = trc)
+  f3()
+  expect_equal(got$name, "f3")
+  g3 <- function() start_span_dev(tracer = trc)
+  g3()
+  expect_equal(got$name, "g3")
+
+  # name is given
+  f4 <- function() start_local_active_span("myspan", tracer = trc)
+  f4()
+  expect_equal(got, list(name = "myspan", attributes = NULL))
+
+  # code.function.name is given
+  f5 <- function() {
+    start_local_active_span(
+      attributes = list(code.function.name = "foo", x = 1),
+      tracer = trc
+    )
+  }
+  f5()
+  expect_equal(got$name, "f5")
+  expect_equal(got$attributes, list(code.function.name = "foo", x = 1))
+
+  # obj$method
+  obj <- list(meth = function() start_local_active_span(tracer = trc))
+  obj$meth()
+  expect_equal(got$name, "obj$meth")
+
+  # anonymous function
+  (function() start_local_active_span(tracer = trc))()
+  expect_equal(got, list(name = NULL, attributes = NULL))
+
+  # no calling function
+  start_local_active_span(tracer = trc, activation_scope = new.env())
+  expect_equal(got, list(name = NULL, attributes = NULL))
+})
+
+test_that("default span name is not computed if tracing is off", {
+  local_otel_off()
+  fake(start_local_active_span_dev, "default_span_name", function(...) {
+    stop("should not be called")
+  })
+  fake(start_span_dev, "default_span_name", function(...) {
+    stop("should not be called")
+  })
+  f <- function() start_local_active_span_dev()
+  expect_s3_class(f(), "otel_span_noop")
+  g <- function() start_span_dev()
+  expect_s3_class(g(), "otel_span_noop")
+})

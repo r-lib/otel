@@ -138,6 +138,15 @@ doc_arg <- function() {
   list(
     "span-name" = "Name of the span. If not specified it will be `\"<NA>\"`.",
 
+    "span-name-default" = "Name of the span. If not specified, and
+     tracing is enabled, then otel uses the name of the calling function
+     as the span name, and also sets the `code.function.name` attribute
+     to the function name, unless it is already set. otel prefixes this
+     attribute with the package name, if the function is in a package.
+     If otel cannot find the name of the calling function, e.g. at the
+     top level, or for anonymous functions, the span name will be
+     `\"<NA>\"`.",
+
     links = "A named list of links to other spans. Every link must be an
      OpenTelemetry span ([otel_span]) object, or a list with a span
      object as the first element and named span attributes as the rest.",

@@ -504,7 +504,7 @@ extract_http_context_safe <- extract_http_context
 #' It is a good idea to end spans created with `start_span()` in an
 #' [base::on.exit()] call.
 #'
-#' @param name `r doc_arg()[["span-name"]]`
+#' @param name `r doc_arg()[["span-name-default"]]`
 #' @param attributes `r doc_arg()[["attributes"]]`
 #' @param links `r doc_arg()[["links"]]`
 #' @param options `r doc_arg()[["span-options"]]`
@@ -554,6 +554,11 @@ start_span <- function(
   tryCatch({                                                         # safe
     if (!inherits(tracer, "otel_tracer")) {
       tracer <- get_tracer(tracer)
+    }
+    if (is.null(name) && !inherits(tracer, "otel_tracer_noop")) {
+      def <- default_span_name(attributes, parent.frame())
+      name <- def$name
+      attributes <- def$attributes
     }
     invisible(tracer$start_span(name, attributes, links, options, ...))
   }, error = function(err) {                                         # safe
@@ -645,6 +650,11 @@ start_local_active_span <- function(
   tryCatch({                                                         # safe
     if (!inherits(tracer, "otel_tracer")) {
       tracer <- get_tracer(tracer)
+    }
+    if (is.null(name) && !inherits(tracer, "otel_tracer_noop")) {
+      def <- default_span_name(attributes, activation_scope)
+      name <- def$name
+      attributes <- def$attributes
     }
     span <- tracer$start_span(name, attributes, links, options, ...)
     span$activate(

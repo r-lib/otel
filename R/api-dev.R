@@ -95,6 +95,11 @@ start_span_dev <- function(
     if (!inherits(tracer, "otel_tracer")) {
       tracer <- get_tracer(tracer)
     }
+    if (is.null(name) && !inherits(tracer, "otel_tracer_noop")) {
+      def <- default_span_name(attributes, parent.frame())
+      name <- def$name
+      attributes <- def$attributes
+    }
     invisible(tracer$start_span(name, attributes, links, options, ...))
 }
 
@@ -115,6 +120,11 @@ start_local_active_span_dev <- function(
 ) {
     if (!inherits(tracer, "otel_tracer")) {
       tracer <- get_tracer(tracer)
+    }
+    if (is.null(name) && !inherits(tracer, "otel_tracer_noop")) {
+      def <- default_span_name(attributes, activation_scope)
+      name <- def$name
+      attributes <- def$attributes
     }
     span <- tracer$start_span(name, attributes, links, options, ...)
     span$activate(
