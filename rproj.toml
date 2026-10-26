@@ -36,7 +36,7 @@ callr = "*"
 cli = "*"
 glue = "*"
 jsonlite = "*"
-otelsdk = "*"
+otelsdk = { version = "*", git = "https://github.com/r-lib/otelsdk.git", ref = "r-lib/otelsdk" }
 processx = "*"
 shiny = "*"
 spelling = "*"

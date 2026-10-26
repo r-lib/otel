@@ -148,14 +148,14 @@ metadata = { RemoteHash = "7b227f0627709a2073daf960ac612a0b87d03e18f7dd5c1938048
 [[targets.packages]]
 package = "cachem"
 version = "1.1.0"
-binary = true
-platform = "aarch64-apple-darwin"
+binary = false
+platform = "source"
 dependencies = [
     "fastmap",
     "rlang",
 ]
-sources = ["https://p3m.dev/cran/2024-05-17/bin/macosx/sonoma-arm64/contrib/4.6/cachem_1.1.0.tgz"]
-target = "bin/macosx/sonoma-arm64/4.6/cachem_1.1.0-c7485274.tgz"
+sources = ["https://p3m.dev/cran/2024-05-17/src/contrib/cachem_1.1.0.tar.gz"]
+target = "src/cachem_1.1.0-c7485274.tar.gz"
 groups = ["dev"]
 metadata = { RemoteHash = "550839fc2ae5d865db475ba2c1714144f07fa0c052c72135b0e4a70287492e21" }
 
@@ -415,14 +415,14 @@ metadata = { RemoteHash = "a16b50e41ddbbf2bac236572e3e68c4ef9c76b88faf5cf840c795
 
 [[targets.packages]]
 package = "otelsdk"
-version = "0.2.4"
-binary = true
-platform = "aarch64-apple-darwin"
+version = "0.2.4.9001"
+binary = false
+platform = "source"
 dependencies = ["otel"]
-sources = ["https://p3m.dev/cran/2026-04-09/bin/macosx/sonoma-arm64/contrib/4.6/otelsdk_0.2.4.tgz"]
-target = "bin/macosx/sonoma-arm64/4.6/otelsdk_0.2.4-d771b38f.tgz"
+sources = ["git+https://github.com/r-lib/otelsdk.git#commit=f34e7fb976ddeabfcf57baaba881fac93f4179ac"]
+target = "git/github/r-lib/otelsdk/f34e7fb976ddeabfcf57baaba881fac93f4179ac"
 groups = ["dev"]
-metadata = { RemoteHash = "e4839bf6f3dd934f9c8d61d8d646a00c04447b6b304d531def40efab5a8ffab8" }
+metadata = { RemoteHost = "github.com", RemoteRepo = "r-lib/otelsdk", RemoteSha = "f34e7fb976ddeabfcf57baaba881fac93f4179ac", RemoteType = "github", RemoteUrl = "https://github.com/r-lib/otelsdk.git", RemoteUsername = "r-lib" }
 
 [[targets.packages]]
 package = "commonmark"
@@ -460,8 +460,8 @@ metadata = { RemoteHash = "47aac79f889a828a5f8b4756cb972d7c2966bb984cbae17a4bd23
 [[targets.packages]]
 package = "bslib"
 version = "0.12.0"
-binary = true
-platform = "aarch64-apple-darwin"
+binary = false
+platform = "source"
 dependencies = [
     "sass",
     "mime",
@@ -475,8 +475,8 @@ dependencies = [
     "memoise",
     "rlang",
 ]
-sources = ["https://p3m.dev/cran/2026-08-04/bin/macosx/sonoma-arm64/contrib/4.6/bslib_0.12.0.tgz"]
-target = "bin/macosx/sonoma-arm64/4.6/bslib_0.12.0-d8cbac28.tgz"
+sources = ["https://p3m.dev/cran/2026-08-04/src/contrib/bslib_0.12.0.tar.gz"]
+target = "src/bslib_0.12.0-d8cbac28.tar.gz"
 groups = ["dev"]
 metadata = { RemoteHash = "26fc11793dc1fdccd6d8d2fc1d638c29c47aa0c2e5cbadc6a35af3819f5446d1" }
 
@@ -771,11 +771,11 @@ version = "0.2.0.9000"
 binary = false
 platform = "source"
 dependencies = []
-sources = ["file:///Users/gaborcsardi/works/otel/"]
+sources = ["."]
 target = ""
 groups = ["main"]
 is_project = true
-metadata = { RemoteSha = "36392e35c4e766c1d817cde1818849b0d5bf3c1fe7750c3682d45c06d0be0c2f", RemoteType = "local", RemoteUrl = "/Users/gaborcsardi/works/otel" }
+metadata = { RemoteSha = "c677c5c3f52e9c1bb8b44b86ca10734513295497742c5fc1c28ca99f8c238d3b", RemoteType = "local", RemoteUrl = "." }
 
 [[targets]]
 r_version = "4.6.1"
@@ -1186,15 +1186,15 @@ metadata = { RemoteHash = "a16b50e41ddbbf2bac236572e3e68c4ef9c76b88faf5cf840c795
 
 [[targets.packages]]
 package = "otelsdk"
-version = "0.2.4"
+version = "0.2.4.9001"
 binary = false
 platform = "source"
 dependencies = ["otel"]
-sources = ["https://p3m.dev/cran/2026-04-09/src/contrib/otelsdk_0.2.4.tar.gz"]
-target = "src/otelsdk_0.2.4-d771b38f.tar.gz"
+sources = ["git+https://github.com/r-lib/otelsdk.git#commit=f34e7fb976ddeabfcf57baaba881fac93f4179ac"]
+target = "git/github/r-lib/otelsdk/f34e7fb976ddeabfcf57baaba881fac93f4179ac"
 groups = ["dev"]
 system_requirements = "cmake, protobuf-compiler, libprotobuf, libcurl, zlib, GNU make"
-metadata = { RemoteHash = "e4839bf6f3dd934f9c8d61d8d646a00c04447b6b304d531def40efab5a8ffab8" }
+metadata = { RemoteHost = "github.com", RemoteRepo = "r-lib/otelsdk", RemoteSha = "f34e7fb976ddeabfcf57baaba881fac93f4179ac", RemoteType = "github", RemoteUrl = "https://github.com/r-lib/otelsdk.git", RemoteUsername = "r-lib" }
 
 [[targets.packages]]
 package = "commonmark"
@@ -1546,11 +1546,11 @@ version = "0.2.0.9000"
 binary = false
 platform = "source"
 dependencies = []
-sources = ["file:///Users/gaborcsardi/works/otel/"]
+sources = ["."]
 target = ""
 groups = ["main"]
 is_project = true
-metadata = { RemoteSha = "36392e35c4e766c1d817cde1818849b0d5bf3c1fe7750c3682d45c06d0be0c2f", RemoteType = "local", RemoteUrl = "/Users/gaborcsardi/works/otel" }
+metadata = { RemoteSha = "c677c5c3f52e9c1bb8b44b86ca10734513295497742c5fc1c28ca99f8c238d3b", RemoteType = "local", RemoteUrl = "." }
 
 [[targets]]
 r_version = "4.6.1"
@@ -1692,14 +1692,14 @@ metadata = { RemoteHash = "7b227f0627709a2073daf960ac612a0b87d03e18f7dd5c1938048
 [[targets.packages]]
 package = "cachem"
 version = "1.1.0"
-binary = true
-platform = "x86_64-unknown-linux-gnu"
+binary = false
+platform = "source"
 dependencies = [
     "fastmap",
     "rlang",
 ]
-sources = ["https://p3m.dev/cran/2024-05-17/bin/linux/manylinux_2_28-x86_64/4.6/src/contrib/cachem_1.1.0.tar.gz"]
-target = "bin/linux/manylinux_2_28-x86_64/4.6/cachem_1.1.0-c7485274.tar.gz"
+sources = ["https://p3m.dev/cran/2024-05-17/src/contrib/cachem_1.1.0.tar.gz"]
+target = "src/cachem_1.1.0-c7485274.tar.gz"
 groups = ["dev"]
 metadata = { RemoteHash = "550839fc2ae5d865db475ba2c1714144f07fa0c052c72135b0e4a70287492e21" }
 
@@ -1959,14 +1959,15 @@ metadata = { RemoteHash = "a16b50e41ddbbf2bac236572e3e68c4ef9c76b88faf5cf840c795
 
 [[targets.packages]]
 package = "otelsdk"
-version = "0.2.4"
-binary = true
-platform = "x86_64-unknown-linux-gnu"
+version = "0.2.4.9001"
+binary = false
+platform = "source"
 dependencies = ["otel"]
-sources = ["https://p3m.dev/cran/2026-04-09/bin/linux/manylinux_2_28-x86_64/4.6/src/contrib/otelsdk_0.2.4.tar.gz"]
-target = "bin/linux/manylinux_2_28-x86_64/4.6/otelsdk_0.2.4-d771b38f.tar.gz"
+sources = ["git+https://github.com/r-lib/otelsdk.git#commit=f34e7fb976ddeabfcf57baaba881fac93f4179ac"]
+target = "git/github/r-lib/otelsdk/f34e7fb976ddeabfcf57baaba881fac93f4179ac"
 groups = ["dev"]
-metadata = { RemoteHash = "e4839bf6f3dd934f9c8d61d8d646a00c04447b6b304d531def40efab5a8ffab8" }
+system_requirements = "cmake, protobuf-compiler, libprotobuf, libcurl, zlib, GNU make"
+metadata = { RemoteHost = "github.com", RemoteRepo = "r-lib/otelsdk", RemoteSha = "f34e7fb976ddeabfcf57baaba881fac93f4179ac", RemoteType = "github", RemoteUrl = "https://github.com/r-lib/otelsdk.git", RemoteUsername = "r-lib" }
 
 [[targets.packages]]
 package = "commonmark"
@@ -2004,8 +2005,8 @@ metadata = { RemoteHash = "47aac79f889a828a5f8b4756cb972d7c2966bb984cbae17a4bd23
 [[targets.packages]]
 package = "bslib"
 version = "0.12.0"
-binary = true
-platform = "x86_64-unknown-linux-gnu"
+binary = false
+platform = "source"
 dependencies = [
     "sass",
     "mime",
@@ -2019,8 +2020,8 @@ dependencies = [
     "memoise",
     "rlang",
 ]
-sources = ["https://p3m.dev/cran/2026-08-04/bin/linux/manylinux_2_28-x86_64/4.6/src/contrib/bslib_0.12.0.tar.gz"]
-target = "bin/linux/manylinux_2_28-x86_64/4.6/bslib_0.12.0-d8cbac28.tar.gz"
+sources = ["https://p3m.dev/cran/2026-08-04/src/contrib/bslib_0.12.0.tar.gz"]
+target = "src/bslib_0.12.0-d8cbac28.tar.gz"
 groups = ["dev"]
 metadata = { RemoteHash = "26fc11793dc1fdccd6d8d2fc1d638c29c47aa0c2e5cbadc6a35af3819f5446d1" }
 
@@ -2315,11 +2316,11 @@ version = "0.2.0.9000"
 binary = false
 platform = "source"
 dependencies = []
-sources = ["file:///Users/gaborcsardi/works/otel/"]
+sources = ["."]
 target = ""
 groups = ["main"]
 is_project = true
-metadata = { RemoteSha = "36392e35c4e766c1d817cde1818849b0d5bf3c1fe7750c3682d45c06d0be0c2f", RemoteType = "local", RemoteUrl = "/Users/gaborcsardi/works/otel" }
+metadata = { RemoteSha = "c677c5c3f52e9c1bb8b44b86ca10734513295497742c5fc1c28ca99f8c238d3b", RemoteType = "local", RemoteUrl = "." }
 
 [[targets]]
 r_version = "4.6.1"
@@ -2728,14 +2729,14 @@ metadata = { RemoteHash = "a16b50e41ddbbf2bac236572e3e68c4ef9c76b88faf5cf840c795
 
 [[targets.packages]]
 package = "otelsdk"
-version = "0.2.4"
-binary = true
-platform = "x86_64-w64-mingw32"
+version = "0.2.4.9001"
+binary = false
+platform = "source"
 dependencies = ["otel"]
-sources = ["https://p3m.dev/cran/2026-04-09/bin/windows/contrib/4.6/otelsdk_0.2.4.zip"]
-target = "bin/windows/4.6/otelsdk_0.2.4-d771b38f.zip"
+sources = ["git+https://github.com/r-lib/otelsdk.git#commit=f34e7fb976ddeabfcf57baaba881fac93f4179ac"]
+target = "git/github/r-lib/otelsdk/f34e7fb976ddeabfcf57baaba881fac93f4179ac"
 groups = ["dev"]
-metadata = { RemoteHash = "e4839bf6f3dd934f9c8d61d8d646a00c04447b6b304d531def40efab5a8ffab8" }
+metadata = { RemoteHost = "github.com", RemoteRepo = "r-lib/otelsdk", RemoteSha = "f34e7fb976ddeabfcf57baaba881fac93f4179ac", RemoteType = "github", RemoteUrl = "https://github.com/r-lib/otelsdk.git", RemoteUsername = "r-lib" }
 
 [[targets.packages]]
 package = "commonmark"
@@ -3084,8 +3085,8 @@ version = "0.2.0.9000"
 binary = false
 platform = "source"
 dependencies = []
-sources = ["file:///Users/gaborcsardi/works/otel/"]
+sources = ["."]
 target = ""
 groups = ["main"]
 is_project = true
-metadata = { RemoteSha = "36392e35c4e766c1d817cde1818849b0d5bf3c1fe7750c3682d45c06d0be0c2f", RemoteType = "local", RemoteUrl = "/Users/gaborcsardi/works/otel" }
+metadata = { RemoteSha = "c677c5c3f52e9c1bb8b44b86ca10734513295497742c5fc1c28ca99f8c238d3b", RemoteType = "local", RemoteUrl = "." }

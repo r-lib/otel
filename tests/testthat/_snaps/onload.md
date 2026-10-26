@@ -90,3 +90,18 @@
     Output
       trace_namespace(pkg, inc, exc)
 
+# check_otelsdk_version
+
+    Code
+      check_otelsdk_version()
+    Condition
+      Warning:
+      otel needs otelsdk 0.2.4.9002 or later, but otelsdk 0.2.4 is loaded. Please update otelsdk.
+
+# setup_otelsdk_check
+
+    Code
+      body(res[[2]])
+    Output
+      check_otelsdk_version()
+

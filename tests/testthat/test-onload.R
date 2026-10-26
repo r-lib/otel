@@ -116,3 +116,45 @@ test_that("setup_r_trace", {
     body(res[[2]])
   })
 })
+
+test_that("check_otelsdk_version", {
+  fake(
+    check_otelsdk_version,
+    "otelsdk_loaded_version",
+    package_version("100.0.0")
+  )
+  expect_silent(check_otelsdk_version())
+
+  fake(
+    check_otelsdk_version,
+    "otelsdk_loaded_version",
+    package_version("0.2.4")
+  )
+  expect_snapshot(check_otelsdk_version())
+})
+
+test_that("setup_otelsdk_check", {
+  # otelsdk loaded, check now
+  fake(setup_otelsdk_check, "loadedNamespaces", "otelsdk")
+  fake(setup_otelsdk_check, "check_otelsdk_version", function() {
+    res <<- "checked"
+  })
+  fake(setup_otelsdk_check, "setHook", function(...) stop("not yet"))
+  res <- NULL
+  setup_otelsdk_check()
+  expect_equal(res, "checked")
+
+  # otelsdk not loaded, set hook
+  fake(setup_otelsdk_check, "loadedNamespaces", "nothere")
+  fake(setup_otelsdk_check, "setHook", function(...) res <<- list(...))
+  res <- NULL
+  setup_otelsdk_check()
+  expect_equal(res[[1]], packageEvent("otelsdk", "onLoad"))
+  expect_snapshot(body(res[[2]]))
+})
+
+test_that("otelsdk_loaded_version", {
+  skip_if_not_installed("otelsdk")
+  loadNamespace("otelsdk")
+  expect_s3_class(otelsdk_loaded_version(), "package_version")
+})

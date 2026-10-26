@@ -34,6 +34,7 @@
         is_recording()
         record_exception(error_condition, attributes, ...)
         set_attribute(name, value)
+        set_attributes(attributes)
         set_status(status_code, description)
         update_name(name)
 

@@ -39,8 +39,42 @@ the$mode <- "prod"
   otel_clean_cache()
   setup_dev_env()
   setup_r_trace()
+  setup_otelsdk_check()
 }
 # nocov end
+
+# Minimum otelsdk version that implements the full otel API.
+otelsdk_min_version <- "0.2.4.9002"
+
+otelsdk_loaded_version <- function() {
+  package_version(getNamespaceVersion("otelsdk"))
+}
+
+check_otelsdk_version <- function() {
+  ver <- otelsdk_loaded_version()
+  if (ver < otelsdk_min_version) {
+    warning(
+      "otel needs otelsdk ",
+      otelsdk_min_version,
+      " or later, but ",
+      "otelsdk ",
+      format(ver),
+      " is loaded. Please update otelsdk.",
+      call. = FALSE
+    )
+  }
+}
+
+setup_otelsdk_check <- function() {
+  if ("otelsdk" %in% loadedNamespaces()) {
+    check_otelsdk_version()
+  } else {
+    setHook(
+      packageEvent("otelsdk", "onLoad"),
+      function(...) check_otelsdk_version()
+    )
+  }
+}
 
 setup_dev_env <- function(envir = asNamespace(.packageName)) {
   ev <- tolower(Sys.getenv("OTEL_ENV"))

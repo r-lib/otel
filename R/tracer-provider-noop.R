@@ -478,6 +478,29 @@ tracer_noop <- list(
 #' The span object itself, invisibly.
 #'
 # -------------------------------------------------------------------------
+#' ## `span$set_attributes()`
+#'
+#' Set multiple attributes at once. It is better to set attributes at span
+#' creation, instead of calling this method later, since samplers can only
+#' make decisions based on attributes present at span creation.
+#'
+#' ### Usage
+#'
+#' ```r
+#' span$set_attributes(attributes)
+#' ```
+#'
+#' ### Arguments
+#'
+#' * `attributes`: A named list of attributes. See [as_attributes()] for
+#'   supported R types. You may also use [as_attributes()] to convert an
+#'   R object to OpenTelemetry attributes.
+#'
+#' ### Value
+#'
+#' The span object itself, invisibly.
+#'
+# -------------------------------------------------------------------------
 #' ## `span$set_status()`
 #'
 #' Set the status of the span.
@@ -564,6 +587,10 @@ span_noop <- list(
         },
 
         set_attribute = function(name, value = NULL) {
+          invisible(self)
+        },
+
+        set_attributes = function(attributes = NULL) {
           invisible(self)
         },
 

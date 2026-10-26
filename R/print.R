@@ -74,6 +74,9 @@ format.otel_span <- function(x, ...) {
     if ("set_attribute" %in% names(x)) {
       "  set_attribute(name, value)"
     },
+    if ("set_attributes" %in% names(x)) {
+      "  set_attributes(attributes)"
+    },
     if ("set_status" %in% names(x)) {
       "  set_status(status_code, description)"
     },

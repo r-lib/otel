@@ -230,6 +230,32 @@ The span object itself, invisibly.
 
 }
 
+\subsection{\code{span$set_attributes()}}{
+
+Set multiple attributes at once. It is better to set attributes at span
+creation, instead of calling this method later, since samplers can only
+make decisions based on attributes present at span creation.
+\subsection{Usage}{
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{span$set_attributes(attributes)
+}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\itemize{
+\item \code{attributes}: A named list of attributes. See \code{\link[=as_attributes]{as_attributes()}} for
+supported R types. You may also use \code{\link[=as_attributes]{as_attributes()}} to convert an
+R object to OpenTelemetry attributes.
+}
+}
+
+\subsection{Value}{
+
+The span object itself, invisibly.
+}
+
+}
+
 \subsection{\code{span$set_status()}}{
 
 Set the status of the span.

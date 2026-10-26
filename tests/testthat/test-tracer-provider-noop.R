@@ -30,6 +30,7 @@ test_that("span_noop", {
   expect_false(spn$is_valid())
   expect_false(spn$is_recording())
   expect_equal(spn$set_attribute("key", "value"), spn)
+  expect_equal(spn$set_attributes(list(a = 1, b = "x")), spn)
   expect_equal(spn$add_event("name"), spn)
   expect_equal(spn$add_link(spn), spn)
   expect_equal(spn$set_status("ok"), spn)
