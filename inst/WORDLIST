@@ -1,5 +1,6 @@
 CMD
 Codecov
+JSON
 JSONL
 OTLP
 OpenTelemetry
