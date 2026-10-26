@@ -2,6 +2,14 @@
 
 ## otel (development version)
 
+- [`start_local_active_span()`](https://otel.r-lib.org/dev/reference/start_local_active_span.md)
+  and
+  [`start_span()`](https://otel.r-lib.org/dev/reference/start_span.md)
+  now use the name of the calling function as the span name, if `name`
+  is not given. They also set the `code.function.name` attribute. This
+  only happens if tracing is enabled, so it costs nothing if tracing is
+  off ([\#45](https://github.com/r-lib/otel/issues/45)).
+
 - Spans ended automatically, without an error, now keep the `unset`
   status, instead of being set to `ok`. Only end users should mark spans
   as `ok`, see the OpenTelemetry specification. This needs otelsdk
