@@ -49,6 +49,11 @@ The following values are allowed:
   [otelsdk::meter_provider_file](https://otelsdk.r-lib.org/reference/meter_provider_file.html)
   to write metrics to a JSONL file.
 
+- `otlp/stdout` uses
+  [otelsdk::meter_provider_file](https://otelsdk.r-lib.org/reference/meter_provider_file.html)
+  to write metrics to the standard output, in OTLP JSON format. This
+  needs otelsdk 0.2.4.9001 or later.
+
 - `<package>::<provider>`: will select the `<provider>` object from the
   `<package>` package to use as a meter provider. It calls
   `<package>::<provider>$new()` to create the new meter provider. If

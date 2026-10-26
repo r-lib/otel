@@ -81,6 +81,9 @@ metrics to the standard error.</p></li>
 metrics through HTTP, using the OpenTelemetry Protocol (OTLP).</p></li>
 <li><p><code>otlp/file</code> uses <a href="https://otelsdk.r-lib.org/reference/meter_provider_file.html" class="external-link">otelsdk::meter_provider_file</a> to write metrics
 to a JSONL file.</p></li>
+<li><p><code>otlp/stdout</code> uses <a href="https://otelsdk.r-lib.org/reference/meter_provider_file.html" class="external-link">otelsdk::meter_provider_file</a> to write metrics
+to the standard output, in OTLP JSON format. This needs
+otelsdk 0.2.4.9001 or later.</p></li>
 <li><p><code>&lt;package&gt;::&lt;provider&gt;</code>: will select the <code>&lt;provider&gt;</code> object from
 the <code>&lt;package&gt;</code> package to use as a meter provider. It calls
 <code>&lt;package&gt;::&lt;provider&gt;$new()</code> to create the new meter provider.

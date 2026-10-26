@@ -49,6 +49,11 @@ The following values are allowed:
   [otelsdk::logger_provider_file](https://otelsdk.r-lib.org/reference/logger_provider_file.html)
   to write logs to a JSONL file.
 
+- `otlp/stdout` uses
+  [otelsdk::logger_provider_file](https://otelsdk.r-lib.org/reference/logger_provider_file.html)
+  to write logs to the standard output, in OTLP JSON format. This needs
+  otelsdk 0.2.4.9001 or later.
+
 - `<package>::<provider>`: will select the `<provider>` object from the
   `<package>` package to use as a logger provider. It calls
   `<package>::<provider>$new()` to create the new logger provider. If

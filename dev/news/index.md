@@ -18,6 +18,10 @@
   scopes by package name
   ([\#52](https://github.com/r-lib/otel/issues/52)).
 
+- New `otlp/stdout` exporter for traces, logs and metrics. It writes
+  OTLP JSON lines to the standard output. It needs otelsdk 0.2.4.9001 or
+  later ([\#18](https://github.com/r-lib/otel/issues/18)).
+
 - The `record_exception()` method of no-op spans now accepts the same
   arguments as the method of real spans: `error_condition`, `attributes`
   and `...` ([\#36](https://github.com/r-lib/otel/issues/36)).
