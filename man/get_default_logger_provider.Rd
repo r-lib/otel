@@ -41,6 +41,9 @@ to the standard error.
 traces through HTTP, using the OpenTelemetry Protocol (OTLP).
 \item \code{otlp/file} uses \link[otelsdk:logger_provider_file]{otelsdk::logger_provider_file} to write logs
 to a JSONL file.
+\item \code{otlp/stdout} uses \link[otelsdk:logger_provider_file]{otelsdk::logger_provider_file} to write logs
+to the standard output, in OTLP JSON format. This needs
+otelsdk 0.2.4.9001 or later.
 \item \verb{<package>::<provider>}: will select the \verb{<provider>} object from
 the \verb{<package>} package to use as a logger provider. It calls
 \verb{<package>::<provider>$new()} to create the new logger provider.

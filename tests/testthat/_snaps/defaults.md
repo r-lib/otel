@@ -163,3 +163,21 @@
       Error in `setup_default_meter_provider()`:
       ! Cannot set metrics exporter otel::is_string from OTEL_R_METRICS_EXPORTER environment variable, it is not a list or environment with a 'new' member.
 
+# otlp/stdout needs a new otelsdk
+
+    Code
+      setup_default_tracer_provider()
+    Condition
+      Error in `check_otelsdk_otlp_stdout()`:
+      ! The 'otlp/stdout' OpenTelemetry exporter needs otelsdk 0.2.4.9001 or later.
+    Code
+      setup_default_logger_provider()
+    Condition
+      Error in `check_otelsdk_otlp_stdout()`:
+      ! The 'otlp/stdout' OpenTelemetry exporter needs otelsdk 0.2.4.9001 or later.
+    Code
+      setup_default_meter_provider()
+    Condition
+      Error in `check_otelsdk_otlp_stdout()`:
+      ! The 'otlp/stdout' OpenTelemetry exporter needs otelsdk 0.2.4.9001 or later.
+

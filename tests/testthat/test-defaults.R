@@ -97,6 +97,12 @@ test_that("setup_default_tracer_provider", {
   setup_default_tracer_provider()
   expect_s3_class(the$tracer_provider, "otel_tracer_provider_file")
 
+  if (otelsdk_version() >= otelsdk_otlp_stdout_version) {
+    set_ev("otlp/stdout")
+    setup_default_tracer_provider()
+    expect_s3_class(the$tracer_provider, "otel_tracer_provider_file")
+  }
+
   set_ev("http")
   setup_default_tracer_provider()
   expect_s3_class(the$tracer_provider, "otel_tracer_provider_http")
@@ -225,6 +231,12 @@ test_that("setup_default_logger_provider", {
   set_ev("otlp/file")
   setup_default_logger_provider()
   expect_s3_class(the$logger_provider, "otel_logger_provider_file")
+
+  if (otelsdk_version() >= otelsdk_otlp_stdout_version) {
+    set_ev("otlp/stdout")
+    setup_default_logger_provider()
+    expect_s3_class(the$logger_provider, "otel_logger_provider_file")
+  }
 
   set_ev("otlp")
   setup_default_logger_provider()
@@ -355,6 +367,12 @@ test_that("setup_default_meter_provider", {
   setup_default_meter_provider()
   expect_s3_class(the$meter_provider, "otel_meter_provider_file")
 
+  if (otelsdk_version() >= otelsdk_otlp_stdout_version) {
+    set_ev("otlp/stdout")
+    setup_default_meter_provider()
+    expect_s3_class(the$meter_provider, "otel_meter_provider_file")
+  }
+
   set_ev("http")
   setup_default_meter_provider()
   expect_s3_class(the$meter_provider, "otel_meter_provider_http")
@@ -391,6 +409,21 @@ test_that("setup_default_meter_provider", {
 
   set_ev("otel::is_string")
   expect_snapshot(error = TRUE, {
+    setup_default_meter_provider()
+  })
+})
+
+test_that("otlp/stdout needs a new otelsdk", {
+  local_otel_cache()
+  local_mocked_bindings(otelsdk_version = function() package_version("0.2.4"))
+  withr::local_envvar(
+    OTEL_R_TRACES_EXPORTER = "otlp/stdout",
+    OTEL_R_LOGS_EXPORTER = "otlp/stdout",
+    OTEL_R_METRICS_EXPORTER = "otlp/stdout"
+  )
+  expect_snapshot(error = TRUE, {
+    setup_default_tracer_provider()
+    setup_default_logger_provider()
     setup_default_meter_provider()
   })
 })

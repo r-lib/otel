@@ -9,6 +9,10 @@
   given. Now `OTEL_R_EMIT_SCOPES` and `OTEL_R_SUPPRESS_SCOPES` can match
   these scopes by package name (#52).
 
+* New `otlp/stdout` exporter for traces, logs and metrics. It writes
+  OTLP JSON lines to the standard output. It needs otelsdk 0.2.4.9001 or
+  later (#18).
+
 * The `record_exception()` method of no-op spans now accepts the same
   arguments as the method of real spans: `error_condition`, `attributes`
   and `...` (#36).

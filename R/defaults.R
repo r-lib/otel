@@ -64,6 +64,23 @@ set_default_service_name <- function() {
 
 get_default_tracer_provider_safe <- get_default_tracer_provider
 
+# otelsdk version that can write OTLP JSON to stdout. Older versions
+# would write to a file called 'stdout' instead.
+otelsdk_otlp_stdout_version <- "0.2.4.9001"
+
+otelsdk_version <- function() {
+  utils::packageVersion("otelsdk")
+}
+
+check_otelsdk_otlp_stdout <- function() {
+  if (otelsdk_version() < otelsdk_otlp_stdout_version) {
+    stop(
+      "The 'otlp/stdout' OpenTelemetry exporter needs otelsdk ",
+      otelsdk_otlp_stdout_version, " or later."
+    )
+  }
+}
+
 #' @rdname get_default_tracer_provider
 #' @usage NULL
 #' @details
@@ -107,6 +124,13 @@ setup_default_tracer_provider <- function() {
       #'    to a JSONL file.
       "otlp/file" = {
         otelsdk::tracer_provider_file$new()
+      },
+      #' - `otlp/stdout` uses [otelsdk::tracer_provider_file] to write traces
+      #'    to the standard output, in OTLP JSON format. This needs
+      #'    otelsdk 0.2.4.9001 or later.
+      "otlp/stdout" = {
+        check_otelsdk_otlp_stdout()
+        otelsdk::tracer_provider_file$new(list(file_pattern = "stdout"))
       },
       "jaeger" = {
         warning("OpenTelemetry: Jaeger trace exporter is not supported yet")
@@ -245,6 +269,13 @@ setup_default_logger_provider <- function() {
       "otlp/file" = {
         otelsdk::logger_provider_file$new()
       },
+      #' - `otlp/stdout` uses [otelsdk::logger_provider_file] to write logs
+      #'    to the standard output, in OTLP JSON format. This needs
+      #'    otelsdk 0.2.4.9001 or later.
+      "otlp/stdout" = {
+        check_otelsdk_otlp_stdout()
+        otelsdk::logger_provider_file$new(list(file_pattern = "stdout"))
+      },
       stop(
         "Unknown OpenTelemetry exporter from ", evar,
         " environment variable: ", ev
@@ -373,6 +404,13 @@ setup_default_meter_provider <- function() {
       #'    to a JSONL file.
       "otlp/file" = {
         otelsdk::meter_provider_file$new()
+      },
+      #' - `otlp/stdout` uses [otelsdk::meter_provider_file] to write metrics
+      #'    to the standard output, in OTLP JSON format. This needs
+      #'    otelsdk 0.2.4.9001 or later.
+      "otlp/stdout" = {
+        check_otelsdk_otlp_stdout()
+        otelsdk::meter_provider_file$new(list(file_pattern = "stdout"))
       },
       "prometheus" = {
         warning("OpenTelemetry: Prometheus trace exporter is not supported yet")
