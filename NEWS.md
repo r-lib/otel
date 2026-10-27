@@ -1,5 +1,9 @@
 # otel (development version)
 
+* The `create_histogram()` method of meters now has a `boundaries`
+  argument, to set the explicit bucket boundaries advisory parameter
+  of the histogram. This needs otelsdk 0.2.4.9005 or later (#49).
+
 * `start_local_active_span()` and `start_span()` now use the name of the
   calling function as the span name, if `name` is not given. They also
   set the `code.function.name` attribute. This only happens if tracing
@@ -8,15 +12,15 @@
 * Length one attribute values that are R arrays, e.g. created with
   `as.array()`, are now recorded as arrays, instead of scalars.
   `as_attributes()` keeps them as arrays.
-  This needs otelsdk 0.2.4.9004 or later (#48).
+  This needs otelsdk 0.2.4.9005 or later (#48).
 
 * Spans ended automatically, without an error, now keep the `unset` status,
   instead of being set to `ok`. Only end users should mark spans as `ok`,
-  see the OpenTelemetry specification. This needs otelsdk 0.2.4.9004 or
+  see the OpenTelemetry specification. This needs otelsdk 0.2.4.9005 or
   later (#30).
 
 * Spans now have a `set_attributes()` method, to set multiple attributes
-  at once. It needs otelsdk 0.2.4.9004 or later (#35).
+  at once. It needs otelsdk 0.2.4.9005 or later (#35).
 
 * `OTEL_R_SUPPRESS_SCOPES` now turns off a scope if either its scope name
   or its package name matches. Previously both had to match, and scopes
@@ -28,7 +32,7 @@
   these scopes by package name (#52).
 
 * New `otlp/stdout` exporter for traces, logs and metrics. It writes
-  OTLP JSON lines to the standard output. It needs otelsdk 0.2.4.9004 or
+  OTLP JSON lines to the standard output. It needs otelsdk 0.2.4.9005 or
   later (#18).
 
 * The `record_exception()` method of no-op spans now accepts the same

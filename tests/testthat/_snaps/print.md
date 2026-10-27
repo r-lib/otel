@@ -102,7 +102,7 @@
       methods:
         create_counter(name, description, unit)
         create_up_down_counter(name, description, unit)
-        create_histogram(name, description, unit)
+        create_histogram(name, description, unit, boundaries)
         create_gauge(name, description, unit)
 
 # format.otel_counter

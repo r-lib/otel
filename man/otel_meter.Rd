@@ -102,7 +102,7 @@ An OpenTelemetry counter (\link{otel_up_down_counter}) object.
 Create a new \href{https://opentelemetry.io/docs/specs/otel/metrics/api/#histogram}{histogram}.
 \subsection{Usage}{
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{create_histogram(name, description = NULL, unit = NULL)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{create_histogram(name, description = NULL, unit = NULL, boundaries = NULL)
 }\if{html}{\out{</div>}}
 }
 
@@ -113,6 +113,11 @@ Create a new \href{https://opentelemetry.io/docs/specs/otel/metrics/api/#histogr
 \item \code{unit}: Optional measurement unit. If specified, it should use
 units from \href{https://ucum.org/}{Unified Code for Units of Measure},
 according to the \href{https://opentelemetry.io/docs/specs/semconv/general/metrics/#instrument-units}{OpenTelemetry semantic conventions}.
+\item \code{boundaries}: Optional numeric vector of explicit bucket boundaries,
+in increasing order. This is an \href{https://opentelemetry.io/docs/specs/otel/metrics/api/#instrument-advisory-parameters}{advisory parameter},
+the SDK may ignore it, e.g. if a view configures different
+boundaries for the histogram. If \code{NULL}, the default boundaries
+of the SDK are used.
 }
 }
 

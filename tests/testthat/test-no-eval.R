@@ -47,6 +47,7 @@ test_that("instrument description and unit", {
   expect_silent(mtr$create_up_down_counter("udc", unit = stop("nah-ah")))
   expect_silent(mtr$create_histogram("hst", description = stop("nay")))
   expect_silent(mtr$create_histogram("hst", unit = stop("nay")))
+  expect_silent(mtr$create_histogram("hst", boundaries = stop("nay")))
   expect_silent(mtr$create_gauge("gge", description = stop("not today")))
   expect_silent(mtr$create_gauge("gge", unit = stop("not today")))
 })

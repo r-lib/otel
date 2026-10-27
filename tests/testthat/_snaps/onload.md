@@ -96,7 +96,7 @@
       check_otelsdk_version()
     Condition
       Warning:
-      otel needs otelsdk 0.2.4.9004 or later, but otelsdk 0.2.4 is loaded. Please update otelsdk.
+      otel needs otelsdk 0.2.4.9005 or later, but otelsdk 0.2.4 is loaded. Please update otelsdk.
 
 # setup_otelsdk_check
 

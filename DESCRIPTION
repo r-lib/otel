@@ -1,6 +1,6 @@
 Package: otel
 Title: OpenTelemetry R API
-Version: 0.2.0.9001
+Version: 0.2.0.9002
 Authors@R:
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = c("aut", "cre"))
 Description: High-quality, ubiquitous, and portable telemetry to enable
@@ -21,7 +21,7 @@ Suggests:
     cli,
     glue,
     jsonlite,
-    otelsdk (>= 0.2.4.9004),
+    otelsdk (>= 0.2.4.9005),
     processx,
     shiny,
     spelling,

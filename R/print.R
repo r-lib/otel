@@ -229,7 +229,7 @@ format.otel_meter <- function(x, ...) {
       "  create_up_down_counter(name, description, unit)"
     },
     if ("create_histogram" %in% names(x)) {
-      "  create_histogram(name, description, unit)"
+      "  create_histogram(name, description, unit, boundaries)"
     },
     if ("create_gauge" %in% names(x)) {
       "  create_gauge(name, description, unit)"
