@@ -107,6 +107,15 @@ You can also make the new span be a root span, by setting <code>parent = NA</cod
 in <code>options</code> to the <code><a href="start_local_active_span.html">start_local_active_span()</a></code> or <code><a href="start_span.html">start_span()</a></code> call.</p>
     </div>
     <div class="section level2">
+    <h2 id="array-attributes">Array attributes<a class="anchor" aria-label="anchor" href="#array-attributes"></a></h2>
+    <p>A length one R vector is recorded as a scalar attribute, and longer
+vectors are recorded as arrays. To record a length one vector as an
+array, make it an R array, e.g. with <code><a href="https://rdrr.io/r/base/array.html" class="external-link">as.array()</a></code>:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">span</span><span class="op">$</span><span class="fu">set_attribute</span><span class="op">(</span><span class="st">"gen_ai.response.finish_reasons"</span>, <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">as.array</a></span><span class="op">(</span><span class="st">"stop"</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>This works for span attributes, event attributes and link attributes,
+and also for the attributes of log records and metric measurements.</p>
+    </div>
+    <div class="section level2">
     <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
 
 <div class="section">

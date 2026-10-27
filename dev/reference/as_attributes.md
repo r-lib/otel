@@ -32,6 +32,11 @@ OpenTelemetry (character, logical, double, integer), then their printed
 form is captured using
 [`utils::capture.output()`](https://rdrr.io/r/utils/capture.output.html).
 
+Length one R arrays (e.g. from
+[`as.array()`](https://rdrr.io/r/base/array.html)) are kept as arrays,
+so they are recorded as arrays. See "Array attributes" in
+[otel_span](https://otel.r-lib.org/dev/reference/otel_span.md).
+
 ### Limits
 
 The number of attributes can be limited with the

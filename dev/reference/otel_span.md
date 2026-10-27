@@ -91,6 +91,18 @@ can also make the new span be a root span, by setting `parent = NA` in
 or [`start_span()`](https://otel.r-lib.org/dev/reference/start_span.md)
 call.
 
+## Array attributes
+
+A length one R vector is recorded as a scalar attribute, and longer
+vectors are recorded as arrays. To record a length one vector as an
+array, make it an R array, e.g. with
+[`as.array()`](https://rdrr.io/r/base/array.html):
+
+    span$set_attribute("gen_ai.response.finish_reasons", as.array("stop"))
+
+This works for span attributes, event attributes and link attributes,
+and also for the attributes of log records and metric measurements.
+
 ## Methods
 
 ### `span$add_event()`

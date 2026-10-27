@@ -10,13 +10,20 @@
   only happens if tracing is enabled, so it costs nothing if tracing is
   off ([\#45](https://github.com/r-lib/otel/issues/45)).
 
+- Length one attribute values that are R arrays, e.g. created with
+  [`as.array()`](https://rdrr.io/r/base/array.html), are now recorded as
+  arrays, instead of scalars.
+  [`as_attributes()`](https://otel.r-lib.org/dev/reference/as_attributes.md)
+  keeps them as arrays. This needs otelsdk 0.2.4.9004 or later
+  ([\#48](https://github.com/r-lib/otel/issues/48)).
+
 - Spans ended automatically, without an error, now keep the `unset`
   status, instead of being set to `ok`. Only end users should mark spans
   as `ok`, see the OpenTelemetry specification. This needs otelsdk
-  0.2.4.9003 or later ([\#30](https://github.com/r-lib/otel/issues/30)).
+  0.2.4.9004 or later ([\#30](https://github.com/r-lib/otel/issues/30)).
 
 - Spans now have a `set_attributes()` method, to set multiple attributes
-  at once. It needs otelsdk 0.2.4.9002 or later
+  at once. It needs otelsdk 0.2.4.9004 or later
   ([\#35](https://github.com/r-lib/otel/issues/35)).
 
 - `OTEL_R_SUPPRESS_SCOPES` now turns off a scope if either its scope
@@ -36,7 +43,7 @@
   ([\#52](https://github.com/r-lib/otel/issues/52)).
 
 - New `otlp/stdout` exporter for traces, logs and metrics. It writes
-  OTLP JSON lines to the standard output. It needs otelsdk 0.2.4.9001 or
+  OTLP JSON lines to the standard output. It needs otelsdk 0.2.4.9004 or
   later ([\#18](https://github.com/r-lib/otel/issues/18)).
 
 - The `record_exception()` method of no-op spans now accepts the same
