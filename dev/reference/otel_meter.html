@@ -9,7 +9,7 @@ otel_up_down_counter, otel_histogram, otel_gauge"><meta name="robots" content="n
 
     <a class="navbar-brand me-2" href="../index.html">otel</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -159,7 +159,7 @@ according to the <a href="https://opentelemetry.io/docs/specs/semconv/general/me
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 
 
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu">create_histogram</span><span class="op">(</span><span class="va">name</span>, description <span class="op">=</span> <span class="cn">NULL</span>, unit <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">create_histogram</span><span class="op">(</span><span class="va">name</span>, description <span class="op">=</span> <span class="cn">NULL</span>, unit <span class="op">=</span> <span class="cn">NULL</span>, boundaries <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre><p></p></div>
 </div>
 
 <div class="section">
@@ -170,6 +170,11 @@ according to the <a href="https://opentelemetry.io/docs/specs/semconv/general/me
 <li><p><code>unit</code>: Optional measurement unit. If specified, it should use
 units from <a href="https://ucum.org/" class="external-link">Unified Code for Units of Measure</a>,
 according to the <a href="https://opentelemetry.io/docs/specs/semconv/general/metrics/#instrument-units" class="external-link">OpenTelemetry semantic conventions</a>.</p></li>
+<li><p><code>boundaries</code>: Optional numeric vector of explicit bucket boundaries,
+in increasing order. This is an <a href="https://opentelemetry.io/docs/specs/otel/metrics/api/#instrument-advisory-parameters" class="external-link">advisory parameter</a>,
+the SDK may ignore it, e.g. if a view configures different
+boundaries for the histogram. If <code>NULL</code>, the default boundaries
+of the SDK are used.</p></li>
 </ul></div>
 
 <div class="section">

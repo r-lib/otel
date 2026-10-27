@@ -11,12 +11,12 @@ Source:
 [`DESCRIPTION`](https://github.com/r-lib/otel/blob/main/DESCRIPTION)
 
 Csárdi G (2026). *otel: OpenTelemetry R API*. R package version
-0.2.0.9001, <https://otel.r-lib.org>.
+0.2.0.9002, <https://otel.r-lib.org>.
 
     @Manual{,
       title = {otel: OpenTelemetry R API},
       author = {Gábor Csárdi},
       year = {2026},
-      note = {R package version 0.2.0.9001},
+      note = {R package version 0.2.0.9002},
       url = {https://otel.r-lib.org},
     }

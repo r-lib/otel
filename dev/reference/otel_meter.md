@@ -110,7 +110,7 @@ Create a new
 
 #### Usage
 
-    create_histogram(name, description = NULL, unit = NULL)
+    create_histogram(name, description = NULL, unit = NULL, boundaries = NULL)
 
 #### Arguments
 
@@ -122,6 +122,13 @@ Create a new
   from [Unified Code for Units of Measure](https://ucum.org/), according
   to the [OpenTelemetry semantic
   conventions](https://opentelemetry.io/docs/specs/semconv/general/metrics/#instrument-units).
+
+- `boundaries`: Optional numeric vector of explicit bucket boundaries,
+  in increasing order. This is an [advisory
+  parameter](https://opentelemetry.io/docs/specs/otel/metrics/api/#instrument-advisory-parameters),
+  the SDK may ignore it, e.g. if a view configures different boundaries
+  for the histogram. If `NULL`, the default boundaries of the SDK are
+  used.
 
 #### Value
 
