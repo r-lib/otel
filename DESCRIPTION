@@ -21,7 +21,7 @@ Suggests:
     cli,
     glue,
     jsonlite,
-    otelsdk (>= 0.2.4.9002),
+    otelsdk (>= 0.2.4.9004),
     processx,
     shiny,
     spelling,

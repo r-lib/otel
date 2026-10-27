@@ -22,6 +22,9 @@ integer numbers as used for the missing or invalid names.
 If some elements in \code{x} are not of the natively supported R types in
 OpenTelemetry (character, logical, double, integer), then
 their printed form is captured using \code{\link[utils:capture.output]{utils::capture.output()}}.
+
+Length one R arrays (e.g. from \code{\link[=as.array]{as.array()}}) are kept as arrays, so
+they are recorded as arrays. See "Array attributes" in \link{otel_span}.
 \subsection{Limits}{
 
 The number of attributes can be limited with the

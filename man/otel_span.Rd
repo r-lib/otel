@@ -70,6 +70,18 @@ You can also make the new span be a root span, by setting \code{parent = NA}
 in \code{options} to the \code{\link[=start_local_active_span]{start_local_active_span()}} or \code{\link[=start_span]{start_span()}} call.
 }
 
+\section{Array attributes}{
+A length one R vector is recorded as a scalar attribute, and longer
+vectors are recorded as arrays. To record a length one vector as an
+array, make it an R array, e.g. with \code{\link[=as.array]{as.array()}}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{span$set_attribute("gen_ai.response.finish_reasons", as.array("stop"))
+}\if{html}{\out{</div>}}
+
+This works for span attributes, event attributes and link attributes,
+and also for the attributes of log records and metric measurements.
+}
+
 \section{Methods}{
 \subsection{\code{span$add_event()}}{
 
