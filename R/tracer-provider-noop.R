@@ -329,6 +329,19 @@ tracer_noop <- list(
 #' You can also make the new span be a root span, by setting `parent = NA`
 #' in `options` to the [start_local_active_span()] or [start_span()] call.
 #'
+#' # Array attributes
+#'
+#' A length one R vector is recorded as a scalar attribute, and longer
+#' vectors are recorded as arrays. To record a length one vector as an
+#' array, make it an R array, e.g. with [as.array()]:
+#'
+#' ```r
+#' span$set_attribute("gen_ai.response.finish_reasons", as.array("stop"))
+#' ```
+#'
+#' This works for span attributes, event attributes and link attributes,
+#' and also for the attributes of log records and metric measurements.
+#'
 #' # Methods
 
 # we cannot document these inline, because then roxygen2 adds the 'span_noop'

@@ -44,7 +44,7 @@ the$mode <- "prod"
 # nocov end
 
 # Minimum otelsdk version that implements the full otel API.
-otelsdk_min_version <- "0.2.4.9002"
+otelsdk_min_version <- "0.2.4.9004"
 
 otelsdk_loaded_version <- function() {
   package_version(getNamespaceVersion("otelsdk"))

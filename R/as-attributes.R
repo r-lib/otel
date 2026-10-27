@@ -15,6 +15,9 @@
 #' OpenTelemetry (`r paste0(otel_attr_types, collapse = ", ")`), then
 #' their printed form is captured using [utils::capture.output()].
 #'
+#' Length one R arrays (e.g. from [as.array()]) are kept as arrays, so
+#' they are recorded as arrays. See "Array attributes" in [otel_span].
+#'
 #' ## Limits
 #'
 #' The number of attributes can be limited with the
@@ -65,6 +68,7 @@ as_attributes <- function(x) {
   nms <- make.unique(nms)
 
   for (i in seq_along(x)) {
+    arr <- is.array(x[[i]])
     if (!typeof(x[[i]]) %in% otel_attr_types) {
       x[[i]] <- utils::capture.output(print(x[[i]]))
     }
@@ -74,6 +78,10 @@ as_attributes <- function(x) {
     if (is.double(x[[i]]) && !all(is.finite(x[[i]]))) {
       # as.character keeps NAs, which is not what we want here
       x[[i]] <- paste(x[[i]])
+    }
+    # keep length one arrays as arrays, so they are recorded as arrays
+    if (arr && length(x[[i]]) == 1 && !is.array(x[[i]])) {
+      x[[i]] <- as.array(x[[i]])
     }
   }
 
