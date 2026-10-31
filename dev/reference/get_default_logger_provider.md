@@ -76,4 +76,5 @@ get_default_logger_provider()
 #> methods:
 #>   get_logger(name, minimum_severity, version, schema_url, attributes)
 #>   flush()
+#>   shutdown()
 ```

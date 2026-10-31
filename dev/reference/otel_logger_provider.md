@@ -98,6 +98,19 @@ this method.
 
 Nothing.
 
+### `logger_provider$shutdown()`
+
+Stop the logger provider. Flushes any buffered logs and stops emitting
+logs.
+
+#### Usage
+
+    logger_provider$shutdown()
+
+#### Value
+
+Nothing.
+
 ## See also
 
 Other low level logs API:

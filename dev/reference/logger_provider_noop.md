@@ -28,4 +28,5 @@ logger_provider_noop$new()
 #> methods:
 #>   get_logger(name, minimum_severity, version, schema_url, attributes)
 #>   flush()
+#>   shutdown()
 ```

@@ -102,6 +102,19 @@ this method.
 
 Nothing.
 
+### `tracer_provider$shutdown()`
+
+Stop the tracer provider. Flushes any buffered spans and stops emitting
+spans.
+
+#### Usage
+
+    tracer_provider$shutdown()
+
+#### Value
+
+Nothing.
+
 ## See also
 
 Other low level trace API:
