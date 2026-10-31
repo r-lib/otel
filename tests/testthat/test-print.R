@@ -3,6 +3,14 @@ test_that("format.otel_tracer_privider", {
   expect_snapshot(get_default_tracer_provider())
 })
 
+test_that("format.otel_tracer_provider, shutdown", {
+  tp <- structure(
+    list(get_tracer = identity, flush = identity, shutdown = identity),
+    class = c("otel_tracer_provider_test", "otel_tracer_provider")
+  )
+  expect_snapshot(tp)
+})
+
 test_that("format.otel_tracer", {
   local_otel_off()
   expect_snapshot(get_default_tracer_provider()$get_tracer())
@@ -23,6 +31,14 @@ test_that("format.otel_span_context", {
 test_that("format.otel_logger_provider", {
   local_otel_off()
   expect_snapshot(get_default_logger_provider())
+})
+
+test_that("format.otel_logger_provider, shutdown", {
+  lp <- structure(
+    list(get_logger = identity, flush = identity, shutdown = identity),
+    class = c("otel_logger_provider_test", "otel_logger_provider")
+  )
+  expect_snapshot(lp)
 })
 
 test_that("format.otel_logger", {

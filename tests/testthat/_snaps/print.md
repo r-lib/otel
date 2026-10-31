@@ -9,6 +9,17 @@
         flush()
         get_spans()
 
+# format.otel_tracer_provider, shutdown
+
+    Code
+      tp
+    Output
+      <otel_tracer_provider_test/otel_tracer_provider>
+      methods:
+        get_tracer(name, version, schema_url, attributes)
+        flush()
+        shutdown()
+
 # format.otel_tracer
 
     Code
@@ -62,6 +73,17 @@
       methods:
         get_logger(name, minimum_severity, version, schema_url, attributes)
         flush()
+
+# format.otel_logger_provider, shutdown
+
+    Code
+      lp
+    Output
+      <otel_logger_provider_test/otel_logger_provider>
+      methods:
+        get_logger(name, minimum_severity, version, schema_url, attributes)
+        flush()
+        shutdown()
 
 # format.otel_logger
 

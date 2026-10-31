@@ -15,6 +15,9 @@ format.otel_tracer_provider <- function(x, ...) {
     if ("flush" %in% names(x)) {
       "  flush()"
     },
+    if ("shutdown" %in% names(x)) {
+      "  shutdown()"
+    },
     if ("get_spans" %in% names(x)) {
       "  get_spans()"
     },
@@ -137,6 +140,9 @@ format.otel_logger_provider <- function(x, ...) {
     },
     if ("flush" %in% names(x)) {
       "  flush()"
+    },
+    if ("shutdown" %in% names(x)) {
+      "  shutdown()"
     },
     NULL
   )
