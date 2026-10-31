@@ -1,5 +1,9 @@
 # otel (development version)
 
+* The no-op tracer and logger providers now have a `shutdown()` method,
+  and tracer and logger providers print their `shutdown()` method, if
+  they have one (r-lib/otelsdk#32).
+
 * The `create_histogram()` method of meters now has a `boundaries`
   argument, to set the explicit bucket boundaries advisory parameter
   of the histogram. This needs otelsdk 0.2.4.9005 or later (#49).

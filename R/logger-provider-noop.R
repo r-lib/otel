@@ -82,6 +82,22 @@
 #'
 #' Nothing.
 #'
+# -------------------------------------------------------------------------
+#' ## `logger_provider$shutdown()`
+#'
+#' Stop the logger provider. Flushes any buffered logs and stops
+#' emitting logs.
+#'
+#' ### Usage
+#'
+#' ```r
+#' logger_provider$shutdown()
+#' ```
+#'
+#' ### Value
+#'
+#' Nothing.
+#'
 #' @name otel_logger_provider
 #' @family low level logs API
 #' @return Not applicable.
@@ -109,7 +125,7 @@ NULL
 
 logger_provider_noop <- list(
   new = function() {
-    structure(
+    self <- structure(
       list(
         get_logger = function(
           name = NULL,
@@ -128,6 +144,10 @@ logger_provider_noop <- list(
         },
         flush = function() {
           # noop
+        },
+        shutdown = function() {
+          # noop
+          invisible(self)
         }
       ),
       class = c(
@@ -135,6 +155,7 @@ logger_provider_noop <- list(
         "otel_logger_provider"
       )
     )
+    self
   }
 )
 

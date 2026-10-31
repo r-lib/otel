@@ -83,6 +83,22 @@
 #'
 #' Nothing.
 #'
+# -------------------------------------------------------------------------
+#' ## `tracer_provider$shutdown()`
+#'
+#' Stop the tracer provider. Flushes any buffered spans and stops
+#' emitting spans.
+#'
+#' ### Usage
+#'
+#' ```r
+#' tracer_provider$shutdown()
+#' ```
+#'
+#' ### Value
+#'
+#' Nothing.
+#'
 #' @name otel_tracer_provider
 #' @return Not applicable.
 #' @family low level trace API
@@ -120,6 +136,10 @@ tracer_provider_noop <- list(
           tracer_noop$new(name, version, schema_url, attributes)
         },
         flush = function() {
+          # noop
+          invisible(self)
+        },
+        shutdown = function() {
           # noop
           invisible(self)
         },

@@ -7,6 +7,7 @@
       methods:
         get_tracer(name, version, schema_url, attributes)
         flush()
+        shutdown()
         get_spans()
 
 # format.otel_tracer_provider, shutdown
@@ -73,6 +74,7 @@
       methods:
         get_logger(name, minimum_severity, version, schema_url, attributes)
         flush()
+        shutdown()
 
 # format.otel_logger_provider, shutdown
 

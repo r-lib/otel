@@ -5,6 +5,8 @@ test_that("logger_provider_noop", {
   lgr <- lp$get_logger("test")
   expect_s3_class(lgr, "otel_logger")
   expect_s3_class(lgr, "otel_logger_noop")
+  expect_null(lp$flush())
+  expect_equal(lp$shutdown(), lp)
 })
 
 test_that("logger_noop", {

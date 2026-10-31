@@ -6,6 +6,7 @@ test_that("tracer_provider_noop", {
   expect_s3_class(trc, "otel_tracer")
   expect_s3_class(trc, "otel_tracer_noop")
   expect_equal(tp$flush(), tp)
+  expect_equal(tp$shutdown(), tp)
   expect_equal(tp$get_spans(), list())
 })
 

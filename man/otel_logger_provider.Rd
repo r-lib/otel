@@ -92,6 +92,23 @@ Nothing.
 }
 
 }
+
+\subsection{\code{logger_provider$shutdown()}}{
+
+Stop the logger provider. Flushes any buffered logs and stops
+emitting logs.
+\subsection{Usage}{
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{logger_provider$shutdown()
+}\if{html}{\out{</div>}}
+}
+
+\subsection{Value}{
+
+Nothing.
+}
+
+}
 }
 
 \examples{

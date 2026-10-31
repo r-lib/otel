@@ -93,6 +93,23 @@ Nothing.
 }
 
 }
+
+\subsection{\code{tracer_provider$shutdown()}}{
+
+Stop the tracer provider. Flushes any buffered spans and stops
+emitting spans.
+\subsection{Usage}{
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{tracer_provider$shutdown()
+}\if{html}{\out{</div>}}
+}
+
+\subsection{Value}{
+
+Nothing.
+}
+
+}
 }
 
 \examples{
