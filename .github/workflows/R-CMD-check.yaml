@@ -26,14 +26,12 @@ jobs:
           # These use the dev version of otelsdk, from GitHub, the rest use
           # otelsdk from CRAN
           - {os: macos-latest,   r: 'release', otelsdk: 'dev'}
-          - {os: ubuntu-latest,  r: 'release', otelsdk: 'dev'}
           - {os: windows-latest, r: 'release', otelsdk: 'dev'}
+          - {os: ubuntu-latest,  r: 'release', otelsdk: 'dev'}
 
           - {os: macos-latest,   r: 'release' }
-          - {os: ubuntu-latest,  r: 'release' }
           - {os: windows-latest, r: 'release' }
           - {os: windows-latest, r: 'oldrel-4'}
-
           - {os: ubuntu-latest,  r: 'devel'   }
           - {os: ubuntu-latest,  r: 'release' }
           - {os: ubuntu-latest,  r: 'oldrel-1'}
