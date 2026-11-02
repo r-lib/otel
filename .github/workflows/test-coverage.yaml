@@ -24,6 +24,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
+          # dev otelsdk, so tests that need it run, and count for coverage
           extra-packages: any::covr, any::xml2, r-lib/otelsdk
           needs: coverage
 

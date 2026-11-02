@@ -17,12 +17,18 @@ jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }}${{ matrix.config.otelsdk == 'dev' && ', dev otelsdk' || '' }})
 
     strategy:
       fail-fast: false
       matrix:
         config:
+          # These use the dev version of otelsdk, from GitHub, the rest use
+          # otelsdk from CRAN
+          - {os: macos-latest,   r: 'release', otelsdk: 'dev'}
+          - {os: windows-latest, r: 'release', otelsdk: 'dev'}
+          - {os: ubuntu-latest,  r: 'release', otelsdk: 'dev'}
+
           - {os: macos-latest,   r: 'release'}
 
           - {os: windows-latest, r: '4.4'}
@@ -59,8 +65,12 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck, r-lib/otelsdk
+          extra-packages: any::rcmdcheck${{ matrix.config.otelsdk == 'dev' && ', r-lib/otelsdk' || '' }}
           needs: check
+
+      - name: Show otelsdk version
+        run: print(packageDescription("otelsdk")[c("Version", "RemoteType", "Repository")])
+        shell: Rscript {0}
 
       - uses: r-hub/actions/debug-shell@v1
 

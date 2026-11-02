@@ -21,15 +21,13 @@ Suggests:
     cli,
     glue,
     jsonlite,
-    otelsdk (>= 0.2.4.9005),
+    otelsdk (>= 0.2.4),
     processx,
     shiny,
     spelling,
     testthat (>= 3.0.0),
     utils,
     withr
-Remotes:
-    r-lib/otelsdk
 Config/Needs/website:
     tidyverse/tidytemplate
 Config/testthat/edition: 3
