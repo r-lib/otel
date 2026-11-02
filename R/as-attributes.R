@@ -80,8 +80,20 @@ as_attributes <- function(x) {
       x[[i]] <- paste(x[[i]])
     }
     # keep length one arrays as arrays, so they are recorded as arrays
-    if (arr && length(x[[i]]) == 1 && !is.array(x[[i]])) {
-      x[[i]] <- as.array(x[[i]])
+    if (arr && length(x[[i]]) == 1) {
+      if (!is.array(x[[i]])) {
+        x[[i]] <- as.array(x[[i]])
+      }
+      if (!otelsdk_has_full_api()) {
+        warning(
+          "Length one array attribute `",
+          nms[i],
+          "` is recorded as a scalar, this needs otelsdk ",
+          otelsdk_full_version,
+          " or later.",
+          call. = FALSE
+        )
+      }
     }
   }
 

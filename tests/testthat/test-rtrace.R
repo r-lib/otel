@@ -43,9 +43,12 @@ test_that("integration test", {
 
   # test w/o instrumenting
   env_wo <- c(callr::rcmd_safe_env(), OTEL_TRACES_EXPORTER = "none")
-  expect_snapshot({
-    callr::rscript(script, env = env_wo)
-  })
+  expect_snapshot(
+    {
+      callr::rscript(script, env = env_wo)
+    },
+    transform = transform_otelsdk_message
+  )
 
   # w/ ZCI
   traces <- tempfile(fileext = ".jsonl")
@@ -57,9 +60,12 @@ test_that("integration test", {
     OTEL_R_INSTRUMENT_PKGS = "oteltest",
     OTEL_ENV = "dev"
   )
-  expect_snapshot({
-    callr::rscript(script, env = env)
-  })
+  expect_snapshot(
+    {
+      callr::rscript(script, env = env)
+    },
+    transform = transform_otelsdk_message
+  )
 
   expect_true(file.exists(traces))
   lns <- readLines(traces)

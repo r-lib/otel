@@ -97,12 +97,6 @@ test_that("setup_default_tracer_provider", {
   setup_default_tracer_provider()
   expect_s3_class(the$tracer_provider, "otel_tracer_provider_file")
 
-  if (otelsdk_version() >= otelsdk_otlp_stdout_version) {
-    set_ev("otlp/stdout")
-    setup_default_tracer_provider()
-    expect_s3_class(the$tracer_provider, "otel_tracer_provider_file")
-  }
-
   set_ev("http")
   setup_default_tracer_provider()
   expect_s3_class(the$tracer_provider, "otel_tracer_provider_http")
@@ -231,12 +225,6 @@ test_that("setup_default_logger_provider", {
   set_ev("otlp/file")
   setup_default_logger_provider()
   expect_s3_class(the$logger_provider, "otel_logger_provider_file")
-
-  if (otelsdk_version() >= otelsdk_otlp_stdout_version) {
-    set_ev("otlp/stdout")
-    setup_default_logger_provider()
-    expect_s3_class(the$logger_provider, "otel_logger_provider_file")
-  }
 
   set_ev("otlp")
   setup_default_logger_provider()
@@ -367,12 +355,6 @@ test_that("setup_default_meter_provider", {
   setup_default_meter_provider()
   expect_s3_class(the$meter_provider, "otel_meter_provider_file")
 
-  if (otelsdk_version() >= otelsdk_otlp_stdout_version) {
-    set_ev("otlp/stdout")
-    setup_default_meter_provider()
-    expect_s3_class(the$meter_provider, "otel_meter_provider_file")
-  }
-
   set_ev("http")
   setup_default_meter_provider()
   expect_s3_class(the$meter_provider, "otel_meter_provider_http")
@@ -411,6 +393,22 @@ test_that("setup_default_meter_provider", {
   expect_snapshot(error = TRUE, {
     setup_default_meter_provider()
   })
+})
+
+test_that("otlp/stdout exporter", {
+  skip_if_old_otelsdk(otelsdk_otlp_stdout_version)
+  local_otel_cache()
+  withr::local_envvar(
+    OTEL_R_TRACES_EXPORTER = "otlp/stdout",
+    OTEL_R_LOGS_EXPORTER = "otlp/stdout",
+    OTEL_R_METRICS_EXPORTER = "otlp/stdout"
+  )
+  setup_default_tracer_provider()
+  expect_s3_class(the$tracer_provider, "otel_tracer_provider_file")
+  setup_default_logger_provider()
+  expect_s3_class(the$logger_provider, "otel_logger_provider_file")
+  setup_default_meter_provider()
+  expect_s3_class(the$meter_provider, "otel_meter_provider_file")
 })
 
 test_that("otlp/stdout needs a new otelsdk", {

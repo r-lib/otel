@@ -128,7 +128,22 @@ test_that("check_otelsdk_version", {
   fake(
     check_otelsdk_version,
     "otelsdk_loaded_version",
+    package_version(otelsdk_full_version)
+  )
+  expect_silent(check_otelsdk_version())
+
+  # works, but some features are missing
+  fake(
+    check_otelsdk_version,
+    "otelsdk_loaded_version",
     package_version("0.2.4")
+  )
+  expect_snapshot(check_otelsdk_version())
+
+  fake(
+    check_otelsdk_version,
+    "otelsdk_loaded_version",
+    package_version("0.2.3")
   )
   expect_snapshot(check_otelsdk_version())
 })
@@ -151,6 +166,26 @@ test_that("setup_otelsdk_check", {
   setup_otelsdk_check()
   expect_equal(res[[1]], packageEvent("otelsdk", "onLoad"))
   expect_snapshot(body(res[[2]]))
+})
+
+test_that("otelsdk_has_full_api", {
+  fake(otelsdk_has_full_api, "isNamespaceLoaded", FALSE)
+  expect_true(otelsdk_has_full_api())
+
+  fake(otelsdk_has_full_api, "isNamespaceLoaded", TRUE)
+  fake(
+    otelsdk_has_full_api,
+    "otelsdk_loaded_version",
+    package_version(otelsdk_full_version)
+  )
+  expect_true(otelsdk_has_full_api())
+
+  fake(
+    otelsdk_has_full_api,
+    "otelsdk_loaded_version",
+    package_version("0.2.4")
+  )
+  expect_false(otelsdk_has_full_api())
 })
 
 test_that("otelsdk_loaded_version", {

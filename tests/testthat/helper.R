@@ -30,3 +30,18 @@ transform_env_address <- function(x) {
   x <- sub("<environment: 0x[0-9a-f]+>", "<environment: 0x<address>>", x)
   x
 }
+
+skip_if_old_otelsdk <- function(version = otelsdk_full_version) {
+  skip_if_not_installed("otelsdk", version)
+}
+
+# drop the message about missing features with an old otelsdk, so
+# snapshots are the same with all otelsdk versions
+transform_otelsdk_message <- function(x) {
+  start <- grep("^otelsdk .* is loaded[.] These otel features need", x)
+  end <- grep("^Update otelsdk to use them[.]$", x)
+  if (length(start) == 1 && length(end) == 1) {
+    x <- x[-(start:end)]
+  }
+  x
+}

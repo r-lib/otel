@@ -16,3 +16,12 @@
       [3] "Mazda RX4 Wag  21   6  160 110"
       
 
+# as_attributes warns about length one arrays with old otelsdk
+
+    Code
+      attr <- as_attributes(list(chr = as.array("stop"), long = as.array(letters),
+      plain = "stop"))
+    Condition
+      Warning:
+      Length one array attribute `chr` is recorded as a scalar, this needs otelsdk 0.2.4.9005 or later.
+
