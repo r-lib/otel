@@ -17,8 +17,8 @@ Usually there is a single logger provider for an R app or script.
 
 Typically the logger provider is created automatically, at the first
 [`log()`](https://otel.r-lib.org/reference/log.md) call. otel decides
-which logger provider class to use based on [Environment
-Variables](https://otel.r-lib.org/reference/environmentvariables.md).
+which logger provider class to use based on '[Environment
+Variables](https://otel.r-lib.org/reference/environmentvariables.md)'.
 
 ## Implementations
 
@@ -91,6 +91,19 @@ this method.
 #### Usage
 
     logger_provider$flush()
+
+#### Value
+
+Nothing.
+
+### `logger_provider$shutdown()`
+
+Stop the logger provider. Flushes any buffered logs and stops emitting
+logs.
+
+#### Usage
+
+    logger_provider$shutdown()
 
 #### Value
 

@@ -32,6 +32,10 @@ It calls
 
 ## See also
 
+'[Environment
+Variables](https://otel.r-lib.org/reference/environmentvariables.md)'
+needed to enable OpenTelemetry tracing.
+
 Other OpenTelemetry trace API:
 [`Zero Code Instrumentation`](https://otel.r-lib.org/reference/zci.md),
 [`end_span()`](https://otel.r-lib.org/reference/end_span.md),

@@ -33,6 +33,10 @@ It calls
 
 ## See also
 
+'[Environment
+Variables](https://otel.r-lib.org/reference/environmentvariables.md)'
+needed to enable OpenTelemetry logging.
+
 Other OpenTelemetry logs API:
 [`log()`](https://otel.r-lib.org/reference/log.md),
 [`log_severity_levels`](https://otel.r-lib.org/reference/log_severity_levels.md)

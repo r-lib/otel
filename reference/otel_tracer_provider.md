@@ -21,8 +21,8 @@ Typically the tracer provider is created automatically, at the first
 [`start_local_active_span()`](https://otel.r-lib.org/reference/start_local_active_span.md)
 or [`start_span()`](https://otel.r-lib.org/reference/start_span.md)
 call. otel decides which tracer provider class to use based on
-[Environment
-Variables](https://otel.r-lib.org/reference/environmentvariables.md).
+'[Environment
+Variables](https://otel.r-lib.org/reference/environmentvariables.md)'.
 
 ## Implementations
 
@@ -96,6 +96,19 @@ this method.
 #### Usage
 
     tracer_provider$flush()
+
+#### Value
+
+Nothing.
+
+### `tracer_provider$shutdown()`
+
+Stop the tracer provider. Flushes any buffered spans and stops emitting
+spans.
+
+#### Usage
+
+    tracer_provider$shutdown()
 
 #### Value
 

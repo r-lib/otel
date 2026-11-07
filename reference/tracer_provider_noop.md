@@ -30,5 +30,6 @@ tracer_provider_noop$new()
 #> methods:
 #>   get_tracer(name, version, schema_url, attributes)
 #>   flush()
+#>   shutdown()
 #>   get_spans()
 ```

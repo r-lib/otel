@@ -25,6 +25,11 @@ and
 [`local_active_span()`](https://otel.r-lib.org/reference/local_active_span.md)
 to end a span automatically.)
 
+With otelsdk 0.3.0 or later, span methods do not throw errors. If a
+method fails, it emits a message of class `otel_error_message` and
+returns a default value, usually the span itself. Set the `OTEL_ENV`
+environment variable to `dev` to turn these errors into R errors.
+
 ## Lifetime
 
 The span starts when it is created in the
@@ -85,6 +90,18 @@ can also make the new span be a root span, by setting `parent = NA` in
 [`start_local_active_span()`](https://otel.r-lib.org/reference/start_local_active_span.md)
 or [`start_span()`](https://otel.r-lib.org/reference/start_span.md)
 call.
+
+## Array attributes
+
+A length one R vector is recorded as a scalar attribute, and longer
+vectors are recorded as arrays. To record a length one vector as an
+array, make it an R array, e.g. with
+[`as.array()`](https://rdrr.io/r/base/array.html):
+
+    span$set_attribute("gen_ai.response.finish_reasons", as.array("stop"))
+
+This works for span attributes, event attributes and link attributes,
+and also for the attributes of log records and metric measurements.
 
 ## Methods
 
@@ -238,22 +255,42 @@ decisions based on attributes present at span creation.
 
 The span object itself, invisibly.
 
+### `span$set_attributes()`
+
+Set multiple attributes at once. It is better to set attributes at span
+creation, instead of calling this method later, since samplers can only
+make decisions based on attributes present at span creation.
+
+#### Usage
+
+    span$set_attributes(attributes)
+
+#### Arguments
+
+- `attributes`: A named list of attributes. See
+  [`as_attributes()`](https://otel.r-lib.org/reference/as_attributes.md)
+  for supported R types. You may also use
+  [`as_attributes()`](https://otel.r-lib.org/reference/as_attributes.md)
+  to convert an R object to OpenTelemetry attributes.
+
+#### Value
+
+The span object itself, invisibly.
+
 ### `span$set_status()`
 
 Set the status of the span.
 
-If the span was created with
+The default span status is `unset`. If the span was created with
 [`start_local_active_span()`](https://otel.r-lib.org/reference/start_local_active_span.md),
 or it was ended automatically with
 [`local_active_span()`](https://otel.r-lib.org/reference/local_active_span.md)
 or
 [`with_active_span()`](https://otel.r-lib.org/reference/with_active_span.md),
-then otel sets the status of the span automatically to `ok` or `error`,
-depending on whether an error happened in the frame the span was
-activated for.
-
-Otherwise the default span status is `unset`, and you need to set it
-manually.
+and an error happened in the frame the span was activated for, then otel
+sets the status of the span automatically to `error`. Otherwise otel
+leaves the status as `unset`. Set it to `ok` manually to mark a span as
+explicitly free of errors.
 
 #### Usage
 

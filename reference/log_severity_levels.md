@@ -10,6 +10,10 @@ Not applicable.
 
 ## See also
 
+'[Environment
+Variables](https://otel.r-lib.org/reference/environmentvariables.md)'
+needed to set OpenTelemetry logging level.
+
 Other OpenTelemetry logs API:
 [`is_logging_enabled()`](https://otel.r-lib.org/reference/is_logging_enabled.md),
 [`log()`](https://otel.r-lib.org/reference/log.md)

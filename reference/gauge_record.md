@@ -42,6 +42,10 @@ invisibly.
 
 ## See also
 
+'[Environment
+Variables](https://otel.r-lib.org/reference/environmentvariables.md)'
+needed to enable OpenTelemetry recording.
+
 Other OpenTelemetry metrics instruments:
 [`counter_add()`](https://otel.r-lib.org/reference/counter_add.md),
 [`histogram_record()`](https://otel.r-lib.org/reference/histogram_record.md),

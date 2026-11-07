@@ -25,8 +25,8 @@ Typically the meter provider is created automatically, at the first
 [`histogram_record()`](https://otel.r-lib.org/reference/histogram_record.md),
 [`gauge_record()`](https://otel.r-lib.org/reference/gauge_record.md) or
 [`get_meter()`](https://otel.r-lib.org/reference/get_meter.md) call.
-otel decides which meter provider class to use based on [Environment
-Variables](https://otel.r-lib.org/reference/environmentvariables.md).
+otel decides which meter provider class to use based on '[Environment
+Variables](https://otel.r-lib.org/reference/environmentvariables.md)'.
 
 ## Implementations
 
@@ -111,7 +111,7 @@ Stop the meter provider. Stops collecting and emitting measurements.
 
 #### Usage
 
-    meter_provider$shurdown()
+    meter_provider$shutdown()
 
 #### Value
 

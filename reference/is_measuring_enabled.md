@@ -29,6 +29,10 @@ with `name` and then it calls the meter's `$is_enabled()` method.
 
 ## See also
 
+'[Environment
+Variables](https://otel.r-lib.org/reference/environmentvariables.md)'
+needed to enable OpenTelemetry recording.
+
 Other OpenTelemetry metrics API:
 [`counter_add()`](https://otel.r-lib.org/reference/counter_add.md),
 [`gauge_record()`](https://otel.r-lib.org/reference/gauge_record.md),
