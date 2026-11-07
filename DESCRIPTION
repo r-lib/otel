@@ -1,6 +1,6 @@
 Package: otel
 Title: OpenTelemetry R API
-Version: 0.2.0.9002
+Version: 0.3.0
 Authors@R:
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = c("aut", "cre"))
 Description: High-quality, ubiquitous, and portable telemetry to enable

@@ -1,4 +1,4 @@
-# otel (development version)
+# otel 0.3.0
 
 * The no-op tracer and logger providers now have a `shutdown()` method,
   and tracer and logger providers print their `shutdown()` method, if
